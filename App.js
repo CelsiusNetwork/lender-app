@@ -31,7 +31,7 @@ export default class AppInit extends React.Component {
       return <Expo.AppLoading />
     }
     return (
-      <App statusBar={this.renderStatusBar()} />
+      <App />
     )
   }
 }

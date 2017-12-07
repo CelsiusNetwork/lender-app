@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { StyleSheet, View } from 'react-native'
-import { Button, Form, Input, Item, Label, Text, Spinner, Content, Header, Title, Container } from 'native-base'
+import { Button, Form, Input, Item, Label, Text, Spinner, Content, Container } from 'native-base'
 import { emailChanged, passwordChanged, loginUser } from '../actions'
 
 class LoginForm extends Component {
@@ -26,8 +26,7 @@ class LoginForm extends Component {
   }
 
   renderError () {
-    if (this.props.error !== '')
-      return (<Text style={styles.errorText}>{this.props.error}</Text>);
+    if (this.props.error !== '') { return (<Text style={styles.errorText}>{this.props.error}</Text>) }
     return <View />
   }
 
@@ -65,7 +64,7 @@ class LoginForm extends Component {
       </Content>
     </Container>
 
-    );
+    )
   }
 }
 
@@ -74,7 +73,7 @@ const styles = StyleSheet.create({
     padding: 5,
     color: '#ea0021'
   }
-});
+})
 
 const mapStateToProps = state => {
   return {
@@ -83,11 +82,11 @@ const mapStateToProps = state => {
     loading: state.auth.loading,
     error: state.auth.error,
     nav: state.nav
-  };
-};
+  }
+}
 
 const mapDispatchToProps = {
-  emailChanged, passwordChanged, loginUser,
+  emailChanged, passwordChanged, loginUser
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginForm)
