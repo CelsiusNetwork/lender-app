@@ -1,5 +1,5 @@
-import * as types from './Types';
-import { NavigationActions } from "react-navigation";
+import * as types from './Types'
+import { NavigationActions } from 'react-navigation'
 
 export const firstNameChanged = (text) => {
   return {
@@ -33,21 +33,20 @@ export const register = ({ firstName }) => {
   return (dispatch) => {
     dispatch({
       type: types.REGISTER_LENDER
-    });
-
+    })
   }
-};
+}
 
 const registerFail = (dispatch, errorCode) => {
   dispatch({
     type: types.REGISTER_LENDER_FAILURE,
     payload: errorCode
-  });
-};
+  })
+}
 
 const registerSuccess = (dispatch, user) => {
   dispatch({
     type: types.REGISTER_LENDER_SUCCESS,
     payload: user
-  });
-};
+  })
+}

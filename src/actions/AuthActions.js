@@ -1,40 +1,38 @@
-import * as types from './Types';
-import { NavigationActions } from "react-navigation";
+import * as types from './Types'
+import { NavigationActions } from 'react-navigation'
 
-export const emailChanged = (text) => {
+export const emailChangedAuht = (text) => {
   return {
     type: types.EMAIL_CHANGED,
     payload: text
   }
-};
+}
 
-export const passwordChanged = (text) => {
+export const passwordChangedAuth = (text) => {
   return {
     type: types.PASSWORD_CHANGED,
     payload: text
   }
-};
+}
 
-export const loginUser = ({ email, password }) => {
+export const loginUserAuth = ({ email, password }) => {
   return (dispatch) => {
     dispatch({
       type: types.LOGIN_USER_LOADING
-    });
+    })
+  }
+}
 
-    }
-};
-
-
-const loginUserFail = (dispatch, errorCode) => {
+const loginUserFailAuth = (dispatch, errorCode) => {
   dispatch({
     type: types.LOGIN_USER_FAIL,
     payload: errorCode
-  });
-};
+  })
+}
 
-const loginUserSuccess = (dispatch, user) => {
+const loginUserSuccessAuth = (dispatch, user) => {
   dispatch({
     type: types.LOGIN_USER_SUCCESS,
     payload: user
-  });
-};
+  })
+}

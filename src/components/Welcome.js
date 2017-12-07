@@ -1,23 +1,21 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { StyleSheet, View } from 'react-native';
-import { NavigationActions } from "react-navigation";
-import { TouchableOpacity, Button, Form, Input, Item, Label, Text, Spinner, Content, Header, Title, Container } from "native-base";
-
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { StyleSheet, View } from 'react-native'
+import { NavigationActions } from 'react-navigation'
+import { TouchableOpacity, Button, Form, Input, Item, Label, Text, Spinner, Content, Header, Title, Container } from 'native-base'
 
 class Welcome extends Component {
-
-  navigate() {
+  navigate () {
     const navigate2HowItWorks = NavigationActions.navigate({
-      routeName: "HowItWorks",
+      routeName: 'HowItWorks',
       params: {
-        name: "HowItWorks"
-        }
-    });
-    this.props.navigation.dispatch(navigate2HowItWorks);
+        name: 'HowItWorks'
+      }
+    })
+    this.props.navigation.dispatch(navigate2HowItWorks)
   }
 
-  render() {
+  render () {
     return (
       <Container style={styles.container}>
         <Content>
@@ -28,7 +26,7 @@ class Welcome extends Component {
           </Button>
         </Content>
       </Container>
-      );
+    )
   }
 }
 
@@ -45,7 +43,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#1F4D7F'
   }
-});
+})
 
 const mapStateToProps = state => {
   return {}
@@ -53,4 +51,4 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {}
 
-export default connect(mapStateToProps, mapDispatchToProps)(Welcome);
+export default connect(mapStateToProps, mapDispatchToProps)(Welcome)

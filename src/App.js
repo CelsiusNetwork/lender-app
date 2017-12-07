@@ -1,15 +1,15 @@
-import React from "react";
-import {Button, Container, Content, Footer, FooterTab, Header, Title} from "native-base";
-import {Provider} from "react-redux";
-import {applyMiddleware, createStore} from "redux";
-import ReduxThunk from "redux-thunk";
-import reducers from "./reducers/index";
-import Navigator from "./Navigator";
+import React from 'react'
+import { Container } from 'native-base'
+import { Provider } from 'react-redux'
+import { applyMiddleware, createStore } from 'redux'
+import ReduxThunk from 'redux-thunk'
+import reducers from './reducers/index'
+import Navigator from './Navigator'
 
-const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
+const store = createStore(reducers, {}, applyMiddleware(ReduxThunk))
 
 class App extends React.Component {
-  render() {
+  render () {
     return (
       <Provider store={store}>
         <Container>
@@ -17,8 +17,8 @@ class App extends React.Component {
           <Navigator />
         </Container>
       </Provider>
-    );
+    )
   }
 }
 
-export default (App);
+export default (App)

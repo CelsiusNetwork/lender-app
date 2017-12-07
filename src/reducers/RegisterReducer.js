@@ -1,4 +1,4 @@
-import * as types from '../actions/Types';
+import * as types from '../actions/Types'
 
 const INITIAL_STATE = {
   firstName: '',
@@ -8,8 +8,8 @@ const INITIAL_STATE = {
   user: null,
   loading: false,
   error: ''
-};
+}
 
 export default (state = INITIAL_STATE, action) => {
-  return state;
-};
+  return state
+}

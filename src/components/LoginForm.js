@@ -1,67 +1,67 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {StyleSheet, View} from 'react-native';
-import {Button, Form, Input, Item, Label, Text, Spinner, Content, Header, Title, Container} from "native-base";
-import {emailChanged, passwordChanged, loginUser} from '../actions';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { StyleSheet, View } from 'react-native'
+import { Button, Form, Input, Item, Label, Text, Spinner, Content, Header, Title, Container } from 'native-base'
+import { emailChanged, passwordChanged, loginUser } from '../actions'
 
 class LoginForm extends Component {
-  static navigationOptions = ({ navigation }) => ({
-    title: 'Celsius Lander Login',
-  });
+  // static navigationOptions = ({ navigation }) => ({
+  //   title: 'Celsius Lander Login',
+  // });
 
-  onButtonPress() {
-    const { email, password } = this.props;
-    this.props.loginUser({ email, password });
+  onButtonPress () {
+    const { email, password } = this.props
+    this.props.loginUser({ email, password })
   }
 
-  renderButton() {
-    if (this.props.loading){
+  renderButton () {
+    if (this.props.loading) {
       return <Spinner color='black' />
     }
     return (
       <Button onPress={this.onButtonPress.bind(this)} block primary>
         <Text>Login</Text>
       </Button>
-    );
+    )
   }
 
-  renderError(){
+  renderError () {
     if (this.props.error !== '')
       return (<Text style={styles.errorText}>{this.props.error}</Text>);
-    return <View />;
+    return <View />
   }
 
-  onEmailChange(text) {
-    this.props.emailChanged(text);
+  onEmailChange (text) {
+    this.props.emailChanged(text)
   }
 
-  onPasswordChange(text) {
-    this.props.passwordChanged(text);
+  onPasswordChange (text) {
+    this.props.passwordChanged(text)
   }
 
-  render() {
+  render () {
     return (<Container>
       <Content>
-          <Form>
-            <Item floatingLabel>
-              <Label>your email</Label>
-              <Input
-                onChangeText={this.onEmailChange.bind(this)}
-                value={this.props.email}
-                keyboard-type='email-address'
-                autoCorrect={false}
-                autoFocus autoCapitalize='none'/>
-            </Item>
-            <Item floatingLabel last>
-              <Label>password</Label>
-              <Input
-                onChangeText={this.onPasswordChange.bind(this)}
-                value={this.props.password}
-                secureTextEntry returnKeyType='done' autoCorrect={false}/>
-            </Item>
-            {this.renderError()}
-            {this.renderButton()}
-          </Form>
+        <Form>
+          <Item floatingLabel>
+            <Label>your email</Label>
+            <Input
+              onChangeText={this.onEmailChange.bind(this)}
+              value={this.props.email}
+              keyboard-type='email-address'
+              autoCorrect={false}
+              autoFocus autoCapitalize='none' />
+          </Item>
+          <Item floatingLabel last>
+            <Label>password</Label>
+            <Input
+              onChangeText={this.onPasswordChange.bind(this)}
+              value={this.props.password}
+              secureTextEntry returnKeyType='done' autoCorrect={false} />
+          </Item>
+          {this.renderError()}
+          {this.renderButton()}
+        </Form>
       </Content>
     </Container>
 
@@ -70,7 +70,7 @@ class LoginForm extends Component {
 }
 
 const styles = StyleSheet.create({
-  errorText:{
+  errorText: {
     padding: 5,
     color: '#ea0021'
   }
@@ -88,6 +88,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
   emailChanged, passwordChanged, loginUser,
-};
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginForm)

@@ -1,20 +1,20 @@
-import React from "react";
-import { BackHandler } from "react-native";
-import { connect } from "react-redux";
-import { addNavigationHelpers, NavigationActions, StackNavigator } from "react-navigation";
+import React from "react"
+import { BackHandler } from "react-native"
+import { connect } from "react-redux"
+import { addNavigationHelpers, NavigationActions, StackNavigator } from "react-navigation"
 
 
-import Welcome from "./components/Welcome";
-import HowItWorks from "./components/HowItWorks";
+import Welcome from "./components/Welcome"
+import HowItWorks from "./components/HowItWorks"
 
-import Register from './components/Register';
-import LoginForm from "./components/LoginForm";
+import Register from './components/Register'
+import LoginForm from "./components/LoginForm"
 
-import VerifyPhoneNumber from './components/VerifyPhoneNumber';
-import VerifyDocument from './components/VerifyDocument';
-import VerifyPhoto from './components/VerifyPhoto';
+import VerifyPhoneNumber from './components/VerifyPhoneNumber'
+import VerifyDocument from './components/VerifyDocument'
+import VerifyPhoto from './components/VerifyPhoto'
 
-import Home from './components/Home';
+import Home from './components/Home'
 
 export const Navigator = StackNavigator({
 
@@ -46,11 +46,11 @@ export const Navigator = StackNavigator({
 });
 
 class Navigation extends React.Component {
-  componentDidMount() {
+  componentDidMount () {
     BackHandler.addEventListener("hardwareBackPress", this.onBackPress);
   }
 
-  componentWillUnmount() {
+  componentWillUnmount () {
     BackHandler.removeEventListener("hardwareBackPress", this.onBackPress);
   }
 
@@ -61,9 +61,9 @@ class Navigation extends React.Component {
     }
     dispatch(NavigationActions.back());
     return true;
-  };
+  }
 
-  render() {
+  render () {
     const { dispatch, nav } = this.props;
     // passing navigation prop (consisting of dispatch and state) to Navigator
     const navigation = addNavigationHelpers({
@@ -71,7 +71,7 @@ class Navigation extends React.Component {
       state: nav
     });
 
-    return <Navigator navigation = { navigation }
+    return <Navigator navigation={navigation}
     />;
   }
 }
