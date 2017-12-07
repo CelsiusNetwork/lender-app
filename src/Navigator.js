@@ -3,12 +3,44 @@ import { BackHandler } from "react-native";
 import { connect } from "react-redux";
 import { addNavigationHelpers, NavigationActions, StackNavigator } from "react-navigation";
 
+
+import Welcome from "./components/Welcome";
+import HowItWorks from "./components/HowItWorks";
+
+import Register from './components/Register';
 import LoginForm from "./components/LoginForm";
 
-export const Routes = StackNavigator({
+import VerifyPhoneNumber from './components/VerifyPhoneNumber';
+import VerifyDocument from './components/VerifyDocument';
+import VerifyPhoto from './components/VerifyPhoto';
 
+import Home from './components/Home';
+
+export const Navigator = StackNavigator({
+
+  Welcome: {
+    screen: Welcome
+  },
+  HowItWorks: {
+    screen: HowItWorks
+  },
+  Register: {
+    screen: Register
+  },
   LoginForm: {
     screen: LoginForm
+  },
+  VerifyPhoneNumber: {
+    screen: VerifyPhoneNumber
+  },
+  VerifyDocument: {
+    screen: VerifyDocument
+  },
+  VerifyPhoto: {
+    screen: VerifyPhoto
+  },
+  Home: {
+    screen: Home
   }
 
 });
@@ -33,18 +65,19 @@ class Navigation extends React.Component {
 
   render() {
     const { dispatch, nav } = this.props;
+    // passing navigation prop (consisting of dispatch and state) to Navigator
     const navigation = addNavigationHelpers({
       dispatch,
       state: nav
     });
 
-    return <Routes navigation = { navigation }
+    return <Navigator navigation = { navigation }
     />;
   }
 }
 
 const mapStateToProps = state => ({
-  nav: state.nav,
+  nav: state.nav
 });
 
 export default connect(mapStateToProps)(Navigation);

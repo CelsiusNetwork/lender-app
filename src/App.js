@@ -4,7 +4,7 @@ import {Provider} from "react-redux";
 import {applyMiddleware, createStore} from "redux";
 import ReduxThunk from "redux-thunk";
 import reducers from "./reducers/index";
-import Routes from "./Routes";
+import Navigator from "./Navigator";
 
 const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
 
@@ -14,7 +14,7 @@ class App extends React.Component {
       <Provider store={store}>
         <Container>
           {this.props.statusBar}
-          <Routes />
+          <Navigator />
         </Container>
       </Provider>
     );
