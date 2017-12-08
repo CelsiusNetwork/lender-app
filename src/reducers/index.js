@@ -1,9 +1,11 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from 'redux'
 
 import AuthReducer from './AuthReducer'
-import RoutesReducer from './RoutesReducer';
+import NavigatorReducer from './NavigatorReducer'
+import RegisterReducer from './RegisterReducer'
 
 export default combineReducers({
   auth: AuthReducer,
-  nav: RoutesReducer
-});
+  nav: NavigatorReducer,
+  register: RegisterReducer
+})
