@@ -3,15 +3,7 @@ import { StyleSheet, View, Text, ImageBackground, Image } from 'react-native'
 import { NavigationActions } from 'react-navigation'
 
 export default class Welcome extends Component {
-  navigate () {
-    const navigate2Register = NavigationActions.navigate({
-      routeName: 'Register',
-      params: {
-        name: 'Register'
-      }
-    })
-    this.props.navigation.dispatch(navigate2Register)
-  }
+
 
   render () {
     return (

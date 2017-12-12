@@ -41,12 +41,12 @@ export const Navigator = StackNavigator({
 
 });
 
-class Navigation extends React.Component {
-  componentDidMount () {
+class LenderNavigation extends React.Component {
+  componentDidMount() {
     BackHandler.addEventListener("hardwareBackPress", this.onBackPress);
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     BackHandler.removeEventListener("hardwareBackPress", this.onBackPress);
   }
 
@@ -59,7 +59,7 @@ class Navigation extends React.Component {
     return true;
   }
 
-  render () {
+  render() {
     const { dispatch, nav } = this.props;
     // passing navigation prop (consisting of dispatch and state) to Navigator
     const navigation = addNavigationHelpers({
@@ -67,8 +67,7 @@ class Navigation extends React.Component {
       state: nav
     });
 
-    return <Navigator navigation={navigation}
-    />;
+    return <Navigator navigation = { navigation } />;
   }
 }
 
@@ -76,4 +75,4 @@ const mapStateToProps = state => ({
   nav: state.nav
 });
 
-export default connect(mapStateToProps)(Navigation);
+export default connect(mapStateToProps)(LenderNavigation);

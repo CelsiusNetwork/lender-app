@@ -4,14 +4,9 @@ import { NavigationActions } from 'react-navigation'
 import { connect } from 'react-redux'
 
 class HowItWorks extends Component {
-  navigate () {
-    const navigate2Register = NavigationActions.navigate({
-      routeName: 'Register',
-      params: {
-        name: 'Register'
-      }
-    })
-    this.props.navigation.dispatch(navigate2Register)
+  navigate = () => {
+   
+    console.log(this.props.navigation)
   }
 
   render () {

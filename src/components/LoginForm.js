@@ -6,12 +6,13 @@ import { emailChanged, passwordChanged, loginUser } from '../actions'
 
 class LoginForm extends Component {
   // static navigationOptions = ({ navigation }) => ({
-  //   title: 'Celsius Lander Login',
-  // });
+   //  title: 'Celsius Lander Login',
+   //});
 
   onButtonPress () {
     const { email, password } = this.props
-    this.props.loginUser({ email, password })
+    //this.props.loginUser({ email, password })
+    console.log(this.props.navigation);
   }
 
   renderButton () {

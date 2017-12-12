@@ -7,7 +7,7 @@ class Home extends Component {
   render () {
     return (<Container>
       <Content>
-        How it Works
+        <Text>csdcdscsd</Text>
       </Content>
     </Container>
     )
