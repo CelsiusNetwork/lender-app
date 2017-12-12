@@ -19,7 +19,6 @@ class HowItWorks extends Component {
       <View style={styles.container}>
         <View>
           <Image source={require('../../../assets/images/logo-header.png')} style={styles.logo} />
-          <View style={styles.contentContainer}>
             {/* <View style={styles.circleWrapper}>
               <Image source={require('../../../assets/images/arrow-left.png')} style={styles.aLeft} />
               <Image source={require('.../../../assets/images/how-it-works.png')} style={styles.circle} />
@@ -28,9 +27,8 @@ class HowItWorks extends Component {
             <Text style={styles.header}>{'How it works?'.toUpperCase()}</Text>
             <Text style={styles.text}>To join our trusted community of members, you need to create Celsius account from which you will be able to lend and borrow money.</Text>
             <TouchableOpacity style={styles.button} onPress={this.navigate.bind(this)}>
-              <Text style={styles.buttonText}>Create account</Text>
+              <Text style={styles.buttonText} onPress={this.navigate.bind(this)}>Create account</Text>
             </TouchableOpacity>
-          </View>
         </View>
       </View>
     )
@@ -39,6 +37,9 @@ class HowItWorks extends Component {
 
 const mapStateToProps = state => {
   return {
+        loading: state.auth.loading,
+        error: state.auth.error,
+        nav: state.nav
   }
 }
 
@@ -52,7 +53,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   contentContainer: {
-    paddingTop: 100,
     flex: 1
   },
   header: {

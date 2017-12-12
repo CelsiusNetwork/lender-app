@@ -16,11 +16,12 @@ export default class Welcome extends Component {
   render () {
     return (
       <View style={styles.container}>
-        <View style={styles.contentContainer}>
-          <Image source={require('../../../assets/images/logo-small.png')} style={styles.logo} />
-          <Text style={styles.header}>{'Welcome to Celsius'.toUpperCase()}</Text>
-          <Text style={styles.text}>A new global financial platform that seamlessly connects holders of crypto-assets with borrowers. Earn fees on your assets by allowing financial traders to borrow them.</Text>
-        </View>
+        <Image source={require('../../../assets/images/logo-small.png')} style={styles.logo} />
+        <Text style={styles.header}>{'Welcome to Celsius'.toUpperCase()}</Text>
+        <Text style={styles.text}>
+          A new global financial platform that seamlessly connects holders of crypto-assets with
+          borrowers. Earn fees on your assets by allowing financial traders to borrow them.
+        </Text>
       </View>
     )
   }
