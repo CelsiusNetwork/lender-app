@@ -4,10 +4,15 @@ import { NavigationActions } from 'react-navigation'
 import { connect } from 'react-redux'
 
 class HowItWorks extends Component {
-  navigate = () => {
-   
-    console.log(this.props.navigation)
-  }
+  navigate () {
+    const navigate2Register = NavigationActions.navigate({
+      routeName: 'Register',
+      params: {
+        name: 'Register'
+         }
+        })
+        this.props.navigation.dispatch(navigate2Register)
+      }
 
   render () {
     return (
@@ -32,9 +37,7 @@ class HowItWorks extends Component {
 
 const mapStateToProps = state => {
   return {
-        loading: state.auth.loading,
-        error: state.auth.error,
-        nav: state.nav
+
   }
 }
 
