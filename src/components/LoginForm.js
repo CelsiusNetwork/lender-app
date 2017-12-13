@@ -5,14 +5,9 @@ import { Button, Form, Input, Item, Label, Text, Spinner, Content, Container } f
 import { emailChanged, passwordChanged, loginUser } from '../actions'
 
 class LoginForm extends Component {
-  // static navigationOptions = ({ navigation }) => ({
-   //  title: 'Celsius Lander Login',
-   //});
-
   onButtonPress () {
-    const { email, password } = this.props
-    //this.props.loginUser({ email, password })
-    console.log(this.props.navigation);
+    // this.props.loginUser({ email, password })
+    console.log(this.props.navigation)
   }
 
   renderButton () {

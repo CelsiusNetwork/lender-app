@@ -1,28 +1,21 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { StyleSheet, View, ImageBackground, Image, Text, TouchableOpacity } from 'react-native'
-import { NavigationActions } from 'react-navigation'
+import { StyleSheet, View, ImageBackground } from 'react-native'
 import { Pages } from 'react-native-pages'
 import Welcome from './Welcome'
 import HowItWorks from './HowItWorks'
 
 class WelcomePager extends Component {
-   static navigationOptions = ({ navigation }) => ({
-     title: 'Welcome'
-   });
-  
-   
-
   render () {
     return (
       <View style={styles.container}>
-         <ImageBackground source={require('../../../assets/images/background.png')} style={styles.background}>
-           <Pages>
-             <Welcome />
-             <HowItWorks navigation={this.props.navigation}/>
-           </Pages>
-         </ImageBackground>
-       </View>
+        <ImageBackground source={require('../../../assets/images/background.png')} style={styles.background}>
+          <Pages>
+            <Welcome />
+            <HowItWorks navigation={this.props.navigation} />
+          </Pages>
+        </ImageBackground>
+      </View>
     )
   }
 }

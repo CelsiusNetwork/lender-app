@@ -1,22 +1,102 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { StyleSheet, View } from 'react-native'
-import { Button, Form, Input, Item, Label, Text, Spinner, Content, Header, Title, Container } from 'native-base'
+import { Button, Form, Input, Item, Label, Text, Image, Content, Header, Title, Container } from 'native-base'
 
 class Register extends Component {
-  
   renderError () {
     if (this.props.error !== '') { return (<Text style={styles.errorText}>{this.props.error}</Text>) }
     return <View />
   }
 
+  onFirstNameChange () {
+  }
+
+  onLastNameChange () {
+  }
+
+  onEmailChange () {
+  }
+
+  onPasswordChange () {
+  }
+
+  onPhoneNumberChange () {
+  }
+
+  onButtonPress () {
+  }
 
   render () {
     return (
-      <Container />
+      <Container>
+        <Content>
+          <Form>
+            <Item floatingLabel>
+              <Label>First Name</Label>
+              <Input
+                onChangeText={this.onFirstNameChange.bind(this)}
+                value={this.props.firstName}
+                autoCorrect={false}
+                autoFocus autoCapitalize='none' />
+            </Item>
+            <Item floatingLabel>
+              <Label>Last Name</Label>
+              <Input
+                onChangeText={this.onLastNameChange.bind(this)}
+                value={this.props.lastName}
+                autoCorrect={false}
+                autoFocus autoCapitalize='none' />
+            </Item>
+            <Item floatingLabel>
+              <Label>your email</Label>
+              <Input
+                onChangeText={this.onEmailChange.bind(this)}
+                value={this.props.email}
+                keyboard-type='email-address'
+                autoCorrect={false}
+                autoFocus autoCapitalize='none' />
+            </Item>
+            <Item floatingLabel last>
+              <Label>password</Label>
+              <Input
+                onChangeText={this.onPasswordChange.bind(this)}
+                value={this.props.password}
+                secureTextEntry returnKeyType='done' autoCorrect={false} />
+            </Item>
+            <Item floatingLabel>
+              <Label>Phone number</Label>
+              <Input
+                onChangeText={this.onPhoneNumberChange.bind(this)}
+                value={this.props.phoneNumber}
+                autoCorrect={false}
+                autoFocus autoCapitalize='none' />
+            </Item>
+            {this.renderError()}
+            <Button onPress={this.onButtonPress.bind(this)} block primary>
+              <Text>Login</Text>
+            </Button>
+          </Form>
+        </Content>
+      </Container>
     )
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center'
+  },
+  logo: {
+    position: 'absolute',
+    width: 140,
+    height: 40,
+    left: 30,
+    top: 30
+  }
+})
 
 const mapStateToProps = state => {
   return {

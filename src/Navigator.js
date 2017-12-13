@@ -18,7 +18,8 @@ import Home from './components/Home'
 export const Navigator = StackNavigator({
 
   Welcome: {
-    screen: WelcomePager
+    screen: WelcomePager,
+    headerMode: 'screen'
   },
   Register: {
     screen: Register
@@ -67,7 +68,8 @@ class LenderNavigation extends React.Component {
       state: nav
     });
 
-    return <Navigator navigation = { navigation } />;
+    return <Navigator navigation = { navigation }
+    />;
   }
 }
 

@@ -9,26 +9,26 @@ class HowItWorks extends Component {
       routeName: 'Register',
       params: {
         name: 'Register'
-         }
-        })
-        this.props.navigation.dispatch(navigate2Register)
       }
+    })
+    this.props.navigation.dispatch(navigate2Register)
+  }
 
   render () {
     return (
       <View style={styles.container}>
         <View>
           <Image source={require('../../../assets/images/logo-header.png')} style={styles.logo} />
-            {/* <View style={styles.circleWrapper}>
-              <Image source={require('../../../assets/images/arrow-left.png')} style={styles.aLeft} />
-              <Image source={require('.../../../assets/images/how-it-works.png')} style={styles.circle} />
-              <Image source={require('../../../assets/images/arrow-right.png')} style={styles.aRight} />
-            </View> */}
-            <Text style={styles.header}>{'How it works?'.toUpperCase()}</Text>
-            <Text style={styles.text}>To join our trusted community of members, you need to create Celsius account from which you will be able to lend and borrow money.</Text>
-            <TouchableOpacity style={styles.button} onPress={this.navigate.bind(this)}>
-              <Text style={styles.buttonText} onPress={this.navigate.bind(this)}>Create account</Text>
-            </TouchableOpacity>
+          {/* <View style={styles.circleWrapper}>
+                <Image source={require('../../../assets/images/arrow-left.png')} style={styles.aLeft} />
+                <Image source={require('.../../../assets/images/how-it-works.png')} style={styles.circle} />
+                <Image source={require('../../../assets/images/arrow-right.png')} style={styles.aRight} />
+              </View> */}
+          <Text style={styles.header}>{'How it works?'.toUpperCase()}</Text>
+          <Text style={styles.text}>To join our trusted community of members, you need to create Celsius account from which you will be able to lend and borrow money.</Text>
+          <TouchableOpacity style={styles.button} onPress={this.navigate.bind(this)}>
+            <Text style={styles.buttonText} onPress={this.navigate.bind(this)}>Create account</Text>
+          </TouchableOpacity>
         </View>
       </View>
     )

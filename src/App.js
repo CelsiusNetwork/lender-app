@@ -13,7 +13,6 @@ class App extends React.Component {
     return (
       <Provider store={store}>
         <Container>
-          {this.props.statusBar}
           <Navigator />
         </Container>
       </Provider>
