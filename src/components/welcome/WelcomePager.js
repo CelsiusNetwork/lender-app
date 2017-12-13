@@ -4,6 +4,7 @@ import { StyleSheet, View, ImageBackground } from 'react-native'
 import { Pages } from 'react-native-pages'
 import Welcome from './Welcome'
 import HowItWorks from './HowItWorks'
+import { lenderAppInitToken } from '../../actions'
 
 class WelcomePager extends Component {
   render () {
@@ -12,7 +13,7 @@ class WelcomePager extends Component {
         <ImageBackground source={require('../../../assets/images/background.png')} style={styles.background}>
           <Pages>
             <Welcome />
-            <HowItWorks navigation={this.props.navigation} />
+            <HowItWorks navigation={this.props.navigation} lenderAppInitToken={this.props.lenderAppInitToken} />
           </Pages>
         </ImageBackground>
       </View>
@@ -48,7 +49,7 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = {
-
+  lenderAppInitToken
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(WelcomePager)

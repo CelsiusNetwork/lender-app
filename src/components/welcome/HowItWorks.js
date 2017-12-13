@@ -12,6 +12,7 @@ class HowItWorks extends Component {
       }
     })
     this.props.navigation.dispatch(navigate2Register)
+    this.props.lenderAppInitToken('LOHU3qeHAxFUE34Q71bfMUtdHW7afyLl', 'GllkPBj6Nn06qjQDxh-qYwPJSYLHGW23VUIk8i8ttLRU2_tppiAzOFqRfQ6dqaYN', 'https://cs.celsius.network/cs', 'client_credentials')
   }
 
   render () {

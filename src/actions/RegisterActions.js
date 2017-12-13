@@ -90,6 +90,7 @@ const registerLenderFail = (dispatch, errorCode) => {
 
 const registerLenderSuccess = (dispatch, user) => {
   console.log('registerLenderSuccess() wooohooo!')
+  console.log(user)
   dispatch({
     type: types.REGISTER_LENDER_SUCCESS,
     payload: user

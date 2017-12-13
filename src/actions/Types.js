@@ -1,3 +1,7 @@
+export const APP_TOKEN_INIT = 'app_token_init'
+export const APP_TOKEN_SUCCESS = 'app_token_success'
+export const APP_TOKEN_FAILURE = 'app_token_failure'
+
 export const REGISTER_FNAME_CHANGED = 'register_fname_changed'
 export const REGISTER_LNAME_CHANGED = 'register_lname_changed'
 export const REGISTER_EMAIL_CHANGED = 'register_email_changed'
