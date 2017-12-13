@@ -42,7 +42,7 @@ export const registerLender = ({ firstName, lastName, email, password, phoneNumb
       type: types.REGISTER_LENDER_LOADING
     })
     const seen = []
-
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Errors/Cyclic_object_value
     const replacer = function (key, value) {
       if (value != null && typeof value == 'object') {
         if (seen.indexOf(value) >= 0) {
