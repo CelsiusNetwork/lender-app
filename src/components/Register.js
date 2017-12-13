@@ -30,7 +30,8 @@ class Register extends Component {
     this.props.registerPhoneNumberChanged(text)
   }
 
-  onButtonPress () {
+  onButtonPress (firstName, lastName, email, password, phoneNumber) {
+    this.props.registerLender({ firstName, lastName, email, password, phoneNumber })
   }
 
   render () {

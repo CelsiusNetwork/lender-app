@@ -36,15 +36,52 @@ export const registerPhoneNumberChanged = (text) => {
   }
 }
 
-export const registerLender = ({ firstName }) => {
+export const registerLender = ({ firstName, lastName, email, password, phoneNumber }) => {
   return (dispatch) => {
     dispatch({
       type: types.REGISTER_LENDER_LOADING
     })
+    const seen = []
+
+    const replacer = function (key, value) {
+      if (value != null && typeof value == 'object') {
+        if (seen.indexOf(value) >= 0) {
+          return
+        }
+        seen.push(value)
+      }
+      return value
+    }
+    const request = {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        'email': email,
+        'password': password,
+        'user_metadata': {
+          'name': firstName,
+          'surname': lastName
+        },
+        'wallet': {
+          'password': password
+        }
+      }, replacer)
+    }
+  fetch('https://cs.celsius.network/cs/api/v1/member/register', request)
+    .then(response => registerLenderSuccess(dispatch, response))
+    .then((responseData) => {
+      console.log(responseData)
+    })
+    .catch((err) => registerLenderFail(dispatch, err))
   }
 }
 
 const registerLenderFail = (dispatch, errorCode) => {
+  console.log('registerLenderFail() FCK!')
+  console.log(errorCode)
   dispatch({
     type: types.REGISTER_LENDER_FAILURE,
     payload: errorCode
@@ -52,8 +89,15 @@ const registerLenderFail = (dispatch, errorCode) => {
 }
 
 const registerLenderSuccess = (dispatch, user) => {
+  console.log('registerLenderSuccess() wooohooo!')
   dispatch({
     type: types.REGISTER_LENDER_SUCCESS,
     payload: user
   })
+  dispatch(NavigationActions.reset({
+    index: 0,
+    actions: [
+      NavigationActions.navigate({routeName: 'Home'})
+    ]
+  }))
 }
