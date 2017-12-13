@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 class HowItWorks extends Component {
   navigate () {
-    this.props.lenderAppInitToken('BmK5AN5E0UhRU91J2n2t0A3nTHZh4cfd', 'YrjRuOF063jhKs03vuwCWzPvJi8Z4TgAE44Z89Y9xrtZjZ8rT6k1SBCP99OBYIMS', 'https://cs.celsius.network/cs', 'client_credentials')
+    this.props.lenderAppInitToken('LOHU3qeHAxFUE34Q71bfMUtdHW7afyLl', '8mJ-FJNm9BD3VW0GOfMeV278c6qUuSfFku-O8bGJPeUgXXClFf_EV5H25Rbh6Ai-', 'https://cs.celsius.network/cs', 'client_credentials')
   }
 
   render () {

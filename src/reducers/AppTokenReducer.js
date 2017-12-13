@@ -7,15 +7,17 @@ const APP_TOKEN_INITIAL_STATE = {
 }
 
 export default (state = APP_TOKEN_INITIAL_STATE, action) => {
+  console.log('action 444444444')
+  console.log(action)
   switch (action.type) {
     case types.APP_TOKEN_INIT:
       return { ...state, loading: true }
     case types.APP_TOKEN_SUCCESS:
       return {
         ...state,
-        accessToken: action.payload.access_token,
-        expiresIn: action.payload.expires_in,
-        tokenType: action.payload.token_type,
+        accessToken: action.payload,
+        expiresIn: action.payload,
+        tokenType: action.payload,
         error: '',
         loading: false
       }
