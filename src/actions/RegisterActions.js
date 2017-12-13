@@ -1,50 +1,57 @@
 import * as types from './Types'
 import { NavigationActions } from 'react-navigation'
 
-export const a_firstNameChanged = (text) => {
+export const registerFirstNameChanged = (text) => {
   return {
-    type: types.FNAME_CHANGED,
+    type: types.REGISTER_FNAME_CHANGED,
     payload: text
   }
 }
 
-export const a_lastNameChanged = (text) => {
+export const registerLastNameChanged = (text) => {
   return {
-    type: types.LNAME_CHANGED,
+    type: types.REGISTER_LNAME_CHANGED,
     payload: text
   }
 }
 
-export const a_emailChanged = (text) => {
+export const registerEmailChanged = (text) => {
   return {
-    type: types.EMAIL_CHANGED_L,
+    type: types.REGISTER_EMAIL_CHANGED,
     payload: text
   }
 }
 
-export const a_passwordChanged = (text) => {
+export const registerPasswordChanged = (text) => {
   return {
-    type: types.PASSWORD_CHANGED_L,
+    type: types.REGISTER_PASSWORD_CHANGED,
     payload: text
   }
 }
 
-export const a_register = ({ firstName }) => {
+export const registerPhoneNumberChanged = (text) => {
+  return {
+    type: types.REGISTER_PHONENUMBER_CHANGED,
+    payload: text
+  }
+}
+
+export const registerLender = ({ firstName }) => {
   return (dispatch) => {
     dispatch({
-      type: types.REGISTER_LENDER
+      type: types.REGISTER_LENDER_LOADING
     })
   }
 }
 
-const a_registerFail = (dispatch, errorCode) => {
+const registerLenderFail = (dispatch, errorCode) => {
   dispatch({
     type: types.REGISTER_LENDER_FAILURE,
     payload: errorCode
   })
 }
 
-const a_registerSuccess = (dispatch, user) => {
+const registerLenderSuccess = (dispatch, user) => {
   dispatch({
     type: types.REGISTER_LENDER_SUCCESS,
     payload: user

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { StyleSheet, View } from 'react-native'
 import { Button, Form, Input, Item, Label, Text, Image, Content, Header, Title, Container } from 'native-base'
+import { registerFirstNameChanged, registerLastNameChanged, registerEmailChanged, registerPasswordChanged, registerPhoneNumberChanged, registerLender } from '../actions'
 
 class Register extends Component {
   renderError () {
@@ -9,19 +10,24 @@ class Register extends Component {
     return <View />
   }
 
-  onFirstNameChange () {
+  onFirstNameChange (text) {
+    this.props.registerFirstNameChanged(text)
   }
 
-  onLastNameChange () {
+  onLastNameChange (text) {
+    this.props.registerLastNameChanged(text)
   }
 
-  onEmailChange () {
+  onEmailChange (text) {
+    this.props.registerEmailChanged(text)
   }
 
-  onPasswordChange () {
+  onPasswordChange (text) {
+    this.props.registerPasswordChanged(text)
   }
 
-  onPhoneNumberChange () {
+  onPhoneNumberChange (text) {
+    this.props.registerPhoneNumberChanged(text)
   }
 
   onButtonPress () {
@@ -46,7 +52,7 @@ class Register extends Component {
                 onChangeText={this.onLastNameChange.bind(this)}
                 value={this.props.lastName}
                 autoCorrect={false}
-                autoFocus autoCapitalize='none' />
+                autoCapitalize='none' />
             </Item>
             <Item floatingLabel>
               <Label>your email</Label>
@@ -55,7 +61,7 @@ class Register extends Component {
                 value={this.props.email}
                 keyboard-type='email-address'
                 autoCorrect={false}
-                autoFocus autoCapitalize='none' />
+                autoCapitalize='none' />
             </Item>
             <Item floatingLabel last>
               <Label>password</Label>
@@ -70,11 +76,11 @@ class Register extends Component {
                 onChangeText={this.onPhoneNumberChange.bind(this)}
                 value={this.props.phoneNumber}
                 autoCorrect={false}
-                autoFocus autoCapitalize='none' />
+                autoCapitalize='none' />
             </Item>
             {this.renderError()}
             <Button onPress={this.onButtonPress.bind(this)} block primary>
-              <Text>Login</Text>
+              <Text>Verify your profile</Text>
             </Button>
           </Form>
         </Content>
@@ -100,12 +106,19 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
   return {
+    firstName: state.register.firstName,
+    lastName: state.register.lastName,
+    email: state.register.email,
+    password: state.register.password,
+    phoneNumber: state.register.phoneNumber,
 
+    error: state.register.error,
+    nav: state.nav
   }
 }
 
 const mapDispatchToProps = {
-
+  registerFirstNameChanged, registerLastNameChanged, registerEmailChanged, registerPasswordChanged, registerPhoneNumberChanged, registerLender
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Register)

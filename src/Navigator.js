@@ -7,7 +7,7 @@ import { addNavigationHelpers, NavigationActions, StackNavigator } from "react-n
 import WelcomePager from "./components/welcome/WelcomePager"
 
 import Register from './components/Register'
-import LoginForm from "./components/LoginForm"
+// import LoginForm from "./components/LoginForm"
 
 import VerifyPhoneNumber from './components/VerifyPhoneNumber'
 import VerifyDocument from './components/VerifyDocument'
@@ -24,9 +24,9 @@ export const Navigator = StackNavigator({
   Register: {
     screen: Register
   },
-  LoginForm: {
-    screen: LoginForm
-  },
+  // LoginForm: {
+  //   screen: LoginForm
+  // },
   VerifyPhoneNumber: {
     screen: VerifyPhoneNumber
   },

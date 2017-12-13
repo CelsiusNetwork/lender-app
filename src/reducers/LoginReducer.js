@@ -1,6 +1,6 @@
 import * as types from '../actions/Types'
 
-const INITIAL_STATE = {
+const LOGIN_INITIAL_STATE = {
   email: '',
   password: '',
   user: null,
@@ -8,15 +8,15 @@ const INITIAL_STATE = {
   error: ''
 }
 
-export default (state = INITIAL_STATE, action) => {
+export default (state = LOGIN_INITIAL_STATE, action) => {
   switch (action.type) {
-    case types.EMAIL_CHANGED:
+    case types.LOGIN_EMAIL_CHANGED:
       return { ...state, email: action.payload }
-    case types.PASSWORD_CHANGED:
+    case types.LOGIN_PASSWORD_CHANGED:
       return { ...state, password: action.payload }
-    case types.LOGIN_USER_LOADING:
+    case types.LOGIN_LENDER_LOADING:
       return { ...state, loading: true }
-    case types.LOGIN_USER_SUCCESS:
+    case types.LOGIN_LENDER_SUCCESS:
       return {
         ...state,
         user: action.payload,
@@ -25,7 +25,7 @@ export default (state = INITIAL_STATE, action) => {
         error: '',
         loading: false
       }
-    case types.LOGIN_USER_FAIL:
+    case types.LOGIN_LENDER_FAIL:
       let errorMsg
       switch (action.payload) {
         case 'auth/invalid-email':

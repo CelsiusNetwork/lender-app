@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { StyleSheet, View } from 'react-native'
 import { Button, Form, Input, Item, Label, Text, Spinner, Content, Container } from 'native-base'
-import { emailChanged, passwordChanged, loginUser } from '../actions'
+import { loginEmailChanged, loginPasswordChanged, loginLender } from '../actions'
 
 class LoginForm extends Component {
   onButtonPress () {
@@ -82,7 +82,7 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = {
-  emailChanged, passwordChanged, loginUser
+  loginEmailChanged, loginPasswordChanged, loginLender
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginForm)

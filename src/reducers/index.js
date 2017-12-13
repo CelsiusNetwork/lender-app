@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux'
 
-import AuthReducer from './AuthReducer'
+import LoginReducer from './LoginReducer'
 import NavigatorReducer from './NavigatorReducer'
 import RegisterReducer from './RegisterReducer'
 
 export default combineReducers({
-  auth: AuthReducer,
+  auth: LoginReducer,
   nav: NavigatorReducer,
   register: RegisterReducer
 })
