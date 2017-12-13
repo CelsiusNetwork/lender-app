@@ -54,4 +54,10 @@ const lenderAppTokenInitSuccess = (dispatch, token) => {
     type: types.APP_TOKEN_SUCCESS,
     payload: token
   })
+  dispatch(NavigationActions.reset({
+    index: 0,
+    actions: [
+      NavigationActions.navigate({routeName: 'Register'})
+    ]
+  }))
 }

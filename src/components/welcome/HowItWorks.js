@@ -1,18 +1,10 @@
 import React, { Component } from 'react'
 import { StyleSheet, View, Image, Text, TouchableOpacity } from 'react-native'
-import { NavigationActions } from 'react-navigation'
 import { connect } from 'react-redux'
 
 class HowItWorks extends Component {
   navigate () {
-    const navigate2Register = NavigationActions.navigate({
-      routeName: 'Register',
-      params: {
-        name: 'Register'
-      }
-    })
-    this.props.navigation.dispatch(navigate2Register)
-    this.props.lenderAppInitToken('LOHU3qeHAxFUE34Q71bfMUtdHW7afyLl', 'GllkPBj6Nn06qjQDxh-qYwPJSYLHGW23VUIk8i8ttLRU2_tppiAzOFqRfQ6dqaYN', 'https://cs.celsius.network/cs', 'client_credentials')
+    this.props.lenderAppInitToken('BmK5AN5E0UhRU91J2n2t0A3nTHZh4cfd', 'YrjRuOF063jhKs03vuwCWzPvJi8Z4TgAE44Z89Y9xrtZjZ8rT6k1SBCP99OBYIMS', 'https://cs.celsius.network/cs', 'client_credentials')
   }
 
   render () {
