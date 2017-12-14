@@ -31,9 +31,7 @@ export const lenderAppInitToken = (clientId, clientSecret, audience, grantType) 
       })
     }
     fetch('https://celsiusnetwork.auth0.com/oauth/token', request)
-      .then(response => lenderAppTokenInitSuccess(dispatch, response))
-      .then((responseData) => {
-      })
+      .then((response) => lenderAppTokenInitSuccess(dispatch, response))
       .catch((err) => lenderAppTokenInitFail(dispatch, err))
   }
 }
@@ -52,7 +50,7 @@ const lenderAppTokenInitSuccess = (dispatch, token) => {
   console.log(token._bodyInit)
   dispatch({
     type: types.APP_TOKEN_SUCCESS,
-    payload: token._bodyInit
+    payload: token
   })
   dispatch(NavigationActions.reset({
     index: 0,
