@@ -1,22 +1,13 @@
-import * as types from './Types'
 import { NavigationActions } from 'react-navigation'
+
+import * as types from './Types'
+import Expo, { SecureStore } from 'expo'
 
 export const lenderAppInitToken = (clientId, clientSecret, audience, grantType) => {
   return (dispatch) => {
     dispatch({
       type: types.APP_TOKEN_INIT
     })
-    const seen = []
-    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Errors/Cyclic_object_value
-    const replacer = function (key, value) {
-      if (value != null && typeof value === 'object') {
-        if (seen.indexOf(value) >= 0) {
-          return
-        }
-        seen.push(value)
-      }
-      return value
-    }
     const request = {
       method: 'POST',
       headers: {
@@ -45,17 +36,19 @@ const lenderAppTokenInitFail = (dispatch, errorCode) => {
   })
 }
 
-const lenderAppTokenInitSuccess = (dispatch, token) => {
+const lenderAppTokenInitSuccess = async (dispatch, data) => {
   console.log('lenderAppTokenInitSuccess() WOOHOO!')
-  console.log(token._bodyInit)
+  data = JSON.parse(data._bodyText) // because of reasons
+  console.log(data)
+  Expo.SecureStore.setItemAsync('token', data.access_token)
   dispatch({
     type: types.APP_TOKEN_SUCCESS,
-    payload: token
+    payload: data
   })
   dispatch(NavigationActions.reset({
     index: 0,
     actions: [
-      NavigationActions.navigate({routeName: 'Register'})
+      NavigationActions.navigate({ routeName: 'Register' })
     ]
   }))
 }

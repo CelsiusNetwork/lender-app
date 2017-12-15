@@ -1,5 +1,6 @@
 import * as types from './Types'
 import { NavigationActions } from 'react-navigation'
+import Expo, { SecureStore } from 'expo'
 
 export const registerFirstNameChanged = (text) => {
   return {
@@ -41,41 +42,35 @@ export const registerLender = ({ firstName, lastName, email, password, phoneNumb
     dispatch({
       type: types.REGISTER_LENDER_LOADING
     })
-    const seen = []
-    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Errors/Cyclic_object_value
-    const replacer = function (key, value) {
-      if (value != null && typeof value == 'object') {
-        if (seen.indexOf(value) >= 0) {
-          return
-        }
-        seen.push(value)
-      }
-      return value
-    }
-    const request = {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        'email': email,
-        'password': password,
-        'user_metadata': {
-          'name': firstName,
-          'surname': lastName
+    const token = Expo.SecureStore.getItemAsync('token')
+    token.then((token) => {
+      console.log(token)
+      const request = {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + token
         },
-        'wallet': {
-          'password': password
-        }
-      }, replacer)
-    }
-  fetch('https://cs.celsius.network/cs/api/v1/member/register', request)
-    .then(response => registerLenderSuccess(dispatch, response))
-    .then((responseData) => {
-      console.log(responseData)
+        body: JSON.stringify({
+          email: email,
+          password: password,
+          user_metadata: {
+            name: firstName,
+            surname: lastName
+          },
+          wallet: {
+            password: password
+          }
+        })
+      }
+      fetch('https://cs.celsius.network/cs/api/v1/member/register', request)
+        .then(response => registerLenderSuccess(dispatch, response))
+        .then((responseData) => {
+          console.log(responseData)
+        })
+        .catch((err) => registerLenderFail(dispatch, err))
     })
-    .catch((err) => registerLenderFail(dispatch, err))
   }
 }
 
@@ -98,7 +93,7 @@ const registerLenderSuccess = (dispatch, user) => {
   dispatch(NavigationActions.reset({
     index: 0,
     actions: [
-      NavigationActions.navigate({routeName: 'Home'})
+      NavigationActions.navigate({ routeName: 'Home' })
     ]
   }))
 }

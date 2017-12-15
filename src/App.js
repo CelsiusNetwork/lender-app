@@ -4,7 +4,6 @@ import { Provider } from 'react-redux'
 import { applyMiddleware, createStore } from 'redux'
 import ReduxThunk from 'redux-thunk'
 
-import { loadState, saveState } from './localstorage'
 import reducers from './reducers/index'
 import Navigator from './Navigator'
 

@@ -2,6 +2,8 @@ import * as types from '../actions/Types'
 
 const APP_TOKEN_INITIAL_STATE = {
   'token': '',
+  'expiresIn': 0,
+  'tokenType': '',
   'loading': false
 }
 
@@ -12,7 +14,9 @@ export default (state = APP_TOKEN_INITIAL_STATE, action) => {
     case types.APP_TOKEN_SUCCESS:
       return {
         ...state,
-        token: action.payload._bodyInit,
+        token: action.access_token,
+        expiresIn: action.expires_in,
+        tokenType: action.token_type,
         loading: false
       }
     case types.APP_TOKEN_FAILURE:

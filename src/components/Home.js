@@ -18,7 +18,12 @@ const mapStateToProps = state => {
   }
 }
 
+// The mapDispatchToProps function lets us inject 
+// certain props into the React component that can dispatch actions
 const mapDispatchToProps = {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)
+
+// For example, the HowItWorks component calls onPress 
+// 

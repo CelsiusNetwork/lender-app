@@ -5,11 +5,6 @@ import { Button, Form, Input, Item, Label, Text, Image, Content, Header, Title, 
 import { registerFirstNameChanged, registerLastNameChanged, registerEmailChanged, registerPasswordChanged, registerPhoneNumberChanged, registerLender } from '../actions'
 
 class Register extends Component {
-  renderError () {
-    if (this.props.error !== '') { return (<Text style={styles.errorText}>{this.props.error}</Text>) }
-    return <View />
-  }
-
   onFirstNameChange (text) {
     this.props.registerFirstNameChanged(text)
   }
@@ -88,13 +83,19 @@ class Register extends Component {
       </Container>
     )
   }
+
+  renderError () {
+    if (this.props.error !== '') { return (<Text style={styles.errorText}>{this.props.error}</Text>) }
+    return <View />
+  }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    backgroundColor: '#000080'
   },
   logo: {
     position: 'absolute',

@@ -77,4 +77,4 @@ const mapStateToProps = state => ({
   nav: state.nav
 });
 
-export default connect(mapStateToProps)(LenderNavigation);
+export default connect(mapStateToProps)(LenderNavigation)
