@@ -19,6 +19,7 @@ lender-app epics summary:
 * [expo](https://docs.expo.io/versions/latest/index.html) - set of tools, libraries and services for building native iOS and Android experiance by writing JavaScript
 * [native-base](https://docs.nativebase.io/) - cross-platform UI components for React Native
 * web3
+* [redux-persist](https://www.npmjs.com/package/redux-persist) - allows us to save the Redux store in the device local storage and restore it later
 
 ### Dev setup
 
