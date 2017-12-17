@@ -2,6 +2,7 @@
   "expo": {
     "name": "lander-app",
     "slug": "lander-app",
-    "sdkVersion": "23.0.0"
+    "sdkVersion": "23.0.0",
+    "orientation": "portrait"
   }
 }

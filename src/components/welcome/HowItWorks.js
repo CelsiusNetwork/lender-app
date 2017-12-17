@@ -6,23 +6,31 @@ class HowItWorks extends Component {
   navigate () {
     this.props.lenderAppInitToken('LOHU3qeHAxFUE34Q71bfMUtdHW7afyLl', '8mJ-FJNm9BD3VW0GOfMeV278c6qUuSfFku-O8bGJPeUgXXClFf_EV5H25Rbh6Ai-', 'https://cs.celsius.network/cs', 'client_credentials')
   }
+  static navigationOptions = {
+    header: null,
+    title: 'How It Works',
+  };
 
   render () {
     return (
       <View style={styles.container}>
-        <View>
-          <Image source={require('../../../assets/images/logo-header.png')} style={styles.logo} />
-          {/* <View style={styles.circleWrapper}>
-                <Image source={require('../../../assets/images/arrow-left.png')} style={styles.aLeft} />
-                <Image source={require('.../../../assets/images/how-it-works.png')} style={styles.circle} />
-                <Image source={require('../../../assets/images/arrow-right.png')} style={styles.aRight} />
-              </View> */}
-          <Text style={styles.header}>{'How it works?'.toUpperCase()}</Text>
-          <Text style={styles.text}>To join our trusted community of members, you need to create Celsius account from which you will be able to lend and borrow money.</Text>
-          <TouchableOpacity style={styles.button} onPress={this.navigate.bind(this)}>
-            <Text style={styles.buttonText} onPress={this.navigate.bind(this)}>Create account</Text>
-          </TouchableOpacity>
+        <Image source={require('../../../assets/images/logo-header.png')} style={styles.logo} />
+        <View style={styles.circleWrapper}>
+              <Image
+                source={require('../../../assets/images/arrow-left.png')}
+                resizeMode="contain"
+                style={styles.aLeft} />
+              <Image source={require('../../../assets/images/how-it-works.png')} style={styles.circle} />
+              <Image
+                source={require('../../../assets/images/arrow-right.png')}
+                resizeMode="contain"
+                style={styles.aRight} />
         </View>
+        <Text style={styles.header}>{'How it works?'.toUpperCase()}</Text>
+        <Text style={styles.text}>To join our trusted community of members, you need to create Celsius account from which you will be able to lend and borrow money.</Text>
+        <TouchableOpacity style={styles.button} onPress={this.navigate.bind(this)}>
+          <Text style={styles.buttonText} onPress={this.navigate.bind(this)}>Create account</Text>
+        </TouchableOpacity>
       </View>
     )
   }
@@ -74,18 +82,25 @@ const styles = StyleSheet.create({
   circleWrapper: {
     flexDirection: 'row',
     alignItems: 'center',
-    height: 180
+    height: 180,
   },
   aLeft: {
     width: 20,
     height: 37,
-    marginRight: 30,
-    marginLeft: 70
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    marginLeft: 10
   },
   aRight: {
     width: 20,
     height: 37,
-    marginLeft: 30
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    marginRight: 10
   },
   circle: {
     width: 140,

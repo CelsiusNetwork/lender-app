@@ -9,5 +9,6 @@ export default combineReducers({
   auth: LoginReducer,
   nav: NavigatorReducer,
   token: AppTokenReducer,
-  register: RegisterReducer
+  register: RegisterReducer,
+
 })
