@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Content, Container, ImageBackground, StyleSheet, View, Image, Text, TouchableOpacity } from 'react-native'
+import { Content, Container, ImageBackground, StyleSheet, View, Image, Text, TouchableOpacity, AsyncStorage } from 'react-native'
 import { Form, Input, Item, Label } from 'native-base'
 import { NavigationActions } from 'react-navigation'
 import { Camera, Permissions } from 'expo';
@@ -17,14 +17,28 @@ class VerifyDocument extends React.Component {
     this.setState({ hasCameraPermission: status === 'granted' });
   }
 
+  snap = async () => {
+    const { navigate } = this.props.navigation
+    if (this.camera) {
+      let photo = await this.camera.takePictureAsync();
+      console.log(photo)
+      try {
+        await AsyncStorage.setItem('@MySuperStore:photo', JSON.stringify(photo));
+      } catch (error) {
+        console.log(error.message)
+      }
+      navigate('VerifyPhoto')
+    }
+  }
+
   render () {
+    const { navigate } = this.props.navigation
     const { hasCameraPermission } = this.state;
     if (hasCameraPermission === null) {
       return <View />;
     } else if (hasCameraPermission === false) {
       return <Text>No access to camera</Text>;
     } else {
-      const { navigate } = this.props.navigation
       return (
         <View style={styles.container}>
           <ImageBackground source={require('../../assets/images/background-blur.png')} style={styles.background}>
@@ -37,7 +51,10 @@ class VerifyDocument extends React.Component {
               <ImageBackground source={require('../../assets/images/scanner.png')} style={styles.cameraWrapper}>
 
                 <View style={{ flex: 1, height: 200, width: 290 }}>
-                  <Camera style={{ flex: 1 }} type={this.state.type}>
+                  <Camera style={{ flex: 1 }}
+                  type={this.state.type}
+                  ref={ref => { this.camera = ref; }}
+                  >
                     <View
                       style={{
                         flex: 1,
@@ -67,11 +84,12 @@ class VerifyDocument extends React.Component {
                 </View>
               </ImageBackground>
 
-              <Text style={styles.text}>Please center your passport in the area above. Ensure that there’s enough light in the room for  better picture quality.</Text>
+              <Text style={styles.text}>Please center your passport in the area above. Ensure that there’s enough light in the room for better picture quality.</Text>
 
               <TouchableOpacity style={styles.button}
-              onPress={() => navigate('Register')}
-            >
+              // onPress={() => navigate('Register')}
+              onPress={this.snap}
+              >
               <Text style={styles.buttonText}>Take a photo</Text>
             </TouchableOpacity>
             </View>
