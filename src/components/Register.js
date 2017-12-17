@@ -31,6 +31,7 @@ class Register extends Component {
   }
 
   render () {
+    const { navigate } = this.props.navigation
     return (
       <View style={styles.container}>
         <ImageBackground source={require('../../assets/images/background.png')} style={styles.background}>
@@ -87,7 +88,9 @@ class Register extends Component {
                 {this.renderError()}
                 <Button
                   style={styles.button}
-                  onPress={this.onButtonPress.bind(this)} block primary>
+                  // onPress={this.onButtonPress.bind(this)}
+                  onPress={() => navigate('VerifyPhoneNumber')}
+                  block primary>
                   <Text
                     style={styles.buttonText}
                   >Verify your profile</Text>

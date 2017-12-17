@@ -5,6 +5,7 @@ import { addNavigationHelpers, NavigationActions, StackNavigator } from "react-n
 
 
 import WelcomePager from "./components/welcome/WelcomePager"
+// import WelcomePager from "./components/VerifyDocument"
 
 import Register from './components/Register'
 // import LoginForm from "./components/LoginForm"
@@ -30,10 +31,12 @@ export const Navigator = StackNavigator({
     screen: VerifyPhoneNumber
   },
   VerifyDocument: {
-    screen: VerifyDocument
+    screen: VerifyDocument,
+    headerMode: 'screen'
   },
   VerifyPhoto: {
-    screen: VerifyPhoto
+    screen: VerifyPhoto,
+    headerMode: 'screen'
   },
   Home: {
     screen: Home

@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { StyleSheet, View, Image, Text, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
+import { NavigationActions } from 'react-navigation'
 
 class HowItWorks extends Component {
   navigate () {
-    this.props.lenderAppInitToken('LOHU3qeHAxFUE34Q71bfMUtdHW7afyLl', '8mJ-FJNm9BD3VW0GOfMeV278c6qUuSfFku-O8bGJPeUgXXClFf_EV5H25Rbh6Ai-', 'https://cs.celsius.network/cs', 'client_credentials')
+    // this.props.lenderAppInitToken('LOHU3qeHAxFUE34Q71bfMUtdHW7afyLl', '8mJ-FJNm9BD3VW0GOfMeV278c6qUuSfFku-O8bGJPeUgXXClFf_EV5H25Rbh6Ai-', 'https://cs.celsius.network/cs', 'client_credentials')
   }
   static navigationOptions = {
     header: null,
@@ -12,6 +13,7 @@ class HowItWorks extends Component {
   };
 
   render () {
+    const { navigate } = this.props.navigation
     return (
       <View style={styles.container}>
         <Image source={require('../../../assets/images/logo-header.png')} style={styles.logo} />
@@ -28,8 +30,11 @@ class HowItWorks extends Component {
         </View>
         <Text style={styles.header}>{'How it works?'.toUpperCase()}</Text>
         <Text style={styles.text}>To join our trusted community of members, you need to create Celsius account from which you will be able to lend and borrow money.</Text>
-        <TouchableOpacity style={styles.button} onPress={this.navigate.bind(this)}>
-          <Text style={styles.buttonText} onPress={this.navigate.bind(this)}>Create account</Text>
+        <TouchableOpacity style={styles.button}
+          // onPress={this.navigate.bind(this)}
+          onPress={() => navigate('Register')}
+          >
+          <Text style={styles.buttonText}>Create account</Text>
         </TouchableOpacity>
       </View>
     )
