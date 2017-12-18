@@ -10,8 +10,10 @@ class WelcomePager extends Component {
   render () {
     return (
       <View style={styles.container}>
-        <ImageBackground source={require('../../../assets/images/background.png')} style={styles.background}>
-          <Pages>
+        <ImageBackground
+          source={require('../../../assets/images/background.png')}
+          style={styles.background}>
+          <Pages style={styles.pagesWrapper}>
             <Welcome />
             <HowItWorks navigation={this.props.navigation} lenderAppInitToken={this.props.lenderAppInitToken} />
           </Pages>
@@ -22,6 +24,9 @@ class WelcomePager extends Component {
 }
 
 const styles = StyleSheet.create({
+  pagesWrapper: {
+    flex: 1,
+  },
   title: {
     fontSize: 38,
     paddingBottom: 12,
@@ -36,7 +41,8 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    paddingBottom: 20
   }
 })
 

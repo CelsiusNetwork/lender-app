@@ -8,8 +8,8 @@ import reducers from './reducers/index'
 import Navigator from './Navigator'
 
 const store = createStore(reducers, {}, applyMiddleware(ReduxThunk))
-console.log('Initial application state:')
-console.log(store.getState())
+// console.log('Initial application state:')
+// console.log(store.getState())
 
 class App extends React.Component {
   render () {

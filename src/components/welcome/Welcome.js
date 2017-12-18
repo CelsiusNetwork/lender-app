@@ -4,7 +4,7 @@ import { StyleSheet, View, Text, Image } from 'react-native'
 export default class Welcome extends Component {
   render () {
     return (
-      <View style={styles.container}>
+      <View style={styles.welcomeContainer}>
         <Image source={require('../../../assets/images/logo-small.png')} style={styles.logo} />
         <Text style={styles.header}>{'Welcome to Celsius'.toUpperCase()}</Text>
         <Text style={styles.text}>
@@ -17,10 +17,10 @@ export default class Welcome extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  welcomeContainer: {
     flex: 1,
     flexDirection: 'column',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   contentContainer: {
     flex: 1
@@ -48,6 +48,6 @@ const styles = StyleSheet.create({
     height: 50,
     marginLeft: 30,
     marginBottom: 80,
-    marginTop: 70
+    marginTop: 0
   }
 })

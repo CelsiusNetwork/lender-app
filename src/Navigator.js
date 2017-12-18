@@ -5,6 +5,7 @@ import { addNavigationHelpers, NavigationActions, StackNavigator } from "react-n
 
 
 import WelcomePager from "./components/welcome/WelcomePager"
+// import WelcomePager from "./components/VerifyDocument"
 
 import Register from './components/Register'
 // import LoginForm from "./components/LoginForm"
@@ -16,7 +17,6 @@ import VerifyPhoto from './components/VerifyPhoto'
 import Home from './components/Home'
 
 export const Navigator = StackNavigator({
-
   Welcome: {
     screen: WelcomePager,
     headerMode: 'screen'
@@ -31,15 +31,20 @@ export const Navigator = StackNavigator({
     screen: VerifyPhoneNumber
   },
   VerifyDocument: {
-    screen: VerifyDocument
+    screen: VerifyDocument,
+    headerMode: 'screen'
   },
   VerifyPhoto: {
-    screen: VerifyPhoto
+    screen: VerifyPhoto,
+    headerMode: 'screen'
   },
   Home: {
     screen: Home
   }
 
+}, {
+  // see next line
+  headerMode: 'none',
 });
 
 class LenderNavigation extends React.Component {
