@@ -2,11 +2,19 @@ import { NavigationActions } from 'react-navigation'
 
 import * as types from './Types'
 import Expo, { SecureStore } from 'expo'
+import getAppToken from '../services/Auth0Service'
 
 export const lenderAppInitToken = (clientId, clientSecret, audience, grantType) => {
   return (dispatch) => {
     dispatch({
       type: types.APP_TOKEN_INIT
+    })
+
+    getAppToken().then((tokenData) => {
+      lenderAppTokenInitSuccess(dispatch, tokenData)
+    }).catch((error) => {
+      lenderAppTokenInitFail(dispatch, error)
+      console.log(error)
     })
     const request = {
       method: 'POST',
@@ -36,7 +44,7 @@ const lenderAppTokenInitFail = (dispatch, errorCode) => {
   })
 }
 
-const lenderAppTokenInitSuccess = async (dispatch, data) => {
+const lenderAppTokenInitSuccess = async(dispatch, data) => {
   console.log('lenderAppTokenInitSuccess() WOOHOO!')
   data = JSON.parse(data._bodyText) // because of reasons
   console.log(data)

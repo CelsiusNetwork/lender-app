@@ -11,6 +11,7 @@
     "standard": "standard './src/**/*.js'"
   },
   "dependencies": {
+    "axios": "^0.17.1",
     "expo": "23.0.4",
     "immutable": "3.8.2",
     "native-base": "2.3.3",
