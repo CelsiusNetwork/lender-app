@@ -4,7 +4,7 @@ import { StyleSheet, View, ImageBackground, Image, TouchableOpacity } from 'reac
 import { Button, Form, Input, Item, Label, Text, Spinner, Content, Header, Title, Container } from 'native-base'
 import { loginEmailChanged, loginPasswordChanged, loginLender } from '../actions'
 
-class LoginForm extends Component {
+class ForgotPassword extends Component {
   onButtonPress () {
     // this.props.loginUser({ email, password })
     console.log(this.props.navigation)
@@ -18,11 +18,11 @@ class LoginForm extends Component {
       <Button
         style={styles.button}
         // onPress={this.onButtonPress.bind(this)}
-        onPress={() => navigate('VerifyPhoneNumber')}
+        onPress={() => navigate('LoginForm')}
         block primary>
         <Text
           style={styles.buttonText}
-        >Log in</Text>
+        >Reset my password</Text>
       </Button>
     )
   }
@@ -48,7 +48,7 @@ class LoginForm extends Component {
           <Container style={styles.formContainer}>
             <Content>
             <Image source={require('../../assets/images/logo-small.png')} style={styles.logo} />
-              <Text style={styles.header}>{'Welcome\nBack'.toUpperCase()}</Text>
+              <Text style={styles.header}>{'Forgot Password'.toUpperCase()}</Text>
               <Text style={styles.text}>
                 Log in to continue to use Celsius. In case you don’t have an account, you can <Text
                   style={styles.createLink}
@@ -66,23 +66,9 @@ class LoginForm extends Component {
                     autoCorrect={false}
                     autoFocus autoCapitalize='none' />
                 </Item>
-                <Item floatingLabel style={styles.floatingWrapper}>
-                  <Label style={{color: '#ffffff', fontSize: 12}}>PASSWORD</Label>
-                  <Input
-                    style={styles.input}
-                    onChangeText={this.onPasswordChange.bind(this)}
-                    value={this.props.password}
-                    secureTextEntry returnKeyType='done' autoCorrect={false} />
-                </Item>
 
                 {this.renderError()}
                 {this.renderButton()}
-                <View>
-                  <Text
-                  style={styles.forgetPassword}
-                  onPress={() => navigate('ForgotPassword')}
-                  >Forgot password?</Text>
-                </View>
               </Form>
             </Content>
           </Container>
@@ -128,7 +114,7 @@ const styles = StyleSheet.create({
   createLink: {
     color: '#ffffff'
   },
-  forgetPassword: {
+  forgotPassword: {
     backgroundColor: 'rgba(0,0,0,0)',
     color: '#a3b0be',
     padding: 10,
@@ -202,4 +188,4 @@ const mapDispatchToProps = {
   loginEmailChanged, loginPasswordChanged, loginLender
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginForm)
+export default connect(mapStateToProps, mapDispatchToProps)(ForgotPassword)

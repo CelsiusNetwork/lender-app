@@ -4,11 +4,13 @@ import { connect } from "react-redux"
 import { addNavigationHelpers, NavigationActions, StackNavigator } from "react-navigation"
 
 
-import WelcomePager from "./components/welcome/WelcomePager"
-// import WelcomePager from "./components/VerifyDocument"
+// import WelcomePager from "./components/welcome/WelcomePager"
+import WelcomePager from "./components/Passcode"
 
 import Register from './components/Register'
-// import LoginForm from "./components/LoginForm"
+import LoginForm from './components/LoginForm'
+import ForgotPassword from './components/ForgotPassword'
+import Passcode from './components/Passcode'
 
 import VerifyPhoneNumber from './components/VerifyPhoneNumber'
 import VerifyDocument from './components/VerifyDocument'
@@ -22,13 +24,20 @@ export const Navigator = StackNavigator({
     headerMode: 'screen'
   },
   Register: {
-    screen: Register
+    screen: Register,
+    headerMode: 'screen'
   },
-  // LoginForm: {
-  //   screen: LoginForm
-  // },
+  LoginForm: {
+    screen: LoginForm,
+    headerMode: 'screen'
+  },
+  ForgotPassword: {
+    screen: ForgotPassword,
+    headerMode: 'screen'
+  },
   VerifyPhoneNumber: {
-    screen: VerifyPhoneNumber
+    screen: VerifyPhoneNumber,
+    headerMode: 'screen'
   },
   VerifyDocument: {
     screen: VerifyDocument,
@@ -39,7 +48,8 @@ export const Navigator = StackNavigator({
     headerMode: 'screen'
   },
   Home: {
-    screen: Home
+    screen: Home,
+    headerMode: 'screen'
   }
 
 }, {
