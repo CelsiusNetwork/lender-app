@@ -27,7 +27,7 @@ class VerifyPhoto extends React.Component {
       } catch (error) {
         console.log(error.message)
       }
-      navigate('VerifyPhoto')
+      navigate('Agree')
     }
   }
 

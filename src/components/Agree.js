@@ -1,104 +1,65 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Content, Container, ImageBackground, StyleSheet, View, Image, Text, TouchableOpacity, AsyncStorage } from 'react-native'
-import { Form, Input, Item, Label } from 'native-base'
+import { ImageBackground, StyleSheet, View, Image, Text, TouchableOpacity, AsyncStorage } from 'react-native'
+import { Form, Input, Item, Label, Content, Container } from 'native-base'
 import { NavigationActions } from 'react-navigation'
-import { Camera, Permissions } from 'expo';
+import { CheckBox } from 'react-native-elements';
 
 class Agree extends React.Component {
-
-  state = {
-    hasCameraPermission: null,
-    type: Camera.Constants.Type.back,
-  };
-
-  async componentWillMount() {
-    const { status } = await Permissions.askAsync(Permissions.CAMERA);
-    this.setState({ hasCameraPermission: status === 'granted' });
-  }
-
-  snap = async () => {
-    const { navigate } = this.props.navigation
-    if (this.camera) {
-      let photo = await this.camera.takePictureAsync();
-      console.log(photo)
-      try {
-        await AsyncStorage.setItem('@MySuperStore:photo', JSON.stringify(photo));
-      } catch (error) {
-        console.log(error.message)
-      }
-      navigate('VerifyPhoto')
+  constructor() {
+    super();
+    this.state = {
+        checked: false
     }
   }
-
+  pressCheckbox(){
+    if(this.state.checked)
+      this.setState({checked: false})
+    else
+      this.setState({checked: true})
+  }
   render () {
     const { navigate } = this.props.navigation
-    const { hasCameraPermission } = this.state;
-    if (hasCameraPermission === null) {
-      return <View />;
-    } else if (hasCameraPermission === false) {
-      return <Text>No access to camera</Text>;
-    } else {
-      return (
-        <View style={styles.container}>
-          <ImageBackground source={require('../../assets/images/background-blur.png')} style={styles.background}>
-            <View style={styles.body}>
-              {/* <Image source={require('../../assets/images/logo-header.png')} style={styles.logo} /> */}
-              <Text style={styles.header}>{'Take a picture'.toUpperCase()}</Text>
-              <ImageBackground source={require('../../assets/images/progress-line-bg.png')} style={styles.line}>
-                <ImageBackground source={require('../../assets/images/progress-line.png')} style={styles.lineInner}></ImageBackground>
-              </ImageBackground>
-              <ImageBackground source={require('../../assets/images/scanner.png')} style={styles.cameraWrapper}>
+    return (
+      <View style={styles.container}>
+        <ImageBackground source={require('../../assets/images/background-blur.png')} style={styles.background}>
+          <View style={styles.body}>
+            <Text style={styles.header}>{'Just one more thing…'.toUpperCase()}</Text>
+            <ImageBackground source={require('../../assets/images/progress-line-bg.png')} style={styles.line}>
+              <ImageBackground source={require('../../assets/images/green-line.png')} style={styles.lineInner}></ImageBackground>
+            </ImageBackground>
+            <Container style={styles.wrapper}>
+              <Content>
 
-                <View style={{ flex: 1, height: 200, width: 290 }}>
-                  <Camera style={{ flex: 1 }}
-                  type={this.state.type}
-                  ref={ref => { this.camera = ref; }}
-                  >
-                    <View
-                      style={{
-                        flex: 1,
-                        backgroundColor: 'transparent',
-                        flexDirection: 'row',
-                      }}>
-                      <TouchableOpacity
-                        style={{
-                          flex: 0.1,
-                          alignSelf: 'flex-end',
-                          alignItems: 'center',
-                        }}
-                        onPress={() => {
-                          this.setState({
-                            type: this.state.type === Camera.Constants.Type.back
-                              ? Camera.Constants.Type.front
-                              : Camera.Constants.Type.back,
-                          });
-                        }}>
-                        <Text
-                          style={{ fontSize: 18, marginBottom: 10, color: 'white' }}>
-                          {' '}Flip{' '}
-                        </Text>
-                      </TouchableOpacity>
-                    </View>
-                  </Camera>
-                </View>
-              </ImageBackground>
+                <Text style={styles.text}>While we are verifying your identity, please check our Terms of Service.</Text>
+                <Text style={styles.text}>As further described below, a free subscription continues until terminated, while a paid subscription has a term that may expire or be terminated. </Text>
+                <Text style={styles.text}>The Contract remains effective until all subscriptions ordered under the Contract have expired or been terminated or the Contract itself terminates. Termination of the Contract will terminate all subscriptions and all Order Forms.</Text>
+                <Text style={styles.text}>We or Customer may terminate the Contract on notice to the other party if the other party materially breaches the Contract and such breach is not cured within thirty (30) days after the non</Text>
 
-              <Text style={styles.text}>Please center your face in the frame above and take a selfie. We need your recent picture to compare it with the one on the passport.</Text>
+              </Content>
+            </Container>
+            <CheckBox
+              title='I agree to Terms of Service'
+              containerStyle={styles.agreeCheckBox}
+              textStyle={styles.agreeText}
+              // checkedIcon='dot-circle-o'
+              // uncheckedIcon='circle-o'
+              checked={this.state.checked}
+              onPress={ this.pressCheckbox.bind(this) }
+            />
+            {/* <Text style={styles.agreeText}>I agree to Terms of Service</Text> */}
 
-              <TouchableOpacity style={styles.button}
-              // onPress={() => navigate('Register')}
-              onPress={this.snap}
-              >
-              <Text style={styles.buttonText}>Take a photo</Text>
-            </TouchableOpacity>
-            </View>
-
-          </ImageBackground>
+            <TouchableOpacity style={styles.button}
+            onPress={() => navigate('LoginForm')}
+            >
+            <Text style={styles.buttonText}>I'm done!</Text>
+          </TouchableOpacity>
         </View>
 
-      )
-    }
+      </ImageBackground>
+    </View>
+
+    )
   }
 }
 
@@ -122,12 +83,6 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     marginRight: 10,
   },
-  cameraWrapper: {
-    alignItems: 'center',
-    width: 298,
-    height: 208,
-    padding: 4
-  },
   line: {
     height: 10,
     borderRadius: 2,
@@ -148,7 +103,7 @@ const styles = StyleSheet.create({
     height: 40,
   },
   header: {
-		fontSize: 32,
+		fontSize: 30,
 		backgroundColor: 'rgba(0,0,0,0)',
 		color: 'white',
 		paddingLeft: 30,
@@ -158,36 +113,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: 50
   },
-  mobileWrapper: {
-    width: 120,
-    height: 120,
-    borderRadius: 60,
-    backgroundColor: 'rgba(0,0,0,0.5)',
-    alignItems: 'center',
-    marginTop: 10,
-    marginBottom: 10
-  },
-  mobile: {
-    marginTop: 20
-  },
-  inputWrapper: {
-    height: 70,
-    marginTop: 20,
-    marginBottom: 20,
-    alignItems: 'center'
-  },
-  input: {
-    height: 40,
-    width: 300,
-    borderColor: 'rgba(255,255,255,0.3)',
-    borderBottomWidth: 0,
-    color: '#ffffff',
-    marginBottom: 10,
-    fontSize: 70,
-    textAlign: 'center',
-  },
-  inputDash: {
-    height: 2
+  wrapper: {
+
   },
   text: {
     fontSize: 14,
@@ -196,10 +123,17 @@ const styles = StyleSheet.create({
     paddingLeft: 30,
     paddingRight: 30,
     lineHeight: 20,
-    textAlign: 'center',
+    textAlign: 'left',
     marginTop: 20,
     marginBottom: 20
-
+  },
+  agreeCheckBox:{
+    backgroundColor: 'rgba(0,0,0,0)',
+    borderWidth: 0
+  },
+  agreeText:{
+    backgroundColor: 'rgba(0,0,0,0)',
+    color: '#9ca9b7',
   },
   button: {
     backgroundColor: '#ffffff',
@@ -209,7 +143,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 30,
-    marginLeft: 30
+    marginLeft: 30,
+    marginBottom: 20
   },
   buttonText: {
     color: '#333333'

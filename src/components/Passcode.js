@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import { StyleSheet, View, ImageBackground, Image, TouchableOpacity, Alert } from 'react-native'
 import { Button, Form, Input, Item, Label, Text, Spinner, Content, Header, Title, Container } from 'native-base'
 import { loginEmailChanged, loginPasswordChanged, loginLender } from '../actions'
+import { NavigationActions } from 'react-navigation'
+import { Font } from 'expo';
 
 let Code = "1111"
 
@@ -12,28 +14,61 @@ class Passcode extends Component {
 
   constructor() {
     super();
+    // this.state = {
     this.state = {
+      fontLoaded: false,
       count: 0,
       enterCode: "",
-      color: 'rgba(255, 255, 255, 0.0)'
+      color1: 'rgba(255, 255, 255, 0.0)',
+      color2: 'rgba(255, 255, 255, 0.0)',
+      color3: 'rgba(255, 255, 255, 0.0)',
+      color4: 'rgba(255, 255, 255, 0.0)',
     };
   }
+
+  async componentDidMount() {
+    await Font.loadAsync({
+      'helvetica-neue-lt': require('../../assets/fonts/helvetica-neue-lt-std-45-light.ttf'),
+    });
+    this.setState({ fontLoaded: true });
+  }
+
 
   _onPressButton(index) {
     // console.log(index)
     this.state.count++
-    this.state.enterCode = this.state.enterCode+index;
-    if(this.state.count == 4){
-      if(this.state.enterCode == Code){
-        Alert.alert('Valid Passcode')
-      } else {
-        Vibration.vibrate(500);
-      }
-      this.state.count = 0
-      this.state.enterCode = ""
+    if (this.state.count == 1)
+      this.setState({color1: 'rgba(255, 255, 255, 0.6)'})
+    else if (this.state.count == 2)
+      this.setState({color2: 'rgba(255, 255, 255, 0.6)'})
+    else if (this.state.count == 3)
+      this.setState({color3: 'rgba(255, 255, 255, 0.6)'})
+    else if (this.state.count == 4)
+      this.setState({color4: 'rgba(255, 255, 255, 0.6)'})
+    let self = this
+    this.state.enterCode = this.state.enterCode + index;
+    if(this.state.enterCode == Code){
+      Alert.alert('Valid Passcode')
     }
-    this.state.color = 'rgba(255, 255, 255, 0.6)'
-    // Alert.alert('Color: '+this.state.color)
+    setTimeout(function(){
+      if(self.state.count >= 4){
+        if(self.state.enterCode != Code){
+          Alert.alert('Passcode is 1111')
+          Vibration.vibrate(500);
+          self.setState({color1: 'rgba(255, 255, 255, 0.0)'})
+          self.setState({color2: 'rgba(255, 255, 255, 0.0)'})
+          self.setState({color3: 'rgba(255, 255, 255, 0.0)'})
+          self.setState({color4: 'rgba(255, 255, 255, 0.0)'})
+        } else {
+          self.setState({color1: 'rgba(255, 255, 255, 0.0)'})
+          self.setState({color2: 'rgba(255, 255, 255, 0.0)'})
+          self.setState({color3: 'rgba(255, 255, 255, 0.0)'})
+          self.setState({color4: 'rgba(255, 255, 255, 0.0)'})
+        }
+        self.state.count = 0
+        self.state.enterCode = ""
+      }
+    }, 50)
   }
 
   renderError () {
@@ -54,96 +89,139 @@ class Passcode extends Component {
     return (
       <View style={styles.container}>
         <ImageBackground source={require('../../assets/images/background.png')} style={styles.background}>
-          <Container style={styles.wrapper}>
+          <Container>
             <Content>
-              <View style={styles.aCenter}>
-                <Image source={require('../../assets/images/logo-small.png')} style={styles.logo} />
-                <Text style={styles.text}>Touch ID or Enter Passcode</Text>
-                <Text style={styles.text}>"{this.state.enterCode}"</Text>
-              </View>
-
-              <View style={styles.aCenter}>
-                <View style={styles.dotRow}>
-                  <View style={styles.dotCell}>
-                    <View style={[styles.dot, {backgroundColor: this.state.color}]}></View>
-                  </View>
-                  <View style={styles.dotCell}>
-                    <View style={[styles.dot, {backgroundColor: this.state.color}]}></View>
-                  </View>
-                  <View style={styles.dotCell}>
-                    <View style={[styles.dot, {backgroundColor: this.state.color}]}></View>
-                  </View>
-                  <View style={styles.dotCell}>
-                    <View style={[styles.dot, {backgroundColor: this.state.color}]}></View>
-                  </View>
+              <View style={styles.wrapper}>
+                <View style={styles.aCenter}>
+                  <Image source={require('../../assets/images/logo-small.png')} style={styles.logo} />
+                  <Text style={styles.text}>Touch ID or Enter Passcode</Text>
                 </View>
 
-                <View style={styles.row}>
-                  <View
-                    style={styles.aLeft}><TouchableOpacity onPress={ this._onPressButton.bind(this, 1) } style={styles.circle}><Text style={styles.circleText}>1</Text></TouchableOpacity>
+                <View style={styles.aCenter}>
+                  <View style={styles.dotRow}>
+                    <View style={[styles.dotCell, {marginLeft: 15}]}>
+                      <View style={[styles.dot, {backgroundColor: this.state.color1}]}></View>
+                    </View>
+                    <View style={styles.dotCell}>
+                      <View style={[styles.dot, {backgroundColor: this.state.color2}]}></View>
+                    </View>
+                    <View style={styles.dotCell}>
+                      <View style={[styles.dot, {backgroundColor: this.state.color3}]}></View>
+                    </View>
+                    <View style={styles.dotCell}>
+                      <View style={[styles.dot, {backgroundColor: this.state.color4}]}></View>
+                    </View>
                   </View>
-                  <View
-                    style={styles.aMiddle}><TouchableOpacity onPress={ this._onPressButton.bind(this, 2) } style={styles.circle}><Text style={styles.circleText}>2</Text></TouchableOpacity>
-                  </View>
-                  <View
-                    style={styles.aRight}><TouchableOpacity onPress={ this._onPressButton.bind(this, 3) } style={styles.circle}><Text style={styles.circleText}>3</Text></TouchableOpacity>
-                  </View>
-                </View>
 
-                <View style={styles.row}>
-                  <View
-                    style={styles.aLeft}><TouchableOpacity onPress={ this._onPressButton.bind(this, 4) } style={styles.circle}><Text style={styles.circleText}>4</Text></TouchableOpacity>
+                  <View style={styles.row}>
+                    <View
+                      style={styles.aLeft}><TouchableOpacity onPress={ this._onPressButton.bind(this, 1) } style={styles.circle}>
+                      {
+                        this.state.fontLoaded ? (
+                          <Text style={[styles.circleText, { fontFamily: 'helvetica-neue-lt' }]}>1</Text>
+                        ) : null
+                      }
+                      </TouchableOpacity>
+                    </View>
+                    <View
+                      style={styles.aMiddle}><TouchableOpacity onPress={ this._onPressButton.bind(this, 2) } style={styles.circle}>{
+                        this.state.fontLoaded ? (
+                          <Text style={[styles.circleText, { fontFamily: 'helvetica-neue-lt' }]}>2</Text>
+                        ) : null
+                      }</TouchableOpacity>
+                    </View>
+                    <View
+                      style={styles.aRight}><TouchableOpacity onPress={ this._onPressButton.bind(this, 3) } style={styles.circle}>{
+                        this.state.fontLoaded ? (
+                          <Text style={[styles.circleText, { fontFamily: 'helvetica-neue-lt' }]}>3</Text>
+                        ) : null
+                      }</TouchableOpacity>
+                    </View>
                   </View>
-                  <View
-                    style={styles.aMiddle}><TouchableOpacity onPress={ this._onPressButton.bind(this, 5) } style={styles.circle}><Text style={styles.circleText}>5</Text></TouchableOpacity>
-                  </View>
-                  <View
-                    style={styles.aRight}><TouchableOpacity onPress={ this._onPressButton.bind(this, 6) } style={styles.circle}><Text style={styles.circleText}>6</Text></TouchableOpacity>
-                  </View>
-                </View>
 
-                <View style={styles.row}>
-                  <View
-                    style={styles.aLeft}><TouchableOpacity onPress={ this._onPressButton.bind(this, 7) } style={styles.circle}><Text style={styles.circleText}>7</Text></TouchableOpacity>
+                  <View style={styles.row}>
+                    <View
+                      style={styles.aLeft}><TouchableOpacity onPress={ this._onPressButton.bind(this, 4) } style={styles.circle}>{
+                        this.state.fontLoaded ? (
+                          <Text style={[styles.circleText, { fontFamily: 'helvetica-neue-lt' }]}>4</Text>
+                        ) : null
+                      }</TouchableOpacity>
+                    </View>
+                    <View
+                      style={styles.aMiddle}><TouchableOpacity onPress={ this._onPressButton.bind(this, 5) } style={styles.circle}>{
+                        this.state.fontLoaded ? (
+                          <Text style={[styles.circleText, { fontFamily: 'helvetica-neue-lt' }]}>5</Text>
+                        ) : null
+                      }</TouchableOpacity>
+                    </View>
+                    <View
+                      style={styles.aRight}><TouchableOpacity onPress={ this._onPressButton.bind(this, 6) } style={styles.circle}>{
+                        this.state.fontLoaded ? (
+                          <Text style={[styles.circleText, { fontFamily: 'helvetica-neue-lt' }]}>6</Text>
+                        ) : null
+                      }</TouchableOpacity>
+                    </View>
                   </View>
-                  <View
-                    style={styles.aMiddle}><TouchableOpacity onPress={ this._onPressButton.bind(this, 8) } style={styles.circle}><Text style={styles.circleText}>8</Text></TouchableOpacity>
-                  </View>
-                  <View
-                    style={styles.aRight}><TouchableOpacity onPress={ this._onPressButton.bind(this, 9) } style={styles.circle}><Text style={styles.circleText}>9</Text></TouchableOpacity>
-                  </View>
-                </View>
 
-                <View style={styles.row}>
-                  <View
-                    style={styles.aLeft}>
+                  <View style={styles.row}>
+                    <View
+                      style={styles.aLeft}><TouchableOpacity onPress={ this._onPressButton.bind(this, 7) } style={styles.circle}>{
+                        this.state.fontLoaded ? (
+                          <Text style={[styles.circleText, { fontFamily: 'helvetica-neue-lt' }]}>7</Text>
+                        ) : null
+                      }</TouchableOpacity>
+                    </View>
+                    <View
+                      style={styles.aMiddle}><TouchableOpacity onPress={ this._onPressButton.bind(this, 8) } style={styles.circle}>{
+                        this.state.fontLoaded ? (
+                          <Text style={[styles.circleText, { fontFamily: 'helvetica-neue-lt' }]}>8</Text>
+                        ) : null
+                      }</TouchableOpacity>
+                    </View>
+                    <View
+                      style={styles.aRight}><TouchableOpacity onPress={ this._onPressButton.bind(this, 9) } style={styles.circle}>{
+                        this.state.fontLoaded ? (
+                          <Text style={[styles.circleText, { fontFamily: 'helvetica-neue-lt' }]}>9</Text>
+                        ) : null
+                      }</TouchableOpacity>
+                    </View>
                   </View>
-                  <View
-                    style={styles.aMiddle}><TouchableOpacity onPress={ this._onPressButton.bind(this, 0) } style={styles.circle}><Text style={styles.circleText}>0</Text></TouchableOpacity>
-                  </View>
-                  <View
-                    style={styles.aRight}>
-                  </View>
-                </View>
 
-                <View style={styles.row}>
-                  <View
-                    style={styles.aLeft}>
-                    <Text style={styles.bottomText}>Forgot?</Text>
+                  <View style={styles.row}>
+                    <View
+                      style={styles.aLeft}>
+                    </View>
+                    <View
+                      style={styles.aMiddle}><TouchableOpacity onPress={ this._onPressButton.bind(this, 0) } style={styles.circle}>{
+                        this.state.fontLoaded ? (
+                          <Text style={[styles.circleText, { fontFamily: 'helvetica-neue-lt' }]}>0</Text>
+                        ) : null
+                      }</TouchableOpacity>
+                    </View>
+                    <View
+                      style={styles.aRight}>
+                    </View>
                   </View>
-                  <View
-                    style={styles.aMiddle}>
-                  </View>
-                  <View
-                    style={styles.aRight}>
-                    <Text
-                      style={styles.bottomText}
-                      onPress={() => navigate('WelcomePager')}
-                    >Log out</Text>
-                  </View>
-                </View>
 
-                {this.renderError()}
+                  <View style={styles.row}>
+                    <View
+                      style={styles.aLeft}>
+                      <Text style={styles.bottomText}>Forgot?</Text>
+                    </View>
+                    <View
+                      style={styles.aMiddle}>
+                    </View>
+                    <View
+                      style={styles.aRight}>
+                      <Text
+                        style={styles.bottomText}
+                        onPress={() => navigate('WelcomePager')}
+                      >Log out</Text>
+                    </View>
+                  </View>
+
+                  {this.renderError()}
+                </View>
               </View>
             </Content>
           </Container>
@@ -188,9 +266,10 @@ const styles = StyleSheet.create({
   },
   wrapper: {
     flex: 1,
-    // width: '100%',
     marginTop: 50,
-    // justifyContent: 'center',
+    marginLeft: 30,
+    marginRight: 30,
+    justifyContent: 'center',
     alignItems: 'center'
   },
   row: {
@@ -206,9 +285,10 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   circleText: {
+    // fontFamily: 'helvetica-neue-lt',
     color: '#ffffff',
     fontSize: 38,
-    paddingTop: 10
+    paddingTop: 20
   },
   aLeft: {
     flex: 1,
@@ -247,7 +327,7 @@ const styles = StyleSheet.create({
     width: 20,
     height: 20,
     borderRadius: 10,
-    marginRight: 20
+    marginRight: 30
   },
   bottomText: {
     backgroundColor: 'rgba(0,0,0,0)',
