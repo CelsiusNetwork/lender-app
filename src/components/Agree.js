@@ -5,7 +5,7 @@ import { Form, Input, Item, Label } from 'native-base'
 import { NavigationActions } from 'react-navigation'
 import { Camera, Permissions } from 'expo';
 
-class VerifyPhoto extends React.Component {
+class Agree extends React.Component {
 
   state = {
     hasCameraPermission: null,
@@ -224,4 +224,4 @@ const mapStateToProps = state => {
 const mapDispatchToProps = {
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(VerifyPhoto)
+export default connect(mapStateToProps, mapDispatchToProps)(Agree)
