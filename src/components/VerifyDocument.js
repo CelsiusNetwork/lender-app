@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Content, Container, ImageBackground, StyleSheet, View, Image, Text, TouchableOpacity, AsyncStorage } from 'react-native'
-import { Form, Input, Item, Label } from 'native-base'
+import { Alert, ImageBackground, StyleSheet, View, Image, Text, TouchableOpacity, AsyncStorage } from 'react-native'
+import { Form, Input, Item, Label, Content, Container } from 'native-base'
 import { NavigationActions } from 'react-navigation'
 import { Camera, Permissions } from 'expo';
 
@@ -10,6 +10,8 @@ class VerifyDocument extends React.Component {
   state = {
     hasCameraPermission: null,
     type: Camera.Constants.Type.back,
+    backgroundColorLeft: {backgroundColor: 'rgba(255,255, 255, 0.2)', borderColor: 'rgba(255,255, 255, 0)'},
+    backgroundColorRight: {backgroundColor: 'rgba(255,255, 255, 0)', borderColor: 'rgba(255,255, 255, 0.2)'}
   };
 
   async componentWillMount() {
@@ -31,6 +33,16 @@ class VerifyDocument extends React.Component {
     }
   }
 
+  pressLeft(){
+    this.setState({backgroundColorLeft: {backgroundColor: 'rgba(255,255, 255, 0.2)', borderColor: 'rgba(255,255, 255, 0)'}})
+    this.setState({backgroundColorRight: {backgroundColor: 'rgba(255,255, 255, 0)', borderColor: 'rgba(255,255, 255, 0.2)'}})
+  }
+
+  pressRight(){
+    this.setState({backgroundColorLeft: {backgroundColor: 'rgba(255,255, 255, 0)', borderColor: 'rgba(255,255, 255, 0.2)'}})
+    this.setState({backgroundColorRight: {backgroundColor: 'rgba(255,255, 255, 0.2)', borderColor: 'rgba(255,255, 255, 0)'}})
+  }
+
   render () {
     const { navigate } = this.props.navigation
     const { hasCameraPermission } = this.state;
@@ -48,50 +60,63 @@ class VerifyDocument extends React.Component {
               <ImageBackground source={require('../../assets/images/progress-line-bg.png')} style={styles.line}>
                 <ImageBackground source={require('../../assets/images/progress-line.png')} style={styles.lineInner}></ImageBackground>
               </ImageBackground>
-              <ImageBackground source={require('../../assets/images/scanner.png')} style={styles.cameraWrapper}>
-
-                <View style={{ flex: 1, height: 200, width: 290 }}>
-                  <Camera style={{ flex: 1 }}
-                  type={this.state.type}
-                  ref={ref => { this.camera = ref; }}
-                  >
-                    <View
-                      style={{
-                        flex: 1,
-                        backgroundColor: 'transparent',
-                        flexDirection: 'row',
-                      }}>
-                      <TouchableOpacity
-                        style={{
-                          flex: 0.1,
-                          alignSelf: 'flex-end',
-                          alignItems: 'center',
-                        }}
-                        onPress={() => {
-                          this.setState({
-                            type: this.state.type === Camera.Constants.Type.back
-                              ? Camera.Constants.Type.front
-                              : Camera.Constants.Type.back,
-                          });
-                        }}>
-                        <Text
-                          style={{ fontSize: 18, marginBottom: 10, color: 'white' }}>
-                          {' '}Flip{' '}
-                        </Text>
-                      </TouchableOpacity>
+              <Container>
+                <Content>
+                  <View style={styles.row}>
+                    <TouchableOpacity
+                      style={[styles.checkLeft, this.state.backgroundColorLeft]}
+                      onPress={this.pressLeft.bind(this)}
+                      ><Text style={styles.checkText}>Passport</Text></TouchableOpacity>
+                    <TouchableOpacity
+                      style={[styles.checkRight, this.state.backgroundColorRight]}
+                      onPress={this.pressRight.bind(this)}
+                      ><Text style={styles.checkText}>ID Card</Text></TouchableOpacity>
+                  </View>
+                  <ImageBackground source={require('../../assets/images/scanner.png')} style={styles.cameraWrapper}>
+                    <View style={{ flex: 1, height: 200, width: 290 }}>
+                      <Camera style={{ flex: 1 }}
+                      type={this.state.type}
+                      ref={ref => { this.camera = ref; }}
+                      >
+                        <View
+                          style={{
+                            flex: 1,
+                            backgroundColor: 'transparent',
+                            flexDirection: 'row',
+                          }}>
+                          <TouchableOpacity
+                            style={{
+                              flex: 0.1,
+                              alignSelf: 'flex-end',
+                              alignItems: 'center',
+                            }}
+                            onPress={() => {
+                              this.setState({
+                                type: this.state.type === Camera.Constants.Type.back
+                                  ? Camera.Constants.Type.front
+                                  : Camera.Constants.Type.back,
+                              });
+                            }}>
+                            <Text
+                              style={{ fontSize: 18, marginBottom: 10, color: 'white' }}>
+                              {' '}Flip{' '}
+                            </Text>
+                          </TouchableOpacity>
+                        </View>
+                      </Camera>
                     </View>
-                  </Camera>
-                </View>
-              </ImageBackground>
+                  </ImageBackground>
 
-              <Text style={styles.text}>Please center your passport in the area above. Ensure that there’s enough light in the room for better picture quality.</Text>
+                  <Text style={styles.text}>Please center your passport in the area above. Ensure that there’s enough light in the room for better picture quality.</Text>
 
-              <TouchableOpacity style={styles.button}
-              // onPress={() => navigate('Register')}
-              onPress={this.snap}
-              >
-              <Text style={styles.buttonText}>Take a photo</Text>
-            </TouchableOpacity>
+                  <TouchableOpacity style={styles.button}
+                  // onPress={() => navigate('Register')}
+                  onPress={this.snap}
+                  >
+                    <Text style={styles.buttonText}>Take a photo</Text>
+                 </TouchableOpacity>
+               </Content>
+              </Container>
             </View>
 
           </ImageBackground>
@@ -121,6 +146,46 @@ const styles = StyleSheet.create({
     flex: 1,
     marginLeft: 10,
     marginRight: 10,
+  },
+  row: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    height: 40,
+    marginTop: 10,
+    marginBottom: 10
+  },
+  checkLeft: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    marginLeft: 10,
+    // width: '50%',
+    borderWidth: 2,
+    borderTopLeftRadius: 20,
+    borderBottomLeftRadius: 20,
+    height: 40,
+    // backgroundColor: 'rgba(255,255, 255, 0.2)',
+    // borderColor: 'rgba(255,255, 255, 0)'
+  },
+  checkRight: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    marginRight: 10,
+    // width: '50%',
+    borderWidth: 2,
+    borderTopRightRadius: 20,
+    borderBottomRightRadius: 20,
+    height: 40,
+    // backgroundColor: 'rgba(255,255, 255, 0)',
+    // borderColor: 'rgba(255,255, 255, 0.2)'
+  },
+  checkText: {
+    width: '100%',
+    textAlign: 'center',
+    color: '#ffffff',
   },
   cameraWrapper: {
     alignItems: 'center',
@@ -209,7 +274,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 30,
-    marginLeft: 30
+    marginLeft: 30,
+    marginBottom: 20
   },
   buttonText: {
     color: '#333333'

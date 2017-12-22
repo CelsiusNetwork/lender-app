@@ -3,30 +3,9 @@ import { connect } from 'react-redux'
 import { StyleSheet, View, ImageBackground, Image, TouchableOpacity } from 'react-native'
 import { Button, Form, Input, Item, Label, Text, Spinner, Content, Header, Title, Container } from 'native-base'
 import { loginEmailChanged, loginPasswordChanged, loginLender } from '../actions'
+import { NavigationActions } from 'react-navigation'
 
 class LoginForm extends Component {
-  onButtonPress () {
-    // this.props.loginUser({ email, password })
-    console.log(this.props.navigation)
-  }
-
-  renderButton () {
-    if (this.props.loading) {
-      return <Spinner color='black' />
-    }
-    return (
-      <Button
-        style={styles.button}
-        // onPress={this.onButtonPress.bind(this)}
-        onPress={() => navigate('VerifyPhoneNumber')}
-        block primary>
-        <Text
-          style={styles.buttonText}
-        >Log in</Text>
-      </Button>
-    )
-  }
-
   renderError () {
     if (this.props.error !== '') { return (<Text style={styles.errorText}>{this.props.error}</Text>) }
     return <View />
@@ -76,7 +55,16 @@ class LoginForm extends Component {
                 </Item>
 
                 {this.renderError()}
-                {this.renderButton()}
+                <Button
+                  style={styles.button}
+                  // onPress={this.onButtonPress.bind(this)}
+                  onPress={() => navigate('Passcode')}
+                  block primary>
+                  <Text
+                    style={styles.buttonText}
+                  >Log in</Text>
+                </Button>
+
                 <View>
                   <Text
                   style={styles.forgetPassword}
