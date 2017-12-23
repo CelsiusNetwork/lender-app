@@ -66,21 +66,87 @@ class IncomeHistory extends Component {
                     <View>
                       <Image source={require('../../../assets/images/icon-coins.png')} style={styles.icon} />
                     </View>
+                    <View style={styles.value}>
+                    { this.state.fontLoaded ? (<Text style={[styles.valueText, { fontFamily: 'barlow-semi-bold' }]}>0.127 DEG</Text>) : null }
+                    </View>
+                    <View style={styles.status}>
+                    { this.state.fontLoaded ? (<Text style={[styles.statusText, { fontFamily: 'barlow' }]}>ON HOLD</Text>) : null }
+                    </View>
+                    <View style={styles.created}>
+                    { this.state.fontLoaded ? (<Text style={[styles.createdText, { fontFamily: 'barlow' }]}>Nov 20, 2017</Text>) : null }
+                    <Image source={require('../../../assets/images/icon-time.png')} style={styles.clock} />
+                    { this.state.fontLoaded ? (<Text style={[styles.createdText, { fontFamily: 'barlow' }]}>9:21AM</Text>) : null }
+                    </View>
                   </View>
                   <View style={styles.tableRow}>
                     <View>
-                      <Image source={require('../../../assets/images/icon-etherium.png')} style={styles.icon} />
+                    <Image source={require('../../../assets/images/icon-etherium.png')} style={styles.icon} />
+                    </View>
+                    <View style={styles.value}>
+                    { this.state.fontLoaded ? (<Text style={[styles.valueText, { fontFamily: 'barlow-semi-bold' }]}>7.000 ETH</Text>) : null }
+                    </View>
+                    <View style={[styles.status, styles.greenStatus]}>
+                    { this.state.fontLoaded ? (<Text style={[styles.statusText, styles.greenText, { fontFamily: 'barlow' }]}>RECEIVED</Text>) : null }
+                    </View>
+                    <View style={styles.created}>
+                    { this.state.fontLoaded ? (<Text style={[styles.createdText, { fontFamily: 'barlow' }]}>Nov 20, 2017</Text>) : null }
+                    <Image source={require('../../../assets/images/icon-time.png')} style={styles.clock} />
+                    { this.state.fontLoaded ? (<Text style={[styles.createdText, { fontFamily: 'barlow' }]}>9:21AM</Text>) : null }
                     </View>
                   </View>
-                  <View style={styles.tableRow}></View>
-                  <View style={styles.tableRow}></View>
-                  <View style={styles.tableRow}></View>
-                  <View style={styles.tableRow}></View>
+                  <View style={styles.tableRow}>
+                    <View>
+                    <Image source={require('../../../assets/images/icon-etherium.png')} style={styles.icon} />
+                    </View>
+                    <View style={styles.value}>
+                    { this.state.fontLoaded ? (<Text style={[styles.valueText, { fontFamily: 'barlow-semi-bold' }]}>-1.000 ETH</Text>) : null }
+                    </View>
+                    <View style={[styles.status, styles.orangeStatus]}>
+                    { this.state.fontLoaded ? (<Text style={[styles.statusText, styles.orangeText, { fontFamily: 'barlow' }]}>SOLD</Text>) : null }
+                    </View>
+                    <View style={styles.created}>
+                    { this.state.fontLoaded ? (<Text style={[styles.createdText, { fontFamily: 'barlow' }]}>Nov 20, 2017</Text>) : null }
+                    <Image source={require('../../../assets/images/icon-time.png')} style={styles.clock} />
+                    { this.state.fontLoaded ? (<Text style={[styles.createdText, { fontFamily: 'barlow' }]}>9:21AM</Text>) : null }
+                    </View>
+                  </View>
+                  <View style={styles.tableRow}>
+                    <View>
+                    <Image source={require('../../../assets/images/icon-etherium.png')} style={styles.icon} />
+                    </View>
+                    <View style={styles.value}>
+                    { this.state.fontLoaded ? (<Text style={[styles.valueText, { fontFamily: 'barlow-semi-bold' }]}>3.000 ETH</Text>) : null }
+                    </View>
+                    <View style={[styles.status, styles.greenStatus]}>
+                    { this.state.fontLoaded ? (<Text style={[styles.statusText, styles.greenText, { fontFamily: 'barlow' }]}>RECEIVED</Text>) : null }
+                    </View>
+                    <View style={styles.created}>
+                    { this.state.fontLoaded ? (<Text style={[styles.createdText, { fontFamily: 'barlow' }]}>Nov 20, 2017</Text>) : null }
+                    <Image source={require('../../../assets/images/icon-time.png')} style={styles.clock} />
+                    { this.state.fontLoaded ? (<Text style={[styles.createdText, { fontFamily: 'barlow' }]}>9:21AM</Text>) : null }
+                    </View>
+                  </View>
+                  <View style={styles.tableRow}>
+                    <View>
+                      <Image source={require('../../../assets/images/icon-coins.png')} style={styles.icon} />
+                    </View>
+                    <View style={styles.value}>
+                    { this.state.fontLoaded ? (<Text style={[styles.valueText, { fontFamily: 'barlow-semi-bold' }]}>0.127 DEG</Text>) : null }
+                    </View>
+                    <View style={styles.status}>
+                    { this.state.fontLoaded ? (<Text style={[styles.statusText, { fontFamily: 'barlow' }]}>ON HOLD</Text>) : null }
+                    </View>
+                    <View style={styles.created}>
+                    { this.state.fontLoaded ? (<Text style={[styles.createdText, { fontFamily: 'barlow' }]}>Nov 20, 2017</Text>) : null }
+                    <Image source={require('../../../assets/images/icon-time.png')} style={styles.clock} />
+                    { this.state.fontLoaded ? (<Text style={[styles.createdText, { fontFamily: 'barlow' }]}>9:21AM</Text>) : null }
+                    </View>
+                  </View>
                 </Content>
               </Container>
             </View>
             <Text style={styles.footer}>
-              { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow' }]}>DEG Value</Text>) : null }
+              { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow' }]}>Income history</Text>) : null }
             </Text>
           </Content>
         </Container>
@@ -219,15 +285,75 @@ const styles = StyleSheet.create({
   tableRow: {
     height: 82,
     borderBottomWidth: 2,
-    borderColor: 'rgba(255, 255, 255, 0.1)'
+    borderColor: 'rgba(255, 255, 255, 0.1)',
+    position: 'relative'
+  },
+  value: {
+    position: 'absolute',
+    top: 10,
+    left: 70,
+  },
+  valueText: {
+    color: '#ffffff',
+    fontSize: 21,
   },
   icon: {
-    width: 50,
-    height: 50,
+    width: 40,
+    height: 40,
     resizeMode: "contain",
     marginLeft: 15,
+    marginTop: 20
   },
-
+  status: {
+    position: 'absolute',
+    top: 45,
+    left: 60,
+    borderWidth: 2,
+    borderColor: 'rgba(255, 255, 255, 0.5)',
+    borderRadius: 20,
+    paddingTop: 0,
+    paddingBottom: 2,
+    paddingLeft: 15,
+    paddingRight: 15
+  },
+  statusText: {
+    color: '#ffffff',
+    fontSize: 18,
+  },
+  created: {
+    position: 'absolute',
+    right: 0,
+    top: 50,
+    flexWrap: 'wrap',
+    alignItems: 'flex-start',
+    flexDirection:'row',
+  },
+  clock: {
+    width: 14,
+    height: 14,
+    resizeMode: "contain",
+    flexDirection:'column',
+    marginLeft: 10,
+    marginRight: 3,
+    marginTop: 3
+  },
+  createdText: {
+    color: 'rgba(255, 255, 255, 0.5)',
+    fontSize: 14,
+    flexDirection:'column',
+  },
+  greenStatus: {
+    borderColor: '#47CA53'
+  },
+  greenText: {
+    color: '#47CA53'
+  },
+  orangeStatus: {
+    borderColor: '#E19F30'
+  },
+  orangeText: {
+    borderColor: '#E19F30'
+  }
 })
 
 const mapStateToProps = state => {
