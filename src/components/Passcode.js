@@ -48,7 +48,9 @@ class Passcode extends Component {
     let self = this
     this.state.enterCode = this.state.enterCode + index;
     if(this.state.enterCode == Code){
-      Alert.alert('Valid Passcode')
+      // Alert.alert('Valid Passcode')
+      const { navigate } = this.props.navigation
+      navigate('Home')
     }
     setTimeout(function(){
       if(self.state.count >= 4){
@@ -68,7 +70,7 @@ class Passcode extends Component {
         self.state.count = 0
         self.state.enterCode = ""
       }
-    }, 50)
+    }, 10)
   }
 
   renderError () {

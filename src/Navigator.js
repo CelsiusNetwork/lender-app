@@ -4,8 +4,8 @@ import { connect } from "react-redux"
 import { addNavigationHelpers, NavigationActions, StackNavigator } from "react-navigation"
 
 
-import WelcomePager from "./components/welcome/WelcomePager"
-// import WelcomePager from "./components/LoginForm"
+// import WelcomePager from "./components/welcome/WelcomePager"
+import WelcomePager from "./components/Home"
 
 import Register from './components/Register'
 import LoginForm from './components/LoginForm'
@@ -20,16 +20,16 @@ import Agree from './components/Agree'
 import Home from './components/Home'
 
 export const Navigator = StackNavigator({
+  LoginForm: {
+    screen: LoginForm,
+    headerMode: 'screen'
+  },
   Welcome: {
     screen: WelcomePager,
     headerMode: 'screen'
   },
   Register: {
     screen: Register,
-    headerMode: 'screen'
-  },
-  LoginForm: {
-    screen: LoginForm,
     headerMode: 'screen'
   },
   ForgotPassword: {

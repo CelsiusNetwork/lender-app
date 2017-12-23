@@ -31,7 +31,7 @@ class LoginForm extends Component {
               <Text style={styles.text}>
                 Log in to continue to use Celsius. In case you don’t have an account, you can <Text
                   style={styles.createLink}
-                  onPress={() => navigate('Register')}
+                  onPress={() => navigate('Welcome')}
                   >create one here</Text>.
               </Text>
                 <Form style={styles.form}>

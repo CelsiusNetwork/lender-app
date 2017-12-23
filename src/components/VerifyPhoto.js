@@ -48,50 +48,51 @@ class VerifyPhoto extends React.Component {
               <ImageBackground source={require('../../assets/images/progress-line-bg.png')} style={styles.line}>
                 <ImageBackground source={require('../../assets/images/progress-line.png')} style={styles.lineInner}></ImageBackground>
               </ImageBackground>
-              <ImageBackground source={require('../../assets/images/scanner.png')} style={styles.cameraWrapper}>
-
-                <View style={{ flex: 1, height: 200, width: 290 }}>
-                  <Camera style={{ flex: 1 }}
-                  type={this.state.type}
-                  ref={ref => { this.camera = ref; }}
-                  >
-                    <View
-                      style={{
-                        flex: 1,
-                        backgroundColor: 'transparent',
-                        flexDirection: 'row',
-                      }}>
-                      <TouchableOpacity
+              <View style={styles.aCenter}>
+                <ImageBackground source={require('../../assets/images/scanner.png')} style={styles.cameraWrapper}>
+                  <View style={{ flex: 1, height: 200, width: 290 }}>
+                    <Camera style={{ flex: 1 }}
+                    type={this.state.type}
+                    ref={ref => { this.camera = ref; }}
+                    >
+                      <View
                         style={{
-                          flex: 0.1,
-                          alignSelf: 'flex-end',
-                          alignItems: 'center',
-                        }}
-                        onPress={() => {
-                          this.setState({
-                            type: this.state.type === Camera.Constants.Type.back
-                              ? Camera.Constants.Type.front
-                              : Camera.Constants.Type.back,
-                          });
+                          flex: 1,
+                          backgroundColor: 'transparent',
+                          flexDirection: 'row',
                         }}>
-                        <Text
-                          style={{ fontSize: 18, marginBottom: 10, color: 'white' }}>
-                          {' '}Flip{' '}
-                        </Text>
-                      </TouchableOpacity>
-                    </View>
-                  </Camera>
-                </View>
-              </ImageBackground>
+                        <TouchableOpacity
+                          style={{
+                            flex: 0.1,
+                            alignSelf: 'flex-end',
+                            alignItems: 'center',
+                          }}
+                          onPress={() => {
+                            this.setState({
+                              type: this.state.type === Camera.Constants.Type.back
+                                ? Camera.Constants.Type.front
+                                : Camera.Constants.Type.back,
+                            });
+                          }}>
+                          <Text
+                            style={{ fontSize: 18, marginBottom: 10, color: 'white' }}>
+                            {' '}Flip{' '}
+                          </Text>
+                        </TouchableOpacity>
+                      </View>
+                    </Camera>
+                  </View>
+                </ImageBackground>
 
-              <Text style={styles.text}>Please center your face in the frame above and take a selfie. We need your recent picture to compare it with the one on the passport.</Text>
+                <Text style={styles.text}>Please center your face in the frame above and take a selfie. We need your recent picture to compare it with the one on the passport.</Text>
 
-              <TouchableOpacity style={styles.button}
-              // onPress={() => navigate('Register')}
-              onPress={this.snap}
-              >
-              <Text style={styles.buttonText}>Take a photo</Text>
-            </TouchableOpacity>
+                <TouchableOpacity style={styles.button}
+                // onPress={() => navigate('Register')}
+                  onPress={this.snap}
+                  >
+                  <Text style={styles.buttonText}>Take a photo</Text>
+                </TouchableOpacity>
+              </View>
             </View>
 
           </ImageBackground>
@@ -188,6 +189,9 @@ const styles = StyleSheet.create({
   },
   inputDash: {
     height: 2
+  },
+  aCenter: {
+    alignItems: 'center'
   },
   text: {
     fontSize: 14,
