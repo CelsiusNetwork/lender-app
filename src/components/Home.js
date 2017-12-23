@@ -1,24 +1,22 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { ImageBackground, StyleSheet, View, Image, Text, TouchableOpacity, AsyncStorage } from 'react-native'
+import { Alert, ImageBackground, StyleSheet, View, Image, Text, TouchableOpacity, AsyncStorage, Animated } from 'react-native'
 import { Form, Input, Item, Label, Content, Container } from 'native-base'
 import { NavigationActions } from 'react-navigation'
 import { Font } from 'expo';
 
 class Home extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
         fontLoaded: false,
-        checked: false,
         eth: 0.000,
         deg: 0.000,
         user: {
           name: "Alex"
-        }
+        },
     }
   }
-
   async componentDidMount() {
     await Font.loadAsync({
       'barlow-semi-bold': require('../../assets/fonts/Barlow-SemiBold.otf'),
@@ -29,12 +27,6 @@ class Home extends Component {
     this.setState({ fontLoaded: true });
   }
 
-  pressCheckbox(){
-    if(this.state.checked)
-      this.setState({checked: false})
-    else
-      this.setState({checked: true})
-  }
   render () {
     const { navigate } = this.props.navigation
     return (
@@ -51,6 +43,7 @@ class Home extends Component {
             </View>
             <Container style={styles.wrapper}>
               <Content>
+
                 <Text style={styles.header}>
                   { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow-semi-bold' }]}>{ this.state.eth.toFixed(3) }</Text>) : null }
                   { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow-semi-bold' }]}> ETH</Text>) : null }
@@ -60,7 +53,7 @@ class Home extends Component {
                   { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow-light' }]}> DEG</Text>) : null }
                 </Text>
                 <TouchableOpacity style={styles.button}
-                  onPress={() => navigate('LoginForm')}
+                  onPress={() => navigate('Graph')}
                 >
                   <Text style={styles.buttonText}>Add founds</Text>
                 </TouchableOpacity>
@@ -96,8 +89,6 @@ class Home extends Component {
 
               </Content>
             </Container>
-
-
         </View>
 
       </ImageBackground>
