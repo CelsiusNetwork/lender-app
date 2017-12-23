@@ -12,6 +12,7 @@ class IncomeHistory extends Component {
         fontLoaded: false,
         eth: 10.000,
         deg: 2.984,
+        change: ' ▲ +3.24%',
         user: {
           name: "Alex"
         },
@@ -44,6 +45,7 @@ class IncomeHistory extends Component {
             <Text style={styles.header2}>
               { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow-light' }]}>{ this.state.deg.toFixed(3) }</Text>) : null }
               { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow-light' }]}> DEG</Text>) : null }
+              { this.state.fontLoaded ? (<Text style={[ styles.changeUp, { fontFamily: 'barlow-light' }]}> { this.state.change}</Text>) : null }
             </Text>
             <View style={styles.row}>
               <View style={styles.cellLeft}>
@@ -57,8 +59,25 @@ class IncomeHistory extends Component {
                 </TouchableOpacity>
               </View>
             </View>
-            <View style={styles.graphWrapper}>
-              <Image source={require('../../../assets/images/graph-token-value.png')} style={styles.graph} />
+            <View style={styles.tableWrapper}>
+              <Container style={styles.tableContainer}>
+                <Content>
+                  <View style={styles.tableRow}>
+                    <View>
+                      <Image source={require('../../../assets/images/icon-coins.png')} style={styles.icon} />
+                    </View>
+                  </View>
+                  <View style={styles.tableRow}>
+                    <View>
+                      <Image source={require('../../../assets/images/icon-etherium.png')} style={styles.icon} />
+                    </View>
+                  </View>
+                  <View style={styles.tableRow}></View>
+                  <View style={styles.tableRow}></View>
+                  <View style={styles.tableRow}></View>
+                  <View style={styles.tableRow}></View>
+                </Content>
+              </Container>
             </View>
             <Text style={styles.footer}>
               { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow' }]}>DEG Value</Text>) : null }
@@ -99,6 +118,14 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     marginTop: 0
+  },
+  changeUp: {
+    fontSize: 18,
+    color: '#47CA53'
+  },
+  changeDown: {
+    fontSize: 18,
+    color: '#ff3333'
   },
   cellLeft: {
     flex: 1,
@@ -167,12 +194,12 @@ const styles = StyleSheet.create({
     // borderColor: 'blue'
 
   },
-  graph: {
+  tableContainer: {
     flex: 1,
     // flexDirection: 'row',
     // width: '100%',
     height: 340,
-    resizeMode: "contain",
+    // resizeMode: "contain",
     marginLeft: 20,
     marginRight: 20,
     // borderWidth: 1,
@@ -189,6 +216,18 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: 0
   },
+  tableRow: {
+    height: 82,
+    borderBottomWidth: 2,
+    borderColor: 'rgba(255, 255, 255, 0.1)'
+  },
+  icon: {
+    width: 50,
+    height: 50,
+    resizeMode: "contain",
+    marginLeft: 15,
+  },
+
 })
 
 const mapStateToProps = state => {
