@@ -1,6 +1,7 @@
 import * as types from './Types'
 import { NavigationActions } from 'react-navigation'
 import Expo, { SecureStore } from 'expo'
+import axios from 'axios'
 
 export const registerFirstNameChanged = (text) => {
   return {
