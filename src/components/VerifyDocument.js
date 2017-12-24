@@ -72,41 +72,42 @@ class VerifyDocument extends React.Component {
                       onPress={this.pressRight.bind(this)}
                       ><Text style={styles.checkText}>ID Card</Text></TouchableOpacity>
                   </View>
-                  <ImageBackground source={require('../../assets/images/scanner.png')} style={styles.cameraWrapper}>
-                    <View style={{ flex: 1, height: 200, width: 290 }}>
-                      <Camera style={{ flex: 1 }}
-                      type={this.state.type}
-                      ref={ref => { this.camera = ref; }}
-                      >
-                        <View
-                          style={{
-                            flex: 1,
-                            backgroundColor: 'transparent',
-                            flexDirection: 'row',
-                          }}>
-                          <TouchableOpacity
+                  <View style={styles.aCenter}>
+                    <ImageBackground source={require('../../assets/images/scanner.png')} style={styles.cameraWrapper}>
+                      <View style={{ flex: 1, height: 200, width: 290 }}>
+                        <Camera style={{ flex: 1 }}
+                        type={this.state.type}
+                        ref={ref => { this.camera = ref; }}
+                        >
+                          <View
                             style={{
-                              flex: 0.1,
-                              alignSelf: 'flex-end',
-                              alignItems: 'center',
-                            }}
-                            onPress={() => {
-                              this.setState({
-                                type: this.state.type === Camera.Constants.Type.back
-                                  ? Camera.Constants.Type.front
-                                  : Camera.Constants.Type.back,
-                              });
+                              flex: 1,
+                              backgroundColor: 'transparent',
+                              flexDirection: 'row',
                             }}>
-                            <Text
-                              style={{ fontSize: 18, marginBottom: 10, color: 'white' }}>
-                              {' '}Flip{' '}
-                            </Text>
-                          </TouchableOpacity>
-                        </View>
-                      </Camera>
-                    </View>
-                  </ImageBackground>
-
+                            <TouchableOpacity
+                              style={{
+                                flex: 0.1,
+                                alignSelf: 'flex-end',
+                                alignItems: 'center',
+                              }}
+                              onPress={() => {
+                                this.setState({
+                                  type: this.state.type === Camera.Constants.Type.back
+                                    ? Camera.Constants.Type.front
+                                    : Camera.Constants.Type.back,
+                                });
+                              }}>
+                              <Text
+                                style={{ fontSize: 18, marginBottom: 10, color: 'white' }}>
+                                {' '}Flip{' '}
+                              </Text>
+                            </TouchableOpacity>
+                          </View>
+                        </Camera>
+                      </View>
+                    </ImageBackground>
+                  </View>
                   <Text style={styles.text}>Please center your passport in the area above. Ensure that there’s enough light in the room for better picture quality.</Text>
 
                   <TouchableOpacity style={styles.button}
@@ -198,6 +199,9 @@ const styles = StyleSheet.create({
     borderRadius: 2,
     height: 4,
     marginBottom: 10
+  },
+  aCenter: {
+    alignItems: 'center'
   },
   lineInner: {
     width: '66%',

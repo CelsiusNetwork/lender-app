@@ -5,7 +5,9 @@ import { addNavigationHelpers, NavigationActions, StackNavigator } from "react-n
 
 
 import WelcomePager from "./components/welcome/WelcomePager"
-// import WelcomePager from "./components/LoginForm"
+// import WelcomePager from "./components/graph/GraphPager"
+
+import GraphPager from "./components/graph/GraphPager.js"
 
 import Register from './components/Register'
 import LoginForm from './components/LoginForm'
@@ -19,17 +21,19 @@ import Agree from './components/Agree'
 
 import Home from './components/Home'
 
+
+
 export const Navigator = StackNavigator({
+  LoginForm: {
+    screen: LoginForm,
+    headerMode: 'screen'
+  },
   Welcome: {
     screen: WelcomePager,
     headerMode: 'screen'
   },
   Register: {
     screen: Register,
-    headerMode: 'screen'
-  },
-  LoginForm: {
-    screen: LoginForm,
     headerMode: 'screen'
   },
   ForgotPassword: {
@@ -58,6 +62,10 @@ export const Navigator = StackNavigator({
   },
   Home: {
     screen: Home,
+    headerMode: 'screen'
+  },
+  Graph: {
+    screen: GraphPager,
     headerMode: 'screen'
   }
 
