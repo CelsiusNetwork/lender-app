@@ -85,13 +85,14 @@ class VerifyPhoto extends React.Component {
                 </ImageBackground>
 
                 <Text style={styles.text}>Please center your face in the frame above and take a selfie. We need your recent picture to compare it with the one on the passport.</Text>
-
-                <TouchableOpacity style={styles.button}
-                // onPress={() => navigate('Register')}
-                  onPress={this.snap}
-                  >
-                  <Text style={styles.buttonText}>Take a photo</Text>
-                </TouchableOpacity>
+                <View>
+                  <TouchableOpacity style={styles.button}
+                  // onPress={() => navigate('Register')}
+                    onPress={this.snap}
+                    >
+                    <Text style={styles.buttonText}>Take a photo</Text>
+                  </TouchableOpacity>
+                </View>
               </View>
             </View>
 
@@ -213,7 +214,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 30,
-    marginLeft: 30
+    marginLeft: 30,
+    paddingLeft: 100,
+    paddingRight: 100
   },
   buttonText: {
     color: '#333333'
