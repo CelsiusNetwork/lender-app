@@ -62,7 +62,7 @@ class IncomeHistory extends Component {
             <View style={styles.tableWrapper}>
               <Container style={styles.tableContainer}>
                 <Content>
-                  <View style={styles.tableRow}>
+                  <TouchableOpacity style={styles.tableRow} onPress={() => navigate('HistoryDetail')}>
                     <View>
                       <Image source={require('../../../assets/images/icon-coins.png')} style={styles.icon} />
                     </View>
@@ -77,8 +77,8 @@ class IncomeHistory extends Component {
                     <Image source={require('../../../assets/images/icon-time.png')} style={styles.clock} />
                     { this.state.fontLoaded ? (<Text style={[styles.createdText, { fontFamily: 'barlow' }]}>9:21AM</Text>) : null }
                     </View>
-                  </View>
-                  <View style={styles.tableRow}>
+                  </TouchableOpacity>
+                  <TouchableOpacity style={styles.tableRow} onPress={() => navigate('HistoryDetail')}>
                     <View>
                     <Image source={require('../../../assets/images/icon-etherium.png')} style={styles.icon} />
                     </View>
@@ -93,8 +93,8 @@ class IncomeHistory extends Component {
                     <Image source={require('../../../assets/images/icon-time.png')} style={styles.clock} />
                     { this.state.fontLoaded ? (<Text style={[styles.createdText, { fontFamily: 'barlow' }]}>9:21AM</Text>) : null }
                     </View>
-                  </View>
-                  <View style={styles.tableRow}>
+                  </TouchableOpacity>
+                  <TouchableOpacity style={styles.tableRow} onPress={() => navigate('HistoryDetail')}>
                     <View>
                     <Image source={require('../../../assets/images/icon-etherium.png')} style={styles.icon} />
                     </View>
@@ -109,8 +109,8 @@ class IncomeHistory extends Component {
                     <Image source={require('../../../assets/images/icon-time.png')} style={styles.clock} />
                     { this.state.fontLoaded ? (<Text style={[styles.createdText, { fontFamily: 'barlow' }]}>9:21AM</Text>) : null }
                     </View>
-                  </View>
-                  <View style={styles.tableRow}>
+                  </TouchableOpacity>
+                  <TouchableOpacity style={styles.tableRow} onPress={() => navigate('HistoryDetail')}>
                     <View>
                     <Image source={require('../../../assets/images/icon-etherium.png')} style={styles.icon} />
                     </View>
@@ -125,8 +125,8 @@ class IncomeHistory extends Component {
                     <Image source={require('../../../assets/images/icon-time.png')} style={styles.clock} />
                     { this.state.fontLoaded ? (<Text style={[styles.createdText, { fontFamily: 'barlow' }]}>9:21AM</Text>) : null }
                     </View>
-                  </View>
-                  <View style={styles.tableRow}>
+                  </TouchableOpacity>
+                  <TouchableOpacity style={styles.tableRow} onPress={() => navigate('HistoryDetail')}>
                     <View>
                       <Image source={require('../../../assets/images/icon-coins.png')} style={styles.icon} />
                     </View>
@@ -141,7 +141,7 @@ class IncomeHistory extends Component {
                     <Image source={require('../../../assets/images/icon-time.png')} style={styles.clock} />
                     { this.state.fontLoaded ? (<Text style={[styles.createdText, { fontFamily: 'barlow' }]}>9:21AM</Text>) : null }
                     </View>
-                  </View>
+                  </TouchableOpacity>
                 </Content>
               </Container>
             </View>

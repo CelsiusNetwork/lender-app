@@ -62,7 +62,7 @@ class Home extends Component {
                 <Text style={styles.welcomeText}>As a member of Celsius community, you can lend ETH and earn DEG token for the time you spend with us.</Text>
                 <View style={styles.hr}></View>
 
-                <TouchableOpacity style={styles.box}>
+                <TouchableOpacity style={styles.box} onPress={() => navigate('HistoryDetail')}>
                   <View style={styles.boxIconWrapper}>
                     <Image source={require('../../assets/images/icon-wallet.png')} style={styles.icon} />
                   </View>
@@ -86,7 +86,6 @@ class Home extends Component {
                     <Text style={styles.boxText}>Improve your seniority score by sticking longer with Celsius and earn more Degree.</Text>
                   </View>
                 </TouchableOpacity>
-
               </Content>
             </Container>
         </View>
