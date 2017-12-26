@@ -8,8 +8,7 @@ class HowItWorks extends Component {
     // this.props.lenderAppInitToken('LOHU3qeHAxFUE34Q71bfMUtdHW7afyLl', '8mJ-FJNm9BD3VW0GOfMeV278c6qUuSfFku-O8bGJPeUgXXClFf_EV5H25Rbh6Ai-', 'https://cs.celsius.network/cs', 'client_credentials')
   }
   static navigationOptions = {
-    header: null,
-    title: 'How It Works',
+    header: null
   };
 
   render () {
@@ -35,6 +34,10 @@ class HowItWorks extends Component {
           onPress={() => navigate('Register')}
           >
           <Text style={styles.buttonText}>Create account</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.loginTouchable} onPress={() => navigate('LoginForm')}>
+          <Text style={styles.loginText}>Already have one?</Text>
         </TouchableOpacity>
       </View>
     )
@@ -123,6 +126,17 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: '#333333'
+  },
+  loginTouchable: {
+    marginTop: 25,
+    marginRight: 30,
+    marginLeft: 30,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  loginText: {
+    backgroundColor: 'transparent',
+    color: 'white'
   }
 })
 
