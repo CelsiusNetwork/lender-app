@@ -1,4 +1,5 @@
 import * as types from './Types'
+import auth0Service from '../services/Auth0Service'
 import { NavigationActions } from 'react-navigation'
 
 export const loginEmailChanged = (text) => {
@@ -15,24 +16,27 @@ export const loginPasswordChanged = (text) => {
   }
 }
 
-export const loginLender = ({ email, password }) => {
+export const loginLender = (email, password) => {
   return (dispatch) => {
     dispatch({
       type: types.LOGIN_LENDER_LOADING
     })
+    auth0Service.siginInWithEmailAndPassword(email, password)
+      .then(token => loginLenderSuccess(dispatch, token))
+      .catch(error => loginLenderFail(dispatch, error))
   }
 }
 
-const loginLenderFail = (dispatch, errorCode) => {
+const loginLenderSuccess = (dispatch, token) => {
   dispatch({
-    type: types.LOGIN_LENDER_FAIL,
-    payload: errorCode
+    type: types.LOGIN_LENDER_SUCCESS,
+    payload: token
   })
 }
 
-const loginLenderSuccess = (dispatch, user) => {
+const loginLenderFail = (dispatch, error) => {
   dispatch({
-    type: types.LOGIN_LENDER_SUCCESS,
-    payload: user
+    type: types.LOGIN_LENDER_FAIL,
+    payload: error
   })
 }

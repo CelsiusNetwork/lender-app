@@ -6,17 +6,27 @@ import { loginEmailChanged, loginPasswordChanged, loginLender } from '../actions
 import { NavigationActions } from 'react-navigation'
 
 class LoginForm extends Component {
-  renderError () {
-    if (this.props.error !== '') { return (<Text style={styles.errorText}>{this.props.error}</Text>) }
-    return <View />
-  }
+
+  static navigationOptions = ({ navigation }) => ({
+    title: 'Login'
+  })
 
   onEmailChange (text) {
-    this.props.emailChanged(text)
+    this.props.loginEmailChanged(text)
   }
 
   onPasswordChange (text) {
-    this.props.passwordChanged(text)
+    this.props.loginPasswordChanged(text)
+  }
+
+  onButtonPress () {
+    const { email, password } = this.props
+    this.props.loginLender({ email, password })
+  }
+
+  renderError () {
+    if (this.props.error !== '') { return (<Text style={styles.errorText}>{this.props.error}</Text>) }
+    return <View />
   }
 
   render () {
@@ -26,15 +36,8 @@ class LoginForm extends Component {
         <ImageBackground source={require('../../assets/images/background.png')} style={styles.background}>
           <Container style={styles.formContainer}>
             <Content>
-            <Image source={require('../../assets/images/logo-small.png')} style={styles.logo} />
-              <Text style={styles.header}>{'Welcome\nBack'.toUpperCase()}</Text>
-              <Text style={styles.text}>
-                Log in to continue to use Celsius. In case you don’t have an account, you can <Text
-                  style={styles.createLink}
-                  onPress={() => navigate('Welcome')}
-                  >create one here</Text>.
-              </Text>
-                <Form style={styles.form}>
+              <Image source={require('../../assets/images/logo-small.png')} style={styles.logo} />
+              <Form style={styles.form}>
                 <Item floatingLabel style={styles.floatingWrapper}>
                   <Label style={{color: '#ffffff', fontSize: 12}}>E-MAIL</Label>
                   <Input
@@ -55,21 +58,14 @@ class LoginForm extends Component {
                 </Item>
 
                 {this.renderError()}
-                <Button
-                  style={styles.button}
-                  // onPress={this.onButtonPress.bind(this)}
-                  onPress={() => navigate('Passcode')}
-                  block primary>
-                  <Text
-                    style={styles.buttonText}
-                  >Log in</Text>
+                <Button style={styles.button} onPress={this.onButtonPress.bind(this)} block primary>
+                  <Text style={styles.buttonText}>Log in</Text>
                 </Button>
 
                 <View>
-                  <Text
-                  style={styles.forgetPassword}
-                  onPress={() => navigate('ForgotPassword')}
-                  >Forgot password?</Text>
+                  <Text style={styles.forgetPassword} onPress={() => navigate('ForgotPassword')}>
+                    Forgot password?
+                  </Text>
                 </View>
               </Form>
             </Content>
@@ -84,7 +80,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   background: {
     flex: 1,
@@ -94,8 +90,8 @@ const styles = StyleSheet.create({
   },
   logo: {
     // position: 'absolute',
-    width: 30,
-    height: 30,
+    width: 50,
+    height: 50,
     marginLeft: 35,
     marginBottom: 15,
     marginTop: 30
@@ -103,7 +99,7 @@ const styles = StyleSheet.create({
   welcomeContainer: {
     flex: 1,
     flexDirection: 'column',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   text: {
     fontSize: 16,
@@ -119,7 +115,8 @@ const styles = StyleSheet.create({
   forgetPassword: {
     backgroundColor: 'rgba(0,0,0,0)',
     color: '#a3b0be',
-    padding: 10,
+    paddingLeft: 17,
+    paddingTop: 50
   },
   header: {
     fontSize: 32,
@@ -137,20 +134,21 @@ const styles = StyleSheet.create({
     color: '#ffffff'
   },
   floatingWrapper: {
-    borderBottomWidth: 0,
+    borderBottomWidth: 0
   },
   form: {
     marginLeft: 20,
-    marginRight: 20,
+    marginRight: 20
   },
   input: {
     height: 40,
-    width: 300,
     borderColor: 'rgba(255,255,255,0.3)',
     borderBottomWidth: 2,
     color: '#ffffff',
     marginBottom: 10,
-    fontSize: 14,
+    marginRight: 15,
+    paddingTop: 10,
+    fontSize: 14
   },
   button: {
     backgroundColor: '#ffffff',
@@ -159,16 +157,12 @@ const styles = StyleSheet.create({
     height: 50,
     justifyContent: 'center',
     alignItems: 'center',
-    marginRight: 10,
-    marginLeft: 10,
-    marginTop: 30
+    marginRight: 15,
+    marginLeft: 15,
+    marginTop: 40
   },
   buttonText: {
     color: '#333333'
-  },
-  form: {
-    marginLeft: 20,
-    marginRight: 20
   },
   errorText: {
     padding: 5,
