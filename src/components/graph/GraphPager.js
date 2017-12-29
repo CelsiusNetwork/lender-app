@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { StyleSheet, View, Image, ImageBackground } from 'react-native'
+import { StyleSheet, TouchableOpacity, View, Image, ImageBackground } from 'react-native'
 import { Pages } from 'react-native-pages'
 import DegIncome from './DegIncome'
 import DegValue from './DegValue'
@@ -9,6 +9,7 @@ import { lenderAppInitToken } from '../../actions'
 
 class GraphPager extends Component {
   render () {
+    const { navigate } = this.props.navigation
     return (
       <View style={styles.container}>
         <ImageBackground
@@ -16,10 +17,14 @@ class GraphPager extends Component {
           style={styles.background}>
           <View style={styles.header}>
             <View style={styles.cellLeft}>
-              <Image source={require('../../../assets/images/logo-small.png')} style={styles.logo} />
+              <TouchableOpacity onPress={() => navigate('Welcome')}>
+                <Image source={require('../../../assets/images/logo-small.png')} style={styles.logo} />
+              </TouchableOpacity>
             </View>
             <View style={styles.cellRight}>
-              <Image source={require('../../../assets/images/icon-user.png')} style={styles.user} />
+              <TouchableOpacity onPress={() => navigate('EditProfile')}>
+                <Image source={require('../../../assets/images/icon-user.png')} style={styles.user} />
+              </TouchableOpacity>
             </View>
           </View>
           <View style={styles.pagesWrapper}>
