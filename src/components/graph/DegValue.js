@@ -49,7 +49,7 @@ class DegValue extends Component {
             </Text>
             <View style={styles.row}>
               <View style={styles.cellLeft}>
-                <TouchableOpacity style={styles.button} onPress={() => navigate('Graph')}>
+                <TouchableOpacity style={styles.button} onPress={() => navigate('AddFounds')}>
                   <Text style={styles.buttonText}>Add founds</Text>
                 </TouchableOpacity>
               </View>
