@@ -5,8 +5,26 @@ import { Button, Form, Input, Item, Label, Text, Content, Header, Title, Contain
 import { registerFirstNameChanged, registerLastNameChanged, registerEmailChanged, registerPasswordChanged, registerPhoneNumberChanged, registerLender } from '../actions'
 import { Font } from 'expo';
 import QRCode from 'react-native-qrcode';
+import { Share } from 'react-native';
 
 class AddFounds extends Component {
+
+  onButtonPress () {
+    // this.props.loginUser({ email, password })
+    Share.share({
+      message: 'Message',
+      url: 'http://www.celsius.network',
+      title: 'Title'
+    }, {
+      // Android only:
+      dialogTitle: 'Message',
+      // iOS only:
+      excludedActivityTypes: [
+        'com.apple.UIKit.activity.PostToTwitter'
+      ]
+    })
+  }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -48,7 +66,7 @@ class AddFounds extends Component {
                   { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'inconsolata' }, styles.codeText]}>{ this.state.qrcode }</Text>) : null }
                   <View style={styles.row}>
                     {/* <View style={styles.cellLeft}> */}
-                      <TouchableOpacity style={[styles.cellLeft, styles.buttonLeft]}>
+                      <TouchableOpacity style={[styles.cellLeft, styles.buttonLeft]} onPress={this.onButtonPress.bind(this)}>
                         <Image source={require('../../assets/images/icon-send.png')} style={styles.iconLeft} />
                         <Text style={styles.buttonLeftText}>Share</Text>
                       </TouchableOpacity>
