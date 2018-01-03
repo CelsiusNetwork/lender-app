@@ -49,12 +49,6 @@ class ForgotPassword extends Component {
             <Content>
             <Image source={require('../../assets/images/logo-small.png')} style={styles.logo} />
               <Text style={styles.header}>{'Forgot Password'.toUpperCase()}</Text>
-              <Text style={styles.text}>
-                Log in to continue to use Celsius. In case you don’t have an account, you can <Text
-                  style={styles.createLink}
-                  onPress={() => navigate('Register')}
-                  >create one here</Text>.
-              </Text>
                 <Form style={styles.form}>
                 <Item floatingLabel style={styles.floatingWrapper}>
                   <Label style={{color: '#ffffff', fontSize: 12}}>E-MAIL</Label>
