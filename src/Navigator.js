@@ -4,8 +4,8 @@ import { connect } from "react-redux"
 import { addNavigationHelpers, NavigationActions, StackNavigator } from "react-navigation"
 
 
-// import WelcomePager from "./components/welcome/WelcomePager"
-import WelcomePager from "./components/AddFounds"
+import WelcomePager from "./components/welcome/WelcomePager"
+// import WelcomePager from "./components/ManageFoundsWithdraw"
 
 import GraphPager from "./components/graph/GraphPager.js"
 import HistoryDetail from "./components/graph/HistoryDetail.js"
@@ -23,6 +23,7 @@ import Agree from './components/Agree'
 import EditProfile from './components/EditProfile'
 import AddFounds from './components/AddFounds'
 import ManageFounds from './components/ManageFounds'
+import ManageFoundsWithdraw from './components/ManageFoundsWithdraw'
 
 import Home from './components/Home'
 
@@ -88,8 +89,11 @@ export const Navigator = StackNavigator({
   ManageFounds: {
     screen: ManageFounds,
     headerMode: 'screen'
-  }
-
+  },
+  ManageFoundsWithdraw: {
+    screen: ManageFoundsWithdraw,
+    headerMode: 'screen'
+  },
 }, {
   // see next line
   headerMode: 'none',
