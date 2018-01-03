@@ -5,7 +5,7 @@ import { addNavigationHelpers, NavigationActions, StackNavigator } from "react-n
 
 
 // import WelcomePager from "./components/welcome/WelcomePager"
-import WelcomePager from "./components/graph/GraphPager"
+import WelcomePager from "./components/AddFounds"
 
 import GraphPager from "./components/graph/GraphPager.js"
 import HistoryDetail from "./components/graph/HistoryDetail.js"
@@ -21,6 +21,7 @@ import VerifyPhoto from './components/VerifyPhoto'
 import Agree from './components/Agree'
 
 import EditProfile from './components/EditProfile'
+import AddFounds from './components/AddFounds'
 
 import Home from './components/Home'
 

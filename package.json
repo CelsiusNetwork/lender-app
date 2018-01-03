@@ -19,6 +19,7 @@
     "react-native": "https://github.com/expo/react-native/archive/sdk-23.0.0.tar.gz",
     "react-native-elements": "^0.18.5",
     "react-native-pages": "^0.6.1",
+    "react-native-qrcode": "^0.2.6",
     "react-native-vector-icons": "^4.4.2",
     "react-native-vibration": "^0.2.0",
     "react-navigation": "1.0.0-beta.21",
