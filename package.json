@@ -34,6 +34,7 @@
     "babel-preset-react-native": "^3.0.1",
     "concurrently": "^3.5.0",
     "eslint": "4.11.0",
+    "exp": "^47.3.11",
     "husky": "0.14.3",
     "jwt-decode": "^2.2.0",
     "react-native-scripts": "^1.8.0",
