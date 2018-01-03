@@ -50,6 +50,17 @@ class EditProfile extends Component {
           <View style={styles.body}>
             {/* <Image source={require('../../assets/images/logo-header.png')} style={styles.logo} /> */}
             <Text style={styles.header}>{'Edit Profile'.toUpperCase()}</Text>
+            <View style={styles.avatarSection}>
+              <View style={styles.pts}>
+                <Image source={require('../../assets/images/icon-score.png')} style={styles.score} />
+                <Text style={styles.ptsText}>2559</Text>
+                <Text style={styles.ptsTextExt}>pts</Text>
+              </View>
+              <ImageBackground source={require('../../assets/images/avatar-wrapper.png')} style={styles.avatarWrapper}>
+                <ImageBackground source={require('../../assets/images/avatar.png')} style={styles.avatar}>
+                </ImageBackground>
+              </ImageBackground>
+            </View>
             <Container>
               <Content>
                 <Form style={styles.form}>
@@ -272,6 +283,54 @@ const styles = StyleSheet.create({
     marginRight: 10,
     height: 40,
   },
+  avatarSection: {
+    alignItems: 'center',
+    marginTop: 10,
+    marginBottom: 10,
+    position: 'relative'
+  },
+  avatarWrapper: {
+    width: 196,
+    height: 196,
+    alignItems: 'center'
+  },
+  avatar: {
+    marginTop: 8,
+    width: 180,
+    height: 180
+  },
+  pts: {
+    width: 100,
+    height: 30,
+    backgroundColor: 'rgba(255, 255, 255, 1)',
+    borderRadius: 15,
+    position: 'absolute',
+    zIndex: 5,
+    bottom: 10,
+    right: 50,
+    flexDirection:'row',
+    flexWrap:'wrap'
+  },
+  ptsText: {
+    backgroundColor: 'rgba(255, 255, 255, 0)',
+    color: '#3D4853',
+    fontSize: 18,
+    marginTop: 5,
+    marginRight: 3
+  },
+  ptsTextExt: {
+    backgroundColor: 'rgba(255, 255, 255, 0)',
+    fontSize: 12,
+    color: '#3D4853',
+    marginTop: 10,
+  },
+  score: {
+    width: 16,
+    height: 16,
+    marginTop: 7,
+    marginRight: 3,
+    marginLeft: 7
+  }
 })
 
 const mapStateToProps = state => {
