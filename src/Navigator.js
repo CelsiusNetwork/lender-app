@@ -5,7 +5,7 @@ import { addNavigationHelpers, NavigationActions, StackNavigator } from "react-n
 
 
 // import WelcomePager from "./components/welcome/WelcomePager"
-import WelcomePager from "./components/AddFounds"
+import WelcomePager from "./components/ManageFounds"
 
 import GraphPager from "./components/graph/GraphPager.js"
 import HistoryDetail from "./components/graph/HistoryDetail.js"
@@ -22,6 +22,7 @@ import Agree from './components/Agree'
 
 import EditProfile from './components/EditProfile'
 import AddFounds from './components/AddFounds'
+import ManageFounds from './components/ManageFounds'
 
 import Home from './components/Home'
 
@@ -78,6 +79,14 @@ export const Navigator = StackNavigator({
   },
   EditProfile: {
     screen: EditProfile,
+    headerMode: 'screen'
+  },
+  AddFounds: {
+    screen: AddFounds,
+    headerMode: 'screen'
+  },
+  ManageFounds: {
+    screen: ManageFounds,
     headerMode: 'screen'
   }
 
