@@ -1,11 +1,11 @@
 import * as types from '../actions/Types'
 
 const LOGIN_INITIAL_STATE = {
+  token: null,
   email: '',
   password: '',
-  user: null,
-  loading: false,
-  error: ''
+  error: '',
+  loading: false
 }
 
 export default (state = LOGIN_INITIAL_STATE, action) => {
@@ -17,9 +17,10 @@ export default (state = LOGIN_INITIAL_STATE, action) => {
     case types.LOGIN_LENDER_LOADING:
       return { ...state, loading: true }
     case types.LOGIN_LENDER_SUCCESS:
+      console.log(action.payload)
       return {
         ...state,
-        user: action.payload,
+        token: action.payload,
         email: '',
         password: '',
         error: '',

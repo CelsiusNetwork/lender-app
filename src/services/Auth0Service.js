@@ -1,7 +1,7 @@
 const apiUrl = 'https://celsiusnetwork.auth0.com'
 
 export const Auth0Service = () => ({
-  siginInWithEmailAndPassword (email, pass) {
+  siginInWithEmailAndPassword ({email, password}) {
     console.debug('service| siginInWithEmailAndPassword(email, pass) return Promise')
     const request = {
       headers: {
@@ -12,9 +12,10 @@ export const Auth0Service = () => ({
         grant_type: 'password',
         client_id: 'LOHU3qeHAxFUE34Q71bfMUtdHW7afyLl',
         username: email,
-        password: pass
+        password: password
       })
     }
+    console.log('request: ', request)
     return fetch(apiUrl + '/oauth/token', request)
   },
   initClientCredentials () {

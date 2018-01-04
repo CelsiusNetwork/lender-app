@@ -6,25 +6,25 @@ import { NavigationActions } from 'react-navigation'
 import { Font } from 'expo';
 
 class Home extends Component {
-  constructor(props) {
-    super(props);
+  constructor (props) {
+    super(props)
     this.state = {
-        fontLoaded: false,
-        eth: 0.000,
-        deg: 0.000,
-        user: {
-          name: "Alex"
-        },
+      fontLoaded: false,
+      eth: 0.000,
+      deg: 0.000,
+      user: {
+        name: 'Alex'
+      }
     }
   }
-  async componentDidMount() {
+  async componentDidMount () {
     await Font.loadAsync({
-      'barlow-semi-bold': require('../../assets/fonts/Barlow-SemiBold.otf'),
-    });
+      'barlow-semi-bold': require('../../assets/fonts/Barlow-SemiBold.otf')
+    })
     await Font.loadAsync({
-      'barlow-light': require('../../assets/fonts/Barlow-Light.otf'),
-    });
-    this.setState({ fontLoaded: true });
+      'barlow-light': require('../../assets/fonts/Barlow-Light.otf')
+    })
+    this.setState({ fontLoaded: true })
   }
 
   render () {
@@ -130,23 +130,23 @@ const styles = StyleSheet.create({
     height: 4
   },
   header: {
-		fontSize: 42,
-		backgroundColor: 'rgba(0,0,0,0)',
-		color: 'white',
-		paddingLeft: 30,
-		paddingRight: 30,
-		marginBottom: 10,
+    fontSize: 42,
+    backgroundColor: 'rgba(0,0,0,0)',
+    color: 'white',
+    paddingLeft: 30,
+    paddingRight: 30,
+    marginBottom: 10,
     fontWeight: 'bold',
     textAlign: 'center',
     marginTop: 20
   },
   header2: {
-		fontSize: 24,
-		backgroundColor: 'rgba(0,0,0,0)',
-		color: '#9CA9B6',
-		paddingLeft: 30,
-		paddingRight: 30,
-		marginBottom: 10,
+    fontSize: 24,
+    backgroundColor: 'rgba(0,0,0,0)',
+    color: '#9CA9B6',
+    paddingLeft: 30,
+    paddingRight: 30,
+    marginBottom: 10,
     fontWeight: 'bold',
     textAlign: 'center',
     marginTop: 0

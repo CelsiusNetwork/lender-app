@@ -7,7 +7,7 @@ import { NavigationActions } from 'react-navigation'
 
 class LoginForm extends Component {
 
-  static navigationOptions = ({ navigation }) => ({
+  static navigationOptions = ( {navigation} ) => ({
     title: 'Login'
   })
 
