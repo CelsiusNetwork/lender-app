@@ -36,7 +36,7 @@ class LoginForm extends Component {
         <ImageBackground source={require('../../assets/images/background.png')} style={styles.background}>
           <Container style={styles.formContainer}>
             <Content>
-              <Image source={require('../../assets/images/logo-small.png')} style={styles.logo} />
+              <Image source={require('../../assets/images/Celsius_Symbol_white.png')} style={styles.logo} />
               <Form style={styles.form}>
                 <Item floatingLabel style={styles.floatingWrapper}>
                   <Label style={{color: '#ffffff', fontSize: 12}}>E-MAIL</Label>
@@ -90,11 +90,11 @@ const styles = StyleSheet.create({
   },
   logo: {
     // position: 'absolute',
-    width: 50,
-    height: 50,
-    marginLeft: 35,
-    marginBottom: 15,
-    marginTop: 30
+    width: 70,
+    height: 70,
+    marginLeft: 20,
+    marginBottom: 20,
+    marginTop: 20
   },
   welcomeContainer: {
     flex: 1,
@@ -159,14 +159,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginRight: 15,
     marginLeft: 15,
-    marginTop: 40
+    marginTop: 30
   },
   buttonText: {
     color: '#333333'
   },
   errorText: {
-    padding: 5,
-    color: '#ea0021'
+    marginLeft: 15,
+    marginTop: 10,
+    color: '#FF9494'
   }
 })
 

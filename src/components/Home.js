@@ -2,12 +2,13 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Alert, ImageBackground, StyleSheet, View, Image, Text, TouchableOpacity, AsyncStorage, Animated } from 'react-native'
 import { Form, Input, Item, Label, Content, Container } from 'native-base'
-import { NavigationActions } from 'react-navigation'
-import { Font } from 'expo';
+import { fetchLender, fetchWalletBalance, fetchTransactionsHistory } from '../actions'
 
 class Home extends Component {
   constructor (props) {
     super(props)
+    console.log('Home props: ')
+    console.log(props)
     this.state = {
       fontLoaded: false,
       eth: 0.000,
@@ -17,14 +18,13 @@ class Home extends Component {
       }
     }
   }
-  async componentDidMount () {
-    await Font.loadAsync({
-      'barlow-semi-bold': require('../../assets/fonts/Barlow-SemiBold.otf')
-    })
-    await Font.loadAsync({
-      'barlow-light': require('../../assets/fonts/Barlow-Light.otf')
-    })
-    this.setState({ fontLoaded: true })
+  componentWillMount () {
+    const t = 'auth0%7C5a4e964e0bee153c1a450aab'
+    const t2 = this.props.token
+    console.log('ZzzzZZZzzzzzzzzzzzzzzzzzzzz', this.props.authId)
+    this.props.fetchLender({t, t2})
+    //this.props.fetchWalletBalance()
+    this.props.fetchTransactionsHistory()
   }
 
   render () {
@@ -33,9 +33,9 @@ class Home extends Component {
       <View style={styles.container}>
         <ImageBackground source={require('../../assets/images/background-blur.png')} style={styles.background}>
           <View style={styles.body}>
-            <View style={[styles.row, {marginBottom: 15, marginTop: 40}]}>
+            <View style={[styles.row, {marginBottom: 20, marginTop: 20}]}>
               <View style={styles.cellLeft}>
-                <Image source={require('../../assets/images/logo-small.png')} style={styles.logo} />
+                <Image source={require('../../assets/images/Celsius_Symbol_white.png')} style={styles.logo} />
               </View>
               <View style={styles.cellRight}>
                 <Image source={require('../../assets/images/icon-user.png')} style={styles.user} />
@@ -43,14 +43,13 @@ class Home extends Component {
             </View>
             <Container style={styles.wrapper}>
               <Content>
-
                 <Text style={styles.header}>
-                  { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow-semi-bold' }]}>{ this.state.eth.toFixed(3) }</Text>) : null }
-                  { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow-semi-bold' }]}> ETH</Text>) : null }
+                  <Text>{ this.state.eth.toFixed(3) }</Text>
+                  <Text> ETH</Text>
                 </Text>
                 <Text style={styles.header2}>
-                  { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow-light' }]}>{ this.state.deg.toFixed(3) }</Text>) : null }
-                  { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow-light' }]}> DEG</Text>) : null }
+                  <Text>{ this.state.deg.toFixed(3) }</Text>
+                  <Text> CEL</Text>
                 </Text>
                 <TouchableOpacity style={styles.button}
                   onPress={() => navigate('Graph')}
@@ -114,8 +113,6 @@ const styles = StyleSheet.create({
   },
   body: {
     flex: 1,
-    marginLeft: 10,
-    marginRight: 10,
     marginTop: 20
   },
   line: {
@@ -130,24 +127,22 @@ const styles = StyleSheet.create({
     height: 4
   },
   header: {
-    fontSize: 42,
+    fontSize: 36,
     backgroundColor: 'rgba(0,0,0,0)',
     color: 'white',
     paddingLeft: 30,
     paddingRight: 30,
-    marginBottom: 10,
-    fontWeight: 'bold',
+    marginBottom: 0,
     textAlign: 'center',
-    marginTop: 20
+    marginTop: 10
   },
   header2: {
-    fontSize: 24,
+    fontSize: 22,
     backgroundColor: 'rgba(0,0,0,0)',
     color: '#9CA9B6',
     paddingLeft: 30,
     paddingRight: 30,
     marginBottom: 10,
-    fontWeight: 'bold',
     textAlign: 'center',
     marginTop: 0
   },
@@ -157,7 +152,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
     marginLeft: 10,
-    height: 40,
+    height: 40
   },
   cellRight: {
     flex: 1,
@@ -165,19 +160,19 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     alignItems: 'center',
     marginRight: 10,
-    height: 40,
+    height: 40
   },
   logo: {
     // position: 'absolute',
-    width: 30,
-    height: 30,
-    marginLeft: 15,
+    width: 35,
+    height: 35,
+    marginLeft: 10
   },
   user: {
     // position: 'absolute',
-    width: 30,
-    height: 30,
-    marginRight: 35,
+    width: 25,
+    height: 25,
+    marginRight: 15,
     resizeMode: "contain"
   },
   wrapper: {
@@ -194,30 +189,30 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginBottom: 20
   },
-  agreeCheckBox:{
+  agreeCheckBox: {
     backgroundColor: 'rgba(0,0,0,0)',
     borderWidth: 0
   },
-  agreeText:{
+  agreeText: {
     backgroundColor: 'rgba(0,0,0,0)',
-    color: '#9ca9b7',
+    color: '#9ca9b7'
   },
   button: {
     backgroundColor: '#ffffff',
     borderRadius: 5,
     padding: 5,
-    height: 50,
+    height: 40,
     // width: 150,
     justifyContent: 'center',
     alignItems: 'center',
-    marginRight: '20%',
-    marginLeft: '20%',
-    marginTop: 40,
+    marginRight: '30%',
+    marginLeft: '30%',
+    marginTop: 20,
     marginBottom: 40
   },
   buttonText: {
     color: '#333333',
-    fontSize: 20
+    fontSize: 16
   },
   hr: {
     height: 1,
@@ -252,13 +247,13 @@ const styles = StyleSheet.create({
     marginBottom: 5,
     borderRadius: 5,
     flex: 1,
-    flexDirection: 'row',
+    flexDirection: 'row'
   },
   icon: {
     width: 50,
     height: 50,
     resizeMode: "contain",
-    marginLeft: 15,
+    marginLeft: 15
   },
   boxText: {
     color: '#ffffff',
@@ -270,29 +265,46 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    marginLeft: 0,
+    marginLeft: 0
   },
   boxTextWrapper: {
     flex: 3,
     flexDirection: 'row',
     justifyContent: 'flex-end',
     alignItems: 'center',
-    marginRight: 0,
-  },
+    marginRight: 0
+  }
 
 })
 
 const mapStateToProps = state => {
   return {
+    token: state.auth.token,
+    email: state.auth.email,
+    authId: state.auth.authId
   }
 }
 
 // The mapDispatchToProps function lets us inject
 // certain props into the React component that can dispatch actions
 const mapDispatchToProps = {
+  fetchLender, fetchWalletBalance, fetchTransactionsHistory
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)
 
 // For example, the HowItWorks component calls onPress
 //
+// const mapStateToProps = state => {
+//   return {
+//     email: state.auth.email,
+//     password: state.auth.password,
+//     loading: state.auth.loading,
+//     error: state.auth.error,
+//     nav: state.nav
+//   }
+// }
+
+// const mapDispatchToProps = {
+//   loginEmailChanged, loginPasswordChanged, loginLender
+// }

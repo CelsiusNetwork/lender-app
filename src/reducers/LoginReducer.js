@@ -2,6 +2,7 @@ import * as types from '../actions/Types'
 
 const LOGIN_INITIAL_STATE = {
   token: null,
+  authId: '',
   email: '',
   password: '',
   error: '',
@@ -17,11 +18,11 @@ export default (state = LOGIN_INITIAL_STATE, action) => {
     case types.LOGIN_LENDER_LOADING:
       return { ...state, loading: true }
     case types.LOGIN_LENDER_SUCCESS:
-      console.log(action.payload)
       return {
         ...state,
-        token: action.payload,
-        email: '',
+        token: action.payload.tokenId,
+        authId: action.payload.lender.sub,
+        email: action.payload.lender.email,
         password: '',
         error: '',
         loading: false
@@ -34,14 +35,14 @@ export default (state = LOGIN_INITIAL_STATE, action) => {
           break
         case 'auth/invalid-password':
         case 'auth/weak-password':
-          errorMsg = 'Must be a password with at least six characters.'
+          errorMsg = ''
           break
         case 'auth/email-already-exists':
         case 'auth/email-already-in-use':
           errorMsg = 'Incorrect password.'
           break
         default:
-          errorMsg = 'Authentication failed.'
+          errorMsg = 'Wrong user data.'
       }
       return { ...state, error: errorMsg, loading: false }
     default:

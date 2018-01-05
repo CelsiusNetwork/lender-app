@@ -5,11 +5,11 @@ export default class Welcome extends Component {
   render () {
     return (
       <View style={styles.welcomeContainer}>
-        <Image source={require('../../../assets/images/logo-small.png')} style={styles.logo} />
-        <Text style={styles.header}>{'Welcome to Celsius'.toUpperCase()}</Text>
+        <Image source={require('../../../assets/images/Celsius_Symbol_white.png')} style={styles.logo} />
+        <Text style={styles.header}>WELCOME TO CELSIUS</Text>
         <Text style={styles.text}>
-          A new global financial platform that seamlessly connects holders of crypto-assets with
-          borrowers. Earn fees on your assets by allowing financial traders to borrow them.
+          Celsius is the first crypto wallet that allows users to earn interest on their held coins.
+          Earn fees on your assets by allowing financial traders to borrow them.
         </Text>
       </View>
     )
@@ -26,28 +26,29 @@ const styles = StyleSheet.create({
     flex: 1
   },
   header: {
-    fontSize: 32,
+    fontSize: 28,
     backgroundColor: 'rgba(0,0,0,0)',
     color: 'white',
-    paddingLeft: 30,
+    paddingLeft: 25,
     paddingRight: 30,
     marginBottom: 10,
     fontWeight: 'bold'
   },
   text: {
-    fontSize: 16,
+    fontSize: 14,
     backgroundColor: 'rgba(0,0,0,0)',
-    color: 'white',
+    color: '#fefefe',
     padding: 30,
+    paddingLeft: 25,
     lineHeight: 20
   },
   logo: {
     justifyContent: 'center',
     alignItems: 'center',
-    width: 50,
-    height: 50,
-    marginLeft: 30,
+    width: 60,
+    height: 60,
+    marginLeft: 15,
     marginBottom: 80,
-    marginTop: 0
+    marginTop: 90
   }
 })
