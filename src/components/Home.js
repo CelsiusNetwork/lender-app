@@ -1,21 +1,18 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Alert, ImageBackground, StyleSheet, View, Image, Text, TouchableOpacity, AsyncStorage, Animated } from 'react-native'
-import { Form, Input, Item, Label, Content, Container } from 'native-base'
+import { ImageBackground, StyleSheet, View, Image, Text, TouchableOpacity } from 'react-native'
+import { Content, Container } from 'native-base'
 import { fetchWalletBalance, fetchTransactionsHistory } from '../actions'
-import jwtDecode from 'jwt-decode'
 
 class Home extends Component {
-
   componentWillMount () {
-    // console.log('Home componentDidMount:')
-    // console.log(this.props)
     this.props.fetchWalletBalance(this.props.walletAddress, this.props.token)
-    console.log('PROPS: ')
-    console.log(this.props)
   }
 
   componentWillReceiveProps (nextProps) {
+    // nextProps are the next set of props that this component
+    // will be rendered with
+    // this.props is still the old set of props
     console.log('received props: ')
     console.log(nextProps)
   }
