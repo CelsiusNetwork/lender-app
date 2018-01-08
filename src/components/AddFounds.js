@@ -6,6 +6,7 @@ import { registerFirstNameChanged, registerLastNameChanged, registerEmailChanged
 import { Font } from 'expo';
 import QRCode from 'react-native-qrcode';
 import { Share } from 'react-native';
+import { Clipboard } from 'react-native';
 
 class AddFounds extends Component {
 
@@ -23,6 +24,10 @@ class AddFounds extends Component {
         'com.apple.UIKit.activity.PostToTwitter'
       ]
     })
+  }
+
+  onCopyButtonPress () {
+    Clipboard.setString(this.state.qrcode);
   }
 
   constructor(props) {
@@ -72,7 +77,7 @@ class AddFounds extends Component {
                       </TouchableOpacity>
                     {/* </View> */}
                     {/* <View style={styles.cellRight}> */}
-                      <TouchableOpacity style={[styles.cellRight, styles.buttonRight]}>
+                      <TouchableOpacity style={[styles.cellRight, styles.buttonRight]} onPress={this.onCopyButtonPress.bind(this)}>
                         <Image source={require('../../assets/images/icon-copy.png')} style={styles.iconRight} />
                         <Text style={styles.buttonRightText}>Copy</Text>
                       </TouchableOpacity>

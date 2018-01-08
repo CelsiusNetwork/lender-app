@@ -11,6 +11,7 @@
     "standard": "standard './src/**/*.js'"
   },
   "dependencies": {
+    "aws-amplify": "^0.1.0",
     "axios": "^0.17.1",
     "expo": "23.0.4",
     "immutable": "3.8.2",
@@ -18,8 +19,10 @@
     "native-base": "2.3.3",
     "react": "16.2.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-23.0.0.tar.gz",
+    "react-native-clipboard": "0.0.5",
     "react-native-elements": "^0.18.5",
     "react-native-pages": "^0.6.1",
+    "react-native-pasteboard": "^1.3.0",
     "react-native-qrcode": "^0.2.6",
     "react-native-vector-icons": "^4.4.2",
     "react-native-vibration": "^0.2.0",
@@ -28,8 +31,7 @@
     "redux": "3.7.2",
     "redux-persist": "^5.4.0",
     "redux-thunk": "2.2.0",
-    "web3": "1.0.0-beta.26",
-    "aws-amplify": "^0.1.0"
+    "web3": "1.0.0-beta.26"
   },
   "devDependencies": {
     "awsmobile-cli": "^1.0.6",

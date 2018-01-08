@@ -231,6 +231,7 @@ const styles = StyleSheet.create({
     // marginRight: 30,
     // marginLeft: 30,
     marginTop: 30,
+    marginBottom: 30,
     width: 130
   },
   buttonText: {
