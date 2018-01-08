@@ -81,7 +81,7 @@ class AddFounds extends Component {
                 </View>
                 <View style={styles.center}>
                   <TouchableOpacity
-                    onPress={() => navigate('ManageFoundsWithdraw')}
+                    onPress={() => navigate('Home')}
                     style={styles.button}>
                     <Text style={styles.buttonText}>
                       Done

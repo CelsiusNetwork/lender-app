@@ -63,7 +63,7 @@ class AddFounds extends Component {
                         { this.state.fontLoaded ? (<Text style={[ styles.changeUp, { fontFamily: 'barlow-light' }]}> { this.state.ethChange}</Text>) : null }
                       </Text>
                       <Image source={require('../../assets/images/graph1.png')} style={styles.graph} />
-                      <TouchableOpacity style={styles.boxButton}>
+                      <TouchableOpacity style={styles.boxButton} onPress={() => navigate('ManageFoundsWithdraw')}>
                         <Image source={require('../../assets/images/icon-transfer-arrows.png')} style={styles.buttonIcon} />
                         <Text style={styles.boxButtonText}>Withdraw ETH</Text>
                       </TouchableOpacity>
@@ -93,7 +93,7 @@ class AddFounds extends Component {
                 </View>
 
                 <View style={styles.center}>
-                  <TouchableOpacity style={styles.button}>
+                  <TouchableOpacity style={styles.button} onPress={() => navigate('Home')}>
                     <Text style={styles.buttonText}>
                       Done
                     </Text>

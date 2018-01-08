@@ -135,7 +135,7 @@ class EditProfile extends Component {
                       <Button
                         style={styles.button2}
                         // onPress={this.onButtonPress.bind(this)}
-                        onPress={() => navigate('VerifyPhoneNumber')}
+                        onPress={() => navigate('Home')}
                         block primary>
                         <Text
                           style={styles.buttonText2}
