@@ -16,7 +16,7 @@ export const Auth0Service = () => ({
     }
     return fetch(apiUrl + '/oauth/token', request)
   },
-  initClientCredentials() {
+  initClientCredentials () {
     const request = {
       headers: {
         'Content-Type': 'application/json'
@@ -31,7 +31,10 @@ export const Auth0Service = () => ({
     }
     return fetch(apiUrl + '/oauth/token', request)
   },
-  getUser({ id, token }) {
+  getUser (id, token) {
+    console.log('getUser()')
+    console.log(id)
+    console.log(token)
     const request = {
       headers: {
         'Content-Type': 'application/json',

@@ -18,13 +18,26 @@ class Home extends Component {
       }
     }
   }
+
+  componentWillReceiveProps () {
+  }
   componentWillMount () {
-    const t = 'auth0%7C5a4e964e0bee153c1a450aab'
-    const t2 = this.props.token
-    console.log('fetch lender info from component')
-    this.props.fetchLenderInfo({t, t2})
-    //this.props.fetchWalletBalance()
-    this.props.fetchTransactionsHistory()
+    // const t = 'auth0%7C5a4e964e0bee153c1a450aab'
+    // const t2 = this.props.token
+    // console.log('fetch lender info from component')
+    // this.props.fetchLenderInfo({t, t2})
+    console.log(this.props)
+    // this.props.fetchTransactionsHistory()
+  }
+
+  componentWillUpdate () {
+    console.log('componentWillUpdate() props:')
+    console.log(this.props)
+  }
+
+  componentDidMount () {
+    console.log('componentDidMount()')
+    console.log(this.props)
   }
 
   render () {
@@ -289,7 +302,7 @@ const mapStateToProps = state => {
 // The mapDispatchToProps function lets us inject
 // certain props into the React component that can dispatch actions
 const mapDispatchToProps = {
-  fetchLenderInfo, fetchWalletBalance, fetchTransactionsHistory
+  fetchWalletBalance, fetchTransactionsHistory
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)

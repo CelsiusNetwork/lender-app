@@ -18,7 +18,9 @@ export const loginPasswordChanged = (text) => {
 }
 
 export const loginLender = ({ email, password }) => {
+  console.log('lalalalal666')
   return (dispatch) => {
+    console.log(dispatch)
     dispatch({
       type: types.LOGIN_LENDER_LOADING
     })
@@ -33,15 +35,21 @@ export const loginLender = ({ email, password }) => {
   }
 }
 
-export const fetchLenderInfo = (id, token) => {
-  console.log('fetchLenderInfo()')
+export const fetchLenderInfo = ({ lender }, token) => {
+  console.log('FETCHlENDERiNFO()')
+  console.log(lender.sub)
+  console.log(token)
+  console.log('-------')
+  const id = lender.sub
   return (dispatch) => {
+    console.log('steva was here')
     dispatch({
       type: types.FETCH_LENDER_LOADING
     })
-    Auth0Service().getUser({ id, token })
+    Auth0Service().getUser(id, token)
       .then(response => handleLenderInfo(dispatch, JSON.stringify(response)))
       .catch((error) => {
+        handleLenderInfoFail(dispatch, error)
         console.log('Error while fetchLenderInfo()')
         console.debug(error)
       })
@@ -66,10 +74,13 @@ const handleResponse = (dispatch, response) => {
   const tokenId = token.id_token
   const lender = jwtDecode(tokenId)
   if (response.ok === true) {
+    fetchLenderInfo({ lender }, tokenId)
+
     dispatch({
       type: types.LOGIN_LENDER_SUCCESS,
       payload: { lender, tokenId }
     })
+
     dispatch(NavigationActions.reset({
       index: 0,
       actions: [
@@ -89,4 +100,8 @@ const loginLenderFail = (dispatch, error) => {
     type: types.LOGIN_LENDER_FAIL,
     payload: error
   })
+}
+
+const handleLenderInfoFail = (dispatch, error) => {
+
 }

@@ -36,8 +36,6 @@ export const lenderAppInitToken = (clientId, clientSecret, audience, grantType) 
 }
 
 const lenderAppTokenInitFail = (dispatch, errorCode) => {
-  console.log('lenderAppTokenInitFail() FCK!')
-  console.log(errorCode)
   dispatch({
     type: types.APP_TOKEN_FAILURE,
     payload: errorCode
