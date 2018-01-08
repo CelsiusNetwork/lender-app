@@ -45,7 +45,7 @@ class Home extends Component {
                 <TouchableOpacity style={styles.button}
                   onPress={() => navigate('Graph')}
                 >
-                  <Text style={styles.buttonText}>Add founds</Text>
+                  <Text style={styles.buttonText}>Add funds</Text>
                 </TouchableOpacity>
                 <View style={styles.hr}></View>
                 <Text style={styles.welcomeTitle}>Welcome to Celsius, Crnac!</Text>
