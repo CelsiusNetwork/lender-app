@@ -65,6 +65,13 @@ const handleLenderInfo = (dispatch, response) => {
     type: types.FETCH_LENDER_SUCCESS,
     payload: user
   })
+
+  dispatch(NavigationActions.reset({
+    index: 0,
+    actions: [
+      NavigationActions.navigate({ routeName: 'Home' })
+    ]
+  }))
 }
 
 const handleResponse = (dispatch, response) => {
@@ -89,13 +96,6 @@ const handleResponse = (dispatch, response) => {
       type: types.LOGIN_LENDER_SUCCESS,
       payload: { lender, tokenId }
     })
-
-    dispatch(NavigationActions.reset({
-      index: 0,
-      actions: [
-        NavigationActions.navigate({ routeName: 'Home' })
-      ]
-    }))
   }
   if (response.ok === false) {
     loginLenderFail(dispatch, response.code)

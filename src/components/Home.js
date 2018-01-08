@@ -8,11 +8,12 @@ import jwtDecode from 'jwt-decode'
 class Home extends Component {
 
   componentDidMount () {
+    console.log('Home componentDidMount:')
+    console.log(this.props)
   }
 
   componentWillMount () {
-    console.log('Home componentWillReceiveProps:')
-    console.log(this.props)
+
   }
 
   componentWillUpdate () {
