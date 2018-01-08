@@ -3,41 +3,49 @@ import { connect } from 'react-redux'
 import { Alert, ImageBackground, StyleSheet, View, Image, Text, TouchableOpacity, AsyncStorage, Animated } from 'react-native'
 import { Form, Input, Item, Label, Content, Container } from 'native-base'
 import { fetchLenderInfo, fetchWalletBalance, fetchTransactionsHistory } from '../actions'
+import jwtDecode from 'jwt-decode'
 
 class Home extends Component {
   constructor (props) {
     super(props)
-    console.log('Home props: ')
-    console.log(props)
-    this.state = {
-      fontLoaded: false,
-      eth: 0.000,
-      deg: 0.000,
-      user: {
-        name: 'Alex'
-      }
-    }
+    // console.log('Home props: ')
+    // console.log(props)
+    // if(typeof props.token != "undefined"){
+    //   console.log(props.token);
+    //   var token = jwtDecode(props.token)
+    //   var t = token.sub
+    // }
+    // this.state = {
+    //   fontLoaded: false,
+    //   eth: 0.000,
+    //   deg: 0.000,
+    //   user: {
+    //     name: token.nickname
+    //   },
+    //   t: token.sub
+    // }
   }
 
   componentWillReceiveProps () {
+    console.log('Home componentWillReceiveProps:')
+    console.log(this.props)
   }
   componentWillMount () {
-    // const t = 'auth0%7C5a4e964e0bee153c1a450aab'
-    // const t2 = this.props.token
-    // console.log('fetch lender info from component')
-    // this.props.fetchLenderInfo({t, t2})
-    console.log(this.props)
-    // this.props.fetchTransactionsHistory()
+
   }
 
   componentWillUpdate () {
-    console.log('componentWillUpdate() props:')
-    console.log(this.props)
   }
 
   componentDidMount () {
-    console.log('componentDidMount()')
-    console.log(this.props)
+
+    // const t = 'auth0%7C5a4e964e0bee153c1a450aab'
+    // const t = this.state.t
+    // const t2 = this.props.token
+    // console.log('fetch lender info from component')
+    // this.props.fetchLenderInfo({t, t2})
+    //this.props.fetchWalletBalance()
+    // this.props.fetchTransactionsHistory()
   }
 
   render () {
@@ -57,11 +65,11 @@ class Home extends Component {
             <Container style={styles.wrapper}>
               <Content>
                 <Text style={styles.header}>
-                  <Text>{ this.state.eth.toFixed(3) }</Text>
+                  <Text>3</Text>
                   <Text> ETH</Text>
                 </Text>
                 <Text style={styles.header2}>
-                  <Text>{ this.state.deg.toFixed(3) }</Text>
+                  <Text>2</Text>
                   <Text> CEL</Text>
                 </Text>
                 <TouchableOpacity style={styles.button}
@@ -70,7 +78,7 @@ class Home extends Component {
                   <Text style={styles.buttonText}>Add founds</Text>
                 </TouchableOpacity>
                 <View style={styles.hr}></View>
-                <Text style={styles.welcomeTitle}>Welcome to Celsius, { this.state.user.name }!</Text>
+                <Text style={styles.welcomeTitle}>Welcome to Celsius, cdscdsc!</Text>
                 <Text style={styles.welcomeText}>As a member of Celsius community, you can lend ETH and earn DEG token for the time you spend with us.</Text>
                 <View style={styles.hr}></View>
 
@@ -295,7 +303,7 @@ const mapStateToProps = state => {
     token: state.auth.token,
     email: state.auth.email,
     authId: state.auth.authId,
-    user: state.auth.user
+    lender: state.lender.walletAddress
   }
 }
 

@@ -21,18 +21,11 @@ export default (state = LOGIN_INITIAL_STATE, action) => {
     case types.LOGIN_LENDER_SUCCESS:
       return {
         ...state,
+        user: null,
         token: action.payload.tokenId,
         authId: action.payload.lender.sub,
         email: action.payload.lender.email,
-        password: '',
-        error: '',
         loading: false
-      }
-    case types.FETCH_LENDER_SUCCESS:
-      console.log('jajsjdjdjhfhfhfhfh38u4239749823748923749823')
-      return {
-        ...state,
-        user: action.payload
       }
     case types.LOGIN_LENDER_FAIL:
       let errorMsg

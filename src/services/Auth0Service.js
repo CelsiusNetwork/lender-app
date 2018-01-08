@@ -39,11 +39,13 @@ export const Auth0Service = () => ({
       headers: {
         'Content-Type': 'application/json',
         // because of reasons id.t2 todo
-        'Authorization': 'Bearer ' + id.t2
+        'Authorization': 'Bearer ' + id
       },
       method: 'get'
     }
-    return fetch(apiUrl + '/api/v2/users/' + id.t, request)
+    console.log('get User request()')
+    console.log(request)
+    return fetch(apiUrl + '/api/v2/users/' + token, request)
   }
 
 })

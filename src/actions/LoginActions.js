@@ -35,26 +35,26 @@ export const loginLender = ({ email, password }) => {
   }
 }
 
-export const fetchLenderInfo = ({ lender }, token) => {
-  console.log('FETCHlENDERiNFO()')
-  console.log(lender.sub)
-  console.log(token)
-  console.log('-------')
-  const id = lender.sub
-  return (dispatch) => {
-    console.log('steva was here')
-    dispatch({
-      type: types.FETCH_LENDER_LOADING
-    })
-    Auth0Service().getUser(id, token)
-      .then(response => handleLenderInfo(dispatch, JSON.stringify(response)))
-      .catch((error) => {
-        handleLenderInfoFail(dispatch, error)
-        console.log('Error while fetchLenderInfo()')
-        console.debug(error)
-      })
-  }
-}
+// export const fetchLenderInfo = ({ lender }, token) => {
+//   console.log('FETCHlENDERiNFO()')
+//   console.log(lender.sub)
+//   console.log(token)
+//   console.log('-------')
+//   const id = lender.sub
+//   return (dispatch) => {
+//     console.log('steva was here')
+//     dispatch({
+//       type: types.FETCH_LENDER_LOADING
+//     })
+//     Auth0Service().getUser(id, token)
+//       .then(response => handleLenderInfo(dispatch, JSON.stringify(response)))
+//       .catch((error) => {
+//         handleLenderInfoFail(dispatch, error)
+//         console.log('Error while fetchLenderInfo()')
+//         console.debug(error)
+//       })
+//   }
+// }
 
 const handleLenderInfo = (dispatch, response) => {
   console.log('handleLenderInfo()')
@@ -74,7 +74,16 @@ const handleResponse = (dispatch, response) => {
   const tokenId = token.id_token
   const lender = jwtDecode(tokenId)
   if (response.ok === true) {
-    fetchLenderInfo({ lender }, tokenId)
+    dispatch({
+      type: types.FETCH_LENDER_LOADING
+    })
+    Auth0Service().getUser(tokenId, lender.sub)
+      .then(response => handleLenderInfo(dispatch, JSON.stringify(response)))
+      .catch((error) => {
+        handleLenderInfoFail(dispatch, error)
+        console.log('Error while fetchLenderInfo()')
+        console.debug(error)
+      })
 
     dispatch({
       type: types.LOGIN_LENDER_SUCCESS,
