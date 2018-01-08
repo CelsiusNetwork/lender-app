@@ -10,6 +10,6 @@ export default combineReducers({
   auth: LoginReducer,
   nav: NavigatorReducer,
   token: AppTokenReducer,
-  register: RegisterReducer,
-  lender: LenderReducer
+  lender: LenderReducer,
+  register: RegisterReducer
 })

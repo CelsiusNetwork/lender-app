@@ -6,32 +6,33 @@ import { fetchLenderInfo, fetchWalletBalance, fetchTransactionsHistory } from '.
 import jwtDecode from 'jwt-decode'
 
 class Home extends Component {
-  constructor (props) {
-    super(props)
-    // console.log('Home props: ')
-    // console.log(props)
-    // if(typeof props.token != "undefined"){
-    //   console.log(props.token);
-    //   var token = jwtDecode(props.token)
-    //   var t = token.sub
-    // }
-    // this.state = {
-    //   fontLoaded: false,
-    //   eth: 0.000,
-    //   deg: 0.000,
-    //   user: {
-    //     name: token.nickname
-    //   },
-    //   t: token.sub
-    // }
-  }
+  // constructor (props) {
+  //   super(props)
+  //   // console.log('Home props: ')
+  //   // console.log(props)
+  //   // if(typeof props.token != "undefined"){
+  //   //   console.log(props.token);
+  //   //   var token = jwtDecode(props.token)
+  //   //   var t = token.sub
+  //   // }
+  //   // this.state = {
+  //   //   fontLoaded: false,
+  //   //   eth: 0.000,
+  //   //   deg: 0.000,
+  //   //   user: {
+  //   //     name: token.nickname
+  //   //   },
+  //   //   t: token.sub
+  //   // }
+  //   console.log(this.state)
+  // }
 
-  componentWillReceiveProps () {
-    console.log('Home componentWillReceiveProps:')
-    console.log(this.props)
+  componentDidMount () {
+
   }
   componentWillMount () {
-
+    console.log('Home componentWillReceiveProps:')
+    console.log(this.props)
   }
 
   componentWillUpdate () {
@@ -304,7 +305,7 @@ const mapStateToProps = state => {
     token: state.auth.token,
     email: state.auth.email,
     authId: state.auth.authId,
-    walletAddress: state.lender
+    lender: state.lender.walletAddress
   }
 }
 
