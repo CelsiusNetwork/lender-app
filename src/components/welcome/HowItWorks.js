@@ -2,11 +2,35 @@ import React, { Component } from 'react'
 import { StyleSheet, View, Image, Text, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 import { NavigationActions } from 'react-navigation'
+import { Font } from 'expo';
 
 class HowItWorks extends Component {
-  navigate () {
-    // this.props.lenderAppInitToken('LOHU3qeHAxFUE34Q71bfMUtdHW7afyLl', '8mJ-FJNm9BD3VW0GOfMeV278c6qUuSfFku-O8bGJPeUgXXClFf_EV5H25Rbh6Ai-', 'https://cs.celsius.network/cs', 'client_credentials')
+  constructor(props) {
+    super(props);
+    this.state = {
+        fontLoaded: false,
+      }
   }
+
+  async componentDidMount() {
+    await Font.loadAsync({
+      'inconsolata': require('../../../assets/fonts/Inconsolata-Regular.ttf'),
+    });
+    await Font.loadAsync({
+      'barlow-semi-bold': require('../../../assets/fonts/Barlow-SemiBold.otf'),
+    });
+    await Font.loadAsync({
+      'barlow-light': require('../../../assets/fonts/Barlow-Light.otf'),
+    });
+    await Font.loadAsync({
+      'barlow-bold': require('../../../assets/fonts/Barlow-Bold.otf'),
+    });
+    await Font.loadAsync({
+      'barlow': require('../../../assets/fonts/Barlow-Regular.otf'),
+    });
+    this.setState({ fontLoaded: true });
+  }
+
   static navigationOptions = {
     header: null
   };
@@ -16,6 +40,8 @@ class HowItWorks extends Component {
     return (
       <View style={styles.container}>
         <Image source={require('../../../assets/images/logo-header.png')} style={styles.logo} />
+        { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow-bold'}, styles.header]}>{'How it works?'.toUpperCase()}</Text>) : null }
+        {/* <Text style={styles.header}>{'How it works?'.toUpperCase()}</Text> */}
         <View style={styles.circleWrapper}>
               <Image
                 source={require('../../../assets/images/arrow-left.png')}
@@ -27,17 +53,17 @@ class HowItWorks extends Component {
                 resizeMode="contain"
                 style={styles.aRight} />
         </View>
-        <Text style={styles.header}>{'How it works?'.toUpperCase()}</Text>
-        <Text style={styles.text}>To join our trusted community of members, you need to create Celsius account from which you will be able to lend and borrow money.</Text>
+        { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow'}, styles.text]}>To join our trusted community of members, you need to create Celsius account from which you will be able to lend and borrow money.</Text>) : null }
+        {/* <Text style={styles.text}>To join our trusted community of members, you need to create Celsius account from which you will be able to lend and borrow money.</Text> */}
         <TouchableOpacity style={styles.button}
           // onPress={this.navigate.bind(this)}
           onPress={() => navigate('Register')}
           >
-          <Text style={styles.buttonText}>Create account</Text>
+          { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow'}, styles.buttonText]}>Create account</Text>) : null }
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.loginTouchable} onPress={() => navigate('LoginForm')}>
-          <Text style={styles.loginText}>Already have one?</Text>
+          { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow'}, styles.loginText]}>Already have one?</Text>) : null }
         </TouchableOpacity>
       </View>
     )
@@ -63,18 +89,19 @@ const styles = StyleSheet.create({
     flex: 1
   },
   header: {
-    fontSize: 32,
+    fontSize: 38,
     backgroundColor: 'rgba(0,0,0,0)',
     color: 'white',
     paddingLeft: 30,
     paddingRight: 30,
     marginBottom: 10,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    textAlign: 'center'
   },
   text: {
-    fontSize: 16,
+    fontSize: 18,
     backgroundColor: 'rgba(0,0,0,0)',
-    color: 'white',
+    color: '#9CA9B6',
     padding: 30,
     lineHeight: 20,
     textAlign: 'center'
@@ -82,15 +109,18 @@ const styles = StyleSheet.create({
   },
   logo: {
     position: 'absolute',
-    width: 140,
+    width: 128,
     height: 40,
     left: 30,
-    top: 30
+    top: 60,
+    resizeMode: 'contain'
   },
   circleWrapper: {
     flexDirection: 'row',
     alignItems: 'center',
     height: 180,
+    marginTop: 40,
+    marginBottom: 20
   },
   aLeft: {
     width: 20,
@@ -99,7 +129,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    marginLeft: 10
+    marginLeft: 0
   },
   aRight: {
     width: 20,
@@ -108,11 +138,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-end',
     alignItems: 'center',
-    marginRight: 10
+    marginRight: 0
   },
   circle: {
-    width: 140,
-    height: 140
+    width: 186,
+    height: 186
   },
   button: {
     backgroundColor: '#ffffff',
@@ -125,7 +155,8 @@ const styles = StyleSheet.create({
     marginLeft: 30
   },
   buttonText: {
-    color: '#333333'
+    color: '#3D4853',
+    fontSize: 21
   },
   loginTouchable: {
     marginTop: 25,
@@ -136,7 +167,8 @@ const styles = StyleSheet.create({
   },
   loginText: {
     backgroundColor: 'transparent',
-    color: 'white'
+    color: 'rgba(156, 169, 182, 0.3)',
+    fontSize: 18
   }
 })
 
