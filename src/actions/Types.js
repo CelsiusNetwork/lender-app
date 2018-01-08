@@ -26,3 +26,7 @@ export const FETCH_ETH_TRANSACTIONS_FAIL = 'fetch_eth_transactions_fail'
 export const FETCH_LENDER_LOADING = 'fetch_lender_loading'
 export const FETCH_LENDER_SUCCESS = 'fetch_lender_success'
 export const FETCH_LENDER_FAIL = 'fetch_lender_fail'
+
+export const FETCH_WALLET_BALANCE_LOADING = 'fetch_wallet_balance_loading'
+export const FETCH_WALLET_BALANCE_SUCCESS = 'fetch_wallet_balance_success'
+export const FETCH_WALLET_BALANCE_ERROR = 'fetch_wallet_balance_error'

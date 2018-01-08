@@ -2,18 +2,30 @@ import * as types from './Types'
 import { WalletService, TestEtherScanService } from '../services'
 import { NavigationActions } from 'react-navigation'
 
-export const fetchWalletBalance = (walletAddress) => {
+export const fetchWalletBalance = (walletAddress, token) => {
+  console.log('FETCH WALLET BALANCE')
   return (dispatch) => {
     dispatch({
-      type: types.CHECK_BALANCE_LOADING
+      type: types.FETCH_WALLET_BALANCE_LOADING
     })
-    WalletService().getBalance(walletAddress)
+    WalletService().getBalance(walletAddress, token)
       .then(response => handleWalletBalance(dispatch, response))
   }
 }
 
 const handleWalletBalance = (dispatch, response) => {
-
+  console.log('handleWalletBalance')
+    // response = JSON.parse(response)
+  console.log(response._bodyText)
+  if (response.ok === true) {
+    dispatch({
+      type: types.FETCH_WALLET_BALANCE_SUCCESS,
+      payload: response._bodyText
+    })
+  }
+  if (response.ok === false) {
+    // handle this beach
+  }
 }
 
 export const fetchTransactionsHistory = () => {
@@ -34,12 +46,12 @@ const handleTransactionsList = (dispatch, response) => {
   console.log(response.ok)
   if (response.ok === true) {
     dispatch({
-      type: types.FETCH_ETH_TRANSACTIONS_SUCCESS,
-      payload: response
-    })
-   // todo: animate something so user knows we are updating
+        type: types.FETCH_ETH_TRANSACTIONS_SUCCESS,
+        payload: response
+      })
+      // todo: animate something so user knows we are updating
   }
-  if (response.ok === true) {
+  if (response.ok === false) {
     transactionsListFail(dispatch, response.code)
   }
 }
