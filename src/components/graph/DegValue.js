@@ -44,17 +44,17 @@ class DegValue extends Component {
             </Text>
             <Text style={styles.header2}>
               { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow-light' }]}>{ this.state.deg.toFixed(3) }</Text>) : null }
-              { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow-light' }]}> DEG</Text>) : null }
+              { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow-light' }]}> CEL</Text>) : null }
               { this.state.fontLoaded ? (<Text style={[ styles.changeDown, { fontFamily: 'barlow-light' }]}> { this.state.change}</Text>) : null }
             </Text>
             <View style={styles.row}>
               <View style={styles.cellLeft}>
                 <TouchableOpacity style={styles.button} onPress={() => navigate('AddFounds')}>
-                  <Text style={styles.buttonText}>Add founds</Text>
+                  <Text style={styles.buttonText}>Add funds</Text>
                 </TouchableOpacity>
               </View>
               <View style={styles.cellRight}>
-                <TouchableOpacity style={styles.button2} onPress={() => navigate('Graph')}>
+                <TouchableOpacity style={styles.button2} onPress={() => navigate('ManageFounds')}>
                   <Text style={styles.button2Text}>Manage</Text>
                 </TouchableOpacity>
               </View>
@@ -63,7 +63,7 @@ class DegValue extends Component {
               <Image source={require('../../../assets/images/graph-token-value.png')} style={styles.graph} />
             </View>
             <Text style={styles.footer}>
-              { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow' }]}>DEG Value</Text>) : null }
+              { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow' }]}>CEL Value</Text>) : null }
             </Text>
           </Content>
         </Container>

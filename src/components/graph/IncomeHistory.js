@@ -44,13 +44,13 @@ class IncomeHistory extends Component {
             </Text>
             <Text style={styles.header2}>
               { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow-light' }]}>{ this.state.deg.toFixed(3) }</Text>) : null }
-              { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow-light' }]}> DEG</Text>) : null }
+              { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow-light' }]}> CEL</Text>) : null }
               { this.state.fontLoaded ? (<Text style={[ styles.changeUp, { fontFamily: 'barlow-light' }]}> { this.state.change}</Text>) : null }
             </Text>
             <View style={styles.row}>
               <View style={styles.cellLeft}>
                 <TouchableOpacity style={styles.button} onPress={() => navigate('AddFounds')}>
-                  <Text style={styles.buttonText}>Add founds</Text>
+                  <Text style={styles.buttonText}>Add funds</Text>
                 </TouchableOpacity>
               </View>
               <View style={styles.cellRight}>
@@ -67,7 +67,7 @@ class IncomeHistory extends Component {
                       <Image source={require('../../../assets/images/icon-coins.png')} style={styles.icon} />
                     </View>
                     <View style={styles.value}>
-                    { this.state.fontLoaded ? (<Text style={[styles.valueText, { fontFamily: 'barlow-semi-bold' }]}>0.127 DEG</Text>) : null }
+                    { this.state.fontLoaded ? (<Text style={[styles.valueText, { fontFamily: 'barlow-semi-bold' }]}>0.127 CEL</Text>) : null }
                     </View>
                     <View style={styles.status}>
                     { this.state.fontLoaded ? (<Text style={[styles.statusText, { fontFamily: 'barlow' }]}>ON HOLD</Text>) : null }
@@ -131,7 +131,7 @@ class IncomeHistory extends Component {
                       <Image source={require('../../../assets/images/icon-coins.png')} style={styles.icon} />
                     </View>
                     <View style={styles.value}>
-                    { this.state.fontLoaded ? (<Text style={[styles.valueText, { fontFamily: 'barlow-semi-bold' }]}>0.127 DEG</Text>) : null }
+                    { this.state.fontLoaded ? (<Text style={[styles.valueText, { fontFamily: 'barlow-semi-bold' }]}>0.127 CEL</Text>) : null }
                     </View>
                     <View style={styles.status}>
                     { this.state.fontLoaded ? (<Text style={[styles.statusText, { fontFamily: 'barlow' }]}>ON HOLD</Text>) : null }

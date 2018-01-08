@@ -2,6 +2,7 @@ import * as types from '../actions/Types'
 
 const LOGIN_INITIAL_STATE = {
   token: null,
+  user: null,
   authId: '',
   email: '',
   password: '',
@@ -20,17 +21,11 @@ export default (state = LOGIN_INITIAL_STATE, action) => {
     case types.LOGIN_LENDER_SUCCESS:
       return {
         ...state,
+        user: null,
         token: action.payload.tokenId,
         authId: action.payload.lender.sub,
         email: action.payload.lender.email,
-        password: '',
-        error: '',
         loading: false
-      }
-    case types.FETCH_LENDER_SUCCESS:
-      return {
-        ...state,
-        user: action.payload
       }
     case types.LOGIN_LENDER_FAIL:
       let errorMsg
