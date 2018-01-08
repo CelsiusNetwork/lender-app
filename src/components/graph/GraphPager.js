@@ -43,7 +43,7 @@ class GraphPager extends Component {
           style={styles.background}>
           <View style={styles.header}>
             <View style={styles.cellLeft}>
-              <TouchableOpacity onPress={() => navigate('Welcome')}>
+              <TouchableOpacity onPress={() => navigate('LoginForm')}>
                 <Image source={require('../../../assets/images/logo-small.png')} style={styles.logo} />
               </TouchableOpacity>
             </View>
