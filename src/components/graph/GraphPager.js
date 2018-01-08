@@ -1,13 +1,39 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { StyleSheet, TouchableOpacity, View, Image, ImageBackground } from 'react-native'
+import { StyleSheet, TouchableOpacity, View, Text, Image, ImageBackground } from 'react-native'
 import { Pages } from 'react-native-pages'
 import DegIncome from './DegIncome'
 import DegValue from './DegValue'
 import IncomeHistory from './IncomeHistory'
 import { lenderAppInitToken } from '../../actions'
+import { Font } from 'expo';
 
 class GraphPager extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+        fontLoaded: false,
+        eth: 10.000,
+        deg: 2.984,
+        change: ' ▲ +3.24%',
+        user: {
+          name: "Alex"
+        },
+    }
+  }
+  async componentDidMount() {
+    await Font.loadAsync({
+      'barlow-semi-bold': require('../../../assets/fonts/Barlow-SemiBold.otf'),
+    });
+    await Font.loadAsync({
+      'barlow-light': require('../../../assets/fonts/Barlow-Light.otf'),
+    });
+    await Font.loadAsync({
+      'barlow': require('../../../assets/fonts/Barlow-Regular.otf'),
+    });
+    this.setState({ fontLoaded: true });
+  }
+
   render () {
     const { navigate } = this.props.navigation
     return (
@@ -17,7 +43,7 @@ class GraphPager extends Component {
           style={styles.background}>
           <View style={styles.header}>
             <View style={styles.cellLeft}>
-              <TouchableOpacity onPress={() => navigate('Welcome')}>
+              <TouchableOpacity onPress={() => navigate('LoginForm')}>
                 <Image source={require('../../../assets/images/logo-small.png')} style={styles.logo} />
               </TouchableOpacity>
             </View>
@@ -27,6 +53,17 @@ class GraphPager extends Component {
               </TouchableOpacity>
             </View>
           </View>
+
+          <Text style={styles.headerText}>
+              { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow-semi-bold' }]}>{ this.state.eth.toFixed(3) }</Text>) : null }
+              { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow-semi-bold' }]}> ETH</Text>) : null }
+          </Text>
+          <Text style={styles.header2Text}>
+            { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow-light' }]}>{ this.state.deg.toFixed(3) }</Text>) : null }
+            { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow-light' }]}> CEL</Text>) : null }
+            { this.state.fontLoaded ? (<Text style={[ styles.changeUp, { fontFamily: 'barlow-light' }]}> { this.state.change}</Text>) : null }
+          </Text>
+
           <View style={styles.pagesWrapper}>
             <Pages style={styles.pages}>
               <DegIncome navigation={this.props.navigation} lenderAppInitToken={this.props.lenderAppInitToken} />
@@ -45,6 +82,40 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginBottom: 15,
     marginTop: 40
+  },
+  headerText: {
+		fontSize: 42,
+		backgroundColor: 'rgba(0,0,0,0)',
+		color: 'white',
+		paddingLeft: 30,
+		paddingRight: 30,
+		marginBottom: 10,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginTop: 20
+  },
+  row: {
+    height: 140,
+    flexDirection: 'row',
+  },
+  header2Text: {
+		fontSize: 24,
+		backgroundColor: 'rgba(0,0,0,0)',
+		color: '#9CA9B6',
+		paddingLeft: 30,
+		paddingRight: 30,
+		marginBottom: 10,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginTop: 0
+  },
+  changeUp: {
+    fontSize: 18,
+    color: '#47CA53'
+  },
+  changeDown: {
+    fontSize: 18,
+    color: '#ff3333'
   },
   pagesWrapper: {
     flex: 1,

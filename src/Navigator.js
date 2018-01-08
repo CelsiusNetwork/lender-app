@@ -5,7 +5,7 @@ import { addNavigationHelpers, NavigationActions, StackNavigator } from "react-n
 
 
 import WelcomePager from "./components/welcome/WelcomePager"
-// import WelcomePager from "./components/ManageFoundsSuccess"
+// import WelcomePager from "./components/AddFounds"
 
 import GraphPager from "./components/graph/GraphPager.js"
 import HistoryDetail from "./components/graph/HistoryDetail.js"
@@ -29,8 +29,6 @@ import QRScanner from './components/QRScanner'
 import ManageFoundsSuccess from './components/ManageFoundsSuccess'
 
 import Home from './components/Home'
-
-
 
 export const Navigator = StackNavigator({
   LoginForm: {

@@ -38,7 +38,7 @@ export default class DegIncome extends Component {
         <Container style={styles.wrapper}>
           <Content>
 
-            <Text style={styles.header}>
+            {/* <Text style={styles.header}>
               { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow-semi-bold' }]}>{ this.state.eth.toFixed(3) }</Text>) : null }
               { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow-semi-bold' }]}> ETH</Text>) : null }
             </Text>
@@ -46,7 +46,8 @@ export default class DegIncome extends Component {
               { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow-light' }]}>{ this.state.deg.toFixed(3) }</Text>) : null }
               { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow-light' }]}> CEL</Text>) : null }
               { this.state.fontLoaded ? (<Text style={[ styles.changeUp, { fontFamily: 'barlow-light' }]}> { this.state.change}</Text>) : null }
-            </Text>
+            </Text> */}
+
             <View style={styles.row}>
               <View style={styles.cellLeft}>
                 <TouchableOpacity style={styles.button} onPress={() => navigate('AddFounds')}>

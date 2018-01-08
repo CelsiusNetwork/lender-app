@@ -6,6 +6,7 @@ import { registerFirstNameChanged, registerLastNameChanged, registerEmailChanged
 import { Font } from 'expo';
 import QRCode from 'react-native-qrcode';
 import { Share } from 'react-native';
+import { Clipboard } from 'react-native';
 
 class AddFounds extends Component {
 
@@ -25,6 +26,10 @@ class AddFounds extends Component {
     })
   }
 
+  onCopyButtonPress () {
+    Clipboard.setString(this.state.qrcode);
+  }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -36,6 +41,15 @@ class AddFounds extends Component {
   async componentDidMount() {
     await Font.loadAsync({
       'inconsolata': require('../../assets/fonts/Inconsolata-Regular.ttf'),
+    });
+    await Font.loadAsync({
+      'barlow-semi-bold': require('../../assets/fonts/Barlow-SemiBold.otf'),
+    });
+    await Font.loadAsync({
+      'barlow-light': require('../../assets/fonts/Barlow-Light.otf'),
+    });
+    await Font.loadAsync({
+      'barlow': require('../../assets/fonts/Barlow-Regular.otf'),
     });
     this.setState({ fontLoaded: true });
   }
@@ -50,7 +64,8 @@ class AddFounds extends Component {
             <Container>
               <Content>
                 <Text style={styles.header}>{'Add Funds'.toUpperCase()}</Text>
-                <Text style={styles.text}>Transfer your funds from another Ethereum wallet to your Celsius account by sending ETH to your unique Celsius address.</Text>
+                {/* <Text style={styles.text}>Transfer your funds from another Ethereum wallet to your Celsius account by sending ETH to your unique Celsius address.</Text> */}
+                { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow' }, styles.text]}>Transfer your funds from another Ethereum wallet to your Celsius account by sending ETH to your unique Celsius address.</Text>) : null }
                 <View style={styles.center}>
                   <View style={styles.qrWrapper}>
                     <QRCode
@@ -60,7 +75,8 @@ class AddFounds extends Component {
                       fgColor='white'/>
                   </View>
                 </View>
-                <Text style={styles.text}>Your Celsius ETH address:</Text>
+                { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow', marginBottom: 0 }, styles.text]}>Your Celsius ETH address:</Text>) : null }
+                {/* <Text style={styles.text}>Your Celsius ETH address:</Text> */}
 
                 <View style={styles.codeWrapper}>
                   { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'inconsolata' }, styles.codeText]}>{ this.state.qrcode }</Text>) : null }
@@ -72,7 +88,7 @@ class AddFounds extends Component {
                       </TouchableOpacity>
                     {/* </View> */}
                     {/* <View style={styles.cellRight}> */}
-                      <TouchableOpacity style={[styles.cellRight, styles.buttonRight]}>
+                      <TouchableOpacity style={[styles.cellRight, styles.buttonRight]} onPress={this.onCopyButtonPress.bind(this)}>
                         <Image source={require('../../assets/images/icon-copy.png')} style={styles.iconRight} />
                         <Text style={styles.buttonRightText}>Copy</Text>
                       </TouchableOpacity>
@@ -142,14 +158,15 @@ const styles = StyleSheet.create({
 		marginBottom: 30,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginTop: 60,
+    marginTop: 30,
   },
   text: {
     textAlign: 'center',
     fontSize: 18,
     color: '#9CA9B6',
     marginLeft: 30,
-    marginRight: 30
+    marginRight: 30,
+    paddingBottom: 15
   },
   formContainer: {
     marginTop: 100
@@ -170,6 +187,7 @@ const styles = StyleSheet.create({
     // marginRight: 30,
     // marginLeft: 30,
     marginTop: 10,
+    marginBottom: 30,
     width: 130
   },
   buttonText: {
@@ -211,7 +229,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingTop: 45,
     marginTop: 20,
-    marginBottom: 30
+    marginBottom: 30,
   },
   codeWrapper: {
     borderRadius: 8,
@@ -219,7 +237,7 @@ const styles = StyleSheet.create({
     marginRight: 30,
     marginLeft: 30,
     // paddingTop: 20,
-    marginTop: 20,
+    marginTop: 0,
     marginBottom: 20
   },
   codeText: {
