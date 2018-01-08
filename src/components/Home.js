@@ -75,11 +75,12 @@ class Home extends Component {
                 <TouchableOpacity style={styles.button}
                   onPress={() => navigate('Graph')}
                 >
-                  <Text style={styles.buttonText}>Add founds</Text>
+                  <Text style={styles.buttonText}>Add funds</Text>
                 </TouchableOpacity>
                 <View style={styles.hr}></View>
                 <Text style={styles.welcomeTitle}>Welcome to Celsius, cdscdsc!</Text>
                 <Text style={styles.welcomeText}>As a member of Celsius community, you can lend ETH and earn DEG token for the time you spend with us.</Text>
+
                 <View style={styles.hr}></View>
 
                 <TouchableOpacity style={styles.box} onPress={() => navigate('HistoryDetail')}>
@@ -95,7 +96,7 @@ class Home extends Component {
                     <Image source={require('../../assets/images/icon-transfer.png')} style={styles.icon} />
                    </View>
                   <View style={styles.boxTextWrapper}>
-                    <Text style={styles.boxText}>By lending money to borrowers, you earn Degree which you can later on sell on the market.</Text>
+                    <Text style={styles.boxText}>By lending money to borrowers, you earn CEL which you can later on sell on the market.</Text>
                    </View>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.box}>
@@ -103,7 +104,7 @@ class Home extends Component {
                     <Image source={require('../../assets/images/icon-network.png')} style={styles.icon} />
                   </View>
                   <View style={styles.boxTextWrapper}>
-                    <Text style={styles.boxText}>Improve your seniority score by sticking longer with Celsius and earn more Degree.</Text>
+                    <Text style={styles.boxText}>Improve your seniority score by sticking longer with Celsius and earn more CEL.</Text>
                   </View>
                 </TouchableOpacity>
               </Content>
@@ -303,7 +304,7 @@ const mapStateToProps = state => {
     token: state.auth.token,
     email: state.auth.email,
     authId: state.auth.authId,
-    lender: state.lender.walletAddress
+    walletAddress: state.lender
   }
 }
 

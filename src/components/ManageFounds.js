@@ -47,7 +47,7 @@ class AddFounds extends Component {
             {/* <Image source={require('../../assets/images/logo-header.png')} style={styles.logo} /> */}
             <Container>
               <Content>
-                <Text style={styles.header}>{'Manage Founds'.toUpperCase()}</Text>
+                <Text style={styles.header}>{'Manage Funds'.toUpperCase()}</Text>
                 <Text style={styles.text}>You can safely withdraw your funds in <Text style={{color: '#ffffff'}}>7 days</Text> from now. If you do it earlier, you may lose seniority score and additional fees may apply. </Text>
                 <View style={styles.center}>
 
@@ -77,7 +77,7 @@ class AddFounds extends Component {
                       <Image source={require('../../assets/images/icon-transfer.png')} style={styles.icon} />
                       <Text style={styles.boxText1}>
                         { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow-semi-bold' }, styles.boxText1Inner]}>{ this.state.deg.toFixed(3) }</Text>) : null }
-                        { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow-semi-bold' }, styles.boxText1Inner]}> DEG</Text>) : null }
+                        { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow-semi-bold' }, styles.boxText1Inner]}> CEL</Text>) : null }
                       </Text>
                       <Text style={styles.boxText2}>
                         { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow-light' }, styles.boxText2Inner]}>{ this.state.degFiat }</Text>) : null }

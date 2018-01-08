@@ -49,7 +49,7 @@ class AddFounds extends Component {
             {/* <Image source={require('../../assets/images/logo-header.png')} style={styles.logo} /> */}
             <Container>
               <Content>
-                <Text style={styles.header}>{'Add Founds'.toUpperCase()}</Text>
+                <Text style={styles.header}>{'Add Funds'.toUpperCase()}</Text>
                 <Text style={styles.text}>Transfer your funds from another Ethereum wallet to your Celsius account by sending ETH to your unique Celsius address.</Text>
                 <View style={styles.center}>
                   <View style={styles.qrWrapper}>
