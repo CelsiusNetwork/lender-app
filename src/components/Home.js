@@ -15,6 +15,7 @@ class Home extends Component {
       var token = jwtDecode(props.token)
       var t = token.sub
     }
+    // console.log(token)
     this.state = {
       fontLoaded: false,
       eth: 0.000,
@@ -26,11 +27,11 @@ class Home extends Component {
     }
   }
   componentWillMount () {
-    console.log(this.state)
+    // console.log(this.state)
     // const t = 'auth0%7C5a4e964e0bee153c1a450aab'
     const t = this.state.t
     const t2 = this.props.token
-    console.log('fetch lender info from component')
+    // console.log('fetch lender info from component')
     this.props.fetchLenderInfo({t, t2})
     //this.props.fetchWalletBalance()
     this.props.fetchTransactionsHistory()
@@ -63,11 +64,11 @@ class Home extends Component {
                 <TouchableOpacity style={styles.button}
                   onPress={() => navigate('Graph')}
                 >
-                  <Text style={styles.buttonText}>Add funds</Text>
+                  <Text style={styles.buttonText}>Add founds</Text>
                 </TouchableOpacity>
                 <View style={styles.hr}></View>
                 <Text style={styles.welcomeTitle}>Welcome to Celsius, { this.state.user.name }!</Text>
-                <Text style={styles.welcomeText}>As a member of Celsius community, you can lend ETH and earn CEL token for the time you spend with us.</Text>
+                <Text style={styles.welcomeText}>As a member of Celsius community, you can lend ETH and earn DEG token for the time you spend with us.</Text>
                 <View style={styles.hr}></View>
 
                 <TouchableOpacity style={styles.box} onPress={() => navigate('HistoryDetail')}>
@@ -83,7 +84,7 @@ class Home extends Component {
                     <Image source={require('../../assets/images/icon-transfer.png')} style={styles.icon} />
                    </View>
                   <View style={styles.boxTextWrapper}>
-                    <Text style={styles.boxText}>By lending money to borrowers, you earn CEL which you can later on sell on the market.</Text>
+                    <Text style={styles.boxText}>By lending money to borrowers, you earn Degree which you can later on sell on the market.</Text>
                    </View>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.box}>
@@ -91,7 +92,7 @@ class Home extends Component {
                     <Image source={require('../../assets/images/icon-network.png')} style={styles.icon} />
                   </View>
                   <View style={styles.boxTextWrapper}>
-                    <Text style={styles.boxText}>Improve your seniority score by sticking longer with Celsius and earn more CEL.</Text>
+                    <Text style={styles.boxText}>Improve your seniority score by sticking longer with Celsius and earn more Degree.</Text>
                   </View>
                 </TouchableOpacity>
               </Content>
