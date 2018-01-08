@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Alert, ImageBackground, StyleSheet, View, Image, Text, TouchableOpacity, AsyncStorage, Animated } from 'react-native'
 import { Form, Input, Item, Label, Content, Container } from 'native-base'
-import { fetchLenderInfo, fetchWalletBalance, fetchTransactionsHistory } from '../actions'
+import { fetchWalletBalance, fetchTransactionsHistory } from '../actions'
 import jwtDecode from 'jwt-decode'
 
 class Home extends Component {
@@ -10,10 +10,13 @@ class Home extends Component {
   componentDidMount () {
     console.log('Home componentDidMount:')
     console.log(this.props)
+    this.props.fetchWalletBalance(this.props.walletAddress, this.props.token)
+    console.log('-----')
   }
 
-  componentWillMount () {
-
+  constructor (props) {
+    super(props)
+    console.log(props)
   }
 
   componentWillUpdate () {
@@ -274,8 +277,10 @@ const mapStateToProps = state => {
     token: state.auth.token,
     email: state.auth.email,
     authId: state.auth.authId,
-    lenderAddress: state.lender.walletAddress,
-    lender: state.lender
+    walletAddress: state.lender.walletAddress,
+    lender: state.lender,
+    ethBalance: state.wallet.ethBalance,
+    celBalance: state.wallet.celBalance
   }
 }
 
