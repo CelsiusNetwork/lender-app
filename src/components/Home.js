@@ -6,47 +6,16 @@ import { fetchLenderInfo, fetchWalletBalance, fetchTransactionsHistory } from '.
 import jwtDecode from 'jwt-decode'
 
 class Home extends Component {
-  // constructor (props) {
-  //   super(props)
-  //   // console.log('Home props: ')
-  //   // console.log(props)
-  //   // if(typeof props.token != "undefined"){
-  //   //   console.log(props.token);
-  //   //   var token = jwtDecode(props.token)
-  //   //   var t = token.sub
-  //   // }
-  //   // this.state = {
-  //   //   fontLoaded: false,
-  //   //   eth: 0.000,
-  //   //   deg: 0.000,
-  //   //   user: {
-  //   //     name: token.nickname
-  //   //   },
-  //   //   t: token.sub
-  //   // }
-  //   console.log(this.state)
-  // }
 
   componentDidMount () {
-
   }
+
   componentWillMount () {
     console.log('Home componentWillReceiveProps:')
     console.log(this.props)
   }
 
   componentWillUpdate () {
-  }
-
-  componentDidMount () {
-
-    // const t = 'auth0%7C5a4e964e0bee153c1a450aab'
-    // const t = this.state.t
-    // const t2 = this.props.token
-    // console.log('fetch lender info from component')
-    // this.props.fetchLenderInfo({t, t2})
-    //this.props.fetchWalletBalance()
-    // this.props.fetchTransactionsHistory()
   }
 
   render () {
@@ -66,22 +35,21 @@ class Home extends Component {
             <Container style={styles.wrapper}>
               <Content>
                 <Text style={styles.header}>
-                  <Text>3</Text>
+                  <Text>2</Text>
                   <Text> ETH</Text>
                 </Text>
                 <Text style={styles.header2}>
-                  <Text>2</Text>
+                  <Text>4</Text>
                   <Text> CEL</Text>
                 </Text>
                 <TouchableOpacity style={styles.button}
                   onPress={() => navigate('Graph')}
                 >
-                  <Text style={styles.buttonText}>Add funds</Text>
+                  <Text style={styles.buttonText}>Add founds</Text>
                 </TouchableOpacity>
                 <View style={styles.hr}></View>
-                <Text style={styles.welcomeTitle}>Welcome to Celsius, cdscdsc!</Text>
+                <Text style={styles.welcomeTitle}>Welcome to Celsius, Crnac!</Text>
                 <Text style={styles.welcomeText}>As a member of Celsius community, you can lend ETH and earn DEG token for the time you spend with us.</Text>
-
                 <View style={styles.hr}></View>
 
                 <TouchableOpacity style={styles.box} onPress={() => navigate('HistoryDetail')}>
@@ -97,7 +65,7 @@ class Home extends Component {
                     <Image source={require('../../assets/images/icon-transfer.png')} style={styles.icon} />
                    </View>
                   <View style={styles.boxTextWrapper}>
-                    <Text style={styles.boxText}>By lending money to borrowers, you earn CEL which you can later on sell on the market.</Text>
+                    <Text style={styles.boxText}>By lending money to borrowers, you earn Degree which you can later on sell on the market.</Text>
                    </View>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.box}>
@@ -105,7 +73,7 @@ class Home extends Component {
                     <Image source={require('../../assets/images/icon-network.png')} style={styles.icon} />
                   </View>
                   <View style={styles.boxTextWrapper}>
-                    <Text style={styles.boxText}>Improve your seniority score by sticking longer with Celsius and earn more CEL.</Text>
+                    <Text style={styles.boxText}>Improve your seniority score by sticking longer with Celsius and earn more Degree.</Text>
                   </View>
                 </TouchableOpacity>
               </Content>
