@@ -5,7 +5,7 @@ import { addNavigationHelpers, NavigationActions, StackNavigator } from "react-n
 
 
 import WelcomePager from "./components/welcome/WelcomePager"
-// import WelcomePager from "./components/ManageFoundsWithdraw"
+// import WelcomePager from "./components/ManageFoundsSuccess"
 
 import GraphPager from "./components/graph/GraphPager.js"
 import HistoryDetail from "./components/graph/HistoryDetail.js"
@@ -24,6 +24,9 @@ import EditProfile from './components/EditProfile'
 import AddFounds from './components/AddFounds'
 import ManageFounds from './components/ManageFounds'
 import ManageFoundsWithdraw from './components/ManageFoundsWithdraw'
+import ManageFoundsConfirm from './components/ManageFoundsConfirm'
+import QRScanner from './components/QRScanner'
+import ManageFoundsSuccess from './components/ManageFoundsSuccess'
 
 import Home from './components/Home'
 
@@ -94,6 +97,18 @@ export const Navigator = StackNavigator({
     screen: ManageFoundsWithdraw,
     headerMode: 'screen'
   },
+  ManageFoundsConfirm: {
+    screen: ManageFoundsConfirm,
+    headerMode: 'screen'
+  },
+  QRScanner: {
+    screen: QRScanner,
+    headerMode: 'screen'
+  },
+  ManageFoundsSuccess: {
+    screen: ManageFoundsSuccess,
+    headerMode: 'screen'
+  }
 }, {
   // see next line
   headerMode: 'none',
