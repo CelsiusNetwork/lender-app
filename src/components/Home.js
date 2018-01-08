@@ -15,6 +15,7 @@ class Home extends Component {
       var token = jwtDecode(props.token)
       var t = token.sub
     }
+    // console.log(token)
     this.state = {
       fontLoaded: false,
       eth: 0.000,
@@ -26,11 +27,11 @@ class Home extends Component {
     }
   }
   componentWillMount () {
-    console.log(this.state)
+    // console.log(this.state)
     // const t = 'auth0%7C5a4e964e0bee153c1a450aab'
     const t = this.state.t
     const t2 = this.props.token
-    console.log('fetch lender info from component')
+    // console.log('fetch lender info from component')
     this.props.fetchLenderInfo({t, t2})
     //this.props.fetchWalletBalance()
     this.props.fetchTransactionsHistory()
