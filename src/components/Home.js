@@ -7,19 +7,23 @@ import jwtDecode from 'jwt-decode'
 
 class Home extends Component {
 
-  componentDidMount () {
-    console.log('Home componentDidMount:')
-    console.log(this.props)
+  componentWillMount () {
+    // console.log('Home componentDidMount:')
+    // console.log(this.props)
     this.props.fetchWalletBalance(this.props.walletAddress, this.props.token)
-    console.log('-----')
+    console.log('PROPS: ')
+    console.log(this.props)
+  }
+
+  componentWillReceiveProps (nextProps) {
+    console.log('received props: ')
+    console.log(nextProps)
   }
 
   constructor (props) {
     super(props)
+    console.log('props: ')
     console.log(props)
-  }
-
-  componentWillUpdate () {
   }
 
   render () {
@@ -280,7 +284,7 @@ const mapStateToProps = state => {
     walletAddress: state.lender.walletAddress,
     lender: state.lender,
     ethBalance: state.wallet.ethBalance,
-    celBalance: state.wallet.celBalance
+    celBalance: state.wallet
   }
 }
 
