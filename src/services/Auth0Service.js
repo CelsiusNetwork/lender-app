@@ -1,7 +1,7 @@
 const apiUrl = 'https://celsiusnetwork.auth0.com'
 
 export const Auth0Service = () => ({
-  siginInWithEmailAndPassword ({ email, password }) {
+  siginInWithEmailAndPassword({ email, password }) {
     const request = {
       headers: {
         'Content-Type': 'application/json'
@@ -14,10 +14,9 @@ export const Auth0Service = () => ({
         password: password
       })
     }
-    console.log('request: ', request)
     return fetch(apiUrl + '/oauth/token', request)
   },
-  initClientCredentials () {
+  initClientCredentials() {
     const request = {
       headers: {
         'Content-Type': 'application/json'
@@ -32,11 +31,7 @@ export const Auth0Service = () => ({
     }
     return fetch(apiUrl + '/oauth/token', request)
   },
-  getUser ({id, token}) {
-    console.log('getUser()')
-    console.log(id)
-    console.log(token)
-
+  getUser({ id, token }) {
     const request = {
       headers: {
         'Content-Type': 'application/json',
@@ -45,9 +40,6 @@ export const Auth0Service = () => ({
       },
       method: 'get'
     }
-    console.log('zumzuzm:')
-    console.log(id.t)
-    console.log(id.t2)
     return fetch(apiUrl + '/api/v2/users/' + id.t, request)
   }
 

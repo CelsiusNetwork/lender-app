@@ -34,20 +34,25 @@ export const loginLender = ({ email, password }) => {
 }
 
 export const fetchLenderInfo = (id, token) => {
+  console.log('fetchLenderInfo()')
   return (dispatch) => {
     dispatch({
       type: types.FETCH_LENDER_LOADING
     })
     Auth0Service().getUser({ id, token })
-      .then(response => handleLenderInfo(dispatch, response))
+      .then(response => handleLenderInfo(dispatch, JSON.stringify(response)))
+      .catch((error) => {
+        console.log('Error while fetchLenderInfo()')
+        console.debug(error)
+      })
   }
 }
 
 const handleLenderInfo = (dispatch, response) => {
+  console.log('handleLenderInfo()')
   response = JSON.parse(response)
+  console.log(response._bodyInit)
   const user = JSON.parse(response._bodyInit)
-  console.log('lenderInfo')
-  console.log(response)
   dispatch({
     type: types.FETCH_LENDER_SUCCESS,
     payload: user

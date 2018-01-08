@@ -21,7 +21,7 @@ class Home extends Component {
   componentWillMount () {
     const t = 'auth0%7C5a4e964e0bee153c1a450aab'
     const t2 = this.props.token
-    console.log('ZzzzZZZzzzzzzzzzzzzzzzzzzzz', this.props.authId)
+    console.log('fetch lender info from component')
     this.props.fetchLenderInfo({t, t2})
     //this.props.fetchWalletBalance()
     this.props.fetchTransactionsHistory()
