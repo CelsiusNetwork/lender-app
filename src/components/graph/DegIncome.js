@@ -50,7 +50,7 @@ export default class DegIncome extends Component {
             <View style={styles.row}>
               <View style={styles.cellLeft}>
                 <TouchableOpacity style={styles.button} onPress={() => navigate('AddFounds')}>
-                  <Text style={styles.buttonText}>Add founds</Text>
+                  <Text style={styles.buttonText}>Add funds</Text>
                 </TouchableOpacity>
               </View>
               <View style={styles.cellRight}>

@@ -47,7 +47,7 @@ class AddFounds extends Component {
             {/* <Image source={require('../../assets/images/logo-header.png')} style={styles.logo} /> */}
             <Container>
               <Content>
-                <Text style={styles.header}>{'Manage Founds'.toUpperCase()}</Text>
+                <Text style={styles.header}>{'Manage Funds'.toUpperCase()}</Text>
                 <Text style={styles.text}>You can safely withdraw your funds in <Text style={{color: '#ffffff'}}>7 days</Text> from now. If you do it earlier, you may lose seniority score and additional fees may apply. </Text>
                 <View style={styles.center}>
 
