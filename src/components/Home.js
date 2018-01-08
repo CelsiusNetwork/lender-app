@@ -275,7 +275,7 @@ const mapStateToProps = state => {
     email: state.auth.email,
     authId: state.auth.authId,
     lenderAddress: state.lender.walletAddress,
-    lemder: state.lender
+    lender: state.lender
   }
 }
 
