@@ -27,6 +27,11 @@ export default (state = LOGIN_INITIAL_STATE, action) => {
         error: '',
         loading: false
       }
+    case types.FETCH_LENDER_SUCCESS:
+      return {
+        ...state,
+        user: action.payload
+      }
     case types.LOGIN_LENDER_FAIL:
       let errorMsg
       switch (action.payload) {

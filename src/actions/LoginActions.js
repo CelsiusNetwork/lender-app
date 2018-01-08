@@ -33,16 +33,25 @@ export const loginLender = ({ email, password }) => {
   }
 }
 
-export const fetchLender = (id, token) => {
-  console.log('mamicumammamamamam')
-  console.log(id, token)
+export const fetchLenderInfo = (id, token) => {
   return (dispatch) => {
     dispatch({
       type: types.FETCH_LENDER_LOADING
     })
     Auth0Service().getUser({ id, token })
-      .then(response => console.log(response))
+      .then(response => handleLenderInfo(dispatch, response))
   }
+}
+
+const handleLenderInfo = (dispatch, response) => {
+  response = JSON.parse(response)
+  const user = JSON.parse(response._bodyInit)
+  console.log('lenderInfo')
+  console.log(response)
+  dispatch({
+    type: types.FETCH_LENDER_SUCCESS,
+    payload: user
+  })
 }
 
 const handleResponse = (dispatch, response) => {
@@ -51,14 +60,6 @@ const handleResponse = (dispatch, response) => {
   const token = JSON.parse(response._bodyInit)
   const tokenId = token.id_token
   const lender = jwtDecode(tokenId)
-  const lenderId = lender.sub
-  const lenderEmail = lender.email
-  const lenderPicture = lender.picture
-
-  // console.log(response.ok)
-  // const tokenId = response.id_token
-  // console.log("TOKENID~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-  // console.log(tokenId)
   if (response.ok === true) {
     dispatch({
       type: types.LOGIN_LENDER_SUCCESS,

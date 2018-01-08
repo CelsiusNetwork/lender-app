@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Alert, ImageBackground, StyleSheet, View, Image, Text, TouchableOpacity, AsyncStorage, Animated } from 'react-native'
 import { Form, Input, Item, Label, Content, Container } from 'native-base'
-import { fetchLender, fetchWalletBalance, fetchTransactionsHistory } from '../actions'
+import { fetchLenderInfo, fetchWalletBalance, fetchTransactionsHistory } from '../actions'
 
 class Home extends Component {
   constructor (props) {
@@ -22,7 +22,7 @@ class Home extends Component {
     const t = 'auth0%7C5a4e964e0bee153c1a450aab'
     const t2 = this.props.token
     console.log('ZzzzZZZzzzzzzzzzzzzzzzzzzzz', this.props.authId)
-    this.props.fetchLender({t, t2})
+    this.props.fetchLenderInfo({t, t2})
     //this.props.fetchWalletBalance()
     this.props.fetchTransactionsHistory()
   }
@@ -281,30 +281,15 @@ const mapStateToProps = state => {
   return {
     token: state.auth.token,
     email: state.auth.email,
-    authId: state.auth.authId
+    authId: state.auth.authId,
+    user: state.auth.user
   }
 }
 
 // The mapDispatchToProps function lets us inject
 // certain props into the React component that can dispatch actions
 const mapDispatchToProps = {
-  fetchLender, fetchWalletBalance, fetchTransactionsHistory
+  fetchLenderInfo, fetchWalletBalance, fetchTransactionsHistory
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)
-
-// For example, the HowItWorks component calls onPress
-//
-// const mapStateToProps = state => {
-//   return {
-//     email: state.auth.email,
-//     password: state.auth.password,
-//     loading: state.auth.loading,
-//     error: state.auth.error,
-//     nav: state.nav
-//   }
-// }
-
-// const mapDispatchToProps = {
-//   loginEmailChanged, loginPasswordChanged, loginLender
-// }
