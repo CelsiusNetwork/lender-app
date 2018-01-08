@@ -3,23 +3,32 @@ import { connect } from 'react-redux'
 import { Alert, ImageBackground, StyleSheet, View, Image, Text, TouchableOpacity, AsyncStorage, Animated } from 'react-native'
 import { Form, Input, Item, Label, Content, Container } from 'native-base'
 import { fetchLenderInfo, fetchWalletBalance, fetchTransactionsHistory } from '../actions'
+import jwtDecode from 'jwt-decode'
 
 class Home extends Component {
   constructor (props) {
     super(props)
     console.log('Home props: ')
     console.log(props)
+    if(typeof props.token != "undefined"){
+      console.log(props.token);
+      var token = jwtDecode(props.token)
+      var t = token.sub
+    }
     this.state = {
       fontLoaded: false,
       eth: 0.000,
       deg: 0.000,
       user: {
-        name: 'Alex'
-      }
+        name: token.nickname
+      },
+      t: token.sub
     }
   }
   componentWillMount () {
-    const t = 'auth0%7C5a4e964e0bee153c1a450aab'
+    console.log(this.state)
+    // const t = 'auth0%7C5a4e964e0bee153c1a450aab'
+    const t = this.state.t
     const t2 = this.props.token
     console.log('fetch lender info from component')
     this.props.fetchLenderInfo({t, t2})
