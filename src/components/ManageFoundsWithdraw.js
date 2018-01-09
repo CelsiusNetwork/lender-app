@@ -4,31 +4,32 @@ import { StyleSheet, View, ImageBackground, Image, TouchableOpacity, Alert } fro
 import { Button, Form, Input, Item, Label, Text, Spinner, Content, Header, Title, Container } from 'native-base'
 import { loginEmailChanged, loginPasswordChanged, loginLender } from '../actions'
 import { NavigationActions } from 'react-navigation'
-import { Font } from 'expo';
+import { Font } from 'expo'
+import { setWithdrawAmount } from '../actions'
 
 class ManageFoundsWithdraw extends Component {
 
-  constructor() {
-    super();
+  constructor () {
+    super()
     // this.state = {
     this.state = {
       fontLoaded: false,
       number: "",
-      amount: "",
-    };
+      amount: ""
+    }
   }
 
-  async componentDidMount() {
+  async componentDidMount () {
     await Font.loadAsync({
       'helvetica-neue-lt': require('../../assets/fonts/helvetica-neue-lt-std-45-light.ttf'),
-    });
+    })
     await Font.loadAsync({
       'barlow-semi-bold': require('../../assets/fonts/Barlow-SemiBold.otf'),
-    });
+    })
     await Font.loadAsync({
       'barlow-light': require('../../assets/fonts/Barlow-Light.otf'),
-    });
-    this.setState({ fontLoaded: true });
+    })
+    this.setState({ fontLoaded: true })
   }
 
   _onPressButton(index) {
@@ -188,7 +189,7 @@ class ManageFoundsWithdraw extends Component {
                   </View>
 
                   <View>
-                    <TouchableOpacity style={styles.button} onPress={() => navigate('ManageFoundsConfirm')}>
+                    <TouchableOpacity style={styles.button} onPress={() => this.props.setWithdrawAmount('0.01')}>
                       <Text style={styles.buttonText}>
                         Withdraw ETH
                         <Image source={require('../../assets/images/icon-arrow.png')} style={styles.buttonIcon} />
@@ -410,7 +411,7 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = {
-  loginEmailChanged, loginPasswordChanged, loginLender
+  setWithdrawAmount
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ManageFoundsWithdraw)

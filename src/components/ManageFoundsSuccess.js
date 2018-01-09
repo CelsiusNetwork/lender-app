@@ -5,6 +5,7 @@ import { Button, Form, Input, Item, Label, Text, Content, Header, Title, Contain
 import { registerFirstNameChanged, registerLastNameChanged, registerEmailChanged, registerPasswordChanged, registerPhoneNumberChanged, registerLender } from '../actions'
 import { Font } from 'expo';
 import { NavigationActions } from 'react-navigation'
+import { withdrawETH } from '../actions'
 
 class AddFounds extends Component {
   constructor (props) {
@@ -14,20 +15,20 @@ class AddFounds extends Component {
     }
   }
 
-  async componentDidMount() {
+  async componentDidMount () {
     await Font.loadAsync({
       'inconsolata': require('../../assets/fonts/Inconsolata-Regular.ttf'),
-    });
+    })
     await Font.loadAsync({
       'barlow-semi-bold': require('../../assets/fonts/Barlow-SemiBold.otf'),
-    });
+    })
     await Font.loadAsync({
       'barlow-light': require('../../assets/fonts/Barlow-Light.otf'),
-    });
+    })
     await Font.loadAsync({
       'barlow': require('../../assets/fonts/Barlow-Regular.otf'),
-    });
-    this.setState({ fontLoaded: true });
+    })
+    this.setState({ fontLoaded: true })
   }
 
   render () {
@@ -78,7 +79,7 @@ class AddFounds extends Component {
                   <Text style={styles.text}>Feel free to add funds back to Celsius wallet anytime you want.</Text>
 
                 <View style={styles.center}>
-                  <TouchableOpacity style={styles.button} onPress={() => navigate('Home')}>
+                  <TouchableOpacity style={styles.button} onPress={() => this.props.withdrawETH('0.01')}>
                     <Text style={styles.buttonText}>Close</Text>
                   </TouchableOpacity>
                 </View>
@@ -234,7 +235,7 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = {
-  registerFirstNameChanged, registerLastNameChanged, registerEmailChanged, registerPasswordChanged, registerPhoneNumberChanged, registerLender
+  withdrawETH
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddFounds)

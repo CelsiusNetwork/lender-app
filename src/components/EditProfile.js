@@ -6,7 +6,7 @@ import { registerFirstNameChanged, registerLastNameChanged, registerEmailChanged
 
 class EditProfile extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
         firstName: "Alex",
         lastName: "Johnson",
@@ -44,6 +44,10 @@ class EditProfile extends Component {
 
   render () {
     const { navigate } = this.props.navigation
+    const firstName = this.props.name
+    const lastName = this.props.surname
+    const email = this.props.email
+    const phoneNumber = this.props.phoneNumber
     return (
       <View style={styles.container}>
         <ImageBackground source={require('../../assets/images/background-blur.png')} style={styles.background}>
@@ -69,7 +73,7 @@ class EditProfile extends Component {
                     <Input
                       style={styles.input}
                       onChangeText={this.onFirstNameChange.bind(this)}
-                      value={this.state.firstName}
+                      value={firstName}
                       autoCorrect={false}
                       highlightColor="#00ACC1" // cyan600
                       autoFocus autoCapitalize='none' />
@@ -79,7 +83,7 @@ class EditProfile extends Component {
                     <Input
                       style={styles.input}
                       onChangeText={this.onLastNameChange.bind(this)}
-                      value={this.state.lastName}
+                      value={lastName}
                       autoCorrect={false}
                       autoCapitalize='none' />
                   </Item>
@@ -88,7 +92,7 @@ class EditProfile extends Component {
                     <Input
                       style={styles.input}
                       onChangeText={this.onEmailChange.bind(this)}
-                      value={this.state.email}
+                      value={email}
                       keyboard-type='email-address'
                       autoCorrect={false}
                       autoCapitalize='none' />
@@ -114,7 +118,7 @@ class EditProfile extends Component {
                     <Input
                       style={styles.input}
                       onChangeText={this.onPhoneNumberChange.bind(this)}
-                      value={this.state.phoneNumber}
+                      value={phoneNumber}
                       autoCorrect={false}
                       autoCapitalize='none' />
                   </Item>
@@ -335,11 +339,15 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
   return {
-    firstName: state.register.firstName,
-    lastName: state.register.lastName,
-    email: state.register.email,
-    password: state.register.password,
-    phoneNumber: state.register.phoneNumber,
+    token: state.auth.token,
+    name: state.auth.name,
+    surname: state.auth.surname,
+    email: state.auth.email,
+    authId: state.auth.authId,
+    walletAddress: state.lender.walletAddress,
+    lender: state.lender,
+    ethBalance: state.wallet.ethBalance,
+    celBalance: state.wallet.celBalance,
 
     error: state.register.error,
     nav: state.nav
