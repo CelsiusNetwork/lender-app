@@ -7,11 +7,11 @@ import { Font } from 'expo';
 import { NavigationActions } from 'react-navigation'
 
 class AddFounds extends Component {
-  constructor(props) {
-    super(props);
+  constructor (props) {
+    super(props)
     this.state = {
-        fontLoaded: false,
-      }
+      fontLoaded: false,
+    }
   }
 
   async componentDidMount() {

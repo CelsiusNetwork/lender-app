@@ -25,9 +25,9 @@ class Register extends Component {
     this.props.registerPhoneNumberChanged(text)
   }
 
-  onButtonPress (firstName, lastName, email, password, phoneNumber) {
-    // this.props.registerLender({ firstName, lastName, email, password, phoneNumber })
-
+  onButtonPress () {
+    const appToken = this.props.initToken
+    this.props.registerLender(this.props.firstName, this.props.lastName, this.props.email, this.props.password, this.props.phoneNumber, appToken)
   }
 
   render () {
@@ -88,8 +88,8 @@ class Register extends Component {
                 {this.renderError()}
                 <Button
                   style={styles.button}
-                  // onPress={this.onButtonPress.bind(this)}
-                  onPress={() => navigate('VerifyPhoneNumber')}
+                  onPress={this.onButtonPress.bind(this)}
+                  // onPress={() => navigate('VerifyPhoneNumber')}
                   block primary>
                   <Text
                     style={styles.buttonText}
@@ -169,6 +169,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
   return {
+    initToken: state.initToken.token,
     firstName: state.register.firstName,
     lastName: state.register.lastName,
     email: state.register.email,

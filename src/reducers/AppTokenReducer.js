@@ -12,11 +12,15 @@ export default (state = APP_TOKEN_INITIAL_STATE, action) => {
     case types.APP_TOKEN_INIT:
       return { ...state, loading: true }
     case types.APP_TOKEN_SUCCESS:
+      console.log('App token reducer')
+      const a = JSON.parse(action.payload)
+      a = JSON.parse(a._bodyText)
+      console.log(a.access_token)
       return {
         ...state,
-        token: action.access_token,
-        expiresIn: action.expires_in,
-        tokenType: action.token_type,
+        token: a.access_token,
+        expiresIn: a.expires_in,
+        tokenType: a.token_type,
         loading: false
       }
     case types.APP_TOKEN_FAILURE:

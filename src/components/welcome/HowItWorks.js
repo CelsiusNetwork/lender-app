@@ -34,7 +34,11 @@ class HowItWorks extends Component {
 
   static navigationOptions = {
     header: null
-  };
+  }
+
+  onButtonPress () {
+    this.props.lenderAppInitToken()
+  }
 
   render () {
     const { navigate } = this.props.navigation
@@ -62,8 +66,8 @@ class HowItWorks extends Component {
             {/* <Text style={styles.text}>To join our trusted community of members, you need to create Celsius account from which you will be able to lend and borrow money.</Text> */}
 
             <TouchableOpacity style={styles.button}
-              // onPress={this.navigate.bind(this)}
-              onPress={() => navigate('Register')}
+              onPress={this.onButtonPress.bind(this)}
+              //onPress={() => navigate('Register')}
               >
               { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow'}, styles.buttonText]}>Create account</Text>) : null }
             </TouchableOpacity>

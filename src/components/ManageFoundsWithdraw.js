@@ -191,9 +191,7 @@ class ManageFoundsWithdraw extends Component {
                   </View>
 
                   <View>
-                    <TouchableOpacity style={styles.button}
-                    onPress={() => navigate('ManageFoundsConfirm')}
-                    >
+                    <TouchableOpacity style={styles.button} onPress={() => navigate('ManageFoundsConfirm')}>
                       <Text style={styles.buttonText}>
                         Withdraw ETH
                         <Image source={require('../../assets/images/icon-arrow.png')} style={styles.buttonIcon} />
