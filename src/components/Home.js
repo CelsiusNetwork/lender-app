@@ -139,7 +139,7 @@ class Home extends Component {
             style={stylesGraph.background}>
             <View style={stylesGraph.header}>
               <View style={stylesGraph.cellLeft}>
-                <TouchableOpacity onPress={() => navigate('LoginForm')}>
+                <TouchableOpacity onPress={() => navigate('Home')}>
                   <Image source={require('../../assets/images/logo-small.png')} style={stylesGraph.logo} />
                 </TouchableOpacity>
               </View>

@@ -69,7 +69,7 @@ class EditProfile extends Component {
               <Content>
                 <Form style={styles.form}>
                   <Item floatingLabel style={styles.floatingWrapper}>
-                    <Label style={{color: '#9CA9B6'}}>{'First Name'.toUpperCase()}</Label>
+                    <Label style={{color: 'rgba(156, 169, 182, 0.5)', fontSize: 12}}>{'First Name'.toUpperCase()}</Label>
                     <Input
                       style={styles.input}
                       onChangeText={this.onFirstNameChange.bind(this)}
@@ -79,7 +79,7 @@ class EditProfile extends Component {
                       autoFocus autoCapitalize='none' />
                   </Item>
                   <Item floatingLabel style={styles.floatingWrapper}>
-                    <Label style={{color: '#9CA9B6'}}>{'Last Name'.toUpperCase()}</Label>
+                    <Label style={{color: 'rgba(156, 169, 182, 0.5)', fontSize: 12}}>{'Last Name'.toUpperCase()}</Label>
                     <Input
                       style={styles.input}
                       onChangeText={this.onLastNameChange.bind(this)}
@@ -88,7 +88,7 @@ class EditProfile extends Component {
                       autoCapitalize='none' />
                   </Item>
                   <Item floatingLabel style={styles.floatingWrapper}>
-                    <Label style={{color: '#9CA9B6'}}>{'Your email'.toUpperCase()}</Label>
+                    <Label style={{color: 'rgba(156, 169, 182, 0.5)', fontSize: 12}}>{'Your email'.toUpperCase()}</Label>
                     <Input
                       style={styles.input}
                       onChangeText={this.onEmailChange.bind(this)}
@@ -98,7 +98,7 @@ class EditProfile extends Component {
                       autoCapitalize='none' />
                   </Item>
                   <Item floatingLabel style={styles.floatingWrapper}>
-                    <Label style={{color: '#9CA9B6'}}>{'Password'.toUpperCase()}</Label>
+                    <Label style={{color: 'rgba(156, 169, 182, 0.5)', fontSize: 12}}>{'Password'.toUpperCase()}</Label>
                     <Input
                       style={styles.input}
                       onChangeText={this.onPasswordChange.bind(this)}
@@ -106,7 +106,7 @@ class EditProfile extends Component {
                       secureTextEntry returnKeyType='done' autoCorrect={false} />
                   </Item>
                   <Item floatingLabel style={styles.floatingWrapper}>
-                    <Label style={{color: '#9CA9B6'}}>{'Passcode'.toUpperCase()}</Label>
+                    <Label style={{color: 'rgba(156, 169, 182, 0.5)', fontSize: 12}}>{'Passcode'.toUpperCase()}</Label>
                     <Input
                       style={styles.input}
                       // onChangeText={this.onPasswordChange.bind(this)}
@@ -114,7 +114,7 @@ class EditProfile extends Component {
                       secureTextEntry returnKeyType='done' autoCorrect={false} />
                   </Item>
                   <Item floatingLabel style={styles.floatingWrapper}>
-                    <Label style={{color: '#9CA9B6'}}>{'Phone number'.toUpperCase()}</Label>
+                    <Label style={{color: 'rgba(156, 169, 182, 0.5)', fontSize: 12}}>{'Phone number'.toUpperCase()}</Label>
                     <Input
                       style={styles.input}
                       onChangeText={this.onPhoneNumberChange.bind(this)}
@@ -123,7 +123,7 @@ class EditProfile extends Component {
                       autoCapitalize='none' />
                   </Item>
                   {this.renderError()}
-                  <View style={styles.row}>
+                  <View style={[{marginBottom: 70}, styles.row]}>
                     <View style={styles.cellLeft}>
                       <Button
                         style={styles.button}
@@ -140,7 +140,8 @@ class EditProfile extends Component {
                         style={styles.button2}
                         // onPress={this.onButtonPress.bind(this)}
                         onPress={() => navigate('Home')}
-                        block primary>
+                        // block primary
+                        >
                         <Text
                           style={styles.buttonText2}
                         >Cancel</Text>
@@ -206,7 +207,8 @@ const styles = StyleSheet.create({
     marginTop: 20
   },
   formContainer: {
-    marginTop: 100
+    marginTop: 100,
+    marginBottom: 20
   },
   floatingLabel: {
     color: '#9CA9B6',
@@ -214,19 +216,20 @@ const styles = StyleSheet.create({
   },
   label: {
     // color: '#9CA9B6',
-    // fontSize: 12
+    fontSize: 12
   },
   floatingWrapper: {
     borderBottomWidth: 0,
   },
   input: {
     height: 40,
-    width: 300,
     borderColor: 'rgba(255,255,255,0.3)',
     borderBottomWidth: 2,
     color: '#ffffff',
     marginBottom: 10,
-    fontSize: 21,
+    marginRight: 15,
+    paddingTop: 10,
+    fontSize: 14
   },
   button: {
     backgroundColor: '#ffffff',
@@ -238,7 +241,7 @@ const styles = StyleSheet.create({
     // marginRight: 30,
     // marginLeft: 30,
     marginTop: 30,
-    width: 130
+    width: '95%'
   },
   button2: {
     backgroundColor: 'rgba(0, 0, 0, 0)',
@@ -252,7 +255,7 @@ const styles = StyleSheet.create({
     // marginRight: 30,
     // marginLeft: 30,
     marginTop: 30,
-    width: 130
+    width: '95%'
   },
   buttonText: {
     color: '#333333'
