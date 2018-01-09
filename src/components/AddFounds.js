@@ -22,14 +22,15 @@ class AddFounds extends Component {
   }
 
   onCopyButtonPress () {
-    Clipboard.setString(this.props.walletAddres)
+    console.log()
+    Clipboard.setString(this.props.walletAddress)
   }
 
   constructor (props) {
     super(props)
     console.log('ADD FUNDS')
     console.log(this.props.walletAddress)
-    const qr = this.props.walletAddres
+    const qr = this.props.walletAddress
     this.state = {
       fontLoaded: false,
       qrcode: qr
@@ -83,13 +84,14 @@ class AddFounds extends Component {
                   <View style={styles.row}>
                     {/* <View style={styles.cellLeft}> */}
                       <TouchableOpacity style={[styles.cellLeft, styles.buttonLeft]} onPress={this.onButtonPress.bind(this)}>
-                        <Text style={styles.buttonLeftText}><Image source={require('../../assets/images/icon-send.png')} style={styles.iconLeft} />Share</Text>
+                        <Image source={require('../../assets/images/icon-send.png')} style={styles.iconLeft} />
+                        <Text style={styles.buttonLeftText}>Share</Text>
                       </TouchableOpacity>
                     {/* </View> */}
                     {/* <View style={styles.cellRight}> */}
                       <TouchableOpacity style={[styles.cellRight, styles.buttonRight]} onPress={this.onCopyButtonPress.bind(this)}>
-
-                        <Text style={styles.buttonRightText}><Image source={require('../../assets/images/icon-copy.png')} style={styles.iconRight} />Copy</Text>
+                        <Image source={require('../../assets/images/icon-copy.png')} style={styles.iconRight} />
+                        <Text style={styles.buttonRightText}>Copy</Text>
                       </TouchableOpacity>
                     {/* </View> */}
                   </View>
@@ -109,7 +111,6 @@ class AddFounds extends Component {
 
         </ImageBackground>
       </View>
-
     )
   }
 

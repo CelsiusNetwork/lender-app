@@ -66,7 +66,7 @@ class AddFounds extends Component {
                       </Text>
                       <Image source={require('../../assets/images/graph1.png')} style={styles.graph} />
                       <TouchableOpacity style={styles.boxButton} onPress={() => navigate('ManageFoundsWithdraw')}>
-                        <Text style={styles.boxButtonText}><Image source={require('../../assets/images/icon-transfer-arrows.png')} style={styles.buttonIcon} />Withdraw ETH</Text>
+                        <Text style={styles.boxButtonText}><Image source={require('../../assets/images/icon-transfer-arrows.png')} style={styles.buttonIcon} /><Text style={{color: '#ffffff'}}>Withdraw ETH</Text></Text>
                       </TouchableOpacity>
                     </View>
                   </View>

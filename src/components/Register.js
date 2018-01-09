@@ -89,8 +89,8 @@ class Register extends Component {
                 {this.renderError()}
                 <Button
                   style={styles.button}
-                  onPress={this.onButtonPress.bind(this)}
-                  // onPress={() => navigate('VerifyPhoneNumber')}
+                  // onPress={this.onButtonPress.bind(this)}
+                  onPress={() => navigate('VerifyPhoneNumber')}
                   block primary>
                   <Text
                     style={styles.buttonText}
@@ -127,7 +127,8 @@ const styles = StyleSheet.create({
     width: 140,
     height: 40,
     marginLeft: 35,
-    marginBottom: 5
+    marginBottom: 5,
+    resizeMode: 'contain'
   },
   formContainer: {
     marginTop: 100

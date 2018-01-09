@@ -74,10 +74,7 @@ class VerifyPhoto extends React.Component {
                                 : Camera.Constants.Type.back,
                             });
                           }}>
-                          <Text
-                            style={{ fontSize: 18, marginBottom: 10, color: 'white' }}>
-                            {' '}Flip{' '}
-                          </Text>
+                          <Image source={require('../../assets/images/camera-flip.png')} style={styles.flip} />
                         </TouchableOpacity>
                       </View>
                     </Camera>
@@ -85,14 +82,12 @@ class VerifyPhoto extends React.Component {
                 </ImageBackground>
 
                 <Text style={styles.text}>Please center your face in the frame above and take a selfie. We need your recent picture to compare it with the one on the passport.</Text>
-                <View>
-                  <TouchableOpacity style={styles.button}
-                  // onPress={() => navigate('Register')}
-                    onPress={this.snap}
-                    >
-                    <Text style={styles.buttonText}>Take a photo</Text>
-                  </TouchableOpacity>
-                </View>
+                <TouchableOpacity style={styles.button}
+                // onPress={() => navigate('Register')}
+                  onPress={this.snap}
+                  >
+                  <Text style={styles.buttonText}>Take a photo</Text>
+                </TouchableOpacity>
               </View>
             </View>
 
@@ -215,12 +210,21 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginRight: 30,
     marginLeft: 30,
-    paddingLeft: 100,
-    paddingRight: 100
+    alignSelf: 'stretch',
   },
   buttonText: {
-    color: '#333333'
+    color: '#333333',
+    alignSelf: 'stretch',
+    textAlign: 'center',
+  },
+  flip: {
+    width: 50,
+    height: 32,
+    resizeMode: 'contain',
+    marginLeft: 35,
+    marginBottom: 5
   }
+
 })
 
 const mapStateToProps = state => {
