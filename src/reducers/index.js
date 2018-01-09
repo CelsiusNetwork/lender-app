@@ -6,6 +6,7 @@ import NavigatorReducer from './NavigatorReducer'
 import RegisterReducer from './RegisterReducer'
 import LenderReducer from './LenderReducer'
 import WalletBalance from './WalletBalance'
+import WithdrawETHReducer from './WithdrawETHReducer'
 
 export default combineReducers({
   auth: LoginReducer,
@@ -13,5 +14,6 @@ export default combineReducers({
   initToken: AppTokenReducer,
   lender: LenderReducer,
   wallet: WalletBalance,
-  register: RegisterReducer
+  register: RegisterReducer,
+  withdrawETH: WithdrawETHReducer
 })

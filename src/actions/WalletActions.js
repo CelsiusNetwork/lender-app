@@ -1,6 +1,7 @@
 import * as types from './Types'
 import { WalletService, TestEtherScanService } from '../services'
 import { NavigationActions } from 'react-navigation'
+import Navigator from '../Navigator'
 
 export const withdrawETH = (password, fromAddress, toAddress, value, token) => {
   return (dispatch) => {
@@ -12,11 +13,18 @@ export const withdrawETH = (password, fromAddress, toAddress, value, token) => {
   }
 }
 
-export const setWithdrawAmount = (amount) => {
-  console.log('setWithdrawAmount()', amount)
-  return {
-    type: types.SET_ETH_WITHDRAW_AMOUNT,
-    payload: amount
+export const setWithdrawAmount = (text) => {
+  return (dispatch) => {
+    dispatch({
+      type: types.SET_ETH_WITHDRAW_AMOUNT,
+      payload: text
+    })
+    dispatch(NavigationActions.navigate({
+      routeName: 'ManageFoundsConfirm',
+      actions: [
+        NavigationActions.navigate({ routeName: 'ManageFoundsConfirm' })
+      ]
+    }))
   }
 }
 
@@ -76,10 +84,10 @@ const handleTransactionsList = (dispatch, response) => {
   console.log(response.ok)
   if (response.ok === true) {
     dispatch({
-        type: types.FETCH_ETH_TRANSACTIONS_SUCCESS,
-        payload: response
-      })
-      // todo: animate something so user knows we are updating
+      type: types.FETCH_ETH_TRANSACTIONS_SUCCESS,
+      payload: response
+    })
+    // todo: animate something so user knows we are updating
   }
   if (response.ok === false) {
     transactionsListFail(dispatch, response.code)

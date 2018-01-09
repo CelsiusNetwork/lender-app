@@ -11,6 +11,13 @@ const WITHDRAW_ETH_STATE = {
 
 export default (state = WITHDRAW_ETH_STATE, action) => {
   switch (action.type) {
+    case types.SET_ETH_WITHDRAW_AMOUNT:
+      console.log('SET_ETH_WITHDRAW_AMOUNT')
+      console.log(action.payload)
+      return {
+        ...state,
+        withdrawAmount: action.payload
+      }
     case types.WITHDRAW_ETH_LOADING:
       return { ...state, loading: true }
     case types.WITHDRAW_ETH_SUCCESS:
@@ -25,13 +32,6 @@ export default (state = WITHDRAW_ETH_STATE, action) => {
         withdrawTo: '',
         note: '',
         error: ''
-      }
-    case types.SET_ETH_WITHDRAW_AMOUNT:
-      console.log('SET_ETH_WITHDRAW_AMOUNT')
-      console.log(action.payload)
-      return {
-        ...state,
-        withdrawAmount: action.payload
       }
     case types.WITHDRAW_ETH_ERROR:
       let errorMsg
