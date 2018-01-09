@@ -48,13 +48,9 @@ class ManageFoundsWithdraw extends Component {
       if(index!="-1"){
         this.state.number = this.state.number + index;
       }
-      var fNumber = new Intl.NumberFormat().format(this.state.number);
-      // var fNumber = this.state.number;
-      if(index=="."){
-        this.setState({ amount: fNumber+"." });
-      } else {
-        this.setState({ amount: fNumber });
-      }
+      // var fNumber = new Intl.NumberFormat().format(this.state.number);
+      var fNumber = this.state.number;
+      this.setState({ amount: fNumber });
     }
   }
 
