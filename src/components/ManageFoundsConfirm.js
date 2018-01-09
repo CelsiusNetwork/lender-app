@@ -5,6 +5,7 @@ import { Button, Form, Input, Item, Label, Text, Content, Header, Title, Contain
 import { registerFirstNameChanged, registerLastNameChanged, registerEmailChanged, registerPasswordChanged, registerPhoneNumberChanged, registerLender } from '../actions'
 import { Font } from 'expo'
 import { NavigationActions } from 'react-navigation'
+import { withdrawETH } from '../actions'
 
 class AddFounds extends Component {
   constructor(props) {
@@ -70,7 +71,7 @@ class AddFounds extends Component {
 
                 </Form>
                 <View style={styles.center}>
-                  <TouchableOpacity style={styles.button} onPress={() => navigate('ManageFoundsSuccess')}>
+                  <TouchableOpacity style={styles.button} onPress={() => this.props.withdrawETH('password', this.props.walletAddress, 'toAddress', this.props.withdrawAmount, this.props.token)}>
                     <Text style={styles.buttonText}>
                       Confirm withdraw
                     </Text>
@@ -236,7 +237,7 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = {
-  registerFirstNameChanged, registerLastNameChanged, registerEmailChanged, registerPasswordChanged, registerPhoneNumberChanged, registerLender
+  withdrawETH
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddFounds)
