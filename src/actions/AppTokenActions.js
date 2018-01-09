@@ -32,8 +32,8 @@ const handleAppTokenInit = async(dispatch, data) => {
     type: types.APP_TOKEN_SUCCESS,
     payload: data
   })
-  dispatch(NavigationActions.reset({
-    index: 0,
+  dispatch(NavigationActions.navigate({
+    routeName: 'Register',
     actions: [
       NavigationActions.navigate({ routeName: 'Register' })
     ]

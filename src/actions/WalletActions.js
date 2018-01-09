@@ -4,7 +4,7 @@ import { NavigationActions } from 'react-navigation'
 import Navigator from '../Navigator'
 
 export const withdrawETH = (password, fromAddress, toAddress, value, token) => {
-  console.log('withdrawETH()')
+  console.log('lalala')
   return (dispatch) => {
     dispatch({
       type: types.WITHDRAW_ETH_LOADING
