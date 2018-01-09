@@ -265,7 +265,7 @@ const styles = StyleSheet.create({
     // position: 'absolute',
     width: 25,
     height: 25,
-    marginRight: 15,
+    marginRight: 0,
     resizeMode: "contain"
   },
   wrapper: {
