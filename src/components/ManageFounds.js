@@ -57,7 +57,7 @@ class AddFounds extends Component {
                     <View style={styles.box}>
                       <Image source={require('../../assets/images/icon-eth.png')} style={styles.icon} />
                       <Text style={styles.boxText1}>
-                        { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow-semi-bold' }, styles.boxText1Inner]}>{ ethBalance.toFixed(3) }</Text>) : null }
+                        { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow-semi-bold' }, styles.boxText1Inner]}>{ ethBalance }</Text>) : null }
                         { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow-semi-bold' }, styles.boxText1Inner]}> ETH</Text>) : null }
                       </Text>
                       <Text style={styles.boxText2}>
@@ -77,7 +77,7 @@ class AddFounds extends Component {
                     <View style={styles.box}>
                       <Image source={require('../../assets/images/icon-transfer.png')} style={styles.icon} />
                       <Text style={styles.boxText1}>
-                        { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow-semi-bold' }, styles.boxText1Inner]}>{ celBalance.toFixed(3) }</Text>) : null }
+                        { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow-semi-bold' }, styles.boxText1Inner]}>{ celBalance }</Text>) : null }
                         { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow-semi-bold' }, styles.boxText1Inner]}> CEL</Text>) : null }
                       </Text>
                       <Text style={styles.boxText2}>

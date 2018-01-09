@@ -94,7 +94,7 @@ class HistoryDetail extends Component {
                   </View>
 
                   <TouchableOpacity style={styles.button}
-                      onPress={() => navigate('Graph')}
+                      onPress={() => navigate('Home')}
                     >
                     <Text style={styles.buttonText}>Close</Text>
                   </TouchableOpacity>
