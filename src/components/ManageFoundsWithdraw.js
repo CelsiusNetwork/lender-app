@@ -8,63 +8,54 @@ import { Font } from 'expo'
 import { setWithdrawAmount } from '../actions'
 
 class ManageFoundsWithdraw extends Component {
-
   constructor () {
     super()
     // this.state = {
     this.state = {
       fontLoaded: false,
-      number: "",
-      amount: ""
+      number: '',
+      amount: ''
     }
   }
 
   async componentDidMount () {
     await Font.loadAsync({
-      'helvetica-neue-lt': require('../../assets/fonts/helvetica-neue-lt-std-45-light.ttf'),
+      'helvetica-neue-lt': require('../../assets/fonts/helvetica-neue-lt-std-45-light.ttf')
     })
     await Font.loadAsync({
-      'barlow-semi-bold': require('../../assets/fonts/Barlow-SemiBold.otf'),
+      'barlow-semi-bold': require('../../assets/fonts/Barlow-SemiBold.otf')
     })
     await Font.loadAsync({
-      'barlow-light': require('../../assets/fonts/Barlow-Light.otf'),
+      'barlow-light': require('../../assets/fonts/Barlow-Light.otf')
     })
     this.setState({ fontLoaded: true })
   }
 
-  _onPressButton(index) {
+  _onPressButton (index) {
     // console.log(index)
-    if(index=="-1"){
-      this.state.number = this.state.number.substring(0, this.state.number.length - 1);
+    if (index === '-1') {
+      this.state.number = this.state.number.substring(0, this.state.number.length - 1)
     }
-    if(this.state.number.length < 8){
-      if(index=="."){
-        if(this.state.number.includes(".")){
-          index = ""
+    if (this.state.number.length < 8) {
+      if (index === '.') {
+        if (this.state.number.includes('.')) {
+          index = ''
         } else {
-          index = "."
+          index = '.'
         }
       }
-      if(index!="-1"){
-        this.state.number = this.state.number + index;
+      if (index !== '-1') {
+        this.state.number = this.state.number + index
       }
       // var fNumber = new Intl.NumberFormat().format(this.state.number);
-      var fNumber = this.state.number;
-      this.setState({ amount: fNumber });
+      const fNumber = this.state.number
+      this.setState({ amount: fNumber })
     }
   }
 
   renderError () {
     if (this.props.error !== '') { return (<Text style={styles.errorText}>{this.props.error}</Text>) }
     return <View />
-  }
-
-  onEmailChange (text) {
-    this.props.emailChanged(text)
-  }
-
-  onPasswordChange (text) {
-    this.props.passwordChanged(text)
   }
 
   render () {
@@ -90,13 +81,13 @@ class ManageFoundsWithdraw extends Component {
                         ) : null
                       }</Text>
                   <View style={styles.lineRow}>
-                    <View style={styles.codeFieldLine}></View>
+                    <View style={styles.codeFieldLine} />
                   </View>
                   <Text style={styles.available}>{ethBalance} ETH Available</Text>
                   <View style={[styles.row, {marginTop: 30}]}>
                     <View
-                      style={styles.aLeft}><TouchableOpacity onPress={ this._onPressButton.bind(this, 1) } style={styles.circle}>
-                      {
+                      style={styles.aLeft}><TouchableOpacity onPress={this._onPressButton.bind(this, 1)} style={styles.circle}>
+                        {
                         this.state.fontLoaded ? (
                           <Text style={[styles.circleText, { fontFamily: 'helvetica-neue-lt' }]}>1</Text>
                         ) : null
@@ -104,14 +95,14 @@ class ManageFoundsWithdraw extends Component {
                       </TouchableOpacity>
                     </View>
                     <View
-                      style={styles.aMiddle}><TouchableOpacity onPress={ this._onPressButton.bind(this, 2) } style={styles.circle}>{
+                      style={styles.aMiddle}><TouchableOpacity onPress={this._onPressButton.bind(this, 2)} style={styles.circle}>{
                         this.state.fontLoaded ? (
                           <Text style={[styles.circleText, { fontFamily: 'helvetica-neue-lt' }]}>2</Text>
                         ) : null
                       }</TouchableOpacity>
                     </View>
                     <View
-                      style={styles.aRight}><TouchableOpacity onPress={ this._onPressButton.bind(this, 3) } style={styles.circle}>{
+                      style={styles.aRight}><TouchableOpacity onPress={this._onPressButton.bind(this, 3)} style={styles.circle}>{
                         this.state.fontLoaded ? (
                           <Text style={[styles.circleText, { fontFamily: 'helvetica-neue-lt' }]}>3</Text>
                         ) : null
@@ -121,21 +112,21 @@ class ManageFoundsWithdraw extends Component {
 
                   <View style={styles.row}>
                     <View
-                      style={styles.aLeft}><TouchableOpacity onPress={ this._onPressButton.bind(this, 4) } style={styles.circle}>{
+                      style={styles.aLeft}><TouchableOpacity onPress={this._onPressButton.bind(this, 4)} style={styles.circle}>{
                         this.state.fontLoaded ? (
                           <Text style={[styles.circleText, { fontFamily: 'helvetica-neue-lt' }]}>4</Text>
                         ) : null
                       }</TouchableOpacity>
                     </View>
                     <View
-                      style={styles.aMiddle}><TouchableOpacity onPress={ this._onPressButton.bind(this, 5) } style={styles.circle}>{
+                      style={styles.aMiddle}><TouchableOpacity onPress={this._onPressButton.bind(this, 5)} style={styles.circle}>{
                         this.state.fontLoaded ? (
                           <Text style={[styles.circleText, { fontFamily: 'helvetica-neue-lt' }]}>5</Text>
                         ) : null
                       }</TouchableOpacity>
                     </View>
                     <View
-                      style={styles.aRight}><TouchableOpacity onPress={ this._onPressButton.bind(this, 6) } style={styles.circle}>{
+                      style={styles.aRight}><TouchableOpacity onPress={this._onPressButton.bind(this, 6)} style={styles.circle}>{
                         this.state.fontLoaded ? (
                           <Text style={[styles.circleText, { fontFamily: 'helvetica-neue-lt' }]}>6</Text>
                         ) : null
@@ -145,21 +136,21 @@ class ManageFoundsWithdraw extends Component {
 
                   <View style={styles.row}>
                     <View
-                      style={styles.aLeft}><TouchableOpacity onPress={ this._onPressButton.bind(this, 7) } style={styles.circle}>{
+                      style={styles.aLeft}><TouchableOpacity onPress={this._onPressButton.bind(this, 7)} style={styles.circle}>{
                         this.state.fontLoaded ? (
                           <Text style={[styles.circleText, { fontFamily: 'helvetica-neue-lt' }]}>7</Text>
                         ) : null
                       }</TouchableOpacity>
                     </View>
                     <View
-                      style={styles.aMiddle}><TouchableOpacity onPress={ this._onPressButton.bind(this, 8) } style={styles.circle}>{
+                      style={styles.aMiddle}><TouchableOpacity onPress={this._onPressButton.bind(this, 8)} style={styles.circle}>{
                         this.state.fontLoaded ? (
                           <Text style={[styles.circleText, { fontFamily: 'helvetica-neue-lt' }]}>8</Text>
                         ) : null
                       }</TouchableOpacity>
                     </View>
                     <View
-                      style={styles.aRight}><TouchableOpacity onPress={ this._onPressButton.bind(this, 9) } style={styles.circle}>{
+                      style={styles.aRight}><TouchableOpacity onPress={this._onPressButton.bind(this, 9)} style={styles.circle}>{
                         this.state.fontLoaded ? (
                           <Text style={[styles.circleText, { fontFamily: 'helvetica-neue-lt' }]}>9</Text>
                         ) : null
@@ -169,27 +160,27 @@ class ManageFoundsWithdraw extends Component {
 
                   <View style={styles.row}>
                     <View
-                      style={styles.aLeft}><TouchableOpacity onPress={ this._onPressButton.bind(this, ".") } style={styles.field}>{
+                      style={styles.aLeft}><TouchableOpacity onPress={this._onPressButton.bind(this, '.')} style={styles.field}>{
                         this.state.fontLoaded ? (
                           <Text style={[styles.circleText, { fontFamily: 'helvetica-neue-lt' }]}>.</Text>
                         ) : null
                       }</TouchableOpacity>
                     </View>
                     <View
-                      style={styles.aMiddle}><TouchableOpacity onPress={ this._onPressButton.bind(this, 0) } style={styles.circle}>{
+                      style={styles.aMiddle}><TouchableOpacity onPress={this._onPressButton.bind(this, 0)} style={styles.circle}>{
                         this.state.fontLoaded ? (
                           <Text style={[styles.circleText, { fontFamily: 'helvetica-neue-lt' }]}>0</Text>
                         ) : null
                       }</TouchableOpacity>
                     </View>
                     <View
-                      style={styles.aRight}><TouchableOpacity onPress={ this._onPressButton.bind(this, -1) } style={styles.field}>
-                      <Image source={require('../../assets/images/icon-delete.png')} style={styles.delete} />
+                      style={styles.aRight}><TouchableOpacity onPress={this._onPressButton.bind(this, -1)} style={styles.field}>
+                        <Image source={require('../../assets/images/icon-delete.png')} style={styles.delete} />
                       </TouchableOpacity></View>
                   </View>
 
                   <View>
-                    <TouchableOpacity style={styles.button} onPress={() => this.props.setWithdrawAmount('0.01')}>
+                    <TouchableOpacity style={styles.button} onPress={() => this.props.setWithdrawAmount(this.state.amount)}>
                       <Text style={styles.buttonText}>
                         Withdraw ETH
                         <Image source={require('../../assets/images/icon-arrow.png')} style={styles.buttonIcon} />
@@ -212,7 +203,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   background: {
     flex: 1,
@@ -221,31 +212,31 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   header: {
-		fontSize: 36,
-		backgroundColor: 'rgba(0,0,0,0)',
-		color: 'white',
-		paddingLeft: 30,
-		paddingRight: 30,
-		marginBottom: 30,
+    fontSize: 36,
+    backgroundColor: 'rgba(0,0,0,0)',
+    color: 'white',
+    paddingLeft: 30,
+    paddingRight: 30,
+    marginBottom: 30,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginTop: 0,
+    marginTop: 0
   },
   backButton: {
     position: 'absolute',
     zIndex: 10,
     left: 20,
     top: 65,
-    width: 30,
+    width: 30
     // borderColor: 'red', borderWidth: 1
-},
+  },
   back: {
     width: 28,
     height: 24,
-    resizeMode: 'contain',
+    resizeMode: 'contain'
     // marginLeft: 35,
-    //marginBottom: 30,
-    //marginTop: 30,
+    // marginBottom: 30,
+    // marginTop: 30,
   },
   aCenter: {
     flexDirection: 'column',
@@ -266,14 +257,14 @@ const styles = StyleSheet.create({
     marginLeft: 30,
     marginRight: 30,
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'center'
     // borderWidth: 1,
     // borderColor: 'green'
   },
   row: {
     flexDirection: 'row',
     alignItems: 'center',
-    height: 90,
+    height: 90
   },
   circle: {
     backgroundColor: 'rgba(255, 255, 255, 0.1)',
@@ -311,7 +302,7 @@ const styles = StyleSheet.create({
   },
   aMiddle: {
     borderRadius: 30,
-    borderRadius: 40,
+    borderRadius: 40
   },
   dotRow: {
     flexDirection: 'row',
@@ -337,7 +328,7 @@ const styles = StyleSheet.create({
   bottomText: {
     backgroundColor: 'rgba(0,0,0,0)',
     color: '#a3b0be',
-    padding: 10,
+    padding: 10
   },
   errorText: {
     padding: 5,
@@ -346,17 +337,17 @@ const styles = StyleSheet.create({
   codeField: {
     color: '#ffffff',
     textAlign: 'center',
-    height: 80,
+    height: 80
   },
   codeFieldText: {
     fontSize: 58,
 
-    color: '#ffffff',
+    color: '#ffffff'
   },
   lineRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    height: 10,
+    height: 10
   },
   codeFieldLine: {
     height: 2,
@@ -387,7 +378,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     marginTop: 30,
     paddingLeft: 40,
-    paddingRight: 40,
+    paddingRight: 40
   },
   buttonText: {
     color: '#333333'
