@@ -83,7 +83,7 @@ class AddFounds extends Component {
 
                 </Form>
                 <View style={styles.center}>
-                  <TouchableOpacity style={styles.button} onPress={() => this.props.withdrawETH(this.props.password, this.props.walletAddress, this.state.toAddress, this.props.withdrawAmount, this.props.token)}>
+                  <TouchableOpacity style={styles.button} onPress={() => this.props.withdrawETH('test42!', this.props.walletAddress, this.state.toAddress, this.props.withdrawAmount, this.props.token)}>
                     <Text style={styles.buttonText}>
                       Confirm withdraw
                     </Text>
@@ -239,7 +239,6 @@ const mapStateToProps = state => {
     name: state.auth.name,
     surname: state.auth.surname,
     email: state.auth.email,
-    password: state.auth.password,
     authId: state.auth.authId,
     walletAddress: state.lender.walletAddress,
     lender: state.lender,
