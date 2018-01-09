@@ -319,7 +319,7 @@ const styles = StyleSheet.create({
   },
   statusText: {
     color: '#ffffff',
-    fontSize: 18,
+    fontSize: 14,
   },
   created: {
     position: 'absolute',

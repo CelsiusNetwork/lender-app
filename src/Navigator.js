@@ -4,8 +4,8 @@ import { connect } from "react-redux"
 import { addNavigationHelpers, NavigationActions, StackNavigator } from "react-navigation"
 
 
-import WelcomePager from "./components/welcome/WelcomePager"
-// import WelcomePager from "./components/AddFounds"
+// import WelcomePager from "./components/welcome/WelcomePager"
+import WelcomePager from "./components/ManageFounds"
 
 import GraphPager from "./components/graph/GraphPager.js"
 import HistoryDetail from "./components/graph/HistoryDetail.js"
