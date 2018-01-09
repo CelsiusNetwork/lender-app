@@ -343,8 +343,8 @@ const styles = StyleSheet.create({
 const mapStateToProps = state => {
   return {
     token: state.auth.token,
-    name: state.auth.name,
-    surname: state.auth.surname,
+    name: state.lender.name,
+    surname: state.lender.surname,
     email: state.auth.email,
     authId: state.auth.authId,
     walletAddress: state.lender.walletAddress,
