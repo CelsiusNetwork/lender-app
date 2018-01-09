@@ -2,6 +2,28 @@ import * as types from './Types'
 import { WalletService, TestEtherScanService } from '../services'
 import { NavigationActions } from 'react-navigation'
 
+export const withdrawETH = (password, fromAddress, toAddress, value, token) => {
+  return (dispatch) => {
+    dispatch({
+      type: types.WITHDRAW_ETH_LOADING
+    })
+    WalletService().sendETH(password, fromAddress, toAddress, value, token)
+      .then(response => handleWithdrawETH(dispatch, response))
+  }
+}
+
+const handleWithdrawETH = (dispatch, response) => {
+  if (response.ok === true) {
+    dispatch({
+      type: types.WITHDRAW_ETH_SUCCESS,
+      payload: response._bodyText
+    })
+  }
+  if (response.ok === false) {
+    // handle this beach
+  }
+}
+
 export const fetchWalletBalance = (walletAddress, token) => {
   console.log('FETCH WALLET BALANCE')
   return (dispatch) => {

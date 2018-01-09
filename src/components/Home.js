@@ -15,6 +15,7 @@ class Home extends Component {
     // this.props is still the old set of props
     console.log('received props: ')
     console.log(nextProps)
+    this.props = nextProps
   }
 
   constructor (props) {
@@ -25,6 +26,8 @@ class Home extends Component {
 
   render () {
     const { navigate } = this.props.navigation
+    const ethBalance = this.props.ethBalance
+    const name = this.props.lender.name
     return (
       <View style={styles.container}>
         <ImageBackground source={require('../../assets/images/background-blur.png')} style={styles.background}>
@@ -40,23 +43,30 @@ class Home extends Component {
             <Container style={styles.wrapper}>
               <Content>
                 <Text style={styles.header}>
-                  <Text>2</Text>
+                  <Text>{ethBalance}</Text>
                   <Text> ETH</Text>
                 </Text>
                 <Text style={styles.header2}>
                   <Text>4</Text>
                   <Text> CEL</Text>
                 </Text>
-                <TouchableOpacity style={styles.button}
-                  onPress={() => navigate('Graph')}
-                >
-                  <Text style={styles.buttonText}>Add funds</Text>
-                </TouchableOpacity>
-                <View style={styles.hr}></View>
-                <Text style={styles.welcomeTitle}>Welcome to Celsius, Crnac!</Text>
-                <Text style={styles.welcomeText}>As a member of Celsius community, you can lend ETH and earn DEG token for the time you spend with us.</Text>
+                <View style={styles.btnsContainer}>
+                  <View style={styles.cellLeft}>
+                    <TouchableOpacity style={styles.button} onPress={() => navigate('AddFounds')}>
+                      <Text style={styles.buttonText}>Add funds</Text>
+                    </TouchableOpacity>
+                  </View>
+                  <View style={styles.cellRight}>
+                    <TouchableOpacity style={styles.button2} onPress={() => navigate('ManageFounds')}>
+                      <Text style={styles.button2Text}>Manage</Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
                 <View style={styles.hr}></View>
 
+                <Text style={styles.welcomeTitle}>Welcome to Celsius, {name}!</Text>
+                <Text style={styles.welcomeText}>As a member of Celsius community, you can lend ETH and earn DEG token for the time you spend with us.</Text>
+                <View style={styles.hr}></View>
                 <TouchableOpacity style={styles.box} onPress={() => navigate('HistoryDetail')}>
                   <View style={styles.boxIconWrapper}>
                     <Image source={require('../../assets/images/icon-wallet.png')} style={styles.icon} />
@@ -84,7 +94,6 @@ class Home extends Component {
               </Content>
             </Container>
         </View>
-
       </ImageBackground>
     </View>
 
@@ -201,10 +210,11 @@ const styles = StyleSheet.create({
     // width: 150,
     justifyContent: 'center',
     alignItems: 'center',
-    marginRight: '30%',
-    marginLeft: '30%',
-    marginTop: 20,
-    marginBottom: 40
+    // marginRight: '5%',
+    // marginLeft: '5%',
+    paddingLeft: 20,
+    paddingRight: 20,
+    marginLeft: 20,
   },
   buttonText: {
     color: '#333333',
@@ -269,13 +279,37 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     alignItems: 'center',
     marginRight: 0
+  },
+  btnsContainer: {
+    flexDirection: 'row'
+  },
+  button2: {
+    backgroundColor: 'rgba(255, 255, 255, 0.0)',
+    borderColor: 'rgba(255, 255, 255, 0.5)',
+    borderWidth: 2,
+    borderRadius: 5,
+    padding: 5,
+    height: 40,
+    // width: 150,
+    justifyContent: 'center',
+    alignItems: 'center',
+    // marginRight: '5%',
+    // marginLeft: '5%',
+    paddingLeft: 20,
+    paddingRight: 20,
+    marginRight: 20,
+  },
+  button2Text: {
+    color: 'rgba(255, 255, 255, 0.5)',
+    fontSize: 16
   }
-
 })
 
 const mapStateToProps = state => {
   return {
     token: state.auth.token,
+    name: state.auth.name,
+    surname: state.auth.surname,
     email: state.auth.email,
     authId: state.auth.authId,
     walletAddress: state.lender.walletAddress,

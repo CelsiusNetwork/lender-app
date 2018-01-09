@@ -55,6 +55,10 @@ class HowItWorks extends Component {
         </View>
         { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow'}, styles.text]}>To join our trusted community of members, you need to create Celsius account from which you will be able to lend and borrow money.</Text>) : null }
         {/* <Text style={styles.text}>To join our trusted community of members, you need to create Celsius account from which you will be able to lend and borrow money.</Text> */}
+        <TouchableOpacity style={styles.loginTouchable} onPress={() => navigate('LoginForm')}>
+          { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow'}, styles.loginText]}>Already have one?</Text>) : null }
+        </TouchableOpacity>
+
         <TouchableOpacity style={styles.button}
           // onPress={this.navigate.bind(this)}
           onPress={() => navigate('Register')}
@@ -62,9 +66,7 @@ class HowItWorks extends Component {
           { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow'}, styles.buttonText]}>Create account</Text>) : null }
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.loginTouchable} onPress={() => navigate('LoginForm')}>
-          { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow'}, styles.loginText]}>Already have one?</Text>) : null }
-        </TouchableOpacity>
+
       </View>
     )
   }

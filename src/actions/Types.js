@@ -30,3 +30,7 @@ export const FETCH_LENDER_FAIL = 'fetch_lender_fail'
 export const FETCH_WALLET_BALANCE_LOADING = 'fetch_wallet_balance_loading'
 export const FETCH_WALLET_BALANCE_SUCCESS = 'fetch_wallet_balance_success'
 export const FETCH_WALLET_BALANCE_ERROR = 'fetch_wallet_balance_error'
+
+export const WITHDRAW_ETH_LOADING = 'withdraw_eth_loading'
+export const WITHDRAW_ETH_SUCCESS = 'withdraw_eth_success'
+export const WITHDRAW_ETH_ERROR = 'withdraw_eth_error'

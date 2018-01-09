@@ -11,14 +11,13 @@ import { Clipboard } from 'react-native';
 class AddFounds extends Component {
 
   onButtonPress () {
-    // this.props.loginUser({ email, password })
     Share.share({
-      message: 'Message',
+      message: 'Wallet Address',
       url: 'http://www.celsius.network',
-      title: 'Title'
+      title: 'Wallet Address'
     }, {
       // Android only:
-      dialogTitle: 'Message',
+      dialogTitle: 'Share Wallet Address',
       // iOS only:
       excludedActivityTypes: [
         'com.apple.UIKit.activity.PostToTwitter'
@@ -27,7 +26,7 @@ class AddFounds extends Component {
   }
 
   onCopyButtonPress () {
-    Clipboard.setString(this.state.qrcode);
+    Clipboard.setString(this.props.walletAddres)
   }
 
   constructor(props) {
@@ -51,11 +50,12 @@ class AddFounds extends Component {
     await Font.loadAsync({
       'barlow': require('../../assets/fonts/Barlow-Regular.otf'),
     });
-    this.setState({ fontLoaded: true });
+    this.setState({ fontLoaded: true })
   }
 
   render () {
     const { navigate } = this.props.navigation
+    const walletAddres = this.props.walletAddres
     return (
       <View style={styles.container}>
         <ImageBackground source={require('../../assets/images/background-blur.png')} style={styles.background}>
@@ -69,7 +69,7 @@ class AddFounds extends Component {
                 <View style={styles.center}>
                   <View style={styles.qrWrapper}>
                     <QRCode
-                      value={this.state.qrcode}
+                      value={this.props.walletAddress}
                       size={160}
                       bgColor='black'
                       fgColor='white'/>
@@ -295,19 +295,13 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
   return {
-    firstName: state.register.firstName,
-    lastName: state.register.lastName,
-    email: state.register.email,
-    password: state.register.password,
-    phoneNumber: state.register.phoneNumber,
-
-    error: state.register.error,
-    nav: state.nav
+    nav: state.nav,
+    walletAddress: state.lender.walletAddress,
+    error: state.register.error
   }
 }
 
 const mapDispatchToProps = {
-  registerFirstNameChanged, registerLastNameChanged, registerEmailChanged, registerPasswordChanged, registerPhoneNumberChanged, registerLender
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddFounds)

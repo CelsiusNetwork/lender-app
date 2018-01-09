@@ -16,10 +16,11 @@ export const WalletService = () => ({
     console.log(request)
     return fetch(apiUrl + '/tx/balance/' + walletAddress, request)
   },
-  sendETH (password, fromAddress, toAddress, value) {
+  sendETH (password, fromAddress, toAddress, value, token) {
     const request = {
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
       },
       method: 'post',
       body: JSON.stringify({
