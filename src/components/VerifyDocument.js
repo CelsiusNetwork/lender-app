@@ -283,6 +283,8 @@ const styles = StyleSheet.create({
     marginBottom: 20
   },
   buttonText: {
+    alignSelf: 'stretch',
+    textAlign: 'center',
     color: '#333333'
   }
 })

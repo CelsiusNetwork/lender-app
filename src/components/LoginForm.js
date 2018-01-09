@@ -36,7 +36,10 @@ class LoginForm extends Component {
         <ImageBackground source={require('../../assets/images/background.png')} style={styles.background}>
           <Container style={styles.formContainer}>
             <Content>
-              <Image source={require('../../assets/images/Celsius_Symbol_white.png')} style={styles.logo} />
+              <TouchableOpacity
+                onPress={() => navigate('Welcome')}>
+                <Image source={require('../../assets/images/Celsius_Symbol_white.png')} style={styles.logo} />
+              </TouchableOpacity>
               <Form style={styles.form}>
                 <Item floatingLabel style={styles.floatingWrapper}>
                   <Label style={{color: '#ffffff', fontSize: 12}}>E-MAIL</Label>

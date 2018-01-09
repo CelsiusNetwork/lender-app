@@ -126,7 +126,8 @@ const styles = StyleSheet.create({
     width: 140,
     height: 40,
     marginLeft: 35,
-    marginBottom: 5
+    marginBottom: 5,
+    resizeMode: 'contain'
   },
   formContainer: {
     marginTop: 100
