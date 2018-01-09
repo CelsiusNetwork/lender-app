@@ -89,8 +89,8 @@ class Register extends Component {
                 {this.renderError()}
                 <Button
                   style={styles.button}
-                  // onPress={this.onButtonPress.bind(this)}
-                  onPress={() => navigate('VerifyPhoneNumber')}
+                  onPress={this.onButtonPress.bind(this)}
+                  //onPress={() => navigate('VerifyPhoneNumber')}
                   block primary>
                   <Text
                     style={styles.buttonText}

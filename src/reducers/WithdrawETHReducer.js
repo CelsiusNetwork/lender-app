@@ -2,30 +2,32 @@ import * as types from '../actions/Types'
 
 const WITHDRAW_ETH_STATE = {
   'loading': false,
-  'withdrawAmount'
-  'error': ''
+  'withdrawAmount': null,
+  'withdrawTo': null,
+  'note': null,
+  'error': null
 }
 
-export default (state = LENDER_WALLET_STATE, action) => {
+export default (state = WITHDRAW_ETH_STATE, action) => {
   switch (action.type) {
-    case types.FETCH_WALLET_BALANCE_LOADING:
-      return {...state, loading: true }
-    case types.FETCH_WALLET_BALANCE_SUCCESS:
+    case types.WITHDRAW_ETH_LOADING:
+      return { ...state, loading: true }
+    case types.WITHDRAW_ETH_SUCCESS:
       console.log('FETCH_WALLET_BALANCE_SUCCESS yea:')
       var a = JSON.parse(action.payload)
       console.log(a.ether)
-
       return {
         ...state,
-        ethBalance: a.ether,
-        celBalance: action.payload.deg,
-        loading: false,
+        loading: a.ether,
+        withdrawAmount: action.payload.deg,
+        withdrawTo: '',
+        note: '',
         error: ''
       }
-    case types.FETCH_WALLET_BALANCE_ERROR:
+    case types.WITHDRAW_ETH_ERROR:
       let errorMsg
-      errorMsg = 'Wallet balance error'
-      return {...state, error: errorMsg, loading: false }
+      errorMsg = 'Withdraw ETH error'
+      return { ...state, error: errorMsg, loading: false }
     default:
       return state
   }
