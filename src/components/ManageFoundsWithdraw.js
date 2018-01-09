@@ -61,12 +61,14 @@ class ManageFoundsWithdraw extends Component {
   render () {
     const { navigate } = this.props.navigation
     const ethBalance = this.props.ethBalance
+    console.log("managefunds WITHDRAW")
+    console.log(this.props.nav)
     return (
       <View style={styles.container}>
         <ImageBackground source={require('../../assets/images/background.png')} style={styles.background}>
           <Container>
             <Content>
-              <TouchableOpacity onPress={() => navigate('ManageFounds')} style={[styles.backButton]}>
+              <TouchableOpacity onPress={() => this.props.navigation.goBack()} style={[styles.backButton]}>
                 <Image source={require('../../assets/images/icon-back.png')} style={styles.back} />
               </TouchableOpacity>
               <View style={styles.wrapper}>
