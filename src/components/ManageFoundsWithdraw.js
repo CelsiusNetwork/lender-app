@@ -72,6 +72,7 @@ class ManageFoundsWithdraw extends Component {
 
   render () {
     const { navigate } = this.props.navigation
+    const ethBalance = this.props.ethBalance
     return (
       <View style={styles.container}>
         <ImageBackground source={require('../../assets/images/background.png')} style={styles.background}>
@@ -94,7 +95,7 @@ class ManageFoundsWithdraw extends Component {
                   <View style={styles.lineRow}>
                     <View style={styles.codeFieldLine}></View>
                   </View>
-                  <Text style={styles.available}>10.000 ETH Available</Text>
+                  <Text style={styles.available}>{ethBalance} ETH Available</Text>
                   <View style={[styles.row, {marginTop: 30}]}>
                     <View
                       style={styles.aLeft}><TouchableOpacity onPress={ this._onPressButton.bind(this, 1) } style={styles.circle}>
@@ -405,9 +406,8 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
   return {
-    email: state.auth.email,
-    password: state.auth.password,
-    loading: state.auth.loading,
+    ethBalance: state.wallet.ethBalance,
+    celBalance: state.wallet.celBalance,
     error: state.auth.error,
     nav: state.nav
   }
