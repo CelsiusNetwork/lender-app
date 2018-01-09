@@ -78,7 +78,7 @@ class AddFounds extends Component {
                   <Text style={styles.text}>Feel free to add funds back to Celsius wallet anytime you want.</Text>
 
                 <View style={styles.center}>
-                  <TouchableOpacity style={styles.button} onPress={() => navigate('Graph')}>
+                  <TouchableOpacity style={styles.button} onPress={() => navigate('Home')}>
                     <Text style={styles.buttonText}>Close</Text>
                   </TouchableOpacity>
                 </View>

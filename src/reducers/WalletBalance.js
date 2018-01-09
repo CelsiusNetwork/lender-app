@@ -19,7 +19,7 @@ export default (state = LENDER_WALLET_STATE, action) => {
       return {
         ...state,
         ethBalance: a.ether,
-        celBalance: action.payload.deg,
+        celBalance: a.deg,
         loading: false,
         error: ''
       }

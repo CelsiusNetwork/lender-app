@@ -191,7 +191,7 @@ class ManageFoundsWithdraw extends Component {
 
                   <View>
                     <TouchableOpacity style={styles.button}
-                    onPress={() => navigate('ManageFoundsSuccess')}
+                    onPress={() => navigate('ManageFoundsConfirm')}
                     >
                       <Text style={styles.buttonText}>
                         Withdraw ETH
