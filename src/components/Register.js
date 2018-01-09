@@ -37,7 +37,10 @@ class Register extends Component {
       <View style={styles.container}>
         <ImageBackground source={require('../../assets/images/background.png')} style={styles.background}>
           <Container style={styles.formContainer}>
-            <Image source={require('../../assets/images/logo-header.png')} style={styles.logo} />
+            <TouchableOpacity
+              onPress={() => navigate('Welcome')}>
+              <Image source={require('../../assets/images/logo-header.png')} style={styles.logo} />
+            </TouchableOpacity>
             <Content>
               <Form style={styles.form}>
                 <Item floatingLabel style={styles.floatingWrapper}>

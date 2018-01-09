@@ -47,7 +47,10 @@ class ForgotPassword extends Component {
         <ImageBackground source={require('../../assets/images/background.png')} style={styles.background}>
           <Container style={styles.formContainer}>
             <Content>
-            <Image source={require('../../assets/images/logo-small.png')} style={styles.logo} />
+              <TouchableOpacity
+                onPress={() => navigate('Welcome')}>
+                <Image source={require('../../assets/images/Celsius_Symbol_white.png')} style={styles.logo} />
+              </TouchableOpacity>
               <Text style={styles.header}>{'Forgot Password'.toUpperCase()}</Text>
                 <Form style={styles.form}>
                 <Item floatingLabel style={styles.floatingWrapper}>
