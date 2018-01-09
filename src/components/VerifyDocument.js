@@ -98,10 +98,7 @@ class VerifyDocument extends React.Component {
                                     : Camera.Constants.Type.back,
                                 });
                               }}>
-                              <Text
-                                style={{ fontSize: 18, marginBottom: 10, color: 'white' }}>
-                                {' '}Flip{' '}
-                              </Text>
+                              <Image source={require('../../assets/images/camera-flip.png')} style={styles.flip} />
                             </TouchableOpacity>
                           </View>
                         </Camera>
@@ -286,6 +283,13 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
     textAlign: 'center',
     color: '#333333'
+  },
+  flip: {
+    width: 50,
+    height: 32,
+    resizeMode: 'contain',
+    marginLeft: 35,
+    marginBottom: 5
   }
 })
 
