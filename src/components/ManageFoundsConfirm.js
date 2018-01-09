@@ -40,7 +40,7 @@ class AddFounds extends Component {
             {/* <Image source={require('../../assets/images/logo-header.png')} style={styles.logo} /> */}
             <Container>
               <Content>
-                <Text style={styles.header}>{this.state.eth} {'ETH'.toUpperCase()}</Text>
+                <Text style={styles.header}>{this.props.withdrawAmount} {'ETH'.toUpperCase()}</Text>
                 <Form style={styles.form}>
                   <Item floatingLabel style={styles.floatingWrapper}>
                     <Label style={{color: '#9CA9B6'}}>{'to'.toUpperCase()}</Label>
@@ -220,12 +220,16 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
   return {
-    firstName: state.register.firstName,
-    lastName: state.register.lastName,
-    email: state.register.email,
-    password: state.register.password,
-    phoneNumber: state.register.phoneNumber,
-
+    token: state.auth.token,
+    name: state.auth.name,
+    surname: state.auth.surname,
+    email: state.auth.email,
+    authId: state.auth.authId,
+    walletAddress: state.lender.walletAddress,
+    lender: state.lender,
+    ethBalance: state.wallet.ethBalance,
+    celBalance: state.wallet.celBalance,
+    withdrawAmount: state.withdrawETH.withdrawAmount,
     error: state.register.error,
     nav: state.nav
   }
