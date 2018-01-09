@@ -66,8 +66,7 @@ class AddFounds extends Component {
                       </Text>
                       <Image source={require('../../assets/images/graph1.png')} style={styles.graph} />
                       <TouchableOpacity style={styles.boxButton} onPress={() => navigate('ManageFoundsWithdraw')}>
-                        <Image source={require('../../assets/images/icon-transfer-arrows.png')} style={styles.buttonIcon} />
-                        <Text style={styles.boxButtonText}>Withdraw ETH</Text>
+                        <Text style={styles.boxButtonText}><Image source={require('../../assets/images/icon-transfer-arrows.png')} style={styles.buttonIcon} />Withdraw ETH</Text>
                       </TouchableOpacity>
                     </View>
                   </View>
@@ -159,7 +158,8 @@ const styles = StyleSheet.create({
   },
   boxText1: {
     position: 'absolute',
-    left: 60,
+    left: 50,
+    // right: 0,
     top: 0,
 		fontSize: 42,
 		backgroundColor: 'rgba(0,0,0,0)',
@@ -169,7 +169,8 @@ const styles = StyleSheet.create({
 		marginBottom: 10,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginTop: 20
+    marginTop: 20,
+    flexWrap: 'wrap',
   },
   boxText1Inner: {
 		fontSize: 30,
@@ -180,11 +181,12 @@ const styles = StyleSheet.create({
 		// marginBottom: 10,
     fontWeight: 'bold',
     // textAlign: 'center',
-    // marginTop: 20
+    // marginTop: 20,
+    flexDirection:'column',
   },
   boxText2: {
     position: 'absolute',
-    left: 60,
+    left: 40,
     top: 60,
 		fontSize: 24,
 		backgroundColor: 'rgba(0,0,0,0)',
@@ -194,10 +196,11 @@ const styles = StyleSheet.create({
 		marginBottom: 10,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginTop: 0
+    marginTop: 0,
+    flexWrap: 'wrap',
   },
   boxText2Inner: {
-		fontSize: 18,
+		fontSize: 16,
 		backgroundColor: 'rgba(0,0,0,0)',
 		color: '#9CA9B6',
 		// paddingLeft: 30,
@@ -205,7 +208,8 @@ const styles = StyleSheet.create({
 		// marginBottom: 10,
     fontWeight: 'bold',
     // textAlign: 'center',
-    // marginTop: 20
+    // marginTop: 20,
+    flexDirection:'column',
   },
   text: {
     textAlign: 'center',
@@ -310,7 +314,7 @@ const styles = StyleSheet.create({
     height: 54,
     position: 'absolute',
     top: 20,
-    left: 20,
+    left: 10,
     resizeMode: 'contain'
   },
   boxButton: {
@@ -325,19 +329,21 @@ const styles = StyleSheet.create({
   },
   boxButtonText: {
     color: '#9CA9B6',
-    fontSize: 18
+    fontSize: 18,
+    paddingLeft: 5,
   },
   boxButtonTextDisabled: {
     color: 'rgba(156, 169, 182, 0.3)',
     fontSize: 18
   },
   buttonIcon: {
-    position: 'absolute',
-    left: 50,
-    top: 15,
+    // position: 'absolute',
+    // left: 50,
+    // top: 15,
     width: 20,
     height: 16,
-    resizeMode: 'contain'
+    resizeMode: 'contain',
+    marginTop: 3,
   }
 })
 
