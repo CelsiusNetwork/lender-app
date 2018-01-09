@@ -71,7 +71,7 @@ class AddFounds extends Component {
 
                 </Form>
                 <View style={styles.center}>
-                  <TouchableOpacity style={styles.button}>
+                  <TouchableOpacity style={styles.button} onPress={() => navigate('ManageFoundsSuccess')}>
                     <Text style={styles.buttonText}>
                       Confirm withdraw
                     </Text>

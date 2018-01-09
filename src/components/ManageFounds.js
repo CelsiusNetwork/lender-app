@@ -61,7 +61,7 @@ class AddFounds extends Component {
                         { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow-semi-bold' }, styles.boxText1Inner]}> ETH</Text>) : null }
                       </Text>
                       <Text style={styles.boxText2}>
-                        { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow-light' }, styles.boxText2Inner]}>{ ethBalance * 1250 }</Text>) : null }
+                        { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow-light' }, styles.boxText2Inner]}>= ${ ethBalance * 1250 }</Text>) : null }
                         { this.state.fontLoaded ? (<Text style={[ styles.changeUp, { fontFamily: 'barlow-light' }]}> { this.state.ethChange }</Text>) : null }
                       </Text>
                       <Image source={require('../../assets/images/graph1.png')} style={styles.graph} />
