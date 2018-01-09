@@ -260,7 +260,7 @@ const styles = StyleSheet.create({
   },
   cellLeftText: {
     color: 'rgba(255, 255, 255, 0.5)',
-    fontSize: 21
+    fontSize: 18
   },
   cellRight: {
     flex: 1,
@@ -273,7 +273,7 @@ const styles = StyleSheet.create({
   },
   cellRightText: {
     color: 'rgba(255, 255, 255, 1)',
-    fontSize: 21,
+    fontSize: 18,
     textAlign: 'left',
     // borderColor: 'green',
     // borderWidth: 1

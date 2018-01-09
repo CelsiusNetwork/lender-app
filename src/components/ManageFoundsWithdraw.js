@@ -31,7 +31,6 @@ class ManageFoundsWithdraw extends Component {
     this.setState({ fontLoaded: true });
   }
 
-
   _onPressButton(index) {
     // console.log(index)
     if(index=="-1"){
@@ -78,7 +77,9 @@ class ManageFoundsWithdraw extends Component {
         <ImageBackground source={require('../../assets/images/background.png')} style={styles.background}>
           <Container>
             <Content>
-            <Image source={require('../../assets/images/icon-back.png')} style={styles.back} />
+              <TouchableOpacity onPress={() => navigate('ManageFounds')} style={[styles.backButton]}>
+                <Image source={require('../../assets/images/icon-back.png')} style={styles.back} />
+              </TouchableOpacity>
               <View style={styles.wrapper}>
                 <View style={styles.aCenter}>
                   <Text style={styles.header}>{'Withdraw'.toUpperCase()}</Text>
@@ -224,7 +225,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   header: {
-		fontSize: 38,
+		fontSize: 36,
 		backgroundColor: 'rgba(0,0,0,0)',
 		color: 'white',
 		paddingLeft: 30,
@@ -234,16 +235,21 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: 0,
   },
-  back: {
+  backButton: {
     position: 'absolute',
+    zIndex: 10,
+    left: 20,
+    top: 65,
+    width: 30,
+    // borderColor: 'red', borderWidth: 1
+},
+  back: {
     width: 28,
     height: 24,
     resizeMode: 'contain',
     // marginLeft: 35,
     //marginBottom: 30,
     //marginTop: 30,
-    left: 20,
-    top: 65
   },
   aCenter: {
     flexDirection: 'column',
@@ -264,7 +270,9 @@ const styles = StyleSheet.create({
     marginLeft: 30,
     marginRight: 30,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    // borderWidth: 1,
+    // borderColor: 'green'
   },
   row: {
     flexDirection: 'row',
