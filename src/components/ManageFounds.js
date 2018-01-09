@@ -96,7 +96,7 @@ class AddFounds extends Component {
                 <View style={styles.center}>
                   <TouchableOpacity style={styles.button} onPress={() => navigate('Home')}>
                     <Text style={styles.buttonText}>
-                      Done
+                      Close
                     </Text>
                   </TouchableOpacity>
                 </View>

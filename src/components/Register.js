@@ -27,6 +27,7 @@ class Register extends Component {
 
   onButtonPress () {
     const appToken = this.props.initToken
+    console.log('onButtonPress()')
     this.props.registerLender(this.props.firstName, this.props.lastName, this.props.email, this.props.password, this.props.phoneNumber, appToken)
   }
 

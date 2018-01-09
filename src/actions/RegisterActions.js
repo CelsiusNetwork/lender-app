@@ -1,5 +1,45 @@
 import * as types from './Types'
 import { NavigationActions } from 'react-navigation'
+import { CelsiusService } from '../services'
+
+export const registerLender = (firstName, lastName, email, password, phoneNumber, appToken) => {
+  console.log('registerLender()x')
+  console.log(firstName, lastName, email, password, phoneNumber, appToken)
+  return (dispatch) => {
+    dispatch({
+      type: types.REGISTER_LENDER_LOADING
+    })
+    CelsiusService().registerLender(firstName, lastName, email, password, phoneNumber, appToken)
+      .then(response => handleRegisterLender(dispatch, JSON.stringify(response)))
+      .catch((error) => {
+        registerLenderFail(dispatch, error)
+      })
+  }
+}
+
+const handleRegisterLender = (dispatch, user) => {
+  console.log('registerLenderSuccess() wooohooo!')
+  console.log(user)
+  dispatch({
+    type: types.REGISTER_LENDER_SUCCESS,
+    payload: user
+  })
+  dispatch(NavigationActions.reset({
+    index: 0,
+    actions: [
+      NavigationActions.navigate({ routeName: 'Home' })
+    ]
+  }))
+}
+
+const registerLenderFail = (dispatch, errorCode) => {
+  console.log('registerLenderFail() FCK!')
+  console.log(errorCode)
+  dispatch({
+    type: types.REGISTER_LENDER_FAILURE,
+    payload: errorCode
+  })
+}
 
 export const registerFirstNameChanged = (text) => {
   return {
@@ -34,67 +74,4 @@ export const registerPhoneNumberChanged = (text) => {
     type: types.REGISTER_PHONENUMBER_CHANGED,
     payload: text
   }
-}
-
-export const registerLender = (firstName, lastName, email, password, phoneNumber, appToken) => {
-  console.log('registerLender()x')
-  console.log(firstName, lastName, email, password, phoneNumber, appToken)
-  return (dispatch) => {
-    dispatch({
-        type: types.REGISTER_LENDER_LOADING
-      })
-      // const token = Expo.SecureStore.getItemAsync('token')
-      // token.then((token) => {
-      //   console.log(token)
-      //   const request = {
-      //     method: 'POST',
-      //     headers: {
-      //       'Accept': 'application/json',
-      //       'Content-Type': 'application/json',
-      //       'Authorization': 'Bearer ' + token
-      //     },
-      //     body: JSON.stringify({
-      //       email: email,
-      //       password: password,
-      //       user_metadata: {
-      //         name: firstName,
-      //         surname: lastName
-      //       },
-      //       wallet: {
-      //         password: password
-      //       }
-      //     })
-      //   }
-      //   fetch('https://cs.celsius.network/cs/api/v1/member/register', request)
-      //     .then(response => registerLenderSuccess(dispatch, response))
-      //     .then((responseData) => {
-      //       console.log(responseData)
-      //     })
-      //     .catch((err) => registerLenderFail(dispatch, err))
-      // })
-  }
-}
-
-const registerLenderFail = (dispatch, errorCode) => {
-  console.log('registerLenderFail() FCK!')
-  console.log(errorCode)
-  dispatch({
-    type: types.REGISTER_LENDER_FAILURE,
-    payload: errorCode
-  })
-}
-
-const registerLenderSuccess = (dispatch, user) => {
-  console.log('registerLenderSuccess() wooohooo!')
-  console.log(user)
-  dispatch({
-    type: types.REGISTER_LENDER_SUCCESS,
-    payload: user
-  })
-  dispatch(NavigationActions.reset({
-    index: 0,
-    actions: [
-      NavigationActions.navigate({ routeName: 'Home' })
-    ]
-  }))
 }
