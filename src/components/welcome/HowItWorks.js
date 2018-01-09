@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { StyleSheet, View, Image, Text, TouchableOpacity } from 'react-native'
+import { Content, Header, Title, Container } from 'native-base'
 import { connect } from 'react-redux'
 import { NavigationActions } from 'react-navigation'
 import { Font } from 'expo';
@@ -39,34 +40,40 @@ class HowItWorks extends Component {
     const { navigate } = this.props.navigation
     return (
       <View style={styles.container}>
-        <Image source={require('../../../assets/images/logo-header.png')} style={styles.logo} />
-        { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow-bold'}, styles.header]}>{'How it works?'.toUpperCase()}</Text>) : null }
-        {/* <Text style={styles.header}>{'How it works?'.toUpperCase()}</Text> */}
-        <View style={styles.circleWrapper}>
-              <Image
-                source={require('../../../assets/images/arrow-left.png')}
-                resizeMode="contain"
-                style={styles.aLeft} />
-              <Image source={require('../../../assets/images/how-it-works.png')} style={styles.circle} />
-              <Image
-                source={require('../../../assets/images/arrow-right.png')}
-                resizeMode="contain"
-                style={styles.aRight} />
-        </View>
-        { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow'}, styles.text]}>To join our trusted community of members, you need to create Celsius account from which you will be able to lend and borrow money.</Text>) : null }
-        {/* <Text style={styles.text}>To join our trusted community of members, you need to create Celsius account from which you will be able to lend and borrow money.</Text> */}
-        <TouchableOpacity style={styles.loginTouchable} onPress={() => navigate('LoginForm')}>
-          { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow'}, styles.loginText]}>Already have one?</Text>) : null }
-        </TouchableOpacity>
+        <Container>
+          <Content>
 
-        <TouchableOpacity style={styles.button}
-          // onPress={this.navigate.bind(this)}
-          onPress={() => navigate('Register')}
-          >
-          { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow'}, styles.buttonText]}>Create account</Text>) : null }
-        </TouchableOpacity>
+            <Image source={require('../../../assets/images/logo-header.png')} style={styles.logo} />
+            { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow-bold'}, styles.header]}>{'How it works?'.toUpperCase()}</Text>) : null }
+            {/* <Text style={styles.header}>{'How it works?'.toUpperCase()}</Text> */}
+            <View style={styles.circleWrapper}>
+                  <Image
+                    source={require('../../../assets/images/arrow-left.png')}
+                    resizeMode="contain"
+                    style={styles.aLeft} />
+                  <Image source={require('../../../assets/images/how-it-works.png')} style={styles.circle} />
+                  <Image
+                    source={require('../../../assets/images/arrow-right.png')}
+                    resizeMode="contain"
+                    style={styles.aRight} />
+            </View>
 
+            { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow'}, styles.text]}>To join our trusted community of members, you need to create Celsius account from which you will be able to lend and borrow money.</Text>) : null }
+            {/* <Text style={styles.text}>To join our trusted community of members, you need to create Celsius account from which you will be able to lend and borrow money.</Text> */}
 
+            <TouchableOpacity style={styles.button}
+              // onPress={this.navigate.bind(this)}
+              onPress={() => navigate('Register')}
+              >
+              { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow'}, styles.buttonText]}>Create account</Text>) : null }
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.loginTouchable} onPress={() => navigate('LoginForm')}>
+              { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow'}, styles.loginText]}>Already have one?</Text>) : null }
+            </TouchableOpacity>
+
+          </Content>
+        </Container>
       </View>
     )
   }
@@ -98,7 +105,8 @@ const styles = StyleSheet.create({
     paddingRight: 30,
     marginBottom: 10,
     fontWeight: 'bold',
-    textAlign: 'center'
+    textAlign: 'center',
+    marginTop: 160
   },
   text: {
     fontSize: 18,
@@ -165,7 +173,8 @@ const styles = StyleSheet.create({
     marginRight: 30,
     marginLeft: 30,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    marginBottom: 30
   },
   loginText: {
     backgroundColor: 'transparent',

@@ -83,14 +83,13 @@ class AddFounds extends Component {
                   <View style={styles.row}>
                     {/* <View style={styles.cellLeft}> */}
                       <TouchableOpacity style={[styles.cellLeft, styles.buttonLeft]} onPress={this.onButtonPress.bind(this)}>
-                        <Image source={require('../../assets/images/icon-send.png')} style={styles.iconLeft} />
-                        <Text style={styles.buttonLeftText}>Share</Text>
+                        <Text style={styles.buttonLeftText}><Image source={require('../../assets/images/icon-send.png')} style={styles.iconLeft} />Share</Text>
                       </TouchableOpacity>
                     {/* </View> */}
                     {/* <View style={styles.cellRight}> */}
                       <TouchableOpacity style={[styles.cellRight, styles.buttonRight]} onPress={this.onCopyButtonPress.bind(this)}>
-                        <Image source={require('../../assets/images/icon-copy.png')} style={styles.iconRight} />
-                        <Text style={styles.buttonRightText}>Copy</Text>
+
+                        <Text style={styles.buttonRightText}><Image source={require('../../assets/images/icon-copy.png')} style={styles.iconRight} />Copy</Text>
                       </TouchableOpacity>
                     {/* </View> */}
                   </View>
@@ -256,12 +255,14 @@ const styles = StyleSheet.create({
     borderRightColor: '#3D4B54',
     borderRightWidth: 1,
     padding: 10,
-    borderBottomLeftRadius: 8
+    borderBottomLeftRadius: 8,
+    justifyContent: 'center',
   },
   buttonLeftText: {
     color: '#9CA9B6',
     textAlign: 'left',
-    marginLeft: 50
+    // marginLeft: 50
+    paddingLeft: 5,
   },
   buttonRight: {
     position: 'relative',
@@ -270,26 +271,30 @@ const styles = StyleSheet.create({
     // borderRightColor: '#3D4B54',
     // borderRightWidth: 1,
     padding: 10,
-    borderBottomRightRadius: 8
+    borderBottomRightRadius: 8,
+    justifyContent: 'center',
   },
   buttonRightText: {
     color: '#9CA9B6',
     textAlign: 'left',
-    marginRight: 40
+    paddingLeft: 5,
+
   },
   iconLeft: {
-    position: 'absolute',
-    left: 35,
+    // position: 'absolute',
+    // left: 35,
     width: 16,
     height: 16,
-    resizeMode: 'contain'
+    resizeMode: 'contain',
+    marginRight: 5
   },
   iconRight: {
-    position: 'absolute',
-    left: 35,
+    // position: 'absolute',
+    // left: 35,
     width: 16,
     height: 16,
-    resizeMode: 'contain'
+    resizeMode: 'contain',
+    marginRight: 5
   }
 })
 

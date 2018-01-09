@@ -32,7 +32,7 @@ class Home extends Component {
       <View style={styles.container}>
         <ImageBackground source={require('../../assets/images/background-blur.png')} style={styles.background}>
           <View style={styles.body}>
-            <View style={[styles.row, {marginBottom: 20, marginTop: 20}]}>
+            <View style={[styles.row, {marginBottom: 20, marginTop: 60}]}>
               <View style={styles.cellLeft}>
                 <Image source={require('../../assets/images/Celsius_Symbol_white.png')} style={styles.logo} />
               </View>
