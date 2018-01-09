@@ -1,7 +1,5 @@
 import * as types from './Types'
 import { NavigationActions } from 'react-navigation'
-import Expo, { SecureStore } from 'expo'
-import axios from 'axios'
 
 export const registerFirstNameChanged = (text) => {
   return {
@@ -38,40 +36,42 @@ export const registerPhoneNumberChanged = (text) => {
   }
 }
 
-export const registerLender = ({ firstName, lastName, email, password, phoneNumber }) => {
+export const registerLender = (firstName, lastName, email, password, phoneNumber, appToken) => {
+  console.log('registerLender()x')
+  console.log(firstName, lastName, email, password, phoneNumber, appToken)
   return (dispatch) => {
     dispatch({
-      type: types.REGISTER_LENDER_LOADING
-    })
-    const token = Expo.SecureStore.getItemAsync('token')
-    token.then((token) => {
-      console.log(token)
-      const request = {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + token
-        },
-        body: JSON.stringify({
-          email: email,
-          password: password,
-          user_metadata: {
-            name: firstName,
-            surname: lastName
-          },
-          wallet: {
-            password: password
-          }
-        })
-      }
-      fetch('https://cs.celsius.network/cs/api/v1/member/register', request)
-        .then(response => registerLenderSuccess(dispatch, response))
-        .then((responseData) => {
-          console.log(responseData)
-        })
-        .catch((err) => registerLenderFail(dispatch, err))
-    })
+        type: types.REGISTER_LENDER_LOADING
+      })
+      // const token = Expo.SecureStore.getItemAsync('token')
+      // token.then((token) => {
+      //   console.log(token)
+      //   const request = {
+      //     method: 'POST',
+      //     headers: {
+      //       'Accept': 'application/json',
+      //       'Content-Type': 'application/json',
+      //       'Authorization': 'Bearer ' + token
+      //     },
+      //     body: JSON.stringify({
+      //       email: email,
+      //       password: password,
+      //       user_metadata: {
+      //         name: firstName,
+      //         surname: lastName
+      //       },
+      //       wallet: {
+      //         password: password
+      //       }
+      //     })
+      //   }
+      //   fetch('https://cs.celsius.network/cs/api/v1/member/register', request)
+      //     .then(response => registerLenderSuccess(dispatch, response))
+      //     .then((responseData) => {
+      //       console.log(responseData)
+      //     })
+      //     .catch((err) => registerLenderFail(dispatch, err))
+      // })
   }
 }
 

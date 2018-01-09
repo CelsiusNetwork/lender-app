@@ -10,7 +10,7 @@ import WalletBalance from './WalletBalance'
 export default combineReducers({
   auth: LoginReducer,
   nav: NavigatorReducer,
-  token: AppTokenReducer,
+  initToken: AppTokenReducer,
   lender: LenderReducer,
   wallet: WalletBalance,
   register: RegisterReducer

@@ -37,9 +37,11 @@ class Home extends Component {
               <View style={styles.cellLeft}>
                 <Image source={require('../../assets/images/Celsius_Symbol_white.png')} style={styles.logo} />
               </View>
-              <View style={styles.cellRight}>
-                <Image source={require('../../assets/images/icon-user.png')} style={styles.user} />
-              </View>
+              <TouchableOpacity onPress={() => navigate('EditProfile')}>
+                <View style={styles.cellRight}>
+                  <Image source={require('../../assets/images/icon-user.png')} style={styles.user} />
+                </View>
+              </TouchableOpacity>
             </View>
             <Container style={styles.wrapper}>
               <Content>

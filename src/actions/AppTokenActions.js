@@ -2,36 +2,18 @@ import { NavigationActions } from 'react-navigation'
 
 import * as types from './Types'
 import Expo, { SecureStore } from 'expo'
-import getAppToken from '../services/Auth0Service'
+import { Auth0Service } from '../services'
 
-export const lenderAppInitToken = (clientId, clientSecret, audience, grantType) => {
+export const lenderAppInitToken = () => {
   return (dispatch) => {
     dispatch({
       type: types.APP_TOKEN_INIT
     })
-
-    getAppToken().then((tokenData) => {
-      lenderAppTokenInitSuccess(dispatch, tokenData)
-    }).catch((error) => {
-      lenderAppTokenInitFail(dispatch, error)
-      console.log(error)
-    })
-    const request = {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        client_id: clientId,
-        client_secret: clientSecret,
-        audience: audience,
-        grant_type: grantType
+    Auth0Service().initClientCredentials()
+      .then(response => handleAppTokenInit(dispatch, JSON.stringify(response)))
+      .catch((error) => {
+        lenderAppTokenInitFail(dispatch, error)
       })
-    }
-    fetch('https://celsiusnetwork.auth0.com/oauth/token', request)
-      .then((response) => lenderAppTokenInitSuccess(dispatch, response))
-      .catch((err) => lenderAppTokenInitFail(dispatch, err))
   }
 }
 
@@ -42,11 +24,10 @@ const lenderAppTokenInitFail = (dispatch, errorCode) => {
   })
 }
 
-const lenderAppTokenInitSuccess = async(dispatch, data) => {
+const handleAppTokenInit = async(dispatch, data) => {
   console.log('lenderAppTokenInitSuccess() WOOHOO!')
-  data = JSON.parse(data._bodyText) // because of reasons
   console.log(data)
-  Expo.SecureStore.setItemAsync('token', data.access_token)
+
   dispatch({
     type: types.APP_TOKEN_SUCCESS,
     payload: data
