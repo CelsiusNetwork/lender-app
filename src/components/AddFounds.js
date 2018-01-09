@@ -1,15 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { StyleSheet, View, ImageBackground, Image, TouchableOpacity } from 'react-native'
-import { Button, Form, Input, Item, Label, Text, Content, Header, Title, Container } from 'native-base'
-import { registerFirstNameChanged, registerLastNameChanged, registerEmailChanged, registerPasswordChanged, registerPhoneNumberChanged, registerLender } from '../actions'
-import { Font } from 'expo';
-import QRCode from 'react-native-qrcode';
-import { Share } from 'react-native';
-import { Clipboard } from 'react-native';
+import { StyleSheet, View, ImageBackground, Image, TouchableOpacity, Share, Clipboard } from 'react-native'
+import { Text, Content, Container } from 'native-base'
+import { Font } from 'expo'
+import QRCode from 'react-native-qrcode'
 
 class AddFounds extends Component {
-
   onButtonPress () {
     Share.share({
       message: 'Wallet Address',
@@ -29,15 +25,18 @@ class AddFounds extends Component {
     Clipboard.setString(this.props.walletAddres)
   }
 
-  constructor(props) {
-    super(props);
+  constructor (props) {
+    super(props)
+    console.log('ADD FUNDS')
+    console.log(this.props.walletAddress)
+    const qr = this.props.walletAddres
     this.state = {
-        fontLoaded: false,
-        qrcode: "35McfMBsnPzY1c8G9bd2ZLzuDdLEkEx8Fd"
-      }
+      fontLoaded: false,
+      qrcode: qr
+    }
   }
 
-  async componentDidMount() {
+  async componentDidMount () {
     await Font.loadAsync({
       'inconsolata': require('../../assets/fonts/Inconsolata-Regular.ttf'),
     });
@@ -55,7 +54,8 @@ class AddFounds extends Component {
 
   render () {
     const { navigate } = this.props.navigation
-    const walletAddres = this.props.walletAddres
+    const walletAddress = this.props.walletAddres
+
     return (
       <View style={styles.container}>
         <ImageBackground source={require('../../assets/images/background-blur.png')} style={styles.background}>
@@ -69,7 +69,7 @@ class AddFounds extends Component {
                 <View style={styles.center}>
                   <View style={styles.qrWrapper}>
                     <QRCode
-                      value={this.props.walletAddress}
+                      value={this.props.walletAddres}
                       size={160}
                       bgColor='black'
                       fgColor='white'/>
@@ -79,7 +79,7 @@ class AddFounds extends Component {
                 {/* <Text style={styles.text}>Your Celsius ETH address:</Text> */}
 
                 <View style={styles.codeWrapper}>
-                  { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'inconsolata' }, styles.codeText]}>{ this.state.qrcode }</Text>) : null }
+                  { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'inconsolata' }, styles.codeText]}>{this.props.walletAddress}</Text>) : null }
                   <View style={styles.row}>
                     {/* <View style={styles.cellLeft}> */}
                       <TouchableOpacity style={[styles.cellLeft, styles.buttonLeft]} onPress={this.onButtonPress.bind(this)}>

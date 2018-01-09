@@ -27,6 +27,7 @@ class Home extends Component {
   render () {
     const { navigate } = this.props.navigation
     const ethBalance = this.props.ethBalance
+    const celBalance = this.props.celBalance
     const name = this.props.lender.name
     return (
       <View style={styles.container}>
@@ -47,7 +48,7 @@ class Home extends Component {
                   <Text> ETH</Text>
                 </Text>
                 <Text style={styles.header2}>
-                  <Text>4</Text>
+                  <Text>{celBalance}</Text>
                   <Text> CEL</Text>
                 </Text>
                 <View style={styles.btnsContainer}>
@@ -315,7 +316,7 @@ const mapStateToProps = state => {
     walletAddress: state.lender.walletAddress,
     lender: state.lender,
     ethBalance: state.wallet.ethBalance,
-    celBalance: state.wallet
+    celBalance: state.wallet.celBalance
   }
 }
 

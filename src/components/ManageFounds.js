@@ -14,11 +14,11 @@ class AddFounds extends Component {
 
         eth: 10.000,
         ethFiat: '≈ $8,095.10',
-        ethChange: ' ▲ +6.92%',
+        ethChange: ' ▲ +5.84%',
 
         deg: 2.984,
-        degFiat: '≈ $208.90',
-        degChange: ' ▲ +3.24%',
+        degFiat: '≈ $0.02',
+        degChange: ' ▲ +0.01%'
       }
   }
 
@@ -40,6 +40,8 @@ class AddFounds extends Component {
 
   render () {
     const { navigate } = this.props.navigation
+    const ethBalance = this.props.ethBalance
+    const celBalance = this.props.celBalance
     return (
       <View style={styles.container}>
         <ImageBackground source={require('../../assets/images/background-blur.png')} style={styles.background}>
@@ -55,12 +57,12 @@ class AddFounds extends Component {
                     <View style={styles.box}>
                       <Image source={require('../../assets/images/icon-eth.png')} style={styles.icon} />
                       <Text style={styles.boxText1}>
-                        { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow-semi-bold' }, styles.boxText1Inner]}>{ this.state.eth.toFixed(3) }</Text>) : null }
+                        { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow-semi-bold' }, styles.boxText1Inner]}>{ ethBalance.toFixed(3) }</Text>) : null }
                         { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow-semi-bold' }, styles.boxText1Inner]}> ETH</Text>) : null }
                       </Text>
                       <Text style={styles.boxText2}>
-                        { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow-light' }, styles.boxText2Inner]}>{ this.state.ethFiat }</Text>) : null }
-                        { this.state.fontLoaded ? (<Text style={[ styles.changeUp, { fontFamily: 'barlow-light' }]}> { this.state.ethChange}</Text>) : null }
+                        { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow-light' }, styles.boxText2Inner]}>{ ethBalance * 1250 }</Text>) : null }
+                        { this.state.fontLoaded ? (<Text style={[ styles.changeUp, { fontFamily: 'barlow-light' }]}> { this.state.ethChange }</Text>) : null }
                       </Text>
                       <Image source={require('../../assets/images/graph1.png')} style={styles.graph} />
                       <TouchableOpacity style={styles.boxButton} onPress={() => navigate('ManageFoundsWithdraw')}>
@@ -76,7 +78,7 @@ class AddFounds extends Component {
                     <View style={styles.box}>
                       <Image source={require('../../assets/images/icon-transfer.png')} style={styles.icon} />
                       <Text style={styles.boxText1}>
-                        { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow-semi-bold' }, styles.boxText1Inner]}>{ this.state.deg.toFixed(3) }</Text>) : null }
+                        { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow-semi-bold' }, styles.boxText1Inner]}>{ celBalance.toFixed(3) }</Text>) : null }
                         { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow-semi-bold' }, styles.boxText1Inner]}> CEL</Text>) : null }
                       </Text>
                       <Text style={styles.boxText2}>
@@ -341,14 +343,11 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
   return {
-    firstName: state.register.firstName,
-    lastName: state.register.lastName,
-    email: state.register.email,
-    password: state.register.password,
-    phoneNumber: state.register.phoneNumber,
+    nav: state.nav,
+    ethBalance: state.wallet.ethBalance,
+    celBalance: state.wallet.celBalance,
+    error: state.register.error
 
-    error: state.register.error,
-    nav: state.nav
   }
 }
 
