@@ -48,6 +48,7 @@ class EditProfile extends Component {
     const lastName = this.props.surname
     const email = this.props.email
     const phoneNumber = this.props.phoneNumber
+    const profilePicture = this.props.picture
     return (
       <View style={styles.container}>
         <ImageBackground source={require('../../assets/images/background-blur.png')} style={styles.background}>
@@ -61,7 +62,7 @@ class EditProfile extends Component {
                 <Text style={styles.ptsTextExt}>pts</Text>
               </View>
               <ImageBackground source={require('../../assets/images/avatar-wrapper.png')} style={styles.avatarWrapper}>
-                <ImageBackground source={require('../../assets/images/avatar.png')} style={styles.avatar}>
+                <ImageBackground source={{uri:profilePicture}} style={styles.avatar}>
                 </ImageBackground>
               </ImageBackground>
             </View>
@@ -351,7 +352,7 @@ const mapStateToProps = state => {
     lender: state.lender,
     ethBalance: state.wallet.ethBalance,
     celBalance: state.wallet.celBalance,
-
+    picture: state.lender.lender.picture,
     error: state.register.error,
     nav: state.nav
   }
