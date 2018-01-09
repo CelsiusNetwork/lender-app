@@ -69,7 +69,7 @@ class AddFounds extends Component {
                 <View style={styles.center}>
                   <View style={styles.qrWrapper}>
                     <QRCode
-                      value={this.props.walletAddres}
+                      value={this.props.walletAddress}
                       size={160}
                       bgColor='black'
                       fgColor='white'/>
