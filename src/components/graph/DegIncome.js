@@ -48,7 +48,7 @@ export default class DegIncome extends Component {
               { this.state.fontLoaded ? (<Text style={[ styles.changeUp, { fontFamily: 'barlow-light' }]}> { this.state.change}</Text>) : null }
             </Text> */}
 
-            <View style={styles.row}>
+            {/* <View style={styles.row}>
               <View style={styles.cellLeft}>
                 <TouchableOpacity style={styles.button} onPress={() => navigate('AddFounds')}>
                   <Text style={styles.buttonText}>Add funds</Text>
@@ -59,7 +59,7 @@ export default class DegIncome extends Component {
                   <Text style={styles.button2Text}>Manage</Text>
                 </TouchableOpacity>
               </View>
-            </View>
+            </View> */}
             <View style={styles.graphWrapper}>
               <Image source={require('../../../assets/images/graph-token-earnings.png')} style={styles.graph} />
             </View>
@@ -179,15 +179,17 @@ const styles = StyleSheet.create({
 
   },
   graph: {
-    flex: 1,
+    // flex: 1,
     // flexDirection: 'row',
-    // width: '100%',
+    width: 300,
+    minHeight: 1,
     height: 340,
     resizeMode: "contain",
     marginLeft: 20,
     marginRight: 20,
     // borderWidth: 1,
-    // borderColor: 'red'
+    // borderColor: 'red',
+    // alignSelf: 'stretch'
   },
   footer: {
 		fontSize: 24,

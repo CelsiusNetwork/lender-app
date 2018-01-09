@@ -2,11 +2,30 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { ImageBackground, StyleSheet, View, Image, Text, TouchableOpacity } from 'react-native'
 import { Content, Container } from 'native-base'
+import { Pages } from 'react-native-pages'
+import DegIncome from './graph/DegIncome'
+import DegValue from './graph/DegValue'
+import IncomeHistory from './graph/IncomeHistory'
 import { fetchWalletBalance, fetchTransactionsHistory } from '../actions'
+import { lenderAppInitToken } from '../actions'
+import { Font } from 'expo';
 
 class Home extends Component {
   componentWillMount () {
     this.props.fetchWalletBalance(this.props.walletAddress, this.props.token)
+  }
+
+  async componentDidMount() {
+    await Font.loadAsync({
+      'barlow-semi-bold': require('../../assets/fonts/Barlow-SemiBold.otf'),
+    });
+    await Font.loadAsync({
+      'barlow-light': require('../../assets/fonts/Barlow-Light.otf'),
+    });
+    await Font.loadAsync({
+      'barlow': require('../../assets/fonts/Barlow-Regular.otf'),
+    });
+    this.setState({ fontLoaded: true });
   }
 
   componentWillReceiveProps (nextProps) {
@@ -20,6 +39,15 @@ class Home extends Component {
 
   constructor (props) {
     super(props)
+    this.state = {
+      fontLoaded: false,
+      eth: 10.000,
+      deg: 2.984,
+      change: ' ▲ +3.24%',
+      user: {
+        name: "Alex"
+      },
+    }
     console.log('props: ')
     console.log(props)
   }
@@ -29,6 +57,8 @@ class Home extends Component {
     const ethBalance = this.props.ethBalance
     const celBalance = this.props.celBalance
     const name = this.props.lender.name
+    console.log("ethBalance: ", ethBalance)
+    if(parseFloat(ethBalance) == 0){
     return (
       <View style={styles.container}>
         <ImageBackground source={require('../../assets/images/background-blur.png')} style={styles.background}>
@@ -70,7 +100,7 @@ class Home extends Component {
                 <Text style={styles.welcomeTitle}>Welcome to Celsius, {name}!</Text>
                 <Text style={styles.welcomeText}>As a member of Celsius community, you can lend ETH and earn DEG token for the time you spend with us.</Text>
                 <View style={styles.hr}></View>
-                <TouchableOpacity style={styles.box} onPress={() => navigate('HistoryDetail')}>
+                <TouchableOpacity style={styles.box}>
                   <View style={styles.boxIconWrapper}>
                     <Image source={require('../../assets/images/icon-wallet.png')} style={styles.icon} />
                   </View>
@@ -101,6 +131,59 @@ class Home extends Component {
     </View>
 
     )
+    } else {
+      return (
+        <View style={stylesGraph.container}>
+          <ImageBackground
+            source={require('../../assets/images/background.png')}
+            style={stylesGraph.background}>
+            <View style={stylesGraph.header}>
+              <View style={stylesGraph.cellLeft}>
+                <TouchableOpacity onPress={() => navigate('LoginForm')}>
+                  <Image source={require('../../assets/images/logo-small.png')} style={stylesGraph.logo} />
+                </TouchableOpacity>
+              </View>
+              <View style={stylesGraph.cellRight}>
+                <TouchableOpacity onPress={() => navigate('EditProfile')}>
+                  <Image source={require('../../assets/images/icon-user.png')} style={stylesGraph.user} />
+                </TouchableOpacity>
+              </View>
+            </View>
+
+            <Text style={stylesGraph.headerText}>
+                { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow-semi-bold' }]}>{ ethBalance }</Text>) : null }
+                { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow-semi-bold' }]}> ETH</Text>) : null }
+            </Text>
+            <Text style={stylesGraph.header2Text}>
+              { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow-light' }]}>{ celBalance }</Text>) : null }
+              { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow-light' }]}> CEL</Text>) : null }
+              { this.state.fontLoaded ? (<Text style={[ stylesGraph.changeUp, { fontFamily: 'barlow-light' }]}> { this.state.change}</Text>) : null }
+            </Text>
+
+            <View style={stylesGraph.row}>
+              <View style={stylesGraph.buttonCellLeft}>
+                <TouchableOpacity style={stylesGraph.button} onPress={() => navigate('AddFounds')}>
+                  <Text style={stylesGraph.buttonText}>Add funds</Text>
+                </TouchableOpacity>
+              </View>
+              <View style={stylesGraph.buttonCellRight}>
+                <TouchableOpacity style={stylesGraph.button2} onPress={() => navigate('ManageFounds')}>
+                  <Text style={stylesGraph.button2Text}>Manage</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+
+            <View style={stylesGraph.pagesWrapper}>
+              <Pages style={stylesGraph.pages}>
+                <DegIncome navigation={this.props.navigation} lenderAppInitToken={this.props.lenderAppInitToken} />
+                <DegValue navigation={this.props.navigation} lenderAppInitToken={this.props.lenderAppInitToken} />
+                <IncomeHistory navigation={this.props.navigation} lenderAppInitToken={this.props.lenderAppInitToken} />
+              </Pages>
+            </View>
+          </ImageBackground>
+        </View>
+      )
+    }
   }
 }
 
@@ -160,7 +243,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
     marginLeft: 10,
-    height: 40
+    height: 40,
+    // borderWidth: 1,
+    // borderColor: 'red'
   },
   cellRight: {
     flex: 1,
@@ -210,14 +295,15 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     padding: 5,
     height: 40,
-    // width: 150,
+    width: '95%',
     justifyContent: 'center',
     alignItems: 'center',
     // marginRight: '5%',
     // marginLeft: '5%',
     paddingLeft: 20,
     paddingRight: 20,
-    marginLeft: 20,
+    // marginLeft: 20,
+    alignSelf: 'stretch',
   },
   buttonText: {
     color: '#333333',
@@ -293,19 +379,187 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     padding: 5,
     height: 40,
-    // width: 150,
+    width: '95%',
     justifyContent: 'center',
     alignItems: 'center',
     // marginRight: '5%',
     // marginLeft: '5%',
     paddingLeft: 20,
     paddingRight: 20,
-    marginRight: 20,
+    // marginRight: 20,
+    alignSelf: 'stretch',
   },
   button2Text: {
     color: 'rgba(255, 255, 255, 0.5)',
     fontSize: 16
-  }
+  },
+})
+
+const stylesGraph = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    marginLeft: 0,
+    marginRight: 0
+  },
+  background: {
+    flex: 1,
+    flexDirection: 'row',
+    // justifyContent: 'top',
+    // alignItems: 'center',
+    // backgroundColor: 'red'
+  },
+  header: {
+    flexDirection: 'row',
+    marginBottom: 15,
+    marginTop: 40
+  },
+  headerText: {
+		fontSize: 42,
+		backgroundColor: 'rgba(0,0,0,0)',
+		color: 'white',
+		paddingLeft: 30,
+		paddingRight: 30,
+		marginBottom: 10,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginTop: 20
+  },
+  row: {
+    height: 60,
+    flexDirection: 'row',
+  },
+  header2Text: {
+		fontSize: 24,
+		backgroundColor: 'rgba(0,0,0,0)',
+		color: '#9CA9B6',
+		paddingLeft: 30,
+		paddingRight: 30,
+		marginBottom: 10,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginTop: 0
+  },
+  changeUp: {
+    fontSize: 18,
+    color: '#47CA53'
+  },
+  changeDown: {
+    fontSize: 18,
+    color: '#ff3333'
+  },
+  pagesWrapper: {
+    flex: 1,
+    flexDirection: 'row',
+  },
+  pages: {
+    flex: 1,
+  },
+  cellLeft: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    marginLeft: 10,
+    height: 40,
+  },
+  cellRight: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    marginRight: 10,
+    height: 40,
+  },
+  buttonCellLeft: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    alignSelf: 'stretch',
+    marginLeft: 10,
+    height: 50,
+    // borderWidth: 1,
+    // borderColor: 'green',
+  },
+  buttonCellRight: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    alignSelf: 'stretch',
+    marginRight: 10,
+    height: 50,
+    // borderWidth: 1,
+    // borderColor: 'red'
+  },
+  logo: {
+    width: 30,
+    height: 30,
+    marginLeft: 15,
+  },
+  user: {
+    width: 30,
+    height: 30,
+    marginRight: 35,
+    resizeMode: "contain"
+  },
+  title: {
+    fontSize: 38,
+    paddingBottom: 12,
+    color: '#fff'
+  },
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center'
+  },
+  background: {
+    flex: 1,
+    paddingBottom: 20
+  },
+  button: {
+    backgroundColor: '#ffffff',
+    borderRadius: 5,
+    padding: 5,
+    height: 50,
+    width: '95%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    // marginRight: '5%',
+    // marginLeft: '5%',
+    // paddingLeft: 20,
+    // paddingRight: 20,
+    // marginLeft: 30,
+    alignSelf: 'stretch',
+  },
+  buttonText: {
+    color: '#333333',
+    fontSize: 20
+  },
+  button2: {
+    // flex: 1,
+    backgroundColor: 'rgba(255, 255, 255, 0.0)',
+    borderColor: 'rgba(255, 255, 255, 0.5)',
+    borderWidth: 2,
+    borderRadius: 5,
+    padding: 5,
+    height: 50,
+    width: '95%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    // marginRight: '5%',
+    // marginLeft: '5%',
+    // paddingLeft: 20,
+    // paddingRight: 20,
+    // marginRight: 30,
+    alignSelf: 'stretch',
+  },
+  button2Text: {
+    color: 'rgba(255, 255, 255, 0.5)',
+    fontSize: 20
+  },
 })
 
 const mapStateToProps = state => {
@@ -325,7 +579,7 @@ const mapStateToProps = state => {
 // The mapDispatchToProps function lets us inject
 // certain props into the React component that can dispatch actions
 const mapDispatchToProps = {
-  fetchWalletBalance, fetchTransactionsHistory
+  fetchWalletBalance, fetchTransactionsHistory, lenderAppInitToken
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)

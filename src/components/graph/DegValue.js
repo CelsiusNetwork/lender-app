@@ -48,18 +48,6 @@ class DegValue extends Component {
               { this.state.fontLoaded ? (<Text style={[ styles.changeDown, { fontFamily: 'barlow-light' }]}> { this.state.change}</Text>) : null }
             </Text> */}
 
-            <View style={styles.row}>
-              <View style={styles.cellLeft}>
-                <TouchableOpacity style={styles.button} onPress={() => navigate('AddFounds')}>
-                  <Text style={styles.buttonText}>Add funds</Text>
-                </TouchableOpacity>
-              </View>
-              <View style={styles.cellRight}>
-                <TouchableOpacity style={styles.button2} onPress={() => navigate('ManageFounds')}>
-                  <Text style={styles.button2Text}>Manage</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
             <View style={styles.graphWrapper}>
               <Image source={require('../../../assets/images/graph-token-value.png')} style={styles.graph} />
             </View>
@@ -181,7 +169,7 @@ const styles = StyleSheet.create({
   graph: {
     flex: 1,
     // flexDirection: 'row',
-    // width: '100%',
+    width: 300,
     height: 340,
     resizeMode: "contain",
     marginLeft: 20,
