@@ -48,7 +48,7 @@ class IncomeHistory extends Component {
               { this.state.fontLoaded ? (<Text style={[ styles.changeUp, { fontFamily: 'barlow-light' }]}> { this.state.change}</Text>) : null }
             </Text> */}
 
-            <View style={styles.row}>
+            {/* <View style={styles.row}>
               <View style={styles.cellLeft}>
                 <TouchableOpacity style={styles.button} onPress={() => navigate('AddFounds')}>
                   <Text style={styles.buttonText}>Add funds</Text>
@@ -59,94 +59,90 @@ class IncomeHistory extends Component {
                   <Text style={styles.button2Text}>Manage</Text>
                 </TouchableOpacity>
               </View>
-            </View>
+            </View> */}
             <View style={styles.tableWrapper}>
-              <Container style={styles.tableContainer}>
-                <Content>
-                  <TouchableOpacity style={styles.tableRow} onPress={() => navigate('HistoryDetail')}>
-                    <View>
-                      <Image source={require('../../../assets/images/icon-coins.png')} style={styles.icon} />
-                    </View>
-                    <View style={styles.value}>
-                    { this.state.fontLoaded ? (<Text style={[styles.valueText, { fontFamily: 'barlow-semi-bold' }]}>0.127 CEL</Text>) : null }
-                    </View>
-                    <View style={styles.status}>
-                    { this.state.fontLoaded ? (<Text style={[styles.statusText, { fontFamily: 'barlow' }]}>ON HOLD</Text>) : null }
-                    </View>
-                    <View style={styles.created}>
-                    { this.state.fontLoaded ? (<Text style={[styles.createdText, { fontFamily: 'barlow' }]}>Nov 20, 2017</Text>) : null }
-                    <Image source={require('../../../assets/images/icon-time.png')} style={styles.clock} />
-                    { this.state.fontLoaded ? (<Text style={[styles.createdText, { fontFamily: 'barlow' }]}>9:21AM</Text>) : null }
-                    </View>
-                  </TouchableOpacity>
-                  <TouchableOpacity style={styles.tableRow} onPress={() => navigate('HistoryDetail')}>
-                    <View>
-                    <Image source={require('../../../assets/images/icon-etherium.png')} style={styles.icon} />
-                    </View>
-                    <View style={styles.value}>
-                    { this.state.fontLoaded ? (<Text style={[styles.valueText, { fontFamily: 'barlow-semi-bold' }]}>7.000 ETH</Text>) : null }
-                    </View>
-                    <View style={[styles.status, styles.greenStatus]}>
-                    { this.state.fontLoaded ? (<Text style={[styles.statusText, styles.greenText, { fontFamily: 'barlow' }]}>RECEIVED</Text>) : null }
-                    </View>
-                    <View style={styles.created}>
-                    { this.state.fontLoaded ? (<Text style={[styles.createdText, { fontFamily: 'barlow' }]}>Nov 20, 2017</Text>) : null }
-                    <Image source={require('../../../assets/images/icon-time.png')} style={styles.clock} />
-                    { this.state.fontLoaded ? (<Text style={[styles.createdText, { fontFamily: 'barlow' }]}>9:21AM</Text>) : null }
-                    </View>
-                  </TouchableOpacity>
-                  <TouchableOpacity style={styles.tableRow} onPress={() => navigate('HistoryDetail')}>
-                    <View>
-                    <Image source={require('../../../assets/images/icon-etherium.png')} style={styles.icon} />
-                    </View>
-                    <View style={styles.value}>
-                    { this.state.fontLoaded ? (<Text style={[styles.valueText, { fontFamily: 'barlow-semi-bold' }]}>-1.000 ETH</Text>) : null }
-                    </View>
-                    <View style={[styles.status, styles.orangeStatus]}>
-                    { this.state.fontLoaded ? (<Text style={[styles.statusText, styles.orangeText, { fontFamily: 'barlow' }]}>SOLD</Text>) : null }
-                    </View>
-                    <View style={styles.created}>
-                    { this.state.fontLoaded ? (<Text style={[styles.createdText, { fontFamily: 'barlow' }]}>Nov 20, 2017</Text>) : null }
-                    <Image source={require('../../../assets/images/icon-time.png')} style={styles.clock} />
-                    { this.state.fontLoaded ? (<Text style={[styles.createdText, { fontFamily: 'barlow' }]}>9:21AM</Text>) : null }
-                    </View>
-                  </TouchableOpacity>
-                  <TouchableOpacity style={styles.tableRow} onPress={() => navigate('HistoryDetail')}>
-                    <View>
-                    <Image source={require('../../../assets/images/icon-etherium.png')} style={styles.icon} />
-                    </View>
-                    <View style={styles.value}>
-                    { this.state.fontLoaded ? (<Text style={[styles.valueText, { fontFamily: 'barlow-semi-bold' }]}>3.000 ETH</Text>) : null }
-                    </View>
-                    <View style={[styles.status, styles.greenStatus]}>
-                    { this.state.fontLoaded ? (<Text style={[styles.statusText, styles.greenText, { fontFamily: 'barlow' }]}>RECEIVED</Text>) : null }
-                    </View>
-                    <View style={styles.created}>
-                    { this.state.fontLoaded ? (<Text style={[styles.createdText, { fontFamily: 'barlow' }]}>Nov 20, 2017</Text>) : null }
-                    <Image source={require('../../../assets/images/icon-time.png')} style={styles.clock} />
-                    { this.state.fontLoaded ? (<Text style={[styles.createdText, { fontFamily: 'barlow' }]}>9:21AM</Text>) : null }
-                    </View>
-                  </TouchableOpacity>
-                  <TouchableOpacity style={styles.tableRow} onPress={() => navigate('HistoryDetail')}>
-                    <View>
-                      <Image source={require('../../../assets/images/icon-coins.png')} style={styles.icon} />
-                    </View>
-                    <View style={styles.value}>
-                    { this.state.fontLoaded ? (<Text style={[styles.valueText, { fontFamily: 'barlow-semi-bold' }]}>0.127 CEL</Text>) : null }
-                    </View>
-                    <View style={styles.status}>
-                    { this.state.fontLoaded ? (<Text style={[styles.statusText, { fontFamily: 'barlow' }]}>ON HOLD</Text>) : null }
-                    </View>
-                    <View style={styles.created}>
-                    { this.state.fontLoaded ? (<Text style={[styles.createdText, { fontFamily: 'barlow' }]}>Nov 20, 2017</Text>) : null }
-                    <Image source={require('../../../assets/images/icon-time.png')} style={styles.clock} />
-                    { this.state.fontLoaded ? (<Text style={[styles.createdText, { fontFamily: 'barlow' }]}>9:21AM</Text>) : null }
-                    </View>
-                  </TouchableOpacity>
-                </Content>
-              </Container>
+              <TouchableOpacity style={styles.tableRow} onPress={() => navigate('HistoryDetail')}>
+                <View>
+                  <Image source={require('../../../assets/images/icon-coins.png')} style={styles.icon} />
+                </View>
+                <View style={styles.value}>
+                { this.state.fontLoaded ? (<Text style={[styles.valueText, { fontFamily: 'barlow-semi-bold' }]}>0.127 CEL</Text>) : null }
+                </View>
+                <View style={styles.status}>
+                { this.state.fontLoaded ? (<Text style={[styles.statusText, { fontFamily: 'barlow' }]}>ON HOLD</Text>) : null }
+                </View>
+                <View style={styles.created}>
+                { this.state.fontLoaded ? (<Text style={[styles.createdText, { fontFamily: 'barlow' }]}>Nov 20, 2017</Text>) : null }
+                <Image source={require('../../../assets/images/icon-time.png')} style={styles.clock} />
+                { this.state.fontLoaded ? (<Text style={[styles.createdText, { fontFamily: 'barlow' }]}>9:21AM</Text>) : null }
+                </View>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.tableRow} onPress={() => navigate('HistoryDetail')}>
+                <View>
+                <Image source={require('../../../assets/images/icon-etherium.png')} style={styles.icon} />
+                </View>
+                <View style={styles.value}>
+                { this.state.fontLoaded ? (<Text style={[styles.valueText, { fontFamily: 'barlow-semi-bold' }]}>7.000 ETH</Text>) : null }
+                </View>
+                <View style={[styles.status, styles.greenStatus]}>
+                { this.state.fontLoaded ? (<Text style={[styles.statusText, styles.greenText, { fontFamily: 'barlow' }]}>RECEIVED</Text>) : null }
+                </View>
+                <View style={styles.created}>
+                { this.state.fontLoaded ? (<Text style={[styles.createdText, { fontFamily: 'barlow' }]}>Nov 20, 2017</Text>) : null }
+                <Image source={require('../../../assets/images/icon-time.png')} style={styles.clock} />
+                { this.state.fontLoaded ? (<Text style={[styles.createdText, { fontFamily: 'barlow' }]}>9:21AM</Text>) : null }
+                </View>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.tableRow} onPress={() => navigate('HistoryDetail')}>
+                <View>
+                <Image source={require('../../../assets/images/icon-etherium.png')} style={styles.icon} />
+                </View>
+                <View style={styles.value}>
+                { this.state.fontLoaded ? (<Text style={[styles.valueText, { fontFamily: 'barlow-semi-bold' }]}>-1.000 ETH</Text>) : null }
+                </View>
+                <View style={[styles.status, styles.orangeStatus]}>
+                { this.state.fontLoaded ? (<Text style={[styles.statusText, styles.orangeText, { fontFamily: 'barlow' }]}>SOLD</Text>) : null }
+                </View>
+                <View style={styles.created}>
+                { this.state.fontLoaded ? (<Text style={[styles.createdText, { fontFamily: 'barlow' }]}>Nov 20, 2017</Text>) : null }
+                <Image source={require('../../../assets/images/icon-time.png')} style={styles.clock} />
+                { this.state.fontLoaded ? (<Text style={[styles.createdText, { fontFamily: 'barlow' }]}>9:21AM</Text>) : null }
+                </View>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.tableRow} onPress={() => navigate('HistoryDetail')}>
+                <View>
+                <Image source={require('../../../assets/images/icon-etherium.png')} style={styles.icon} />
+                </View>
+                <View style={styles.value}>
+                { this.state.fontLoaded ? (<Text style={[styles.valueText, { fontFamily: 'barlow-semi-bold' }]}>3.000 ETH</Text>) : null }
+                </View>
+                <View style={[styles.status, styles.greenStatus]}>
+                { this.state.fontLoaded ? (<Text style={[styles.statusText, styles.greenText, { fontFamily: 'barlow' }]}>RECEIVED</Text>) : null }
+                </View>
+                <View style={styles.created}>
+                { this.state.fontLoaded ? (<Text style={[styles.createdText, { fontFamily: 'barlow' }]}>Nov 20, 2017</Text>) : null }
+                <Image source={require('../../../assets/images/icon-time.png')} style={styles.clock} />
+                { this.state.fontLoaded ? (<Text style={[styles.createdText, { fontFamily: 'barlow' }]}>9:21AM</Text>) : null }
+                </View>
+              </TouchableOpacity>
+              <TouchableOpacity style={[styles.tableRow]} onPress={() => navigate('HistoryDetail')}>
+                <View>
+                  <Image source={require('../../../assets/images/icon-coins.png')} style={styles.icon} />
+                </View>
+                <View style={styles.value}>
+                { this.state.fontLoaded ? (<Text style={[styles.valueText, { fontFamily: 'barlow-semi-bold' }]}>0.127 CEL</Text>) : null }
+                </View>
+                <View style={styles.status}>
+                { this.state.fontLoaded ? (<Text style={[styles.statusText, { fontFamily: 'barlow' }]}>ON HOLD</Text>) : null }
+                </View>
+                <View style={styles.created}>
+                { this.state.fontLoaded ? (<Text style={[styles.createdText, { fontFamily: 'barlow' }]}>Nov 20, 2017</Text>) : null }
+                <Image source={require('../../../assets/images/icon-time.png')} style={styles.clock} />
+                { this.state.fontLoaded ? (<Text style={[styles.createdText, { fontFamily: 'barlow' }]}>9:21AM</Text>) : null }
+                </View>
+              </TouchableOpacity>
             </View>
-            <Text style={styles.footer}>
+            <Text style={[styles.footer, {marginBottom: 50}]}>
               { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow' }]}>Income history</Text>) : null }
             </Text>
           </Content>
@@ -292,7 +288,7 @@ const styles = StyleSheet.create({
   value: {
     position: 'absolute',
     top: 10,
-    left: 70,
+    left: 50,
   },
   valueText: {
     color: '#ffffff',
@@ -302,20 +298,20 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     resizeMode: "contain",
-    marginLeft: 15,
+    marginLeft: 0,
     marginTop: 20
   },
   status: {
     position: 'absolute',
     top: 45,
-    left: 60,
-    borderWidth: 2,
+    left: 40,
+    borderWidth: 1.5,
     borderColor: 'rgba(255, 255, 255, 0.5)',
     borderRadius: 20,
     paddingTop: 0,
     paddingBottom: 2,
     paddingLeft: 15,
-    paddingRight: 15
+    paddingRight: 15,
   },
   statusText: {
     color: '#ffffff',
@@ -324,10 +320,13 @@ const styles = StyleSheet.create({
   created: {
     position: 'absolute',
     right: 0,
-    top: 50,
+    bottom: 5,
     flexWrap: 'wrap',
     alignItems: 'flex-start',
     flexDirection:'row',
+    // borderWidth: 1,
+    // borderColor: 'red',
+    width: '50%',
   },
   clock: {
     width: 14,
@@ -340,7 +339,7 @@ const styles = StyleSheet.create({
   },
   createdText: {
     color: 'rgba(255, 255, 255, 0.5)',
-    fontSize: 14,
+    fontSize: 13,
     flexDirection:'column',
   },
   greenStatus: {
