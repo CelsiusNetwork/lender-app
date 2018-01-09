@@ -3,16 +3,16 @@ import { Container } from 'native-base'
 import { Provider } from 'react-redux'
 import { applyMiddleware, createStore } from 'redux'
 import { View, Text, Image } from 'react-native';
-import ReduxThunk from 'redux-thunk'
+import thunk from 'redux-thunk'
 // import { Font } from 'expo'
 import { Font, AppLoading, Asset } from "expo";
 
 import reducers from './reducers/index'
 import Navigator from './Navigator'
 
-const store = createStore(reducers, {}, applyMiddleware(ReduxThunk))
-// console.log('Initial application state:')
-// console.log(store.getState())
+import { composeWithDevTools } from 'remote-redux-devtools';
+
+const store = createStore(reducers, {}, composeWithDevTools(applyMiddleware(thunk)))
 
 function cacheImages(images) {
   return images.map(image => {
