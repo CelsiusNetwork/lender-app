@@ -1,7 +1,7 @@
 const apiUrl = 'https://celsiusnetwork.auth0.com'
 
 export const Auth0Service = () => ({
-  siginInWithEmailAndPassword({ email, password }) {
+  siginInWithEmailAndPassword ({ email, password }) {
     const request = {
       headers: {
         'Content-Type': 'application/json'

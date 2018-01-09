@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { StyleSheet, View, ImageBackground, Image, TouchableOpacity } from 'react-native'
 import { Button, Form, Input, Item, Label, Text, Content, Header, Title, Container } from 'native-base'
 import { registerFirstNameChanged, registerLastNameChanged, registerEmailChanged, registerPasswordChanged, registerPhoneNumberChanged, registerLender } from '../actions'
-import { Font } from 'expo';
+import { Font } from 'expo'
 import { NavigationActions } from 'react-navigation'
 
 class AddFounds extends Component {
@@ -18,17 +18,17 @@ class AddFounds extends Component {
   async componentDidMount() {
     await Font.loadAsync({
       'inconsolata': require('../../assets/fonts/Inconsolata-Regular.ttf'),
-    });
+    })
     await Font.loadAsync({
       'barlow-semi-bold': require('../../assets/fonts/Barlow-SemiBold.otf'),
-    });
+    })
     await Font.loadAsync({
       'barlow-light': require('../../assets/fonts/Barlow-Light.otf'),
-    });
+    })
     await Font.loadAsync({
       'barlow': require('../../assets/fonts/Barlow-Regular.otf'),
-    });
-    this.setState({ fontLoaded: true });
+    })
+    this.setState({ fontLoaded: true })
   }
 
   render () {
@@ -61,8 +61,7 @@ class AddFounds extends Component {
                       autoCorrect={false}
                       autoCapitalize='none' />
                   </Item>
-                  <TouchableOpacity
-                      style={styles.QRCodeWrapper}
+                  <TouchableOpacity style={styles.QRCodeWrapper}
                       onPress={() => navigate('QRScanner')}
                       // onPress={() => navigate('VerifyPhoneNumber')}
                       >

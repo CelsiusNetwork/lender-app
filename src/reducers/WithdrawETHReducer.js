@@ -2,6 +2,7 @@ import * as types from '../actions/Types'
 
 const WITHDRAW_ETH_STATE = {
   'loading': false,
+  'executed': false,
   'withdrawAmount': null,
   'withdrawTo': null,
   'note': null,
@@ -19,10 +20,18 @@ export default (state = WITHDRAW_ETH_STATE, action) => {
       return {
         ...state,
         loading: a.ether,
-        withdrawAmount: action.payload.deg,
+        withdrawAmount: action.payload,
+        executed: '',
         withdrawTo: '',
         note: '',
         error: ''
+      }
+    case types.SET_ETH_WITHDRAW_AMOUNT:
+      console.log('SET_ETH_WITHDRAW_AMOUNT')
+      console.log(action.payload)
+      return {
+        ...state,
+        withdrawAmount: action.payload
       }
     case types.WITHDRAW_ETH_ERROR:
       let errorMsg
