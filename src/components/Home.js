@@ -11,11 +11,32 @@ import { lenderAppInitToken } from '../actions'
 import { Font } from 'expo'
 
 class Home extends Component {
-  componentWillMount () {
-    this.props.fetchWalletBalance(this.props.walletAddress, this.props.token)
+  constructor (props) {
+    super(props)
+
+    this.state = {
+      fontLoaded: false,
+      eth: 10.000,
+      deg: 2.984,
+      change: ' ▲ +3.24%',
+      user: {
+        name: "Alex"
+      },
+    }
+    console.log('props: ')
+    console.log(props)
+
+    this.fetchingInterval = null
   }
 
-  async componentDidMount() {
+  componentWillMount () {
+    const { props } = this
+    this.fetchingInterval = setInterval(() => {
+      props.fetchWalletBalance(props.walletAddress, props.token)
+    }, 5000)
+  }
+
+  async componentDidMount () {
     await Font.loadAsync({
       'barlow-semi-bold': require('../../assets/fonts/Barlow-SemiBold.otf'),
     });
@@ -37,19 +58,8 @@ class Home extends Component {
     this.props = nextProps
   }
 
-  constructor (props) {
-    super(props)
-    this.state = {
-      fontLoaded: false,
-      eth: 10.000,
-      deg: 2.984,
-      change: ' ▲ +3.24%',
-      user: {
-        name: "Alex"
-      },
-    }
-    console.log('props: ')
-    console.log(props)
+  componentWillUnmount () {
+    clearInterval(this.fetchingInterval)
   }
 
   render () {
