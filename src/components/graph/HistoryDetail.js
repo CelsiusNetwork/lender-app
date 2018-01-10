@@ -27,6 +27,9 @@ class HistoryDetail extends Component {
 
   render () {
     const { navigate } = this.props.navigation
+    const { activeTransaction } = this.props
+
+    console.log(this.props)
     return (
       <View style={styles.container}>
         <ImageBackground source={require('../../../assets/images/background-blur.png')} style={styles.background}>
@@ -47,15 +50,7 @@ class HistoryDetail extends Component {
                     { this.state.fontLoaded ? (<Text style={[styles.cellLeftText, { fontFamily: 'barlow' }]}>Amount of ETH</Text>) : null }
                     </View>
                     <View style={styles.cellRight}>
-                    { this.state.fontLoaded ? (<Text style={[styles.cellRightText, { fontFamily: 'barlow-semi-bold' }]}>7.000 ETH</Text>) : null }
-                    </View>
-                  </View>
-                  <View style={styles.row}>
-                    <View style={styles.cellLeft}>
-                    { this.state.fontLoaded ? (<Text style={[styles.cellLeftText, { fontFamily: 'barlow' }]}>Value at the time</Text>) : null }
-                    </View>
-                    <View style={styles.cellRight}>
-                    { this.state.fontLoaded ? (<Text style={[styles.cellRightText, { fontFamily: 'barlow-semi-bold' }]}>$ 2,558.92</Text>) : null }
+                    { this.state.fontLoaded ? (<Text style={[styles.cellRightText, { fontFamily: 'barlow-semi-bold' }]}>{ activeTransaction.ethValue } ETH</Text>) : null }
                     </View>
                   </View>
                   <View style={styles.row}>
@@ -63,7 +58,7 @@ class HistoryDetail extends Component {
                     { this.state.fontLoaded ? (<Text style={[styles.cellLeftText, { fontFamily: 'barlow' }]}>Points earned</Text>) : null }
                     </View>
                     <View style={styles.cellRight}>
-                    { this.state.fontLoaded ? (<Text style={[styles.cellRightText, { fontFamily: 'barlow-semi-bold' }]}>2559</Text>) : null }
+                    { this.state.fontLoaded ? (<Text style={[styles.cellRightText, { fontFamily: 'barlow-semi-bold' }]}>100</Text>) : null }
                     <Image source={require('../../../assets/images/icon-points.png')} style={styles.points} />
                     </View>
                   </View>
@@ -72,7 +67,7 @@ class HistoryDetail extends Component {
                     { this.state.fontLoaded ? (<Text style={[styles.cellLeftText, { fontFamily: 'barlow' }]}>Date</Text>) : null }
                     </View>
                     <View style={styles.cellRight}>
-                    { this.state.fontLoaded ? (<Text style={[styles.cellRightText, { fontFamily: 'barlow-semi-bold' }]}>Nov 8, 2017</Text>) : null }
+                    { this.state.fontLoaded ? (<Text style={[styles.cellRightText, { fontFamily: 'barlow-semi-bold' }]}>{ activeTransaction.dateDisplay }</Text>) : null }
                     </View>
                   </View>
                   <View style={styles.row}>
@@ -80,7 +75,7 @@ class HistoryDetail extends Component {
                     { this.state.fontLoaded ? (<Text style={[styles.cellLeftText, { fontFamily: 'barlow' }]}>Time</Text>) : null }
                     </View>
                     <View style={styles.cellRight}>
-                    { this.state.fontLoaded ? (<Text style={[styles.cellRightText, { fontFamily: 'barlow-semi-bold' }]}>9:21AM</Text>) : null }
+                    { this.state.fontLoaded ? (<Text style={[styles.cellRightText, { fontFamily: 'barlow-semi-bold' }]}>{ activeTransaction.timeDisplay }</Text>) : null }
                     </View>
                   </View>
                   <View style={[styles.row, {borderBottomColor: 'rgba(255, 255, 255, 0.1)', borderBottomWidth: 2}]}>
@@ -289,11 +284,15 @@ const styles = StyleSheet.create({
 })
 
 const mapStateToProps = state => {
+  const { activeTransaction } = state.transactions;
+  console.log(state);
   return {
+    activeTransaction
   }
 }
 
 const mapDispatchToProps = {
+
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(HistoryDetail)

@@ -33,6 +33,13 @@ class IncomeHistory extends Component {
     this.props.fetchTransactionsHistory();
   }
 
+  handleTransacationPress(transaction) {
+    const { navigation, setActiveTransaction } = this.props
+    console.log(this.props)
+    setActiveTransaction(transaction)
+    navigation.navigate('HistoryDetail')
+  }
+
   render () {
     const { navigate } = this.props.navigation
     const { transactions } = this.props
@@ -66,14 +73,14 @@ class IncomeHistory extends Component {
             </View> */}
             <View style={styles.tableWrapper}>
               { transactions.map((t, i) => (
-                <TouchableOpacity key={ i } style={styles.tableRow} onPress={() => navigate('HistoryDetail')}>
+                <TouchableOpacity key={ i } style={styles.tableRow} onPress={() => this.handleTransacationPress(t) }>
                   <View>
                   <Image source={require('../../../assets/images/icon-etherium.png')} style={styles.icon} />
                   </View>
                   <View style={styles.value}>
-                    { this.state.fontLoaded ? (<Text style={[styles.valueText, { fontFamily: 'barlow-semi-bold' }]}>{ t.value } ETH</Text>) : '' }
+                    { this.state.fontLoaded ? (<Text style={[styles.valueText, { fontFamily: 'barlow-semi-bold' }]}>{ t.ethValue } ETH</Text>) : '' }
                   </View>
-                  { t.value >= 0 ? (
+                  { t.ethValue >= 0 ? (
                     <View style={[styles.status, styles.greenStatus]}>
                       { this.state.fontLoaded ? (<Text style={[styles.statusText, styles.greenText, { fontFamily: 'barlow' }]}>RECEIVED</Text>) : '' }
                     </View>

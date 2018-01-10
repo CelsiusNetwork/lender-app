@@ -22,6 +22,7 @@ export const LOGOUT_LENDER = 'logout_lender'
 export const FETCH_ETH_TRANSACTIONS_LOADING = 'fetch_eth_transactions_loading'
 export const FETCH_ETH_TRANSACTIONS_SUCCESS = 'fetch_eth_transactions_success'
 export const FETCH_ETH_TRANSACTIONS_FAIL = 'fetch_eth_transactions_fail'
+export const SET_ACTIVE_TRANSACTION = 'set_active_transactions'
 
 export const FETCH_LENDER_LOADING = 'fetch_lender_loading'
 export const FETCH_LENDER_SUCCESS = 'fetch_lender_success'

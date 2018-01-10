@@ -65,37 +65,3 @@ const handleWalletBalance = (dispatch, response) => {
     // handle this beach
   }
 }
-
-export const fetchTransactionsHistory = () => {
-  return (dispatch) => {
-    dispatch({
-      type: types.FETCH_ETH_TRANSACTIONS_LOADING
-    })
-    TestEtherScanService().fetchTransactionList()
-      .then(response => handleTransactionsList(dispatch, response))
-      .catch((error) => {
-        transactionsListFail(dispatch, error)
-      })
-  }
-}
-
-const handleTransactionsList = (dispatch, response) => {
-  if (response.data.message === 'OK') {
-    dispatch({
-      type: types.FETCH_ETH_TRANSACTIONS_SUCCESS,
-      payload: response.data.result
-    })
-    // todo: animate something so user knows we are updating
-  }
-  if (response.ok === false) {
-    transactionsListFail(dispatch, response.code)
-  }
-}
-
-const transactionsListFail = (dispatch, error) => {
-  console.debug(error)
-  dispatch({
-    type: types.FETCH_ETH_TRANSACTIONS_FAIL,
-    payload: error
-  })
-}

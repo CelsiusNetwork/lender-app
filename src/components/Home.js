@@ -6,7 +6,7 @@ import { Pages } from 'react-native-pages'
 import DegIncome from './graph/DegIncome'
 import DegValue from './graph/DegValue'
 import IncomeHistory from './graph/IncomeHistory'
-import { fetchWalletBalance, fetchTransactionsHistory } from '../actions'
+import { fetchWalletBalance, fetchTransactionsHistory, setActiveTransaction } from '../actions'
 import { lenderAppInitToken } from '../actions'
 import { Font } from 'expo'
 
@@ -182,6 +182,7 @@ class Home extends Component {
                   lenderAppInitToken={this.props.lenderAppInitToken}
                   fetchTransactionsHistory={this.props.fetchTransactionsHistory}
                   transactions={this.props.transactions}
+                  setActiveTransaction={this.props.setActiveTransaction}
                 />
               </Pages>
             </View>
@@ -585,7 +586,7 @@ const mapStateToProps = state => {
 // The mapDispatchToProps function lets us inject
 // certain props into the React component that can dispatch actions
 const mapDispatchToProps = {
-  fetchWalletBalance, fetchTransactionsHistory, lenderAppInitToken
+  fetchWalletBalance, fetchTransactionsHistory, lenderAppInitToken, setActiveTransaction
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)
