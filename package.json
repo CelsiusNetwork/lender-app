@@ -16,6 +16,7 @@
     "expo": "23.0.4",
     "immutable": "3.8.2",
     "lodash.throttle": "^4.1.1",
+    "moment": "^2.20.1",
     "native-base": "2.3.3",
     "react": "16.2.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-23.0.0.tar.gz",
