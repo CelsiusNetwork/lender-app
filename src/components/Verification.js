@@ -10,37 +10,20 @@ import VerifyPhoneNumber from './VerifyPhoneNumber'
 import VerifyDocument from './VerifyDocument'
 import VerifyPhoto from './VerifyPhoto'
 import Agree from './Agree'
-import Swiper from 'react-native-swiper'
 
 
 class Verification extends Component {
   constructor() {
     super();
     this.state = {
-      imgList: [
-        'https://gitlab.pro/yuji/demo/uploads/d6133098b53fe1a5f3c5c00cf3c2d670/DVrj5Hz.jpg_1',
-        'https://gitlab.pro/yuji/demo/uploads/2d5122a2504e5cbdf01f4fcf85f2594b/Mwb8VWH.jpg',
-        'https://gitlab.pro/yuji/demo/uploads/4421f77012d43a0b4e7cfbe1144aac7c/XFVzKhq.jpg',
-        'https://gitlab.pro/yuji/demo/uploads/576ef91941b0bda5761dde6914dae9f0/kD3eeHe.jpg'
-      ],
-      loadQueue: [0, 0, 0, 0]
+        progress: 0,
+        progressLine: '0%'
     }
-    this.loadHandle = this.loadHandle.bind(this)
   }
 
-  loadHandle (i) {
-    let loadQueue = this.state.loadQueue
-    loadQueue[i] = 1
-    this.setState({
-      loadQueue
-    })
-  }
+  scrollToPage() {
+    console.log('scrollToPage()')
 
-  goToPage() {
-    var progress = this.state.progress+25
-    this.setState({progress: progress})
-    this.setState({page: "VerifyPhoto"})
-    this.setState({progressLine: progress+"%"})
   }
 
   renderPager({ pages, progress, indicatorPosition }) {
@@ -63,25 +46,18 @@ class Verification extends Component {
             <ImageBackground source={require('../../assets/images/progress-line-bg.png')} style={styles.line}>
               <ImageBackground source={require('../../assets/images/progress-line.png')} style={[styles.lineInner, {width: this.state.progressLine}]}></ImageBackground>
             </ImageBackground>
-            {/* <TouchableOpacity style={styles.button}
-              onPress={() => this.goToPage()}
-              >
-                <Text style={styles.buttonText}>Go to second page</Text>
-              </TouchableOpacity>
-            <Pages
-              scrollToPage='VerifyPhoto'
-              scrollEnabled={false}
-              renderPager={this.renderPager.bind(this)}
-              // style={styles.pagesWrapper}
-              >
+
+            <Pages ref='kungfoo'>
               <VerifyPhoneNumber />
               <VerifyDocument />
               <VerifyPhoto />
               <Agree />
-            </Pages> */}
-            <Swiper loadMinimal loadMinimalSize={1} style={styles.wrapper} loop={false}>
-            </Swiper>
-
+            </Pages>
+            <TouchableOpacity style={styles.button}
+              onPress={() => this.refs.kungfoo.scrollToPage(2)}
+              >
+                <Text style={styles.buttonText}>Go to second page</Text>
+              </TouchableOpacity>
 
           </View>
 
@@ -187,6 +163,30 @@ const styles = StyleSheet.create({
 
   },
   button: {
+    backgroundColor: '#ffffff',
+    borderRadius: 5,
+    padding: 5,
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 30,
+    marginLeft: 30
+  },
+  buttonText: {
+    color: '#333333'
+  }
+})
+
+const mapStateToProps = state => {
+  return {
+  }
+}
+
+const mapDispatchToProps = {
+  lenderAppInitToken
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Verification)
     backgroundColor: '#ffffff',
     borderRadius: 5,
     padding: 5,
