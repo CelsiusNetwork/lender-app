@@ -10,15 +10,30 @@ import VerifyPhoneNumber from './VerifyPhoneNumber'
 import VerifyDocument from './VerifyDocument'
 import VerifyPhoto from './VerifyPhoto'
 import Agree from './Agree'
+import Swiper from 'react-native-swiper'
 
 
 class Verification extends Component {
   constructor() {
     super();
     this.state = {
-        progress: 0,
-        progressLine: '0%'
+      imgList: [
+        'https://gitlab.pro/yuji/demo/uploads/d6133098b53fe1a5f3c5c00cf3c2d670/DVrj5Hz.jpg_1',
+        'https://gitlab.pro/yuji/demo/uploads/2d5122a2504e5cbdf01f4fcf85f2594b/Mwb8VWH.jpg',
+        'https://gitlab.pro/yuji/demo/uploads/4421f77012d43a0b4e7cfbe1144aac7c/XFVzKhq.jpg',
+        'https://gitlab.pro/yuji/demo/uploads/576ef91941b0bda5761dde6914dae9f0/kD3eeHe.jpg'
+      ],
+      loadQueue: [0, 0, 0, 0]
     }
+    this.loadHandle = this.loadHandle.bind(this)
+  }
+
+  loadHandle (i) {
+    let loadQueue = this.state.loadQueue
+    loadQueue[i] = 1
+    this.setState({
+      loadQueue
+    })
   }
 
   goToPage() {
@@ -48,13 +63,13 @@ class Verification extends Component {
             <ImageBackground source={require('../../assets/images/progress-line-bg.png')} style={styles.line}>
               <ImageBackground source={require('../../assets/images/progress-line.png')} style={[styles.lineInner, {width: this.state.progressLine}]}></ImageBackground>
             </ImageBackground>
-            <TouchableOpacity style={styles.button}
+            {/* <TouchableOpacity style={styles.button}
               onPress={() => this.goToPage()}
               >
                 <Text style={styles.buttonText}>Go to second page</Text>
               </TouchableOpacity>
             <Pages
-              scrollToPage={this.page}
+              scrollToPage='VerifyPhoto'
               scrollEnabled={false}
               renderPager={this.renderPager.bind(this)}
               // style={styles.pagesWrapper}
@@ -63,7 +78,9 @@ class Verification extends Component {
               <VerifyDocument />
               <VerifyPhoto />
               <Agree />
-            </Pages>
+            </Pages> */}
+            <Swiper loadMinimal loadMinimalSize={1} style={styles.wrapper} loop={false}>
+            </Swiper>
 
 
           </View>
@@ -181,6 +198,31 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: '#333333'
+  },
+  wrapper: {
+  },
+  slide1: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#9DD6EB',
+  },
+  slide2: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#97CAE5',
+  },
+  slide3: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#92BBD9',
+  },
+  text: {
+    color: '#fff',
+    fontSize: 30,
+    fontWeight: 'bold',
   }
 })
 
