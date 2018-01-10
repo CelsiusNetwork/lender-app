@@ -33,7 +33,10 @@ class Verification extends Component {
               <ImageBackground source={require('../../assets/images/progress-line.png')} style={[styles.lineInner, {width: this.state.progressLine}]}></ImageBackground>
             </ImageBackground>
 
-            <Pages ref='kungfoo'>
+            <Pages
+              scrollEnabled={false}
+              renderPager={this.renderPager.bind(this)}
+              ref='kungfoo'>
               <VerifyPhoneNumber />
               <VerifyDocument />
               <VerifyPhoto />
