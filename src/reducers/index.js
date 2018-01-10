@@ -7,6 +7,8 @@ import RegisterReducer from './RegisterReducer'
 import LenderReducer from './LenderReducer'
 import WalletBalance from './WalletBalance'
 import WithdrawETHReducer from './WithdrawETHReducer'
+import TransactionsReducer from './TransactionsReducer'
+
 
 export default combineReducers({
   auth: LoginReducer,
@@ -15,5 +17,6 @@ export default combineReducers({
   lender: LenderReducer,
   wallet: WalletBalance,
   register: RegisterReducer,
-  withdrawETH: WithdrawETHReducer
+  withdrawETH: WithdrawETHReducer,
+  transactions: TransactionsReducer,
 })

@@ -177,7 +177,12 @@ class Home extends Component {
               <Pages style={stylesGraph.pages}>
                 <DegIncome navigation={this.props.navigation} lenderAppInitToken={this.props.lenderAppInitToken} />
                 <DegValue navigation={this.props.navigation} lenderAppInitToken={this.props.lenderAppInitToken} />
-                <IncomeHistory navigation={this.props.navigation} lenderAppInitToken={this.props.lenderAppInitToken} />
+                <IncomeHistory
+                  navigation={this.props.navigation}
+                  lenderAppInitToken={this.props.lenderAppInitToken}
+                  fetchTransactionsHistory={this.props.fetchTransactionsHistory}
+                  transactions={this.props.transactions}
+                />
               </Pages>
             </View>
           </ImageBackground>
@@ -572,7 +577,8 @@ const mapStateToProps = state => {
     walletAddress: state.lender.walletAddress,
     lender: state.lender,
     ethBalance: state.wallet.ethBalance,
-    celBalance: state.wallet.celBalance
+    celBalance: state.wallet.celBalance,
+    transactions: state.transactions.transactions
   }
 }
 
