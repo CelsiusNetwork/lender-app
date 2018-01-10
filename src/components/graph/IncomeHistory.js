@@ -29,10 +29,14 @@ class IncomeHistory extends Component {
       'barlow': require('../../../assets/fonts/Barlow-Regular.otf'),
     });
     this.setState({ fontLoaded: true });
+
+    this.props.fetchTransactionsHistory();
   }
 
   render () {
     const { navigate } = this.props.navigation
+    const { transactions } = this.props
+
     return (
       <View style={styles.welcomeContainer}>
         <Container style={styles.wrapper}>
@@ -61,86 +65,30 @@ class IncomeHistory extends Component {
               </View>
             </View> */}
             <View style={styles.tableWrapper}>
-              <TouchableOpacity style={styles.tableRow} onPress={() => navigate('HistoryDetail')}>
-                <View>
-                  <Image source={require('../../../assets/images/icon-coins.png')} style={styles.icon} />
-                </View>
-                <View style={styles.value}>
-                { this.state.fontLoaded ? (<Text style={[styles.valueText, { fontFamily: 'barlow-semi-bold' }]}>0.127 CEL</Text>) : null }
-                </View>
-                <View style={styles.status}>
-                { this.state.fontLoaded ? (<Text style={[styles.statusText, { fontFamily: 'barlow' }]}>ON HOLD</Text>) : null }
-                </View>
-                <View style={styles.created}>
-                { this.state.fontLoaded ? (<Text style={[styles.createdText, { fontFamily: 'barlow' }]}>Nov 20, 2017</Text>) : null }
-                <Image source={require('../../../assets/images/icon-time.png')} style={styles.clock} />
-                { this.state.fontLoaded ? (<Text style={[styles.createdText, { fontFamily: 'barlow' }]}>9:21AM</Text>) : null }
-                </View>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.tableRow} onPress={() => navigate('HistoryDetail')}>
-                <View>
-                <Image source={require('../../../assets/images/icon-etherium.png')} style={styles.icon} />
-                </View>
-                <View style={styles.value}>
-                { this.state.fontLoaded ? (<Text style={[styles.valueText, { fontFamily: 'barlow-semi-bold' }]}>7.000 ETH</Text>) : null }
-                </View>
-                <View style={[styles.status, styles.greenStatus]}>
-                { this.state.fontLoaded ? (<Text style={[styles.statusText, styles.greenText, { fontFamily: 'barlow' }]}>RECEIVED</Text>) : null }
-                </View>
-                <View style={styles.created}>
-                { this.state.fontLoaded ? (<Text style={[styles.createdText, { fontFamily: 'barlow' }]}>Nov 20, 2017</Text>) : null }
-                <Image source={require('../../../assets/images/icon-time.png')} style={styles.clock} />
-                { this.state.fontLoaded ? (<Text style={[styles.createdText, { fontFamily: 'barlow' }]}>9:21AM</Text>) : null }
-                </View>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.tableRow} onPress={() => navigate('HistoryDetail')}>
-                <View>
-                <Image source={require('../../../assets/images/icon-etherium.png')} style={styles.icon} />
-                </View>
-                <View style={styles.value}>
-                { this.state.fontLoaded ? (<Text style={[styles.valueText, { fontFamily: 'barlow-semi-bold' }]}>-1.000 ETH</Text>) : null }
-                </View>
-                <View style={[styles.status, styles.orangeStatus]}>
-                { this.state.fontLoaded ? (<Text style={[styles.statusText, styles.orangeText, { fontFamily: 'barlow' }]}>SOLD</Text>) : null }
-                </View>
-                <View style={styles.created}>
-                { this.state.fontLoaded ? (<Text style={[styles.createdText, { fontFamily: 'barlow' }]}>Nov 20, 2017</Text>) : null }
-                <Image source={require('../../../assets/images/icon-time.png')} style={styles.clock} />
-                { this.state.fontLoaded ? (<Text style={[styles.createdText, { fontFamily: 'barlow' }]}>9:21AM</Text>) : null }
-                </View>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.tableRow} onPress={() => navigate('HistoryDetail')}>
-                <View>
-                <Image source={require('../../../assets/images/icon-etherium.png')} style={styles.icon} />
-                </View>
-                <View style={styles.value}>
-                { this.state.fontLoaded ? (<Text style={[styles.valueText, { fontFamily: 'barlow-semi-bold' }]}>3.000 ETH</Text>) : null }
-                </View>
-                <View style={[styles.status, styles.greenStatus]}>
-                { this.state.fontLoaded ? (<Text style={[styles.statusText, styles.greenText, { fontFamily: 'barlow' }]}>RECEIVED</Text>) : null }
-                </View>
-                <View style={styles.created}>
-                { this.state.fontLoaded ? (<Text style={[styles.createdText, { fontFamily: 'barlow' }]}>Nov 20, 2017</Text>) : null }
-                <Image source={require('../../../assets/images/icon-time.png')} style={styles.clock} />
-                { this.state.fontLoaded ? (<Text style={[styles.createdText, { fontFamily: 'barlow' }]}>9:21AM</Text>) : null }
-                </View>
-              </TouchableOpacity>
-              <TouchableOpacity style={[styles.tableRow]} onPress={() => navigate('HistoryDetail')}>
-                <View>
-                  <Image source={require('../../../assets/images/icon-coins.png')} style={styles.icon} />
-                </View>
-                <View style={styles.value}>
-                { this.state.fontLoaded ? (<Text style={[styles.valueText, { fontFamily: 'barlow-semi-bold' }]}>0.127 CEL</Text>) : null }
-                </View>
-                <View style={styles.status}>
-                { this.state.fontLoaded ? (<Text style={[styles.statusText, { fontFamily: 'barlow' }]}>ON HOLD</Text>) : null }
-                </View>
-                <View style={styles.created}>
-                { this.state.fontLoaded ? (<Text style={[styles.createdText, { fontFamily: 'barlow' }]}>Nov 20, 2017</Text>) : null }
-                <Image source={require('../../../assets/images/icon-time.png')} style={styles.clock} />
-                { this.state.fontLoaded ? (<Text style={[styles.createdText, { fontFamily: 'barlow' }]}>9:21AM</Text>) : null }
-                </View>
-              </TouchableOpacity>
+              { transactions.map((t, i) => (
+                <TouchableOpacity key={ i } style={styles.tableRow} onPress={() => navigate('HistoryDetail')}>
+                  <View>
+                  <Image source={require('../../../assets/images/icon-etherium.png')} style={styles.icon} />
+                  </View>
+                  <View style={styles.value}>
+                    { this.state.fontLoaded ? (<Text style={[styles.valueText, { fontFamily: 'barlow-semi-bold' }]}>{ t.value } ETH</Text>) : '' }
+                  </View>
+                  { t.value >= 0 ? (
+                    <View style={[styles.status, styles.greenStatus]}>
+                      { this.state.fontLoaded ? (<Text style={[styles.statusText, styles.greenText, { fontFamily: 'barlow' }]}>RECEIVED</Text>) : '' }
+                    </View>
+                  ) : (
+                    <View style={[styles.status, styles.orangeStatus]}>
+                      { this.state.kurac ? (<Text style={[styles.statusText, styles.orangeText, { fontFamily: 'barlow' }]}>SOLD</Text>) : '' }
+                    </View>
+                  )}
+                  <View style={styles.created}>
+                  { this.state.fontLoaded ? (<Text style={[styles.createdText, { fontFamily: 'barlow' }]}>{ t.dateDisplay }</Text>) : '' }
+                  <Image source={require('../../../assets/images/icon-time.png')} style={styles.clock} />
+                  { this.state.fontLoaded ? (<Text style={[styles.createdText, { fontFamily: 'barlow' }]}>{ t.timeDisplay }</Text>) : '' }
+                  </View>
+                </TouchableOpacity>
+              ))}
             </View>
             <Text style={[styles.footer, {marginBottom: 50}]}>
               { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow' }]}>Income history</Text>) : null }

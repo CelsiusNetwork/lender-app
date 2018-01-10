@@ -97,7 +97,7 @@ class Register extends Component {
                   block primary>
                   <Text
                     style={styles.buttonText}
-                  >Verify your profile</Text>
+                  >Register</Text>
                 </Button>
               </Form>
             </Content>

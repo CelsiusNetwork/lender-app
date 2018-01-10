@@ -8,7 +8,7 @@ import DegValue from './graph/DegValue'
 import IncomeHistory from './graph/IncomeHistory'
 import { fetchWalletBalance, fetchTransactionsHistory } from '../actions'
 import { lenderAppInitToken } from '../actions'
-import { Font } from 'expo';
+import { Font } from 'expo'
 
 class Home extends Component {
   componentWillMount () {
@@ -177,7 +177,12 @@ class Home extends Component {
               <Pages style={stylesGraph.pages}>
                 <DegIncome navigation={this.props.navigation} lenderAppInitToken={this.props.lenderAppInitToken} />
                 <DegValue navigation={this.props.navigation} lenderAppInitToken={this.props.lenderAppInitToken} />
-                <IncomeHistory navigation={this.props.navigation} lenderAppInitToken={this.props.lenderAppInitToken} />
+                <IncomeHistory
+                  navigation={this.props.navigation}
+                  lenderAppInitToken={this.props.lenderAppInitToken}
+                  fetchTransactionsHistory={this.props.fetchTransactionsHistory}
+                  transactions={this.props.transactions}
+                />
               </Pages>
             </View>
           </ImageBackground>
@@ -572,7 +577,8 @@ const mapStateToProps = state => {
     walletAddress: state.lender.walletAddress,
     lender: state.lender,
     ethBalance: state.wallet.ethBalance,
-    celBalance: state.wallet.celBalance
+    celBalance: state.wallet.celBalance,
+    transactions: state.transactions.transactions
   }
 }
 

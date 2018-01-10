@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Alert, ImageBackground, StyleSheet, View, Image, Text, TouchableOpacity, AsyncStorage, Animated } from 'react-native'
 import { Form, Input, Item, Label, Content, Container } from 'native-base'
 import { NavigationActions } from 'react-navigation'
-import { Font } from 'expo';
+import { Font } from 'expo'
 
 export default class DegIncome extends Component {
   constructor(props) {
@@ -61,7 +61,6 @@ export default class DegIncome extends Component {
               </View>
             </View> */}
             <View style={styles.graphWrapper}>
-              <Image source={require('../../../assets/images/graph-token-earnings.png')} style={styles.graph} />
             </View>
             <Text style={styles.footer}>
               { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow' }]}>CEL Earnings</Text>) : null }

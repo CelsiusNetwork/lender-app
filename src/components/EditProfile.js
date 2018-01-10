@@ -62,12 +62,21 @@ class EditProfile extends Component {
                 <Text style={styles.ptsTextExt}>pts</Text>
               </View>
               <ImageBackground source={require('../../assets/images/avatar-wrapper.png')} style={styles.avatarWrapper}>
+<<<<<<< HEAD
                 {/* <ImageBackground source={{uri:profilePicture}} style={styles.avatar}></ImageBackground> */}
+=======
+                {/* <ImageBackground source={require('../../assets/images/avatar.png')} style={styles.avatar}></ImageBackground> */}
+>>>>>>> 9377d255f5551d10cb8d954439281d905cd27905
                 <Image
                   source={{uri:profilePicture}}
                   style={styles.avatar}
                   resizeMode="cover"
+<<<<<<< HEAD
                   borderRadius={90} />
+=======
+                  borderRadius={90}
+                />
+>>>>>>> 9377d255f5551d10cb8d954439281d905cd27905
               </ImageBackground>
             </View>
             <Container>
@@ -144,7 +153,7 @@ class EditProfile extends Component {
                       <Button
                         style={styles.button2}
                         // onPress={this.onButtonPress.bind(this)}
-                        onPress={() => navigate('Home')}
+                        onPress={() => this.props.navigation.goBack()}
                         // block primary
                         >
                         <Text
@@ -299,7 +308,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 10,
     marginBottom: 10,
-    position: 'relative'
+    position: 'relative',
   },
   avatarWrapper: {
     width: 196,
@@ -309,7 +318,8 @@ const styles = StyleSheet.create({
   avatar: {
     marginTop: 8,
     width: 180,
-    height: 180
+    height: 180,
+    borderRadius: 60
   },
   pts: {
     width: 100,
