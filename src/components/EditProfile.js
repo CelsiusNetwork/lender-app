@@ -62,21 +62,11 @@ class EditProfile extends Component {
                 <Text style={styles.ptsTextExt}>pts</Text>
               </View>
               <ImageBackground source={require('../../assets/images/avatar-wrapper.png')} style={styles.avatarWrapper}>
-<<<<<<< HEAD
-                {/* <ImageBackground source={{uri:profilePicture}} style={styles.avatar}></ImageBackground> */}
-=======
-                {/* <ImageBackground source={require('../../assets/images/avatar.png')} style={styles.avatar}></ImageBackground> */}
->>>>>>> 9377d255f5551d10cb8d954439281d905cd27905
                 <Image
                   source={{uri:profilePicture}}
                   style={styles.avatar}
                   resizeMode="cover"
-<<<<<<< HEAD
                   borderRadius={90} />
-=======
-                  borderRadius={90}
-                />
->>>>>>> 9377d255f5551d10cb8d954439281d905cd27905
               </ImageBackground>
             </View>
             <Container>
