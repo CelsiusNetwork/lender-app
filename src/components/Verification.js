@@ -21,20 +21,6 @@ class Verification extends Component {
     }
   }
 
-  scrollToPage() {
-    console.log('scrollToPage()')
-
-  }
-
-  renderPager({ pages, progress, indicatorPosition }) {
-    if ('none' === indicatorPosition) {
-      return null;
-    }
-    return (
-      null
-    );
-  }
-
   render () {
     // const { navigate } = this.props.navigation
     return (
@@ -54,7 +40,7 @@ class Verification extends Component {
               <Agree />
             </Pages>
             <TouchableOpacity style={styles.button}
-              onPress={() => this.refs.kungfoo.scrollToPage(2)}
+              onPress={() => this.refs.kungfoo.scrollToPage(() => console.log(this.refs.kungfoo))}
               >
                 <Text style={styles.buttonText}>Go to second page</Text>
               </TouchableOpacity>
