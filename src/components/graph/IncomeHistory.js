@@ -64,7 +64,7 @@ class IncomeHistory extends Component {
                 </TouchableOpacity>
               </View>
             </View> */}
-            <View style={styles.tableWrapper}
+            <View style={styles.tableWrapper}>
               { transactions.map((t, i) => (
                 <TouchableOpacity key={ i } style={styles.tableRow} onPress={() => navigate('HistoryDetail')}>
                   <View>
@@ -89,7 +89,6 @@ class IncomeHistory extends Component {
                   </View>
                 </TouchableOpacity>
               ))}
-
             </View>
             <Text style={[styles.footer, {marginBottom: 50}]}>
               { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow' }]}>Income history</Text>) : null }
