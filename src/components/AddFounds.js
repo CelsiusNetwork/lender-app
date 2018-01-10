@@ -98,7 +98,7 @@ class AddFounds extends Component {
                 </View>
                 <View style={styles.center}>
                   <TouchableOpacity
-                    onPress={() => navigate('Home')}
+                    onPress={() => this.props.navigation.goBack()}
                     style={styles.button}>
                     <Text style={styles.buttonText}>
                       Done

@@ -1,19 +1,27 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { StyleSheet, View, ImageBackground, Image, TouchableOpacity } from 'react-native'
-import { Button, Form, Input, Item, Label, Text, Content, Header, Title, Container } from 'native-base'
-import { registerFirstNameChanged, registerLastNameChanged, registerEmailChanged, registerPasswordChanged, registerPhoneNumberChanged, registerLender } from '../actions'
-import { Font } from 'expo'
-import { NavigationActions } from 'react-navigation'
-import { withdrawETH } from '../actions'
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
+import {StyleSheet, View, ImageBackground, Image, TouchableOpacity} from 'react-native'
+import {Button, Form, Input, Item, Label, Text, Content, Header, Title, Container} from 'native-base'
+import {
+  registerFirstNameChanged,
+  registerLastNameChanged,
+  registerEmailChanged,
+  registerPasswordChanged,
+  registerPhoneNumberChanged,
+  registerLender
+} from '../actions'
+import {Font} from 'expo'
+import {NavigationActions} from 'react-navigation'
+import {withdrawETH} from '../actions'
 
 class AddFounds extends Component {
-  constructor(props) {
-    super(props);
+  constructor (props) {
+    super(props)
     this.state = {
-        fontLoaded: false,
-        eth: 6.350,
-      }
+      fontLoaded: false,
+      eth: 6.350,
+      toAddress: ''
+    }
   }
 
   async componentDidMount() {
@@ -29,11 +37,15 @@ class AddFounds extends Component {
     await Font.loadAsync({
       'barlow': require('../../assets/fonts/Barlow-Regular.otf'),
     })
-    this.setState({ fontLoaded: true })
+    this.setState({fontLoaded: true})
+  }
+
+  handleChangeToAddress (toAddress) {
+    this.setState({ toAddress })
   }
 
   render () {
-    const { navigate } = this.props.navigation
+    const {navigate} = this.props.navigation
     return (
       <View style={styles.container}>
         <ImageBackground source={require('../../assets/images/background-blur.png')} style={styles.background}>
@@ -47,11 +59,11 @@ class AddFounds extends Component {
                     <Label style={{color: '#9CA9B6'}}>{'to'.toUpperCase()}</Label>
                     <Input
                       style={styles.input}
-                      // onChangeText={this.onFirstNameChange.bind(this)}
-                      value={this.state.to}
+                      onChangeText={this.handleChangeToAddress.bind(this)}
+                      value={this.state.toAddress}
                       autoCorrect={false}
                       // highlightColor="#00ACC1" // cyan600
-                      autoFocus autoCapitalize='none' />
+                      autoFocus autoCapitalize='none'/>
                   </Item>
                   <Item floatingLabel style={styles.floatingWrapper}>
                     <Label style={{color: '#9CA9B6'}}>{'note'.toUpperCase()}</Label>
@@ -60,18 +72,18 @@ class AddFounds extends Component {
                       // onChangeText={this.onLastNameChange.bind(this)}
                       value={this.state.note}
                       autoCorrect={false}
-                      autoCapitalize='none' />
+                      autoCapitalize='none'/>
                   </Item>
                   <TouchableOpacity style={styles.QRCodeWrapper}
-                      onPress={() => navigate('QRScanner')}
-                      // onPress={() => navigate('VerifyPhoneNumber')}
-                      >
-                      <Image source={require('../../assets/images/icon-scan-qrcode.png')} style={styles.QRCode} />
-                    </TouchableOpacity>
+                                    onPress={() => navigate('QRScanner')}
+                    // onPress={() => navigate('VerifyPhoneNumber')}
+                  >
+                    <Image source={require('../../assets/images/icon-scan-qrcode.png')} style={styles.QRCode}/>
+                  </TouchableOpacity>
 
                 </Form>
                 <View style={styles.center}>
-                  <TouchableOpacity style={styles.button} onPress={() => this.props.withdrawETH('password', this.props.walletAddress, 'toAddress', this.props.withdrawAmount, this.props.token)}>
+                  <TouchableOpacity style={styles.button} onPress={() => this.props.withdrawETH('test42!', this.props.walletAddress, this.state.toAddress, this.props.withdrawAmount, this.props.token)}>
                     <Text style={styles.buttonText}>
                       Confirm withdraw
                     </Text>
@@ -88,8 +100,10 @@ class AddFounds extends Component {
   }
 
   renderError () {
-    if (this.props.error !== '') { return (<Text style={styles.errorText}>{this.props.error}</Text>) }
-    return <View />
+    if (this.props.error !== '') {
+      return (<Text style={styles.errorText}>{this.props.error}</Text>)
+    }
+    return <View/>
   }
 
 }
@@ -123,12 +137,12 @@ const styles = StyleSheet.create({
     marginBottom: 5
   },
   header: {
-		fontSize: 34,
-		backgroundColor: 'rgba(0,0,0,0)',
-		color: 'white',
-		paddingLeft: 30,
-		paddingRight: 30,
-		marginBottom: 30,
+    fontSize: 34,
+    backgroundColor: 'rgba(0,0,0,0)',
+    color: 'white',
+    paddingLeft: 30,
+    paddingRight: 30,
+    marginBottom: 30,
     fontWeight: 'bold',
     textAlign: 'center',
     marginTop: 60,
@@ -176,7 +190,7 @@ const styles = StyleSheet.create({
   },
   form: {
     marginLeft: 20,
-    marginRight: 20,
+    marginRight: 20
   },
   floatingLabel: {
     color: '#9CA9B6',
@@ -189,11 +203,11 @@ const styles = StyleSheet.create({
   center: {
     // flex: 1,
     // flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   row: {
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'center'
     // height: 50,
   },
   floatingWrapper: {

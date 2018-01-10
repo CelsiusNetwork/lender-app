@@ -48,6 +48,7 @@ class EditProfile extends Component {
     const lastName = this.props.surname
     const email = this.props.email
     const phoneNumber = this.props.phoneNumber
+    const profilePicture = this.props.picture
     return (
       <View style={styles.container}>
         <ImageBackground source={require('../../assets/images/background-blur.png')} style={styles.background}>
@@ -61,6 +62,7 @@ class EditProfile extends Component {
                 <Text style={styles.ptsTextExt}>pts</Text>
               </View>
               <ImageBackground source={require('../../assets/images/avatar-wrapper.png')} style={styles.avatarWrapper}>
+<<<<<<< HEAD
                 {/* <ImageBackground source={require('../../assets/images/avatar.png')} style={styles.avatar}></ImageBackground> */}
                 <Image
                   source={require('../../assets/images/avatar.png')}
@@ -68,6 +70,10 @@ class EditProfile extends Component {
                   resizeMode="cover"
                   borderRadius={90}
                 />
+=======
+                <ImageBackground source={{uri:profilePicture}} style={styles.avatar}>
+                </ImageBackground>
+>>>>>>> e51c5039e3ff5c9ed5485fe392a7010059922c8e
               </ImageBackground>
             </View>
             <Container>
@@ -144,7 +150,7 @@ class EditProfile extends Component {
                       <Button
                         style={styles.button2}
                         // onPress={this.onButtonPress.bind(this)}
-                        onPress={() => navigate('Home')}
+                        onPress={() => this.props.navigation.goBack()}
                         // block primary
                         >
                         <Text
@@ -357,7 +363,7 @@ const mapStateToProps = state => {
     lender: state.lender,
     ethBalance: state.wallet.ethBalance,
     celBalance: state.wallet.celBalance,
-
+    picture: state.lender.lender.picture,
     error: state.register.error,
     nav: state.nav
   }
