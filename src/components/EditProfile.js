@@ -61,8 +61,13 @@ class EditProfile extends Component {
                 <Text style={styles.ptsTextExt}>pts</Text>
               </View>
               <ImageBackground source={require('../../assets/images/avatar-wrapper.png')} style={styles.avatarWrapper}>
-                <ImageBackground source={require('../../assets/images/avatar.png')} style={styles.avatar}>
-                </ImageBackground>
+                {/* <ImageBackground source={require('../../assets/images/avatar.png')} style={styles.avatar}></ImageBackground> */}
+                <Image
+                  source={require('../../assets/images/avatar.png')}
+                  style={styles.avatar}
+                  resizeMode="cover"
+                  borderRadius={90}
+                />
               </ImageBackground>
             </View>
             <Container>
@@ -294,7 +299,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 10,
     marginBottom: 10,
-    position: 'relative'
+    position: 'relative',
   },
   avatarWrapper: {
     width: 196,
@@ -304,7 +309,8 @@ const styles = StyleSheet.create({
   avatar: {
     marginTop: 8,
     width: 180,
-    height: 180
+    height: 180,
+    borderRadius: 60
   },
   pts: {
     width: 100,
