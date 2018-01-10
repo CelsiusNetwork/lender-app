@@ -78,21 +78,21 @@ class IncomeHistory extends Component {
                   <Image source={require('../../../assets/images/icon-etherium.png')} style={styles.icon} />
                   </View>
                   <View style={styles.value}>
-                    { this.state.fontLoaded ? (<Text style={[styles.valueText, { fontFamily: 'barlow-semi-bold' }]}>{ t.ethValue } ETH</Text>) : '' }
+                    { this.state.fontLoaded ? (<Text style={[styles.valueText, { fontFamily: 'barlow-semi-bold' }]}>{ t.ethValue } ETH</Text>) : null }
                   </View>
                   { t.ethValue >= 0 ? (
                     <View style={[styles.status, styles.greenStatus]}>
-                      { this.state.fontLoaded ? (<Text style={[styles.statusText, styles.greenText, { fontFamily: 'barlow' }]}>RECEIVED</Text>) : '' }
+                      { this.state.fontLoaded ? (<Text style={[styles.statusText, styles.greenText, { fontFamily: 'barlow' }]}>RECEIVED</Text>) : null }
                     </View>
                   ) : (
                     <View style={[styles.status, styles.orangeStatus]}>
-                      { this.state.kurac ? (<Text style={[styles.statusText, styles.orangeText, { fontFamily: 'barlow' }]}>SOLD</Text>) : '' }
+                      { this.state.kurac ? (<Text style={[styles.statusText, styles.orangeText, { fontFamily: 'barlow' }]}>SOLD</Text>) : null }
                     </View>
                   )}
                   <View style={styles.created}>
-                  { this.state.fontLoaded ? (<Text style={[styles.createdText, { fontFamily: 'barlow' }]}>{ t.dateDisplay }</Text>) : '' }
+                  { this.state.fontLoaded ? (<Text style={[styles.createdText, { fontFamily: 'barlow' }]}>{ t.dateDisplay }</Text>) : null }
                   <Image source={require('../../../assets/images/icon-time.png')} style={styles.clock} />
-                  { this.state.fontLoaded ? (<Text style={[styles.createdText, { fontFamily: 'barlow' }]}>{ t.timeDisplay }</Text>) : '' }
+                  { this.state.fontLoaded ? (<Text style={[styles.createdText, { fontFamily: 'barlow' }]}>{ t.timeDisplay }</Text>) : null }
                   </View>
                 </TouchableOpacity>
               ))}
