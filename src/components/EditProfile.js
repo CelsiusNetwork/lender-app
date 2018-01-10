@@ -140,7 +140,7 @@ class EditProfile extends Component {
                       <Button
                         style={styles.button2}
                         // onPress={this.onButtonPress.bind(this)}
-                        onPress={() => navigate('Home')}
+                        onPress={() => this.props.navigation.goBack()}
                         // block primary
                         >
                         <Text
