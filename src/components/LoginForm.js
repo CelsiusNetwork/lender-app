@@ -31,6 +31,8 @@ class LoginForm extends Component {
 
   render () {
     const { navigate } = this.props.navigation
+    const { loading } = this.props
+
     return (
       <View style={styles.container}>
         <ImageBackground source={require('../../assets/images/background.png')} style={styles.background}>
@@ -62,7 +64,11 @@ class LoginForm extends Component {
 
                 {this.renderError()}
                 <Button style={styles.button} onPress={this.onButtonPress.bind(this)} block primary>
-                  <Text style={styles.buttonText}>Log in</Text>
+                  { loading ? (
+                    <Image source={require('../../assets/images/animated_spinner.gif')} style={styles.loader} />
+                  ) : (
+                    <Text style={styles.buttonText}>Log in</Text>
+                  )}
                 </Button>
 
                 <View>
@@ -171,6 +177,10 @@ const styles = StyleSheet.create({
     marginLeft: 15,
     marginTop: 10,
     color: '#FF9494'
+  },
+  loader: {
+    width: 30,
+    height: 30,
   }
 })
 
