@@ -4,8 +4,8 @@ import { connect } from "react-redux"
 import { addNavigationHelpers, NavigationActions, StackNavigator } from "react-navigation"
 
 
-import WelcomePager from "./components/welcome/WelcomePager"
-// import WelcomePager from "./components/ManageFoundsError"
+// import WelcomePager from "./components/welcome/WelcomePager"
+import WelcomePager from "./components/Verification"
 
 import GraphPager from "./components/graph/GraphPager.js"
 import HistoryDetail from "./components/graph/HistoryDetail.js"
@@ -15,6 +15,7 @@ import LoginForm from './components/LoginForm'
 import ForgotPassword from './components/ForgotPassword'
 import Passcode from './components/Passcode'
 
+import Verification from './components/Verification'
 import VerifyPhoneNumber from './components/VerifyPhoneNumber'
 import VerifyDocument from './components/VerifyDocument'
 import VerifyPhoto from './components/VerifyPhoto'

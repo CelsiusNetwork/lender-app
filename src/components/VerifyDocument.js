@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Alert, ImageBackground, StyleSheet, View, Image, Text, TouchableOpacity, AsyncStorage } from 'react-native'
 import { Form, Input, Item, Label, Content, Container } from 'native-base'
-import { NavigationActions } from 'react-navigation'
+// import { NavigationActions } from 'react-navigation'
 import { Camera, Permissions } from 'expo';
 
 class VerifyDocument extends React.Component {
@@ -20,16 +20,16 @@ class VerifyDocument extends React.Component {
   }
 
   snap = async () => {
-    const { navigate } = this.props.navigation
+    // const { navigate } = this.props.navigation
     if (this.camera) {
-      let photo = await this.camera.takePictureAsync();
-      console.log(photo)
+      let documentPhoto = await this.camera.takePictureAsync();
+      console.log(documentPhoto)
       try {
-        await AsyncStorage.setItem('@MySuperStore:photo', JSON.stringify(photo));
+        await AsyncStorage.setItem('@MySuperStore:documentPhoto', JSON.stringify(documentPhoto));
       } catch (error) {
         console.log(error.message)
       }
-      navigate('VerifyPhoto')
+      // navigate('VerifyPhoto')
     }
   }
 
@@ -44,7 +44,7 @@ class VerifyDocument extends React.Component {
   }
 
   render () {
-    const { navigate } = this.props.navigation
+    // const { navigate } = this.props.navigation
     const { hasCameraPermission } = this.state;
     if (hasCameraPermission === null) {
       return <View />;
@@ -52,74 +52,62 @@ class VerifyDocument extends React.Component {
       return <Text>No access to camera</Text>;
     } else {
       return (
-        <View style={styles.container}>
-          <ImageBackground source={require('../../assets/images/background-blur.png')} style={styles.background}>
-            <View style={styles.body}>
-              {/* <Image source={require('../../assets/images/logo-header.png')} style={styles.logo} /> */}
-              <Text style={styles.header}>{'Document check'.toUpperCase()}</Text>
-              <ImageBackground source={require('../../assets/images/progress-line-bg.png')} style={styles.line}>
-                <ImageBackground source={require('../../assets/images/progress-line.png')} style={styles.lineInner}></ImageBackground>
-              </ImageBackground>
-              <Container>
-                <Content>
-                  <View style={styles.row}>
-                    <TouchableOpacity
-                      style={[styles.checkLeft, this.state.backgroundColorLeft]}
-                      onPress={this.pressLeft.bind(this)}
-                      ><Text style={styles.checkText}>Passport</Text></TouchableOpacity>
-                    <TouchableOpacity
-                      style={[styles.checkRight, this.state.backgroundColorRight]}
-                      onPress={this.pressRight.bind(this)}
-                      ><Text style={styles.checkText}>ID Card</Text></TouchableOpacity>
-                  </View>
-                  <View style={styles.aCenter}>
-                    <ImageBackground source={require('../../assets/images/scanner.png')} style={styles.cameraWrapper}>
-                      <View style={{ flex: 1, height: 200, width: 290 }}>
-                        <Camera style={{ flex: 1 }}
-                        type={this.state.type}
-                        ref={ref => { this.camera = ref; }}
-                        >
-                          <View
-                            style={{
-                              flex: 1,
-                              backgroundColor: 'transparent',
-                              flexDirection: 'row',
-                            }}>
-                            <TouchableOpacity
-                              style={{
-                                flex: 0.1,
-                                alignSelf: 'flex-end',
-                                alignItems: 'center',
-                              }}
-                              onPress={() => {
-                                this.setState({
-                                  type: this.state.type === Camera.Constants.Type.back
-                                    ? Camera.Constants.Type.front
-                                    : Camera.Constants.Type.back,
-                                });
-                              }}>
-                              <Image source={require('../../assets/images/camera-flip.png')} style={styles.flip} />
-                            </TouchableOpacity>
-                          </View>
-                        </Camera>
-                      </View>
-                    </ImageBackground>
-                  </View>
-                  <Text style={styles.text}>Please center your passport in the area above. Ensure that there’s enough light in the room for better picture quality.</Text>
-                  <View>
-                    <TouchableOpacity style={styles.button}
-                    // onPress={() => navigate('Register')}
-                    onPress={this.snap}
-                    >
-                      <Text style={styles.buttonText}>Take a photo</Text>
-                    </TouchableOpacity>
-                  </View>
-               </Content>
-              </Container>
+        <Container>
+          <Content>
+            <View style={styles.row}>
+              <TouchableOpacity
+                style={[styles.checkLeft, this.state.backgroundColorLeft]}
+                onPress={this.pressLeft.bind(this)}
+                ><Text style={styles.checkText}>Passport</Text></TouchableOpacity>
+              <TouchableOpacity
+                style={[styles.checkRight, this.state.backgroundColorRight]}
+                onPress={this.pressRight.bind(this)}
+                ><Text style={styles.checkText}>ID Card</Text></TouchableOpacity>
             </View>
-
-          </ImageBackground>
-        </View>
+            <View style={styles.aCenter}>
+              <ImageBackground source={require('../../assets/images/scanner.png')} style={styles.cameraWrapper}>
+                <View style={{ flex: 1, height: 200, width: 290 }}>
+                  <Camera style={{ flex: 1 }}
+                  type={this.state.type}
+                  ref={ref => { this.camera = ref; }}
+                  >
+                    <View
+                      style={{
+                        flex: 1,
+                        backgroundColor: 'transparent',
+                        flexDirection: 'row',
+                      }}>
+                      <TouchableOpacity
+                        style={{
+                          flex: 0.1,
+                          alignSelf: 'flex-end',
+                          alignItems: 'center',
+                        }}
+                        onPress={() => {
+                          this.setState({
+                            type: this.state.type === Camera.Constants.Type.back
+                              ? Camera.Constants.Type.front
+                              : Camera.Constants.Type.back,
+                          });
+                        }}>
+                        <Image source={require('../../assets/images/camera-flip.png')} style={styles.flip} />
+                      </TouchableOpacity>
+                    </View>
+                  </Camera>
+                </View>
+              </ImageBackground>
+            </View>
+            <Text style={styles.text}>Please center your passport in the area above. Ensure that there’s enough light in the room for better picture quality.</Text>
+            <View>
+              <TouchableOpacity style={styles.button}
+              // onPress={() => navigate('Register')}
+              onPress={this.snap}
+              >
+                <Text style={styles.buttonText}>Take a photo</Text>
+              </TouchableOpacity>
+            </View>
+          </Content>
+        </Container>
 
       )
     }

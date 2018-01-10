@@ -2,36 +2,75 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { ImageBackground, StyleSheet, View, Image, Text, TouchableOpacity } from 'react-native'
 import { Content, Container, Form, Input, Item, Label } from 'native-base'
+// import { NavigationActions } from 'react-navigation'
+import { Pages } from 'react-native-pages'
+import { lenderAppInitToken } from '../actions'
 
-class VerifyPhoneNumber extends Component {
+import VerifyPhoneNumber from './VerifyPhoneNumber'
+import VerifyDocument from './VerifyDocument'
+import VerifyPhoto from './VerifyPhoto'
+import Agree from './Agree'
+
+
+class Verification extends Component {
+  constructor() {
+    super();
+    this.state = {
+        progress: 0,
+        progressLine: '0%'
+    }
+  }
+
+  goToPage() {
+    var progress = this.state.progress+25
+    this.setState({progress: progress})
+    this.setState({page: "VerifyPhoto"})
+    this.setState({progressLine: progress+"%"})
+  }
+
+  renderPager({ pages, progress, indicatorPosition }) {
+    if ('none' === indicatorPosition) {
+      return null;
+    }
+    return (
+      null
+    );
+  }
 
   render () {
+    // const { navigate } = this.props.navigation
     return (
-      <Container>
-        <Content>
-          <View style={styles.aCenter}>
-            <View style={styles.mobileWrapper}>
-              <Image source={require('../../assets/images/icon-mobile.png')} style={styles.mobile} />
-            </View>
-            <Text style={styles.text}>Phone number enables you 2-factor authentication. Please enter the code we’ve sent you via SMS.</Text>
-            <View style={styles.inputWrapper}>
-              <Input
-                style={styles.input}
-                keyboardType='numeric'
-                maxLength={6}
-                // placeholder='_ _ _ _ _ _'
-                returnKeyType='done' autoCorrect={false} />
-                <Image source={require('../../assets/images/dash-line.png')} style={styles.inputDash} />
-            </View>
+      <View style={styles.container}>
+        <ImageBackground source={require('../../assets/images/background-blur.png')} style={styles.background}>
+          <View style={styles.body}>
+            {/* <Image source={require('../../assets/images/logo-header.png')} style={styles.logo} /> */}
+            <Text style={styles.header}>{'Verify phone number'.toUpperCase()}</Text>
+            <ImageBackground source={require('../../assets/images/progress-line-bg.png')} style={styles.line}>
+              <ImageBackground source={require('../../assets/images/progress-line.png')} style={[styles.lineInner, {width: this.state.progressLine}]}></ImageBackground>
+            </ImageBackground>
+            <TouchableOpacity style={styles.button}
+              onPress={() => this.goToPage()}
+              >
+                <Text style={styles.buttonText}>Go to second page</Text>
+              </TouchableOpacity>
+            <Pages
+              scrollToPage={this.page}
+              scrollEnabled={false}
+              renderPager={this.renderPager.bind(this)}
+              // style={styles.pagesWrapper}
+              >
+              <VerifyPhoneNumber />
+              <VerifyDocument />
+              <VerifyPhoto />
+              <Agree />
+            </Pages>
+
+
           </View>
-          <TouchableOpacity style={styles.button}
-              // onPress={() => navigate('VerifyDocument')}
-              // onPress={() => this.goToPage()}
-            >
-            <Text style={styles.buttonText}>Add your ID</Text>
-          </TouchableOpacity>
-        </Content>
-      </Container>
+
+        </ImageBackground>
+      </View>
+
     )
   }
 }
@@ -151,6 +190,7 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = {
+  lenderAppInitToken
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(VerifyPhoneNumber)
+export default connect(mapStateToProps, mapDispatchToProps)(Verification)

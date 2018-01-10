@@ -2,14 +2,14 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { ImageBackground, StyleSheet, View, Image, Text, TouchableOpacity, AsyncStorage } from 'react-native'
 import { Form, Input, Item, Label, Content, Container } from 'native-base'
-import { NavigationActions } from 'react-navigation'
+// import { NavigationActions } from 'react-navigation'
 import { CheckBox } from 'react-native-elements';
 
 class Agree extends React.Component {
   constructor() {
     super();
     this.state = {
-        checked: false
+        checked: false,
     }
   }
   pressCheckbox(){
@@ -19,46 +19,33 @@ class Agree extends React.Component {
       this.setState({checked: true})
   }
   render () {
-    const { navigate } = this.props.navigation
+    // const { navigate } = this.props.navigation
     return (
-      <View style={styles.container}>
-        <ImageBackground source={require('../../assets/images/background-blur.png')} style={styles.background}>
-          <View style={styles.body}>
-            <Text style={styles.header}>{'Just one more thing…'.toUpperCase()}</Text>
-            <ImageBackground source={require('../../assets/images/progress-line-bg.png')} style={styles.line}>
-              <ImageBackground source={require('../../assets/images/green-line.png')} style={styles.lineInner}></ImageBackground>
-            </ImageBackground>
-            <Container style={styles.wrapper}>
-              <Content>
+      <Container style={styles.wrapper}>
+        <Content>
 
-                <Text style={styles.text}>While we are verifying your identity, please check our Terms of Service.</Text>
-                <Text style={styles.text}>As further described below, a free subscription continues until terminated, while a paid subscription has a term that may expire or be terminated. </Text>
-                <Text style={styles.text}>The Contract remains effective until all subscriptions ordered under the Contract have expired or been terminated or the Contract itself terminates. Termination of the Contract will terminate all subscriptions and all Order Forms.</Text>
-                <Text style={styles.text}>We or Customer may terminate the Contract on notice to the other party if the other party materially breaches the Contract and such breach is not cured within thirty (30) days after the non</Text>
+          <Text style={styles.text}>While we are verifying your identity, please check our Terms of Service.</Text>
+          <Text style={styles.text}>As further described below, a free subscription continues until terminated, while a paid subscription has a term that may expire or be terminated. </Text>
+          <Text style={styles.text}>The Contract remains effective until all subscriptions ordered under the Contract have expired or been terminated or the Contract itself terminates. Termination of the Contract will terminate all subscriptions and all Order Forms.</Text>
+          <Text style={styles.text}>We or Customer may terminate the Contract on notice to the other party if the other party materially breaches the Contract and such breach is not cured within thirty (30) days after the non</Text>
 
-              </Content>
-            </Container>
-            <CheckBox
-              title='I agree to Terms of Service'
-              containerStyle={styles.agreeCheckBox}
-              textStyle={styles.agreeText}
-              // checkedIcon='dot-circle-o'
-              // uncheckedIcon='circle-o'
-              checked={this.state.checked}
-              onPress={ this.pressCheckbox.bind(this) }
-            />
-            {/* <Text style={styles.agreeText}>I agree to Terms of Service</Text> */}
+          <CheckBox
+            title='I agree to Terms of Service'
+            containerStyle={styles.agreeCheckBox}
+            textStyle={styles.agreeText}
+            // checkedIcon='dot-circle-o'
+            // uncheckedIcon='circle-o'
+            checked={this.state.checked}
+            onPress={ this.pressCheckbox.bind(this) }
+          />
 
-            <TouchableOpacity style={styles.button}
-            onPress={() => navigate('LoginForm')}
-            >
+          <TouchableOpacity style={styles.button}
+          // onPress={() => navigate('LoginForm')}
+          >
             <Text style={styles.buttonText}>I'm done!</Text>
           </TouchableOpacity>
-        </View>
-
-      </ImageBackground>
-    </View>
-
+        </Content>
+      </Container>
     )
   }
 }
