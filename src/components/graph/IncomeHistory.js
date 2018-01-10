@@ -66,15 +66,15 @@ class IncomeHistory extends Component {
                   <Image source={require('../../../assets/images/icon-coins.png')} style={styles.icon} />
                 </View>
                 <View style={styles.value}>
-                { this.state.fontLoaded ? (<Text style={[styles.valueText, { fontFamily: 'barlow-semi-bold' }]}>0.127 CEL</Text>) : null }
+                { this.state.fontLoaded ? (<Text style={[styles.valueText, { fontFamily: 'barlow-semi-bold' }]}>1042 CEL</Text>) : null }
                 </View>
                 <View style={styles.status}>
                 { this.state.fontLoaded ? (<Text style={[styles.statusText, { fontFamily: 'barlow' }]}>ON HOLD</Text>) : null }
                 </View>
                 <View style={styles.created}>
-                { this.state.fontLoaded ? (<Text style={[styles.createdText, { fontFamily: 'barlow' }]}>Nov 20, 2017</Text>) : null }
+                { this.state.fontLoaded ? (<Text style={[styles.createdText, { fontFamily: 'barlow' }]}>Jan 10, 2018</Text>) : null }
                 <Image source={require('../../../assets/images/icon-time.png')} style={styles.clock} />
-                { this.state.fontLoaded ? (<Text style={[styles.createdText, { fontFamily: 'barlow' }]}>9:21AM</Text>) : null }
+                { this.state.fontLoaded ? (<Text style={[styles.createdText, { fontFamily: 'barlow' }]}>12:00AM</Text>) : null }
                 </View>
               </TouchableOpacity>
               <TouchableOpacity style={styles.tableRow} onPress={() => navigate('HistoryDetail')}>
@@ -82,7 +82,7 @@ class IncomeHistory extends Component {
                 <Image source={require('../../../assets/images/icon-etherium.png')} style={styles.icon} />
                 </View>
                 <View style={styles.value}>
-                { this.state.fontLoaded ? (<Text style={[styles.valueText, { fontFamily: 'barlow-semi-bold' }]}>7.000 ETH</Text>) : null }
+                { this.state.fontLoaded ? (<Text style={[styles.valueText, { fontFamily: 'barlow-semi-bold' }]}>0.01 ETH</Text>) : null }
                 </View>
                 <View style={[styles.status, styles.greenStatus]}>
                 { this.state.fontLoaded ? (<Text style={[styles.statusText, styles.greenText, { fontFamily: 'barlow' }]}>RECEIVED</Text>) : null }
@@ -104,7 +104,7 @@ class IncomeHistory extends Component {
                 { this.state.fontLoaded ? (<Text style={[styles.statusText, styles.orangeText, { fontFamily: 'barlow' }]}>SOLD</Text>) : null }
                 </View>
                 <View style={styles.created}>
-                { this.state.fontLoaded ? (<Text style={[styles.createdText, { fontFamily: 'barlow' }]}>Nov 20, 2017</Text>) : null }
+                { this.state.fontLoaded ? (<Text style={[styles.createdText, { fontFamily: 'barlow' }]}>Jan 09, 2018</Text>) : null }
                 <Image source={require('../../../assets/images/icon-time.png')} style={styles.clock} />
                 { this.state.fontLoaded ? (<Text style={[styles.createdText, { fontFamily: 'barlow' }]}>9:21AM</Text>) : null }
                 </View>
@@ -114,13 +114,13 @@ class IncomeHistory extends Component {
                 <Image source={require('../../../assets/images/icon-etherium.png')} style={styles.icon} />
                 </View>
                 <View style={styles.value}>
-                { this.state.fontLoaded ? (<Text style={[styles.valueText, { fontFamily: 'barlow-semi-bold' }]}>3.000 ETH</Text>) : null }
+                { this.state.fontLoaded ? (<Text style={[styles.valueText, { fontFamily: 'barlow-semi-bold' }]}>0.02 ETH</Text>) : null }
                 </View>
                 <View style={[styles.status, styles.greenStatus]}>
                 { this.state.fontLoaded ? (<Text style={[styles.statusText, styles.greenText, { fontFamily: 'barlow' }]}>RECEIVED</Text>) : null }
                 </View>
                 <View style={styles.created}>
-                { this.state.fontLoaded ? (<Text style={[styles.createdText, { fontFamily: 'barlow' }]}>Nov 20, 2017</Text>) : null }
+                { this.state.fontLoaded ? (<Text style={[styles.createdText, { fontFamily: 'barlow' }]}>Jan 09, 2018</Text>) : null }
                 <Image source={require('../../../assets/images/icon-time.png')} style={styles.clock} />
                 { this.state.fontLoaded ? (<Text style={[styles.createdText, { fontFamily: 'barlow' }]}>9:21AM</Text>) : null }
                 </View>
@@ -130,15 +130,15 @@ class IncomeHistory extends Component {
                   <Image source={require('../../../assets/images/icon-coins.png')} style={styles.icon} />
                 </View>
                 <View style={styles.value}>
-                { this.state.fontLoaded ? (<Text style={[styles.valueText, { fontFamily: 'barlow-semi-bold' }]}>0.127 CEL</Text>) : null }
+                { this.state.fontLoaded ? (<Text style={[styles.valueText, { fontFamily: 'barlow-semi-bold' }]}>42 CEL</Text>) : null }
                 </View>
                 <View style={styles.status}>
                 { this.state.fontLoaded ? (<Text style={[styles.statusText, { fontFamily: 'barlow' }]}>ON HOLD</Text>) : null }
                 </View>
                 <View style={styles.created}>
-                { this.state.fontLoaded ? (<Text style={[styles.createdText, { fontFamily: 'barlow' }]}>Nov 20, 2017</Text>) : null }
+                { this.state.fontLoaded ? (<Text style={[styles.createdText, { fontFamily: 'barlow' }]}>Jan 09, 2017</Text>) : null }
                 <Image source={require('../../../assets/images/icon-time.png')} style={styles.clock} />
-                { this.state.fontLoaded ? (<Text style={[styles.createdText, { fontFamily: 'barlow' }]}>9:21AM</Text>) : null }
+                { this.state.fontLoaded ? (<Text style={[styles.createdText, { fontFamily: 'barlow' }]}>9:45AM</Text>) : null }
                 </View>
               </TouchableOpacity>
             </View>

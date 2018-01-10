@@ -8,7 +8,7 @@ import DegValue from './graph/DegValue'
 import IncomeHistory from './graph/IncomeHistory'
 import { fetchWalletBalance, fetchTransactionsHistory } from '../actions'
 import { lenderAppInitToken } from '../actions'
-import { Font } from 'expo';
+import { Font } from 'expo'
 
 class Home extends Component {
   componentWillMount () {
