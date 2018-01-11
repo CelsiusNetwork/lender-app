@@ -303,7 +303,7 @@ const mapStateToProps = state => {
   return {
     nav: state.nav,
     walletAddress: state.lender.walletAddress,
-    error: state.register.error
+    // error: state.register.error
   }
 }
 
