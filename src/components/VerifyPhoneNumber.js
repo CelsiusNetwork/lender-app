@@ -2,53 +2,35 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { ImageBackground, StyleSheet, View, Image, Text, TouchableOpacity } from 'react-native'
 import { Content, Container, Form, Input, Item, Label } from 'native-base'
-import { NavigationActions } from 'react-navigation'
 
 class VerifyPhoneNumber extends Component {
-  navigate () {
-
-  }
 
   render () {
-    const { navigate } = this.props.navigation
     return (
-      <View style={styles.container}>
-        <ImageBackground source={require('../../assets/images/background-blur.png')} style={styles.background}>
-          <View style={styles.body}>
-            {/* <Image source={require('../../assets/images/logo-header.png')} style={styles.logo} /> */}
-            <Text style={styles.header}>{'Verify phone number'.toUpperCase()}</Text>
-            <ImageBackground source={require('../../assets/images/progress-line-bg.png')} style={styles.line}>
-              <ImageBackground source={require('../../assets/images/progress-line.png')} style={styles.lineInner}></ImageBackground>
-            </ImageBackground>
-            <Container>
-              <Content>
-                <View style={styles.aCenter}>
-                  <View style={styles.mobileWrapper}>
-                    <Image source={require('../../assets/images/icon-mobile.png')} style={styles.mobile} />
-                  </View>
-                  <Text style={styles.text}>Phone number enables you 2-factor authentication. Please enter the code we’ve sent you via SMS.</Text>
-                  <View style={styles.inputWrapper}>
-                    <Input
-                      style={styles.input}
-                      keyboardType='numeric'
-                      maxLength={6}
-                      // placeholder='_ _ _ _ _ _'
-                      returnKeyType='done' autoCorrect={false} />
-                      <Image source={require('../../assets/images/dash-line.png')} style={styles.inputDash} />
-                  </View>
-                </View>
-                <TouchableOpacity style={styles.button}
-                    onPress={() => navigate('VerifyDocument')}
-                  >
-                  <Text style={styles.buttonText}>Add your ID</Text>
-                </TouchableOpacity>
-              </Content>
-            </Container>
+      <Container>
+        <Content>
+          <View style={styles.aCenter}>
+            <View style={styles.mobileWrapper}>
+              <Image source={require('../../assets/images/icon-mobile.png')} style={styles.mobile} />
+            </View>
+            <Text style={styles.text}>Phone number enables you 2-factor authentication. Please enter the code we’ve sent you via SMS.</Text>
+            <View style={styles.inputWrapper}>
+              <Input
+                style={styles.input}
+                keyboardType='numeric'
+                maxLength={6}
+                // placeholder='_ _ _ _ _ _'
+                returnKeyType='done' autoCorrect={false} />
+                <Image source={require('../../assets/images/dash-line.png')} style={styles.inputDash} />
+            </View>
           </View>
-
-        </ImageBackground>
-      </View>
-
+          {/* <TouchableOpacity style={styles.button}
+              // onPress={() => navigate('VerifyDocument')}
+              // onPress={() => this.goToPage()}
+            >
+          </TouchableOpacity> */}
+        </Content>
+      </Container>
     )
   }
 }

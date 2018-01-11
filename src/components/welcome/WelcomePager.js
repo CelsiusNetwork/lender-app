@@ -13,7 +13,8 @@ class WelcomePager extends Component {
         <ImageBackground
           source={require('../../../assets/images/background.png')}
           style={styles.background}>
-          <Pages style={styles.pagesWrapper}>
+          <Pages
+            style={styles.pagesWrapper}>
             <Welcome />
             <HowItWorks navigation={this.props.navigation} lenderAppInitToken={this.props.lenderAppInitToken} />
           </Pages>

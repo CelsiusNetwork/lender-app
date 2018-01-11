@@ -2,98 +2,80 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Content, Container, ImageBackground, StyleSheet, View, Image, Text, TouchableOpacity, AsyncStorage } from 'react-native'
 import { Form, Input, Item, Label } from 'native-base'
-import { NavigationActions } from 'react-navigation'
+// import { NavigationActions } from 'react-navigation'
 import { Camera, Permissions } from 'expo';
 
 class VerifyPhoto extends React.Component {
 
   state = {
-    hasCameraPermission: null,
+    hasPhotoCameraPermission: null,
     type: Camera.Constants.Type.back,
   };
 
   async componentWillMount() {
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
-    this.setState({ hasCameraPermission: status === 'granted' });
+    this.setState({ hasPhotoCameraPermission: status === 'granted' });
   }
 
   snap = async () => {
-    const { navigate } = this.props.navigation
-    if (this.camera) {
-      let photo = await this.camera.takePictureAsync();
+    // const { navigate } = this.props.navigation
+    if (this.photoCamera) {
+      let photo = await this.photoCamera.takePictureAsync();
       console.log(photo)
       try {
         await AsyncStorage.setItem('@MySuperStore:photo', JSON.stringify(photo));
       } catch (error) {
         console.log(error.message)
       }
-      navigate('Agree')
+      // navigate('Agree')
     }
   }
 
   render () {
-    const { navigate } = this.props.navigation
-    const { hasCameraPermission } = this.state;
-    if (hasCameraPermission === null) {
+    // const { navigate } = this.props.navigation
+    const { hasPhotoCameraPermission } = this.state;
+    if (hasPhotoCameraPermission === null) {
       return <View />;
-    } else if (hasCameraPermission === false) {
+    } else if (hasPhotoCameraPermission === false) {
       return <Text>No access to camera</Text>;
     } else {
       return (
-        <View style={styles.container}>
-          <ImageBackground source={require('../../assets/images/background-blur.png')} style={styles.background}>
-            <View style={styles.body}>
-              {/* <Image source={require('../../assets/images/logo-header.png')} style={styles.logo} /> */}
-              <Text style={styles.header}>{'Take a picture'.toUpperCase()}</Text>
-              <ImageBackground source={require('../../assets/images/progress-line-bg.png')} style={styles.line}>
-                <ImageBackground source={require('../../assets/images/progress-line.png')} style={styles.lineInner}></ImageBackground>
-              </ImageBackground>
-              <View style={styles.aCenter}>
-                <ImageBackground source={require('../../assets/images/scanner.png')} style={styles.cameraWrapper}>
-                  <View style={{ flex: 1, height: 200, width: 290 }}>
-                    <Camera style={{ flex: 1 }}
-                    type={this.state.type}
-                    ref={ref => { this.camera = ref; }}
-                    >
-                      <View
-                        style={{
-                          flex: 1,
-                          backgroundColor: 'transparent',
-                          flexDirection: 'row',
-                        }}>
-                        <TouchableOpacity
-                          style={{
-                            flex: 0.1,
-                            alignSelf: 'flex-end',
-                            alignItems: 'center',
-                          }}
-                          onPress={() => {
-                            this.setState({
-                              type: this.state.type === Camera.Constants.Type.back
-                                ? Camera.Constants.Type.front
-                                : Camera.Constants.Type.back,
-                            });
-                          }}>
-                          <Image source={require('../../assets/images/camera-flip.png')} style={styles.flip} />
-                        </TouchableOpacity>
-                      </View>
-                    </Camera>
-                  </View>
-                </ImageBackground>
-
-                <Text style={styles.text}>Please center your face in the frame above and take a selfie. We need your recent picture to compare it with the one on the passport.</Text>
-                <TouchableOpacity style={styles.button}
-                // onPress={() => navigate('Register')}
-                  onPress={this.snap}
-                  >
-                  <Text style={styles.buttonText}>Take a photo</Text>
-                </TouchableOpacity>
-              </View>
+        <View style={styles.aCenter}>
+          <ImageBackground source={require('../../assets/images/scanner.png')} style={styles.cameraWrapper}>
+            <View style={{ flex: 1, height: 200, width: 290 }}>
+              <Camera style={{ flex: 1 }}
+              type={this.state.type}
+              ref={ref => { this.photoCamera = ref; }}
+              >
+                <View
+                  style={{
+                    flex: 1,
+                    backgroundColor: 'transparent',
+                    flexDirection: 'row',
+                  }}>
+                  <TouchableOpacity
+                    style={{
+                      flex: 0.1,
+                      alignSelf: 'flex-end',
+                      alignItems: 'center',
+                    }}
+                    onPress={() => {
+                      this.setState({
+                        type: this.state.type === Camera.Constants.Type.back
+                          ? Camera.Constants.Type.front
+                          : Camera.Constants.Type.back,
+                      });
+                    }}>
+                    <Image source={require('../../assets/images/camera-flip.png')} style={styles.flip} />
+                  </TouchableOpacity>
+                </View>
+              </Camera>
             </View>
-
           </ImageBackground>
-        </View>
 
+          <Text style={styles.text}>Please center your face in the frame above and take a selfie. We need your recent picture to compare it with the one on the passport.</Text>
+
+        </View>
       )
     }
   }
