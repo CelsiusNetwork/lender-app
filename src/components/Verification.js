@@ -18,8 +18,9 @@ class Verification extends Component {
     this.state = {
         progress: 0,
         progressLine: '0%',
-        step: 2,
-        btnTxt: 'Add your ID'
+        step: 1,
+        btnTxt: 'Add your ID',
+        stepName: 'VERIFY PHONE NUMBER'
     }
   }
 
@@ -30,17 +31,20 @@ class Verification extends Component {
 
   scrolled (wasOnPage) {
     console.log('wasOnPage: ', wasOnPage)
-    console.log('step: ', this.state.step)
+    console.log('currentStep: ', this.state.step)
     this.setState({btnTxt: 'Take a photo'})
     const currentStep = this.state.step
-    if(currentStep === 2) {
+    if(currentStep === 1) {
       this.setState({btnTxt: 'Take a photo'})
+      this.setState({stepName: 'DOCUMENT CHECK'})
+    }
+    if(currentStep === 2) {
+      this.setState({btnTxt: 'Finish verification'})
+      this.setState({stepName: 'TAKE A PICTURE'})
     }
     if(currentStep === 3) {
-      this.setState({btnTxt: 'Finish verification'})
-    }
-    if(currentStep === 4) {
       this.setState({btnTxt: 'Im done!'})
+      this.setState({stepName: 'JUST ONE MORE THING...'})
     }
     this.setState({step: currentStep + 1})
   }
@@ -53,7 +57,7 @@ class Verification extends Component {
         <ImageBackground source={require('../../assets/images/background-blur.png')} style={styles.background}>
           <View style={styles.body}>
             {/* <Image source={require('../../assets/images/logo-header.png')} style={styles.logo} /> */}
-            <Text style={styles.header}>{'Verify phone number'.toUpperCase()}</Text>
+            <Text style={styles.header}>{this.state.stepName}</Text>
             <ImageBackground source={require('../../assets/images/progress-line-bg.png')} style={styles.line}>
               <ImageBackground source={require('../../assets/images/progress-line.png')} style={[styles.lineInner, {width: this.state.progressLine}]}></ImageBackground>
             </ImageBackground>

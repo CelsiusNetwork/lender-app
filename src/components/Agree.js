@@ -38,12 +38,6 @@ class Agree extends React.Component {
             checked={this.state.checked}
             onPress={ this.pressCheckbox.bind(this) }
           />
-
-          <TouchableOpacity style={styles.button}
-          // onPress={() => navigate('LoginForm')}
-          >
-            <Text style={styles.buttonText}>I'm done!</Text>
-          </TouchableOpacity>
         </Content>
       </Container>
     )
