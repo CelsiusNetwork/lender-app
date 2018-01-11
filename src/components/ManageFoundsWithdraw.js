@@ -33,7 +33,7 @@ class ManageFoundsWithdraw extends Component {
 
   _onPressButton (index) {
     // console.log(index)
-    if (index === '-1') {
+    if (index === -1) {
       this.state.number = this.state.number.substring(0, this.state.number.length - 1)
     }
     if (this.state.number.length < 8) {
@@ -44,7 +44,7 @@ class ManageFoundsWithdraw extends Component {
           index = '.'
         }
       }
-      if (index !== '-1') {
+      if (index !== -1) {
         this.state.number = this.state.number + index
       }
       // var fNumber = new Intl.NumberFormat().format(this.state.number);
