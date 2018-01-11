@@ -27,6 +27,24 @@ class Verification extends Component {
   handleVerify () {
   }
 
+  renderBtns() {
+    const { navigate } = this.props.navigation
+    if (this.state.step === 4) {
+      return (
+        <TouchableOpacity style={styles.button} onPress={() => navigate('Home')}>
+                <Text style={styles.buttonText}>{this.state.btnTxt}</Text>
+              </TouchableOpacity>
+      )
+   } else {
+     return (
+    <TouchableOpacity style={styles.button} onPress={() => this.refs.kungfoo.scrollToPage(this.state.step)}>
+      <Text style={styles.buttonText}>{this.state.btnTxt}</Text>
+    </TouchableOpacity>
+  )
+   }
+
+}
+
   scrolled (wasOnPage) {
     var progress = this.state.progress+25
     this.setState({progress: progress})
@@ -71,11 +89,9 @@ class Verification extends Component {
               <VerifyPhoto />
               <Agree />
             </Pages>
-            <TouchableOpacity style={styles.button}
-              onPress={() => this.refs.kungfoo.scrollToPage(this.state.step)}
-              >
-                <Text style={styles.buttonText}>{this.state.btnTxt}</Text>
-              </TouchableOpacity>
+            {this.renderBtns()}
+
+
 
           </View>
 
@@ -197,6 +213,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
   return {
+    nav: state.nav
   }
 }
 
