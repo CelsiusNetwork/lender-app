@@ -347,18 +347,18 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
   return {
+    nav: state.nav,
     token: state.auth.token,
-    name: state.lender.name,
-    surname: state.lender.surname,
     email: state.auth.email,
     authId: state.auth.authId,
-    walletAddress: state.lender.walletAddress,
     lender: state.lender,
+    name: state.lender.name,
+    surname: state.lender.surname,
+    walletAddress: state.lender.walletAddress,
+    picture: state.lender.lender.picture,
     ethBalance: state.wallet.ethBalance,
     celBalance: state.wallet.celBalance,
-    picture: state.lender.lender.picture,
     error: state.register.error,
-    nav: state.nav
   }
 }
 

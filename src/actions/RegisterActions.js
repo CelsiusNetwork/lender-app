@@ -36,12 +36,14 @@ export const registerLender = (registerForm, appToken) => {
   }
 }
 
-const registerLenderSuccess = (dispatch, user) => {
+const registerLenderSuccess = (dispatch, resBody) => {
   dispatch({
     type: types.REGISTER_LENDER_SUCCESS,
-    payload: user
   })
-  // TODO(fj): setup wallet address
+  dispatch({
+    type: types.FETCH_LENDER_SUCCESS,
+    payload: resBody.user
+  })
   dispatch(NavigationActions.reset({
     index: 0,
     actions: [

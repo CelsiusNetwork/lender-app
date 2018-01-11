@@ -8,7 +8,6 @@ const REGISTER_INITIAL_STATE = {
     password: 'filip123',
     phoneNumber: '1234567890'
   },
-  user: null,
   loading: false,
   error: null
 }
@@ -46,7 +45,6 @@ export default (state = REGISTER_INITIAL_STATE, action) => {
     case types.REGISTER_LENDER_SUCCESS:
       return {
         ...state,
-        user: action.payload,
         registerForm: { ...REGISTER_INITIAL_STATE.registerForm },
         error: null,
         loading: false
