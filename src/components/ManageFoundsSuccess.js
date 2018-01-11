@@ -5,7 +5,7 @@ import { Button, Form, Input, Item, Label, Text, Content, Header, Title, Contain
 import { registerFirstNameChanged, registerLastNameChanged, registerEmailChanged, registerPasswordChanged, registerPhoneNumberChanged, registerLender } from '../actions'
 import { Font } from 'expo';
 import { NavigationActions } from 'react-navigation'
-import { withdrawETH } from '../actions'
+import { withdrawETH, gotoHome } from '../actions'
 
 class AddFounds extends Component {
   constructor (props) {
@@ -30,7 +30,9 @@ class AddFounds extends Component {
     })
     this.setState({ fontLoaded: true })
   }
-
+  close () {
+    console.log('hitting ')
+  }
   render () {
     const { navigate } = this.props.navigation
     return (
@@ -79,7 +81,7 @@ class AddFounds extends Component {
                   <Text style={styles.text}>Feel free to add funds back to Celsius wallet anytime you want.</Text>
 
                 <View style={styles.center}>
-                  <TouchableOpacity style={styles.button} onPress={() => this.props.withdrawETH('0.01')}>
+                  <TouchableOpacity style={styles.button} onPress={() => navigate('Home')}>
                     <Text style={styles.buttonText}>Close</Text>
                   </TouchableOpacity>
                 </View>
@@ -235,7 +237,7 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = {
-  withdrawETH
+  withdrawETH, gotoHome
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddFounds)

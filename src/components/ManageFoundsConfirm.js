@@ -85,8 +85,12 @@ class AddFounds extends Component {
                 <View style={styles.center}>
                   <TouchableOpacity style={styles.button} onPress={() => this.props.withdrawETH('test42!', this.props.walletAddress, this.state.toAddress, this.props.withdrawAmount, this.props.token)}>
                     <Text style={styles.buttonText}>
-                      Confirm withdraw
                     </Text>
+                    { this.props.loading ? (
+                    <Image source={require('../../assets/images/animated_spinner.gif')} style={styles.loader} />
+                    ) : (
+                    <Text style={styles.buttonText}>Confirm withdraw</Text>
+                  )}
                   </TouchableOpacity>
                 </View>
               </Content>
@@ -235,6 +239,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
   return {
+    loading: state.withdrawETH.loading,
     token: state.auth.token,
     name: state.auth.name,
     surname: state.auth.surname,
