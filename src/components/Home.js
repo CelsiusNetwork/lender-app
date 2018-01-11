@@ -98,11 +98,6 @@ class Home extends Component {
                         <Text style={styles.buttonText}>Add funds</Text>
                       </TouchableOpacity>
                     </View>
-                    <View style={styles.cellRight}>
-                      <TouchableOpacity style={styles.button2} onPress={() => navigate('ManageFounds')}>
-                        <Text style={styles.button2Text}>Manage</Text>
-                      </TouchableOpacity>
-                    </View>
                   </View>
                   <View style={styles.hr} />
 
