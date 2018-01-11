@@ -25,13 +25,12 @@ class Verification extends Component {
   }
 
   handleVerify () {
-    console.log('ref: ')
-    console.log(this.props.refs.kungfoo)
   }
 
   scrolled (wasOnPage) {
-    console.log('wasOnPage: ', wasOnPage)
-    console.log('currentStep: ', this.state.step)
+    var progress = this.state.progress+25
+    this.setState({progress: progress})
+    this.setState({progressLine: progress+"%"})
     this.setState({btnTxt: 'Take a photo'})
     const currentStep = this.state.step
     if(currentStep === 1) {
