@@ -81,7 +81,7 @@ class AddFounds extends Component {
                 </View>
                 <View style={styles.center}>
                   {this.props.loading ? (
-                    <Text style={styles.message}>Accepted transaction. You will be redirected to Home.</Text>
+                    <Text style={styles.message}>Withdrawal should be completed in a few minutes. Check your transaction history for details.</Text>
                   ) : (
                     <Text /> // TODO (djs): remove empty element
                   )}
