@@ -74,7 +74,7 @@ class AddFounds extends Component {
                       </Text>
                       <Text style={styles.boxText2}>
                         {this.state.fontLoaded ? (<Text style={[{fontFamily: 'barlow-light'}, styles.boxText2Inner]}>=
-                          ${ethBalance * 1250}</Text>) : null}
+                          ${(ethBalance * 1250).toFixed(2)}</Text>) : null}
                         {this.state.fontLoaded ? (<Text
                           style={[styles.changeUp, {fontFamily: 'barlow-light'}]}> {this.state.ethChange}</Text>) : null}
                       </Text>

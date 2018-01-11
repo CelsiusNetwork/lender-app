@@ -18,8 +18,8 @@ export default (state = LENDER_WALLET_STATE, action) => {
 
       return {
         ...state,
-        ethBalance: a.ether,
-        celBalance: a.deg,
+        ethBalance: a.ether.toFixed(2),
+        celBalance: a.deg.toFixed(2),
         loading: false,
         error: ''
       }
