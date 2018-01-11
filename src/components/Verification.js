@@ -30,8 +30,18 @@ class Verification extends Component {
 
   scrolled (wasOnPage) {
     console.log('wasOnPage: ', wasOnPage)
+    console.log('step: ', this.state.step)
     this.setState({btnTxt: 'Take a photo'})
     const currentStep = this.state.step
+    if(currentStep === 2) {
+      this.setState({btnTxt: 'Take a photo'})
+    }
+    if(currentStep === 3) {
+      this.setState({btnTxt: 'Finish verification'})
+    }
+    if(currentStep === 4) {
+      this.setState({btnTxt: 'Im done!'})
+    }
     this.setState({step: currentStep + 1})
   }
 

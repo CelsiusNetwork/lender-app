@@ -74,12 +74,7 @@ class VerifyPhoto extends React.Component {
           </ImageBackground>
 
           <Text style={styles.text}>Please center your face in the frame above and take a selfie. We need your recent picture to compare it with the one on the passport.</Text>
-          <TouchableOpacity style={styles.button}
-          // onPress={() => navigate('Register')}
-            onPress={this.snap}
-            >
-            <Text style={styles.buttonText}>Take a photo</Text>
-          </TouchableOpacity>
+
         </View>
       )
     }
