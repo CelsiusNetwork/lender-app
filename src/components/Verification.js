@@ -65,6 +65,7 @@ class Verification extends Component {
             <Pages
               scrollEnabled={false}
               onScrollEnd={this.scrolled.bind(this)}
+              indicatorPosition='none'
               ref='kungfoo'>
               <VerifyPhoneNumber />
               <VerifyDocument />
