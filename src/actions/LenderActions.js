@@ -61,13 +61,29 @@ const registerLenderFail = (dispatch, error) => {
   })
 }
 
-export const updateRegisterForm = (field, text) => {
+export const updateProfile = (registerForm) => {
+  return (dispatch) => {
+    const error = validateEditProfileForm(registerForm)
+    if (error) {
+      dispatch({
+        type: types.REGISTER_LENDER_FAILURE,
+        payload: error
+      })
+    }
+  }
+}
+
+// const editLenderFail = (dispatch, error) => {
+//   dispatch({
+//     type: types.EDIT_LENDER_FAILURE,
+//     payload: error
+//   })
+// }
+
+export const updateRegisterForm = (registerForm) => {
   return {
     type: types.UPDATE_REGISTER_FORM,
-    payload: {
-      text,
-      field
-    }
+    payload: registerForm
   }
 }
 
@@ -83,6 +99,16 @@ function validateRegisterForm (registrationForm) {
   return false
 }
 
+function validateEditProfileForm (registrationForm) {
+  if (!registrationForm.firstName) return getErrorText({ notEmpty: { field: 'First Name' } })
+  if (registrationForm.firstName.length < 5) return getErrorText({ atLeast: { field: 'First Name', number: 3 } })
+  if (!registrationForm.lastName) return getErrorText({ notEmpty: { field: 'Last Name' } })
+  if (registrationForm.lastName.length < 5) return getErrorText({ atLeast: { field: 'First Name', number: 5 } })
+  if (!registrationForm.email) return getErrorText({ notEmpty: { field: 'Email' } })
+  if (!registrationForm.phoneNumber) return getErrorText({ notEmpty: { field: 'Phone number' } })
+  return false
+}
+
 function getErrorText(error) {
   // error format { atLeast: { field, number }}
   if (error.atLeast) return `Ooops... ${error.atLeast.field} must have at least ${error.atLeast.number} letters!`
@@ -90,6 +116,5 @@ function getErrorText(error) {
   if (error.notEmpty) return `Ooops... ${error.notEmpty.field} cannot be empty!`
   // error format { server: String | true }
   if (error.server) return error.server === true ? `Ooops... Something went wrong with our servers :(` : error.server
-  return 'Ooops... Something went terribly wrong :( We are working nonstop!'
+  return 'Ooops... Something went terribly wrong :( We are working nonstop to fix it!'
 }
-

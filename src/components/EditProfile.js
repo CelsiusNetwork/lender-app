@@ -2,53 +2,67 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { StyleSheet, View, ImageBackground, Image, TouchableOpacity } from 'react-native'
 import { Button, Form, Input, Item, Label, Text, Content, Header, Title, Container } from 'native-base'
-import { registerFirstNameChanged, registerLastNameChanged, registerEmailChanged, registerPasswordChanged, registerPhoneNumberChanged, registerLender } from '../actions'
+import { updateRegisterForm, updateProfile } from '../actions'
 
 class EditProfile extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-        firstName: "Alex",
-        lastName: "Johnson",
-        email: "alex.johnson@gmail.com",
-        password: "123456",
-        passcode: "1111",
-        phoneNumber: "+1 213 221 49 51"
-      }
+  // constructor(props) {
+    // super(props)
+    // this.state = {
+    //   }
+  // }
+
+  componentDidMount() {
+    const { lender, registerForm, updateRegisterForm } = this.props
+
+    // Prepopulate form fields with lender data
+    updateRegisterForm({
+      ...registerForm,
+      firstName:  lender.user_metadata.name,
+      lastName: lender.user_metadata.surname,
+      email: lender.email,
+      // TODO(fj)
+      // picture: lender.picture,
+      // password: '',
+      // phoneNumber: ''
+    })
+  }
+
+  componentWillUnmount() {
+    // cleans form & errors
+    this.props.updateRegisterForm()
   }
 
   onFirstNameChange (text) {
-    this.props.registerFirstNameChanged(text)
+    this.updateField('firstName', text)
   }
 
   onLastNameChange (text) {
-    this.props.registerLastNameChanged(text)
+    this.updateField('lastName', text)
   }
 
   onEmailChange (text) {
-    this.props.registerEmailChanged(text)
-  }
-
-  onPasswordChange (text) {
-    this.props.registerPasswordChanged(text)
+    this.updateField('email', text)
   }
 
   onPhoneNumberChange (text) {
-    this.props.registerPhoneNumberChanged(text)
+    this.updateField('phoneNumber', text)
   }
 
-  onButtonPress (firstName, lastName, email, password, phoneNumber) {
-    // this.props.registerLender({ firstName, lastName, email, password, phoneNumber })
+  updateField (field, text) {
+    const { registerForm, updateRegisterForm } = this.props
+    registerForm[field] = text
+    updateRegisterForm(registerForm)
+  }
 
+  onButtonPress () {
+    const { updateProfile, registerForm } = this.props;
+    updateProfile(registerForm)
   }
 
   render () {
-    const { navigate } = this.props.navigation
-    const firstName = this.props.name
-    const lastName = this.props.surname
-    const email = this.props.email
-    const phoneNumber = this.props.phoneNumber
-    const profilePicture = this.props.picture
+    const { loading, registerForm } = this.props
+    const { firstName, lastName, email, picture, phoneNumber } = registerForm
+    const profilePicture = picture
     return (
       <View style={styles.container}>
         <ImageBackground source={require('../../assets/images/background-blur.png')} style={styles.background}>
@@ -101,22 +115,22 @@ class EditProfile extends Component {
                       autoCorrect={false}
                       autoCapitalize='none' />
                   </Item>
-                  <Item floatingLabel style={styles.floatingWrapper}>
-                    <Label style={{color: 'rgba(156, 169, 182, 0.5)', fontSize: 12}}>{'Password'.toUpperCase()}</Label>
-                    <Input
-                      style={styles.input}
-                      onChangeText={this.onPasswordChange.bind(this)}
-                      value={this.state.password}
-                      secureTextEntry returnKeyType='done' autoCorrect={false} />
-                  </Item>
-                  <Item floatingLabel style={styles.floatingWrapper}>
-                    <Label style={{color: 'rgba(156, 169, 182, 0.5)', fontSize: 12}}>{'Passcode'.toUpperCase()}</Label>
-                    <Input
-                      style={styles.input}
-                      // onChangeText={this.onPasswordChange.bind(this)}
-                      value={this.state.passcode}
-                      secureTextEntry returnKeyType='done' autoCorrect={false} />
-                  </Item>
+                  {/*<Item floatingLabel style={styles.floatingWrapper}>*/}
+                    {/*<Label style={{color: 'rgba(156, 169, 182, 0.5)', fontSize: 12}}>{'Password'.toUpperCase()}</Label>*/}
+                    {/*<Input*/}
+                      {/*style={styles.input}*/}
+                      {/*onChangeText={this.onPasswordChange.bind(this)}*/}
+                      {/*value={this.state.password}*/}
+                      {/*secureTextEntry returnKeyType='done' autoCorrect={false} />*/}
+                  {/*</Item>*/}
+                  {/*<Item floatingLabel style={styles.floatingWrapper}>*/}
+                    {/*<Label style={{color: 'rgba(156, 169, 182, 0.5)', fontSize: 12}}>{'Passcode'.toUpperCase()}</Label>*/}
+                    {/*<Input*/}
+                      {/*style={styles.input}*/}
+                      {/*// onChangeText={this.onPasswordChange.bind(this)}*/}
+                      {/*value={this.state.passcode}*/}
+                      {/*secureTextEntry returnKeyType='done' autoCorrect={false} />*/}
+                  {/*</Item>*/}
                   <Item floatingLabel style={styles.floatingWrapper}>
                     <Label style={{color: 'rgba(156, 169, 182, 0.5)', fontSize: 12}}>{'Phone number'.toUpperCase()}</Label>
                     <Input
@@ -131,8 +145,8 @@ class EditProfile extends Component {
                     <View style={styles.cellLeft}>
                       <Button
                         style={styles.button}
-                        // onPress={this.onButtonPress.bind(this)}
-                        onPress={() => navigate('VerifyPhoneNumber')}
+                        onPress={this.onButtonPress.bind(this)}
+                        // onPress={() => navigate('VerifyPhoneNumber')}
                         block primary>
                         <Text
                           style={styles.buttonText}
@@ -342,28 +356,26 @@ const styles = StyleSheet.create({
     marginTop: 7,
     marginRight: 3,
     marginLeft: 7
-  }
+  },
+  errorText: {
+    marginLeft: 15,
+    marginTop: 10,
+    color: '#FF9494'
+  },
 })
 
 const mapStateToProps = state => {
   return {
-    nav: state.nav,
-    token: state.auth.token,
-    email: state.auth.email,
-    authId: state.auth.authId,
-    lender: state.lender,
-    name: state.lender.name,
-    surname: state.lender.surname,
-    walletAddress: state.lender.walletAddress,
+    registerForm: state.lender.registerForm,
+    lender: state.lender.lender,
     picture: state.lender.lender.picture,
-    ethBalance: state.wallet.ethBalance,
-    celBalance: state.wallet.celBalance,
-    error: state.register.error,
+    error: state.lender.error,
   }
 }
 
 const mapDispatchToProps = {
-  registerFirstNameChanged, registerLastNameChanged, registerEmailChanged, registerPasswordChanged, registerPhoneNumberChanged, registerLender
+  updateRegisterForm,
+  updateProfile
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditProfile)

@@ -2,40 +2,42 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {StyleSheet, View, ImageBackground, Image, TouchableOpacity} from 'react-native'
 import {Button, Form, Input, Item, Label, Text, Content, Container} from 'native-base'
-import {
-  updateRegisterForm,
-  // registerFirstNameChanged,
-  // registerLastNameChanged,
-  // registerEmailChanged,
-  // registerPasswordChanged,
-  // registerPhoneNumberChanged,
-  registerLender
-} from '../actions'
+import { updateRegisterForm, registerLender } from '../actions'
 
 class Register extends Component {
+  componentWillUnmount() {
+    // clear form data and errors
+    this.props.updateRegisterForm()
+  }
+
   onFirstNameChange (text) {
-    this.props.updateRegisterForm('firstName', text)
+    this.updateField('firstName', text)
   }
 
   onLastNameChange (text) {
-    this.props.updateRegisterForm('lastName', text)
+    this.updateField('lastName', text)
   }
 
   onEmailChange (text) {
-    this.props.updateRegisterForm('email', text)
+    this.updateField('email', text)
   }
 
   onPasswordChange (text) {
-    this.props.updateRegisterForm('password', text)
+    this.updateField('password', text)
   }
 
   onPhoneNumberChange (text) {
-    this.props.updateRegisterForm('phoneNumber', text)
+    this.updateField('phoneNumber', text)
+  }
+
+  updateField (field, text) {
+    const { registerForm, updateRegisterForm } = this.props
+    registerForm[field] = text
+    updateRegisterForm(registerForm)
   }
 
   onButtonPress () {
     const { registerLender, registerForm } = this.props
-    // const { firstName, lastName, email, password, phoneNumber } = this.props
     const appToken = this.props.initToken
     console.log('onButtonPress()')
     registerLender(registerForm, appToken)
@@ -199,29 +201,18 @@ const styles = StyleSheet.create({
 })
 
 const mapStateToProps = state => {
-  const { register, initToken, nav } = state
+  const { lender, initToken, nav } = state
   return {
     initToken: initToken.token,
-    // firstName: register.firstName,
-    // lastName: register.lastName,
-    // email: register.email,
-    // password: register.password,
-    // phoneNumber: register.phoneNumber,
-    registerForm: register.registerForm,
-
-    error: register.error,
-    loading: register.loading,
+    registerForm: lender.registerForm,
+    error: lender.error,
+    loading: lender.loading,
     nav: nav
   }
 }
 
 const mapDispatchToProps = {
   updateRegisterForm,
-  // registerFirstNameChanged,
-  // registerLastNameChanged,
-  // registerEmailChanged,
-  // registerPasswordChanged,
-  // registerPhoneNumberChanged,
   registerLender
 }
 
