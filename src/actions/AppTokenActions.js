@@ -24,7 +24,7 @@ const lenderAppTokenInitFail = (dispatch, errorCode) => {
   })
 }
 
-const handleAppTokenInit = async(dispatch, data) => {
+const handleAppTokenInit = (dispatch, data) => {
   console.log('lenderAppTokenInitSuccess() WOOHOO!')
   console.log(data)
 

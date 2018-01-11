@@ -1,14 +1,13 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { ImageBackground, StyleSheet, View, Image, Text, TouchableOpacity } from 'react-native'
-import { Content, Container } from 'native-base'
-import { Pages } from 'react-native-pages'
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
+import {ImageBackground, StyleSheet, View, Image, Text, TouchableOpacity} from 'react-native'
+import {Content, Container} from 'native-base'
+import {Pages} from 'react-native-pages'
 import DegIncome from './graph/DegIncome'
 import DegValue from './graph/DegValue'
 import IncomeHistory from './graph/IncomeHistory'
-import { fetchWalletBalance, fetchTransactionsHistory, setActiveTransaction } from '../actions'
-import { lenderAppInitToken } from '../actions'
-import { Font } from 'expo'
+import {fetchWalletBalance, fetchTransactionsHistory, setActiveTransaction, lenderAppInitToken} from '../actions'
+import {Font} from 'expo'
 
 class Home extends Component {
   constructor (props) {
@@ -20,8 +19,8 @@ class Home extends Component {
       deg: 2.984,
       change: ' ▲ +3.24%',
       user: {
-        name: "Alex"
-      },
+        name: 'Alex'
+      }
     }
     console.log('props: ')
     console.log(props)
@@ -30,7 +29,7 @@ class Home extends Component {
   }
 
   componentWillMount () {
-    const { props } = this
+    const {props} = this
     this.fetchingInterval = setInterval(() => {
       props.fetchWalletBalance(props.walletAddress, props.token)
     }, 5000)
@@ -38,15 +37,15 @@ class Home extends Component {
 
   async componentDidMount () {
     await Font.loadAsync({
-      'barlow-semi-bold': require('../../assets/fonts/Barlow-SemiBold.otf'),
-    });
+      'barlow-semi-bold': require('../../assets/fonts/Barlow-SemiBold.otf')
+    })
     await Font.loadAsync({
-      'barlow-light': require('../../assets/fonts/Barlow-Light.otf'),
-    });
+      'barlow-light': require('../../assets/fonts/Barlow-Light.otf')
+    })
     await Font.loadAsync({
-      'barlow': require('../../assets/fonts/Barlow-Regular.otf'),
-    });
-    this.setState({ fontLoaded: true });
+      'barlow': require('../../assets/fonts/Barlow-Regular.otf')
+    })
+    this.setState({fontLoaded: true})
   }
 
   componentWillReceiveProps (nextProps) {
@@ -63,84 +62,83 @@ class Home extends Component {
   }
 
   render () {
-    const { navigate } = this.props.navigation
-    const ethBalance = this.props.ethBalance
-    const celBalance = this.props.celBalance
+    const {navigate} = this.props.navigation
+    const ethBalance = this.props.ethBalance || '0.00'
+    const celBalance = this.props.celBalance || '0.00'
     const name = this.props.lender.name
-    console.log("ethBalance: ", ethBalance)
-    if(parseFloat(ethBalance) == 0){
-    return (
-      <View style={styles.container}>
-        <ImageBackground source={require('../../assets/images/background-blur.png')} style={styles.background}>
-          <View style={styles.body}>
-            <View style={[styles.row, {marginBottom: 20, marginTop: 60}]}>
-              <View style={styles.cellLeft}>
-                <Image source={require('../../assets/images/Celsius_Symbol_white.png')} style={styles.logo} />
-              </View>
-              <TouchableOpacity onPress={() => navigate('EditProfile')}>
-                <View style={styles.cellRight}>
-                  <Image source={require('../../assets/images/icon-user.png')} style={styles.user} />
+
+    if (parseFloat(ethBalance) === 0) {
+      return (
+        <View style={styles.container}>
+          <ImageBackground source={require('../../assets/images/background-blur.png')} style={styles.background}>
+            <View style={styles.body}>
+              <View style={[styles.row, {marginBottom: 20, marginTop: 60}]}>
+                <View style={styles.cellLeft}>
+                  <Image source={require('../../assets/images/Celsius_Symbol_white.png')} style={styles.logo} />
                 </View>
-              </TouchableOpacity>
-            </View>
-            <Container style={styles.wrapper}>
-              <Content>
-                <Text style={styles.header}>
-                  <Text>{ethBalance}</Text>
-                  <Text> ETH</Text>
-                </Text>
-                <Text style={styles.header2}>
-                  <Text>{celBalance}</Text>
-                  <Text> CEL</Text>
-                </Text>
-                <View style={styles.btnsContainer}>
-                  <View style={styles.cellLeft}>
-                    <TouchableOpacity style={styles.button} onPress={() => navigate('AddFounds')}>
-                      <Text style={styles.buttonText}>Add funds</Text>
-                    </TouchableOpacity>
-                  </View>
+                <TouchableOpacity onPress={() => navigate('EditProfile')}>
                   <View style={styles.cellRight}>
-                    <TouchableOpacity style={styles.button2} onPress={() => navigate('ManageFounds')}>
-                      <Text style={styles.button2Text}>Manage</Text>
-                    </TouchableOpacity>
+                    <Image source={require('../../assets/images/icon-user.png')} style={styles.user} />
                   </View>
-                </View>
-                <View style={styles.hr}></View>
+                </TouchableOpacity>
+              </View>
+              <Container style={styles.wrapper}>
+                <Content>
+                  <Text style={styles.header}>
+                    <Text>{ethBalance}</Text>
+                    <Text> ETH</Text>
+                  </Text>
+                  <Text style={styles.header2}>
+                    <Text>{celBalance}</Text>
+                    <Text> CEL</Text>
+                  </Text>
+                  <View style={styles.btnsContainer}>
+                    <View style={styles.cellLeft}>
+                      <TouchableOpacity style={styles.button} onPress={() => navigate('AddFounds')}>
+                        <Text style={styles.buttonText}>Add funds</Text>
+                      </TouchableOpacity>
+                    </View>
+                  </View>
+                  <View style={styles.hr} />
 
-                <Text style={styles.welcomeTitle}>Welcome to Celsius, {name}!</Text>
-                <Text style={styles.welcomeText}>As a member of Celsius community, you can lend ETH and earn DEG token for the time you spend with us.</Text>
-                <View style={styles.hr}></View>
-                <TouchableOpacity style={styles.box}>
-                  <View style={styles.boxIconWrapper}>
-                    <Image source={require('../../assets/images/icon-wallet.png')} style={styles.icon} />
-                  </View>
-                  <View style={styles.boxTextWrapper}>
-                    <Text style={styles.boxText}>Transfer funds to your newly created Celsius wallet to start earning more on top of it.</Text>
-                  </View>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.box}>
-                  <View style={styles.boxIconWrapper}>
-                    <Image source={require('../../assets/images/icon-transfer.png')} style={styles.icon} />
-                   </View>
-                  <View style={styles.boxTextWrapper}>
-                    <Text style={styles.boxText}>By lending money to borrowers, you earn Degree which you can later on sell on the market.</Text>
-                   </View>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.box}>
-                  <View style={styles.boxIconWrapper}>
-                    <Image source={require('../../assets/images/icon-network.png')} style={styles.icon} />
-                  </View>
-                  <View style={styles.boxTextWrapper}>
-                    <Text style={styles.boxText}>Improve your seniority score by sticking longer with Celsius and earn more Degree.</Text>
-                  </View>
-                </TouchableOpacity>
-              </Content>
-            </Container>
+                  <Text style={styles.welcomeTitle}>Welcome to Celsius, {name}!</Text>
+                  <Text style={styles.welcomeText}>As a member of Celsius community, you can lend ETH and earn DEG token
+                    for the time you spend with us.</Text>
+                  <View style={styles.hr} />
+                  <TouchableOpacity style={styles.box}>
+                    <View style={styles.boxIconWrapper}>
+                      <Image source={require('../../assets/images/icon-wallet.png')} style={styles.icon} />
+                    </View>
+                    <View style={styles.boxTextWrapper}>
+                      <Text style={styles.boxText}>Transfer funds to your newly created Celsius wallet to start earning
+                        more on top of it.</Text>
+                    </View>
+                  </TouchableOpacity>
+                  <TouchableOpacity style={styles.box}>
+                    <View style={styles.boxIconWrapper}>
+                      <Image source={require('../../assets/images/icon-transfer.png')} style={styles.icon} />
+                    </View>
+                    <View style={styles.boxTextWrapper}>
+                      <Text style={styles.boxText}>By lending money to borrowers, you earn Degree which you can later on
+                        sell on the market.</Text>
+                    </View>
+                  </TouchableOpacity>
+                  <TouchableOpacity style={styles.box}>
+                    <View style={styles.boxIconWrapper}>
+                      <Image source={require('../../assets/images/icon-network.png')} style={styles.icon} />
+                    </View>
+                    <View style={styles.boxTextWrapper}>
+                      <Text style={styles.boxText}>Improve your seniority score by sticking longer with Celsius and earn
+                        more Degree.</Text>
+                    </View>
+                  </TouchableOpacity>
+                </Content>
+              </Container>
+            </View>
+          </ImageBackground>
         </View>
-      </ImageBackground>
-    </View>
 
-    )
+      )
     } else {
       return (
         <View style={stylesGraph.container}>
@@ -161,13 +159,14 @@ class Home extends Component {
             </View>
 
             <Text style={stylesGraph.headerText}>
-                { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow-semi-bold' }]}>{ ethBalance }</Text>) : null }
-                { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow-semi-bold' }]}> ETH</Text>) : null }
+              {this.state.fontLoaded ? (<Text style={[{fontFamily: 'barlow-semi-bold'}]}>{ethBalance}</Text>) : null}
+              {this.state.fontLoaded ? (<Text style={[{fontFamily: 'barlow-semi-bold'}]}> ETH</Text>) : null}
             </Text>
             <Text style={stylesGraph.header2Text}>
-              { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow-light' }]}>{ celBalance }</Text>) : null }
-              { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow-light' }]}> CEL</Text>) : null }
-              { this.state.fontLoaded ? (<Text style={[ stylesGraph.changeUp, { fontFamily: 'barlow-light' }]}> { this.state.change}</Text>) : null }
+              {this.state.fontLoaded ? (<Text style={[{fontFamily: 'barlow-light'}]}>{celBalance}</Text>) : null}
+              {this.state.fontLoaded ? (<Text style={[{fontFamily: 'barlow-light'}]}> CEL</Text>) : null}
+              {this.state.fontLoaded ? (
+                <Text style={[stylesGraph.changeUp, {fontFamily: 'barlow-light'}]}> {this.state.change}</Text>) : null}
             </Text>
 
             <View style={stylesGraph.row}>
@@ -214,7 +213,7 @@ const styles = StyleSheet.create({
   },
   background: {
     flex: 1,
-    flexDirection: 'row',
+    flexDirection: 'row'
     // justifyContent: 'top',
     // alignItems: 'center',
     // backgroundColor: 'red'
@@ -260,7 +259,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
     marginLeft: 10,
-    height: 40,
+    height: 40
     // borderWidth: 1,
     // borderColor: 'red'
   },
@@ -283,11 +282,9 @@ const styles = StyleSheet.create({
     width: 25,
     height: 25,
     marginRight: 0,
-    resizeMode: "contain"
+    resizeMode: 'contain'
   },
-  wrapper: {
-
-  },
+  wrapper: {},
   text: {
     fontSize: 14,
     backgroundColor: 'rgba(0,0,0,0)',
@@ -320,7 +317,7 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     paddingRight: 20,
     // marginLeft: 20,
-    alignSelf: 'stretch',
+    alignSelf: 'stretch'
   },
   buttonText: {
     color: '#333333',
@@ -364,7 +361,7 @@ const styles = StyleSheet.create({
   icon: {
     width: 50,
     height: 50,
-    resizeMode: "contain",
+    resizeMode: 'contain',
     marginLeft: 15
   },
   boxText: {
@@ -404,12 +401,12 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     paddingRight: 20,
     // marginRight: 20,
-    alignSelf: 'stretch',
+    alignSelf: 'stretch'
   },
   button2Text: {
     color: 'rgba(255, 255, 255, 0.5)',
     fontSize: 16
-  },
+  }
 })
 
 const stylesGraph = StyleSheet.create({
@@ -422,7 +419,7 @@ const stylesGraph = StyleSheet.create({
   },
   background: {
     flex: 1,
-    flexDirection: 'row',
+    flexDirection: 'row'
     // justifyContent: 'top',
     // alignItems: 'center',
     // backgroundColor: 'red'
@@ -433,27 +430,27 @@ const stylesGraph = StyleSheet.create({
     marginTop: 40
   },
   headerText: {
-		fontSize: 42,
-		backgroundColor: 'rgba(0,0,0,0)',
-		color: 'white',
-		paddingLeft: 30,
-		paddingRight: 30,
-		marginBottom: 10,
+    fontSize: 42,
+    backgroundColor: 'rgba(0,0,0,0)',
+    color: 'white',
+    paddingLeft: 30,
+    paddingRight: 30,
+    marginBottom: 10,
     fontWeight: 'bold',
     textAlign: 'center',
     marginTop: 20
   },
   row: {
     height: 60,
-    flexDirection: 'row',
+    flexDirection: 'row'
   },
   header2Text: {
-		fontSize: 24,
-		backgroundColor: 'rgba(0,0,0,0)',
-		color: '#9CA9B6',
-		paddingLeft: 30,
-		paddingRight: 30,
-		marginBottom: 10,
+    fontSize: 24,
+    backgroundColor: 'rgba(0,0,0,0)',
+    color: '#9CA9B6',
+    paddingLeft: 30,
+    paddingRight: 30,
+    marginBottom: 10,
     fontWeight: 'bold',
     textAlign: 'center',
     marginTop: 0
@@ -468,10 +465,10 @@ const stylesGraph = StyleSheet.create({
   },
   pagesWrapper: {
     flex: 1,
-    flexDirection: 'row',
+    flexDirection: 'row'
   },
   pages: {
-    flex: 1,
+    flex: 1
   },
   cellLeft: {
     flex: 1,
@@ -479,7 +476,7 @@ const stylesGraph = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
     marginLeft: 10,
-    height: 40,
+    height: 40
   },
   cellRight: {
     flex: 1,
@@ -487,7 +484,7 @@ const stylesGraph = StyleSheet.create({
     justifyContent: 'flex-end',
     alignItems: 'center',
     marginRight: 10,
-    height: 40,
+    height: 40
   },
   buttonCellLeft: {
     flex: 1,
@@ -496,7 +493,7 @@ const stylesGraph = StyleSheet.create({
     justifyContent: 'flex-start',
     alignSelf: 'stretch',
     marginLeft: 10,
-    height: 50,
+    height: 50
     // borderWidth: 1,
     // borderColor: 'green',
   },
@@ -507,20 +504,20 @@ const stylesGraph = StyleSheet.create({
     alignItems: 'center',
     alignSelf: 'stretch',
     marginRight: 10,
-    height: 50,
+    height: 50
     // borderWidth: 1,
     // borderColor: 'red'
   },
   logo: {
     width: 30,
     height: 30,
-    marginLeft: 15,
+    marginLeft: 15
   },
   user: {
     width: 30,
     height: 30,
     marginRight: 35,
-    resizeMode: "contain"
+    resizeMode: 'contain'
   },
   title: {
     fontSize: 38,
@@ -549,7 +546,7 @@ const stylesGraph = StyleSheet.create({
     // paddingLeft: 20,
     // paddingRight: 20,
     // marginLeft: 30,
-    alignSelf: 'stretch',
+    alignSelf: 'stretch'
   },
   buttonText: {
     color: '#333333',
@@ -571,12 +568,12 @@ const stylesGraph = StyleSheet.create({
     // paddingLeft: 20,
     // paddingRight: 20,
     // marginRight: 30,
-    alignSelf: 'stretch',
+    alignSelf: 'stretch'
   },
   button2Text: {
     color: 'rgba(255, 255, 255, 0.5)',
     fontSize: 20
-  },
+  }
 })
 
 const mapStateToProps = state => {
