@@ -30,7 +30,7 @@ class IncomeHistory extends Component {
     });
     this.setState({ fontLoaded: true });
 
-    this.props.fetchTransactionsHistory();
+    this.props.fetchTransactionsHistory(this.props.walletAddress);
   }
 
   handleTransacationPress(transaction) {

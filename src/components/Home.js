@@ -193,6 +193,7 @@ class Home extends Component {
                   fetchTransactionsHistory={this.props.fetchTransactionsHistory}
                   transactions={this.props.transactions}
                   setActiveTransaction={this.props.setActiveTransaction}
+                  walletAddress={this.props.lender.walletAddress}
                 />
               </Pages>
             </View>

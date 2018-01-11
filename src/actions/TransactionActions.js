@@ -3,12 +3,12 @@ import { TestEtherScanService } from '../services'
 // import { NavigationActions } from 'react-navigation'
 // import Navigator from '../Navigator'
 
-export const fetchTransactionsHistory = () => {
+export const fetchTransactionsHistory = (walletAddress) => {
     return (dispatch) => {
       dispatch({
         type: types.FETCH_ETH_TRANSACTIONS_LOADING
       })
-      TestEtherScanService().fetchTransactionList()
+      TestEtherScanService().fetchTransactionList(walletAddress)
         .then(response => handleTransactionsList(dispatch, response))
         .catch((error) => {
           transactionsListFail(dispatch, error)
