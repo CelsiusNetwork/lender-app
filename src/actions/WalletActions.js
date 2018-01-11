@@ -1,14 +1,27 @@
 import * as types from './Types'
-import { WalletService, TestEtherScanService } from '../services'
+import { WalletService } from '../services'
 import { NavigationActions } from 'react-navigation'
-import Navigator from '../Navigator'
 
 export const withdrawETH = (password, fromAddress, toAddress, value, token) => {
-  console.log('lalala')
   return (dispatch) => {
     dispatch({
       type: types.WITHDRAW_ETH_LOADING
     })
+
+    // Delay redirection in 5 seconds
+    setTimeout(() => {
+      dispatch(NavigationActions.reset({
+        index: 0,
+        actions: [
+          NavigationActions.navigate({ routeName: 'Home' })
+        ]
+      }))
+
+      dispatch({
+        type: types.WITHDRAW_ETH_LOADING
+      })
+    }, 3000)
+
     WalletService().sendETH(password, fromAddress, toAddress, value, token)
       .then(response => handleWithdrawETH(dispatch, response))
   }
@@ -35,20 +48,22 @@ const handleWithdrawETH = (dispatch, response) => {
       type: types.WITHDRAW_ETH_SUCCESS,
       payload: response._bodyText
     })
-    dispatch(NavigationActions.navigate({
-      routeName: 'ManageFoundsSuccess',
-      actions: [
-        NavigationActions.navigate({ routeName: 'ManageFoundsSuccess' })
-      ]
-    }))
+
+    // TODO (djs): Check with team
+    // dispatch(NavigationActions.navigate({
+    //   routeName: 'ManageFoundsSuccess',
+    //   actions: [
+    //     NavigationActions.navigate({ routeName: 'ManageFoundsSuccess' })
+    //   ]
+    // }))
   }
   if (response.ok === false) {
-    dispatch(NavigationActions.navigate({
-      routeName: 'ManageFoundsConfirm',
-      actions: [
-        NavigationActions.navigate({ routeName: 'ManageFoundsError' })
-      ]
-    }))
+    // dispatch(NavigationActions.navigate({
+    //   routeName: 'ManageFoundsConfirm',
+    //   actions: [
+    //     NavigationActions.navigate({ routeName: 'ManageFoundsError' })
+    //   ]
+    // }))
   }
 }
 

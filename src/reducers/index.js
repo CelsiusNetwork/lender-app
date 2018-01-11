@@ -9,7 +9,6 @@ import WalletBalance from './WalletBalance'
 import WithdrawETHReducer from './WithdrawETHReducer'
 import TransactionsReducer from './TransactionsReducer'
 
-
 export default combineReducers({
   auth: LoginReducer,
   nav: NavigatorReducer,

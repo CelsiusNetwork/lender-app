@@ -32,7 +32,7 @@ class AddFounds extends Component {
   }
 
   handleChangeToAddress (toAddress) {
-    this.setState({ toAddress })
+    this.setState({toAddress})
   }
 
   render () {
@@ -65,8 +65,7 @@ class AddFounds extends Component {
                       autoCorrect={false}
                       autoCapitalize='none' />
                   </Item>
-                  <TouchableOpacity style={styles.QRCodeWrapper}
-                    onPress={() => navigate('QRScanner')}
+                  <TouchableOpacity style={styles.QRCodeWrapper} onPress={() => navigate('QRScanner')}
                     // onPress={() => navigate('VerifyPhoneNumber')}
                   >
                     <Image source={require('../../assets/images/icon-scan-qrcode.png')} style={styles.QRCode} />
@@ -74,10 +73,18 @@ class AddFounds extends Component {
 
                 </Form>
                 <View style={styles.center}>
-                  <TouchableOpacity style={styles.button} onPress={() => this.props.withdrawETH('test42!', this.props.walletAddress, this.state.toAddress, this.props.withdrawAmount, this.props.token)}>
+                  <TouchableOpacity style={styles.button}
+                    onPress={() => this.props.withdrawETH('test42!', this.props.walletAddress, this.state.toAddress, this.props.withdrawAmount, this.props.token)}>
                     <Text style={styles.buttonText} />
                     <Text style={styles.buttonText}>Confirm withdraw</Text>
                   </TouchableOpacity>
+                </View>
+                <View style={styles.center}>
+                  {this.props.loading ? (
+                    <Text style={styles.message}>Accepted transaction. You will be redirected to Home.</Text>
+                  ) : (
+                    <Text /> // TODO (djs): remove empty element
+                  )}
                 </View>
               </Content>
             </Container>
@@ -98,6 +105,11 @@ class AddFounds extends Component {
 }
 
 const styles = StyleSheet.create({
+  message: {
+    marginTop: 20,
+    color: 'white',
+    textAlign: 'center'
+  },
   container: {
     flex: 1,
     flexDirection: 'column',

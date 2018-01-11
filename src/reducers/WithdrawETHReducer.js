@@ -19,10 +19,10 @@ export default (state = WITHDRAW_ETH_STATE, action) => {
         withdrawAmount: action.payload
       }
     case types.WITHDRAW_ETH_LOADING:
-      return { ...state, loading: true }
+      return { ...state, loading: !state.loading }
     case types.WITHDRAW_ETH_SUCCESS:
       console.log('FETCH_WALLET_BALANCE_SUCCESS yea:')
-      var a = JSON.parse(action.payload)
+      const a = JSON.parse(action.payload)
       console.log(a.ether)
       return {
         ...state,
