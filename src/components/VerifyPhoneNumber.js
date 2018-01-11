@@ -24,12 +24,11 @@ class VerifyPhoneNumber extends Component {
                 <Image source={require('../../assets/images/dash-line.png')} style={styles.inputDash} />
             </View>
           </View>
-          <TouchableOpacity style={styles.button}
+          {/* <TouchableOpacity style={styles.button}
               // onPress={() => navigate('VerifyDocument')}
               // onPress={() => this.goToPage()}
             >
-            <Text style={styles.buttonText}>Add your ID</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </Content>
       </Container>
     )

@@ -13,16 +13,31 @@ import Agree from './Agree'
 
 
 class Verification extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props)
     this.state = {
         progress: 0,
-        progressLine: '0%'
+        progressLine: '0%',
+        step: 2,
+        btnTxt: 'Add your ID'
     }
+  }
+
+  handleVerify () {
+    console.log('ref: ')
+    console.log(this.props.refs.kungfoo)
+  }
+
+  scrolled (wasOnPage) {
+    console.log('wasOnPage: ', wasOnPage)
+    this.setState({btnTxt: 'Take a photo'})
+    const currentStep = this.state.step
+    this.setState({step: currentStep + 1})
   }
 
   render () {
     // const { navigate } = this.props.navigation
+
     return (
       <View style={styles.container}>
         <ImageBackground source={require('../../assets/images/background-blur.png')} style={styles.background}>
@@ -35,7 +50,7 @@ class Verification extends Component {
 
             <Pages
               scrollEnabled={false}
-              renderPager={this.renderPager.bind(this)}
+              onScrollEnd={this.scrolled.bind(this)}
               ref='kungfoo'>
               <VerifyPhoneNumber />
               <VerifyDocument />
@@ -43,9 +58,9 @@ class Verification extends Component {
               <Agree />
             </Pages>
             <TouchableOpacity style={styles.button}
-              onPress={() => this.refs.kungfoo.scrollToPage(() => console.log(this.refs.kungfoo))}
+              onPress={() => this.refs.kungfoo.scrollToPage(this.state.step)}
               >
-                <Text style={styles.buttonText}>Go to second page</Text>
+                <Text style={styles.buttonText}>{this.state.btnTxt}</Text>
               </TouchableOpacity>
 
           </View>

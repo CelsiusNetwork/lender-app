@@ -99,12 +99,12 @@ class VerifyDocument extends React.Component {
             </View>
             <Text style={styles.text}>Please center your passport in the area above. Ensure that there’s enough light in the room for better picture quality.</Text>
             <View>
-              <TouchableOpacity style={styles.button}
+              {/*<TouchableOpacity style={styles.button}
               // onPress={() => navigate('Register')}
               onPress={this.snap}
               >
                 <Text style={styles.buttonText}>Take a photo</Text>
-              </TouchableOpacity>
+              </TouchableOpacity>*/}
             </View>
           </Content>
         </Container>
