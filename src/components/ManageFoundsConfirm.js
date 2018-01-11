@@ -1,17 +1,8 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {StyleSheet, View, ImageBackground, Image, TouchableOpacity} from 'react-native'
-import {Button, Form, Input, Item, Label, Text, Content, Header, Title, Container} from 'native-base'
-import {
-  registerFirstNameChanged,
-  registerLastNameChanged,
-  registerEmailChanged,
-  registerPasswordChanged,
-  registerPhoneNumberChanged,
-  registerLender
-} from '../actions'
+import {Form, Input, Item, Label, Text, Content, Container} from 'native-base'
 import {Font} from 'expo'
-import {NavigationActions} from 'react-navigation'
 import {withdrawETH} from '../actions'
 
 class AddFounds extends Component {
@@ -24,18 +15,18 @@ class AddFounds extends Component {
     }
   }
 
-  async componentDidMount() {
+  async componentDidMount () {
     await Font.loadAsync({
-      'inconsolata': require('../../assets/fonts/Inconsolata-Regular.ttf'),
+      'inconsolata': require('../../assets/fonts/Inconsolata-Regular.ttf')
     })
     await Font.loadAsync({
-      'barlow-semi-bold': require('../../assets/fonts/Barlow-SemiBold.otf'),
+      'barlow-semi-bold': require('../../assets/fonts/Barlow-SemiBold.otf')
     })
     await Font.loadAsync({
-      'barlow-light': require('../../assets/fonts/Barlow-Light.otf'),
+      'barlow-light': require('../../assets/fonts/Barlow-Light.otf')
     })
     await Font.loadAsync({
-      'barlow': require('../../assets/fonts/Barlow-Regular.otf'),
+      'barlow': require('../../assets/fonts/Barlow-Regular.otf')
     })
     this.setState({fontLoaded: true})
   }
@@ -63,7 +54,7 @@ class AddFounds extends Component {
                       value={this.state.toAddress}
                       autoCorrect={false}
                       // highlightColor="#00ACC1" // cyan600
-                      autoFocus autoCapitalize='none'/>
+                      autoFocus autoCapitalize='none' />
                   </Item>
                   <Item floatingLabel style={styles.floatingWrapper}>
                     <Label style={{color: '#9CA9B6'}}>{'note'.toUpperCase()}</Label>
@@ -72,25 +63,20 @@ class AddFounds extends Component {
                       // onChangeText={this.onLastNameChange.bind(this)}
                       value={this.state.note}
                       autoCorrect={false}
-                      autoCapitalize='none'/>
+                      autoCapitalize='none' />
                   </Item>
                   <TouchableOpacity style={styles.QRCodeWrapper}
-                                    onPress={() => navigate('QRScanner')}
+                    onPress={() => navigate('QRScanner')}
                     // onPress={() => navigate('VerifyPhoneNumber')}
                   >
-                    <Image source={require('../../assets/images/icon-scan-qrcode.png')} style={styles.QRCode}/>
+                    <Image source={require('../../assets/images/icon-scan-qrcode.png')} style={styles.QRCode} />
                   </TouchableOpacity>
 
                 </Form>
                 <View style={styles.center}>
                   <TouchableOpacity style={styles.button} onPress={() => this.props.withdrawETH('test42!', this.props.walletAddress, this.state.toAddress, this.props.withdrawAmount, this.props.token)}>
-                    <Text style={styles.buttonText}>
-                    </Text>
-                    { this.props.loading ? (
-                    <Image source={require('../../assets/images/animated_spinner.gif')} style={styles.loader} />
-                    ) : (
+                    <Text style={styles.buttonText} />
                     <Text style={styles.buttonText}>Confirm withdraw</Text>
-                  )}
                   </TouchableOpacity>
                 </View>
               </Content>
@@ -107,9 +93,8 @@ class AddFounds extends Component {
     if (this.props.error !== '') {
       return (<Text style={styles.errorText}>{this.props.error}</Text>)
     }
-    return <View/>
+    return <View />
   }
-
 }
 
 const styles = StyleSheet.create({
@@ -122,7 +107,7 @@ const styles = StyleSheet.create({
   },
   background: {
     flex: 1,
-    flexDirection: 'row',
+    flexDirection: 'row'
     // justifyContent: 'top',
     // alignItems: 'center',
     // backgroundColor: 'red'
@@ -149,7 +134,7 @@ const styles = StyleSheet.create({
     marginBottom: 30,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginTop: 60,
+    marginTop: 60
   },
   input: {
     height: 40,
@@ -187,7 +172,7 @@ const styles = StyleSheet.create({
     marginRight: 30,
     marginLeft: 30,
     marginTop: 80,
-    alignSelf: 'stretch',
+    alignSelf: 'stretch'
   },
   buttonText: {
     color: '#333333'
@@ -195,10 +180,6 @@ const styles = StyleSheet.create({
   form: {
     marginLeft: 20,
     marginRight: 20
-  },
-  floatingLabel: {
-    color: '#9CA9B6',
-    fontSize: 12
   },
   label: {
     // color: '#9CA9B6',
