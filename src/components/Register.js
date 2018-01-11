@@ -3,43 +3,56 @@ import {connect} from 'react-redux'
 import {StyleSheet, View, ImageBackground, Image, TouchableOpacity} from 'react-native'
 import {Button, Form, Input, Item, Label, Text, Content, Container} from 'native-base'
 import {
-  registerFirstNameChanged,
-  registerLastNameChanged,
-  registerEmailChanged,
-  registerPasswordChanged,
-  registerPhoneNumberChanged,
+  updateRegisterForm,
+  // registerFirstNameChanged,
+  // registerLastNameChanged,
+  // registerEmailChanged,
+  // registerPasswordChanged,
+  // registerPhoneNumberChanged,
   registerLender
 } from '../actions'
 
 class Register extends Component {
   onFirstNameChange (text) {
-    this.props.registerFirstNameChanged(text)
+    this.props.updateRegisterForm('firstName', text)
   }
 
   onLastNameChange (text) {
-    this.props.registerLastNameChanged(text)
+    this.props.updateRegisterForm('lastName', text)
   }
 
   onEmailChange (text) {
-    this.props.registerEmailChanged(text)
+    this.props.updateRegisterForm('email', text)
   }
 
   onPasswordChange (text) {
-    this.props.registerPasswordChanged(text)
+    this.props.updateRegisterForm('password', text)
   }
 
   onPhoneNumberChange (text) {
-    this.props.registerPhoneNumberChanged(text)
+    this.props.updateRegisterForm('phoneNumber', text)
   }
 
   onButtonPress () {
+    const { registerLender, registerForm } = this.props
+    // const { firstName, lastName, email, password, phoneNumber } = this.props
     const appToken = this.props.initToken
     console.log('onButtonPress()')
-    this.props.registerLender(this.props.firstName, this.props.lastName, this.props.email, this.props.password, this.props.phoneNumber, appToken)
+    registerLender(registerForm, appToken)
+  }
+
+  renderError () {
+    const { error } = this.props
+    console.log(error)
+    if (error) { return (<Text style={styles.errorText}>{error}</Text>) }
+    return <View />
   }
 
   render () {
-    const {navigate} = this.props.navigation
+    const { loading, navigation, registerForm} = this.props
+    const { firstName, lastName, email, password, phoneNumber } = registerForm
+    const { navigate } = navigation
+
     return (
       <View style={styles.container}>
         <ImageBackground source={require('../../assets/images/background.png')} style={styles.background}>
@@ -55,7 +68,7 @@ class Register extends Component {
                   <Input
                     style={styles.input}
                     onChangeText={this.onFirstNameChange.bind(this)}
-                    value={this.props.firstName}
+                    value={firstName}
                     autoCorrect={false}
                     highlightColor='#00ACC1' // cyan600
                     autoFocus autoCapitalize='none' />
@@ -65,7 +78,7 @@ class Register extends Component {
                   <Input
                     style={styles.input}
                     onChangeText={this.onLastNameChange.bind(this)}
-                    value={this.props.lastName}
+                    value={lastName}
                     autoCorrect={false}
                     autoCapitalize='none' />
                 </Item>
@@ -74,7 +87,7 @@ class Register extends Component {
                   <Input
                     style={styles.input}
                     onChangeText={this.onEmailChange.bind(this)}
-                    value={this.props.email}
+                    value={email}
                     keyboard-type='email-address'
                     autoCorrect={false}
                     autoCapitalize='none' />
@@ -84,7 +97,7 @@ class Register extends Component {
                   <Input
                     style={styles.input}
                     onChangeText={this.onPasswordChange.bind(this)}
-                    value={this.props.password}
+                    value={password}
                     secureTextEntry returnKeyType='done' autoCorrect={false} />
                 </Item>
                 <Item floatingLabel style={styles.floatingWrapper}>
@@ -92,7 +105,7 @@ class Register extends Component {
                   <Input
                     style={styles.input}
                     onChangeText={this.onPhoneNumberChange.bind(this)}
-                    value={this.props.phoneNumber}
+                    value={phoneNumber}
                     autoCorrect={false}
                     autoCapitalize='none' />
                 </Item>
@@ -102,23 +115,19 @@ class Register extends Component {
                   onPress={this.onButtonPress.bind(this)}
                   // onPress={() => navigate('VerifyPhoneNumber')}
                   block primary>
-                  <Text
-                    style={styles.buttonText}
-                  >Register</Text>
+                  { loading ? (
+                    <Image source={require('../../assets/images/animated_spinner.gif')} style={styles.loader} />
+                  ) : (
+                    <Text style={styles.buttonText}>Register</Text>
+                  )}
                 </Button>
+
               </Form>
             </Content>
           </Container>
         </ImageBackground>
       </View>
     )
-  }
-
-  renderError () {
-    if (this.props.error !== '') {
-      return (<Text style={styles.errorText}>{this.props.error}</Text>)
-    }
-    return <View />
   }
 }
 
@@ -177,29 +186,42 @@ const styles = StyleSheet.create({
   form: {
     marginLeft: 20,
     marginRight: 20
+  },
+  errorText: {
+    marginLeft: 15,
+    marginTop: 10,
+    color: '#FF9494'
+  },
+  loader: {
+    width: 30,
+    height: 30,
   }
 })
 
 const mapStateToProps = state => {
+  const { register, initToken, nav } = state
   return {
-    initToken: state.initToken.token,
-    firstName: state.register.firstName,
-    lastName: state.register.lastName,
-    email: state.register.email,
-    password: state.register.password,
-    phoneNumber: state.register.phoneNumber,
+    initToken: initToken.token,
+    // firstName: register.firstName,
+    // lastName: register.lastName,
+    // email: register.email,
+    // password: register.password,
+    // phoneNumber: register.phoneNumber,
+    registerForm: register.registerForm,
 
-    error: state.register.error,
-    nav: state.nav
+    error: register.error,
+    loading: register.loading,
+    nav: nav
   }
 }
 
 const mapDispatchToProps = {
-  registerFirstNameChanged,
-  registerLastNameChanged,
-  registerEmailChanged,
-  registerPasswordChanged,
-  registerPhoneNumberChanged,
+  updateRegisterForm,
+  // registerFirstNameChanged,
+  // registerLastNameChanged,
+  // registerEmailChanged,
+  // registerPasswordChanged,
+  // registerPhoneNumberChanged,
   registerLender
 }
 

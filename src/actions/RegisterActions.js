@@ -2,28 +2,46 @@ import * as types from './Types'
 import { NavigationActions } from 'react-navigation'
 import { CelsiusService } from '../services'
 
-export const registerLender = (firstName, lastName, email, password, phoneNumber, appToken) => {
+export const registerLender = (registerForm, appToken) => {
   console.log('registerLender()x')
-  console.log(firstName, lastName, email, password, phoneNumber, appToken)
+  console.log(registerForm, appToken)
+
   return (dispatch) => {
-    dispatch({
-      type: types.REGISTER_LENDER_LOADING
-    })
-    CelsiusService().registerLender(firstName, lastName, email, password, phoneNumber, appToken)
-      .then(response => handleRegisterLender(dispatch, JSON.stringify(response)))
-      .catch((error) => {
-        registerLenderFail(dispatch, error)
+    const error = validateRegisterForm(registerForm)
+    if (!error) {
+      dispatch({
+        type: types.REGISTER_LENDER_LOADING
       })
+
+      const { firstName, lastName, email, password, phoneNumber } = registerForm
+      CelsiusService().registerLender(firstName, lastName, email, password, phoneNumber, appToken)
+        .then(response => {
+          if (response.ok) {
+            console.log('Great Success!')
+            console.log(JSON.parse(response._bodyInit))
+            registerLenderSuccess(dispatch, JSON.parse(response._bodyInit))
+          } else {
+            console.log(JSON.parse(JSON.parse(response._bodyInit).error))
+            const error = JSON.parse(JSON.parse(response._bodyInit).error).message
+            registerLenderFail(dispatch, getErrorText({ server: error }))
+          }
+        })
+        .catch((error) => {
+          console.log(error)
+          registerLenderFail(dispatch, getErrorText({ server: true }))
+        })
+    } else {
+      registerLenderFail(dispatch, error)
+    }
   }
 }
 
-const handleRegisterLender = (dispatch, user) => {
-  console.log('registerLenderSuccess() wooohooo!')
-  console.log(user)
+const registerLenderSuccess = (dispatch, user) => {
   dispatch({
     type: types.REGISTER_LENDER_SUCCESS,
     payload: user
   })
+  // TODO(fj): setup wallet address
   dispatch(NavigationActions.reset({
     index: 0,
     actions: [
@@ -32,46 +50,44 @@ const handleRegisterLender = (dispatch, user) => {
   }))
 }
 
-const registerLenderFail = (dispatch, errorCode) => {
+const registerLenderFail = (dispatch, error) => {
   console.log('registerLenderFail() FCK!')
-  console.log(errorCode)
+  console.log(error)
   dispatch({
     type: types.REGISTER_LENDER_FAILURE,
-    payload: errorCode
+    payload: error
   })
 }
 
-export const registerFirstNameChanged = (text) => {
+export const updateRegisterForm = (field, text) => {
   return {
-    type: types.REGISTER_FNAME_CHANGED,
-    payload: text
+    type: types.UPDATE_REGISTER_FORM,
+    payload: {
+      text,
+      field
+    }
   }
 }
 
-export const registerLastNameChanged = (text) => {
-  return {
-    type: types.REGISTER_LNAME_CHANGED,
-    payload: text
-  }
+function validateRegisterForm (registrationForm) {
+  if (!registrationForm.firstName) return getErrorText({ notEmpty: { field: 'First Name' } })
+  if (registrationForm.firstName.length < 5) return getErrorText({ atLeast: { field: 'First Name', number: 3 } })
+  if (!registrationForm.lastName) return getErrorText({ notEmpty: { field: 'Last Name' } })
+  if (registrationForm.lastName.length < 5) return getErrorText({ atLeast: { field: 'First Name', number: 5 } })
+  if (!registrationForm.email) return getErrorText({ notEmpty: { field: 'Email' } })
+  if (!registrationForm.password) return getErrorText({ notEmpty: { field: 'Password' } })
+  if (registrationForm.password.length < 8) return getErrorText({ atLeast: { field: 'First Name', number: 8 } })
+  if (!registrationForm.phoneNumber) return getErrorText({ notEmpty: { field: 'Phone number' } })
+  return false
 }
 
-export const registerEmailChanged = (text) => {
-  return {
-    type: types.REGISTER_EMAIL_CHANGED,
-    payload: text
-  }
+function getErrorText(error) {
+  // error format { atLeast: { field, number }}
+  if (error.atLeast) return `Ooops... ${error.atLeast.field} must have at least ${error.atLeast.number} letters!`
+  // error format { notEmpty: { field }}
+  if (error.notEmpty) return `Ooops... ${error.notEmpty.field} cannot be empty!`
+  // error format { server: String | true }
+  if (error.server) return error.server === true ? `Ooops... Something went wrong with our servers :(` : error.server
+  return 'Ooops... Something went terribly wrong :( We are working nonstop!'
 }
 
-export const registerPasswordChanged = (text) => {
-  return {
-    type: types.REGISTER_PASSWORD_CHANGED,
-    payload: text
-  }
-}
-
-export const registerPhoneNumberChanged = (text) => {
-  return {
-    type: types.REGISTER_PHONENUMBER_CHANGED,
-    payload: text
-  }
-}

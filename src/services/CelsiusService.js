@@ -2,6 +2,7 @@ const apiUrl = 'https://cs.celsius.network/cs/api/v1'
 
 export const CelsiusService = () => ({
   registerLender (firstName, lastName, email, password, phoneNumber, appToken) {
+    console.log(firstName, lastName)
     const request = {
       headers: {
         'Content-Type': 'application/json',
