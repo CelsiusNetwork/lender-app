@@ -31,7 +31,7 @@ class LoginForm extends Component {
 
   render () {
     const { navigate } = this.props.navigation
-    const { loading } = this.props
+    const loading = this.props.loading
 
     return (
       <View style={styles.container}>

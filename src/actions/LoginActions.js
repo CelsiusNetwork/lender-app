@@ -65,7 +65,6 @@ const handleLenderInfo = (dispatch, response) => {
     type: types.FETCH_LENDER_SUCCESS,
     payload: user
   })
-
   dispatch(NavigationActions.reset({
     index: 0,
     actions: [
