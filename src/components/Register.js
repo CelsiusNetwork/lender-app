@@ -1,8 +1,15 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { StyleSheet, View, ImageBackground, Image, TouchableOpacity } from 'react-native'
-import { Button, Form, Input, Item, Label, Text, Content, Header, Title, Container } from 'native-base'
-import { registerFirstNameChanged, registerLastNameChanged, registerEmailChanged, registerPasswordChanged, registerPhoneNumberChanged, registerLender } from '../actions'
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
+import {StyleSheet, View, ImageBackground, Image, TouchableOpacity} from 'react-native'
+import {Button, Form, Input, Item, Label, Text, Content, Container} from 'native-base'
+import {
+  registerFirstNameChanged,
+  registerLastNameChanged,
+  registerEmailChanged,
+  registerPasswordChanged,
+  registerPhoneNumberChanged,
+  registerLender
+} from '../actions'
 
 class Register extends Component {
   onFirstNameChange (text) {
@@ -32,7 +39,7 @@ class Register extends Component {
   }
 
   render () {
-    const { navigate } = this.props.navigation
+    const {navigate} = this.props.navigation
     return (
       <View style={styles.container}>
         <ImageBackground source={require('../../assets/images/background.png')} style={styles.background}>
@@ -50,7 +57,7 @@ class Register extends Component {
                     onChangeText={this.onFirstNameChange.bind(this)}
                     value={this.props.firstName}
                     autoCorrect={false}
-                    highlightColor="#00ACC1" // cyan600
+                    highlightColor='#00ACC1' // cyan600
                     autoFocus autoCapitalize='none' />
                 </Item>
                 <Item floatingLabel style={styles.floatingWrapper}>
@@ -93,7 +100,7 @@ class Register extends Component {
                 <Button
                   style={styles.button}
                   onPress={this.onButtonPress.bind(this)}
-                  //onPress={() => navigate('VerifyPhoneNumber')}
+                  // onPress={() => navigate('VerifyPhoneNumber')}
                   block primary>
                   <Text
                     style={styles.buttonText}
@@ -108,7 +115,9 @@ class Register extends Component {
   }
 
   renderError () {
-    if (this.props.error !== '') { return (<Text style={styles.errorText}>{this.props.error}</Text>) }
+    if (this.props.error !== '') {
+      return (<Text style={styles.errorText}>{this.props.error}</Text>)
+    }
     return <View />
   }
 }
@@ -117,7 +126,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   background: {
     flex: 1,
@@ -140,7 +149,7 @@ const styles = StyleSheet.create({
     color: '#ffffff'
   },
   floatingWrapper: {
-    borderBottomWidth: 0,
+    borderBottomWidth: 0
   },
   input: {
     height: 40,
@@ -149,7 +158,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 2,
     color: '#ffffff',
     marginBottom: 10,
-    fontSize: 14,
+    fontSize: 14
   },
   button: {
     backgroundColor: '#ffffff',
@@ -186,7 +195,12 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = {
-  registerFirstNameChanged, registerLastNameChanged, registerEmailChanged, registerPasswordChanged, registerPhoneNumberChanged, registerLender
+  registerFirstNameChanged,
+  registerLastNameChanged,
+  registerEmailChanged,
+  registerPasswordChanged,
+  registerPhoneNumberChanged,
+  registerLender
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Register)
