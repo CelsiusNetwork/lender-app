@@ -214,12 +214,11 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   header: {
-    fontSize: 36,
+    fontSize: 34,
     backgroundColor: 'rgba(0,0,0,0)',
     color: 'white',
     paddingLeft: 30,
     paddingRight: 30,
-    marginBottom: 30,
     fontWeight: 'bold',
     textAlign: 'center',
     marginTop: 0
@@ -228,7 +227,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     zIndex: 10,
     left: 20,
-    top: 65,
+    top: 60,
     width: 30
     // borderColor: 'red', borderWidth: 1
   },
@@ -339,7 +338,7 @@ const styles = StyleSheet.create({
   codeField: {
     color: '#ffffff',
     textAlign: 'center',
-    height: 80
+    height: 70
   },
   codeFieldText: {
     fontSize: 58,

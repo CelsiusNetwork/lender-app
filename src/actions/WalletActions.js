@@ -35,9 +35,20 @@ const handleWithdrawETH = (dispatch, response) => {
       type: types.WITHDRAW_ETH_SUCCESS,
       payload: response._bodyText
     })
+    dispatch(NavigationActions.navigate({
+      routeName: 'ManageFoundsSuccess',
+      actions: [
+        NavigationActions.navigate({ routeName: 'ManageFoundsSuccess' })
+      ]
+    }))
   }
   if (response.ok === false) {
-    // handle this beach
+    dispatch(NavigationActions.navigate({
+      routeName: 'ManageFoundsConfirm',
+      actions: [
+        NavigationActions.navigate({ routeName: 'ManageFoundsError' })
+      ]
+    }))
   }
 }
 

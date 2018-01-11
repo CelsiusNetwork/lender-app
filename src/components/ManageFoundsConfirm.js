@@ -20,7 +20,7 @@ class AddFounds extends Component {
     this.state = {
       fontLoaded: false,
       eth: 6.350,
-      toAddress: ''
+      toAddress: '0x7328E5cAFC5C533334C98Fd9D860d8B92F263173'
     }
   }
 

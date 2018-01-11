@@ -28,6 +28,7 @@ import ManageFoundsWithdraw from './components/ManageFoundsWithdraw'
 import ManageFoundsConfirm from './components/ManageFoundsConfirm'
 import QRScanner from './components/QRScanner'
 import ManageFoundsSuccess from './components/ManageFoundsSuccess'
+import ManageFoundsError from './components/ManageFoundsError'
 
 import Home from './components/Home'
 
@@ -110,6 +111,10 @@ export const Navigator = StackNavigator({
   },
   ManageFoundsSuccess: {
     screen: ManageFoundsSuccess,
+    headerMode: 'screen'
+  },
+  ManageFoundsError: {
+    screen: ManageFoundsError,
     headerMode: 'screen'
   }
 }, {

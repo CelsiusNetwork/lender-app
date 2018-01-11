@@ -80,7 +80,7 @@ class EditProfile extends Component {
                       value={firstName}
                       autoCorrect={false}
                       highlightColor="#00ACC1" // cyan600
-                      autoFocus autoCapitalize='none' />
+                      autoCapitalize='none' />
                   </Item>
                   <Item floatingLabel style={styles.floatingWrapper}>
                     <Label style={{color: 'rgba(156, 169, 182, 0.5)', fontSize: 12}}>{'Last Name'.toUpperCase()}</Label>
