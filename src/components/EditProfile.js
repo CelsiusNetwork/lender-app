@@ -1,25 +1,25 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { StyleSheet, View, ImageBackground, Image, TouchableOpacity } from 'react-native'
-import { Button, Form, Input, Item, Label, Text, Content, Header, Title, Container } from 'native-base'
-import { updateRegisterForm, updateProfile } from '../actions'
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
+import {StyleSheet, View, ImageBackground, Image} from 'react-native'
+import {Button, Form, Input, Item, Label, Text, Content, Container} from 'native-base'
+import {updateRegisterForm, updateProfile} from '../actions'
 
 class EditProfile extends Component {
   // constructor(props) {
-    // super(props)
-    // this.state = {
-    //   }
+  // super(props)
+  // this.state = {
+  //   }
   // }
 
-  componentDidMount() {
-    const { lender, registerForm, updateRegisterForm } = this.props
+  componentDidMount () {
+    const {lender, registerForm, updateRegisterForm} = this.props
 
     // Prepopulate form fields with lender data
     updateRegisterForm({
       ...registerForm,
-      firstName:  lender.user_metadata.name,
+      firstName: lender.user_metadata.name,
       lastName: lender.user_metadata.surname,
-      email: lender.email,
+      email: lender.email
       // TODO(fj)
       // picture: lender.picture,
       // password: '',
@@ -27,7 +27,7 @@ class EditProfile extends Component {
     })
   }
 
-  componentWillUnmount() {
+  componentWillUnmount () {
     // cleans form & errors
     this.props.updateRegisterForm()
   }
@@ -49,51 +49,50 @@ class EditProfile extends Component {
   }
 
   updateField (field, text) {
-    const { registerForm, updateRegisterForm } = this.props
+    const {registerForm, updateRegisterForm} = this.props
     registerForm[field] = text
     updateRegisterForm(registerForm)
   }
 
   onButtonPress () {
-    const { updateProfile, registerForm } = this.props;
+    const {updateProfile, registerForm} = this.props
     updateProfile(registerForm)
   }
 
   render () {
-    const { loading, registerForm } = this.props
-    const { firstName, lastName, email, picture, phoneNumber } = registerForm
-    const profilePicture = picture
+    const {loading, registerForm} = this.props
+    const {firstName, lastName, email, picture, phoneNumber} = registerForm
     return (
       <View style={styles.container}>
         <ImageBackground source={require('../../assets/images/background-blur.png')} style={styles.background}>
           <View style={styles.body}>
-            {/* <Image source={require('../../assets/images/logo-header.png')} style={styles.logo} /> */}
-            <Text style={styles.header}>{'Edit Profile'.toUpperCase()}</Text>
-            <View style={styles.avatarSection}>
-              <View style={styles.pts}>
-                <Image source={require('../../assets/images/icon-score.png')} style={styles.score} />
-                <Text style={styles.ptsText}>2559</Text>
-                <Text style={styles.ptsTextExt}>pts</Text>
-              </View>
-              <ImageBackground source={require('../../assets/images/avatar-wrapper.png')} style={styles.avatarWrapper}>
-                <Image
-                  source={{uri:profilePicture}}
-                  style={styles.avatar}
-                  resizeMode="cover"
-                  borderRadius={90} />
-              </ImageBackground>
-            </View>
+            <Text style={styles.header}>PROFILE</Text>
             <Container>
               <Content>
+                <View style={styles.avatarSection}>
+                  <View style={styles.pts}>
+                    <Image source={require('../../assets/images/icon-score.png')} style={styles.score} />
+                    <Text style={styles.ptsText}>2559</Text>
+                    <Text style={styles.ptsTextExt}>pts</Text>
+                  </View>
+                  <ImageBackground source={require('../../assets/images/avatar-wrapper.png')} style={styles.avatarWrapper}>
+                    <Image
+                      source={{uri: picture}}
+                      style={styles.avatar}
+                      resizeMode='cover'
+                      borderRadius={90} />
+                  </ImageBackground>
+                </View>
                 <Form style={styles.form}>
                   <Item floatingLabel style={styles.floatingWrapper}>
-                    <Label style={{color: 'rgba(156, 169, 182, 0.5)', fontSize: 12}}>{'First Name'.toUpperCase()}</Label>
+                    <Label
+                      style={{color: 'rgba(156, 169, 182, 0.5)', fontSize: 12}}>{'First Name'.toUpperCase()}</Label>
                     <Input
                       style={styles.input}
                       onChangeText={this.onFirstNameChange.bind(this)}
                       value={firstName}
                       autoCorrect={false}
-                      highlightColor="#00ACC1" // cyan600
+                      highlightColor='#00ACC1' // cyan600
                       autoCapitalize='none' />
                   </Item>
                   <Item floatingLabel style={styles.floatingWrapper}>
@@ -106,7 +105,8 @@ class EditProfile extends Component {
                       autoCapitalize='none' />
                   </Item>
                   <Item floatingLabel style={styles.floatingWrapper}>
-                    <Label style={{color: 'rgba(156, 169, 182, 0.5)', fontSize: 12}}>{'Your email'.toUpperCase()}</Label>
+                    <Label
+                      style={{color: 'rgba(156, 169, 182, 0.5)', fontSize: 12}}>{'Your email'.toUpperCase()}</Label>
                     <Input
                       style={styles.input}
                       onChangeText={this.onEmailChange.bind(this)}
@@ -115,24 +115,9 @@ class EditProfile extends Component {
                       autoCorrect={false}
                       autoCapitalize='none' />
                   </Item>
-                  {/*<Item floatingLabel style={styles.floatingWrapper}>*/}
-                    {/*<Label style={{color: 'rgba(156, 169, 182, 0.5)', fontSize: 12}}>{'Password'.toUpperCase()}</Label>*/}
-                    {/*<Input*/}
-                      {/*style={styles.input}*/}
-                      {/*onChangeText={this.onPasswordChange.bind(this)}*/}
-                      {/*value={this.state.password}*/}
-                      {/*secureTextEntry returnKeyType='done' autoCorrect={false} />*/}
-                  {/*</Item>*/}
-                  {/*<Item floatingLabel style={styles.floatingWrapper}>*/}
-                    {/*<Label style={{color: 'rgba(156, 169, 182, 0.5)', fontSize: 12}}>{'Passcode'.toUpperCase()}</Label>*/}
-                    {/*<Input*/}
-                      {/*style={styles.input}*/}
-                      {/*// onChangeText={this.onPasswordChange.bind(this)}*/}
-                      {/*value={this.state.passcode}*/}
-                      {/*secureTextEntry returnKeyType='done' autoCorrect={false} />*/}
-                  {/*</Item>*/}
                   <Item floatingLabel style={styles.floatingWrapper}>
-                    <Label style={{color: 'rgba(156, 169, 182, 0.5)', fontSize: 12}}>{'Phone number'.toUpperCase()}</Label>
+                    <Label
+                      style={{color: 'rgba(156, 169, 182, 0.5)', fontSize: 12}}>{'Phone number'.toUpperCase()}</Label>
                     <Input
                       style={styles.input}
                       onChangeText={this.onPhoneNumberChange.bind(this)}
@@ -159,7 +144,7 @@ class EditProfile extends Component {
                         // onPress={this.onButtonPress.bind(this)}
                         onPress={() => this.props.navigation.goBack()}
                         // block primary
-                        >
+                      >
                         <Text
                           style={styles.buttonText2}
                         >Cancel</Text>
@@ -179,10 +164,11 @@ class EditProfile extends Component {
   }
 
   renderError () {
-    if (this.props.error !== '') { return (<Text style={styles.errorText}>{this.props.error}</Text>) }
+    if (this.props.error !== '') {
+      return (<Text style={styles.errorText}>{this.props.error}</Text>)
+    }
     return <View />
   }
-
 }
 
 const styles = StyleSheet.create({
@@ -195,7 +181,7 @@ const styles = StyleSheet.create({
   },
   background: {
     flex: 1,
-    flexDirection: 'row',
+    flexDirection: 'row'
     // justifyContent: 'top',
     // alignItems: 'center',
     // backgroundColor: 'red'
@@ -214,12 +200,12 @@ const styles = StyleSheet.create({
     marginBottom: 5
   },
   header: {
-		fontSize: 38,
-		backgroundColor: 'rgba(0,0,0,0)',
-		color: 'white',
-		paddingLeft: 30,
-		paddingRight: 30,
-		marginBottom: 10,
+    fontSize: 38,
+    backgroundColor: 'rgba(0,0,0,0)',
+    color: 'white',
+    paddingLeft: 30,
+    paddingRight: 30,
+    marginBottom: 10,
     fontWeight: 'bold',
     textAlign: 'center',
     marginTop: 20
@@ -237,7 +223,7 @@ const styles = StyleSheet.create({
     fontSize: 12
   },
   floatingWrapper: {
-    borderBottomWidth: 0,
+    borderBottomWidth: 0
   },
   input: {
     height: 40,
@@ -288,7 +274,7 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
     alignItems: 'center',
-    height: 50,
+    height: 50
     // borderTopColor: 'rgba(255, 255, 255, 0.1)',
     // borderTopWidth: 2
   },
@@ -298,7 +284,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
     marginLeft: 10,
-    height: 40,
+    height: 40
   },
   cellRight: {
     flex: 1,
@@ -306,13 +292,13 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     alignItems: 'center',
     marginRight: 10,
-    height: 40,
+    height: 40
   },
   avatarSection: {
     alignItems: 'center',
     marginTop: 10,
     marginBottom: 10,
-    position: 'relative',
+    position: 'relative'
   },
   avatarWrapper: {
     width: 196,
@@ -334,8 +320,8 @@ const styles = StyleSheet.create({
     zIndex: 5,
     bottom: 10,
     right: 50,
-    flexDirection:'row',
-    flexWrap:'wrap'
+    flexDirection: 'row',
+    flexWrap: 'wrap'
   },
   ptsText: {
     backgroundColor: 'rgba(255, 255, 255, 0)',
@@ -348,7 +334,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(255, 255, 255, 0)',
     fontSize: 12,
     color: '#3D4853',
-    marginTop: 10,
+    marginTop: 10
   },
   score: {
     width: 16,
@@ -361,7 +347,7 @@ const styles = StyleSheet.create({
     marginLeft: 15,
     marginTop: 10,
     color: '#FF9494'
-  },
+  }
 })
 
 const mapStateToProps = state => {
@@ -369,7 +355,7 @@ const mapStateToProps = state => {
     registerForm: state.lender.registerForm,
     lender: state.lender.lender,
     picture: state.lender.lender.picture,
-    error: state.lender.error,
+    error: state.lender.error
   }
 }
 
