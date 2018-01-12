@@ -26,7 +26,7 @@ class Home extends Component {
     console.log('props: ')
     console.log(props)
 
-    this.fetchingInterval = null
+    this.fetchingBalanceInterval = null
   }
 
   componentWillMount () {
@@ -39,7 +39,8 @@ class Home extends Component {
     })
 
     // refrest eth & cel balance every 60s
-    this.fetchingInterval = setInterval(() => {
+    props.fetchWalletBalance(props.walletAddress, props.token)
+    this.fetchingBalanceInterval = setInterval(() => {
       props.fetchWalletBalance(props.walletAddress, props.token)
     }, 60000)
   }
@@ -70,7 +71,7 @@ class Home extends Component {
   }
 
   componentWillUnmount () {
-    clearInterval(this.fetchingInterval)
+    clearInterval(this.fetchingBalanceInterval)
   }
 
   render () {

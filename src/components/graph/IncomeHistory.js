@@ -28,6 +28,7 @@ class IncomeHistory extends Component {
     this.setState({ fontLoaded: true });
 
     // refresheshing transactions every 60s
+    fetchTransactionsHistory(walletAddress);
     this.refreshTransactionsInterval = setInterval(() => {
       fetchTransactionsHistory(walletAddress);
     }, 60000)
@@ -49,7 +50,7 @@ class IncomeHistory extends Component {
 
     if (!t.isDegreeTransaction) {
       return (
-        <TouchableOpacity key={ t.timestamp } style={styles.tableRow} onPress={() => this.handleTransacationPress(t) }>
+        <TouchableOpacity key={ t.hash } style={styles.tableRow} onPress={() => this.handleTransacationPress(t) }>
           <View>
             <Image source={require('../../../assets/images/icon-etherium.png')} style={styles.icon} />
           </View>
