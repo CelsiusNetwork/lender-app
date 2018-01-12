@@ -38,9 +38,10 @@ class Home extends Component {
       console.error(error)
     })
 
+    // refrest eth & cel balance every 60s
     this.fetchingInterval = setInterval(() => {
       props.fetchWalletBalance(props.walletAddress, props.token)
-    }, 5000)
+    }, 60000)
   }
 
 

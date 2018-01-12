@@ -27,15 +27,15 @@ class IncomeHistory extends Component {
     });
     this.setState({ fontLoaded: true });
 
-    fetchTransactionsHistory(walletAddress);
-    // this.refreshTransactionsInterval = setInterval(() => {
-    //   fetchTransactionsHistory(walletAddress);
-    // }, 15000)
+    // refresheshing transactions every 60s
+    this.refreshTransactionsInterval = setInterval(() => {
+      fetchTransactionsHistory(walletAddress);
+    }, 60000)
   }
 
   componentWillUnmount() {
     console.log('clearing interval')
-    // clearInterval(this.refreshTransactionsInterval)
+    clearInterval(this.refreshTransactionsInterval)
   }
 
   handleTransacationPress(transaction) {
