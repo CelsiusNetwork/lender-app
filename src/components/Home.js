@@ -43,6 +43,8 @@ class Home extends Component {
     }, 5000)
   }
 
+
+  // TODO: font should be loded before DOM is initializes, into componentWillMount()
   async componentDidMount () {
     await Font.loadAsync({
       'barlow-semi-bold': require('../../assets/fonts/Barlow-SemiBold.otf')
