@@ -2,7 +2,7 @@ const apiUrl = 'https://cs.celsius.network/cs/api/v1'
 const rewardApiUrl = 'https://cs.celsius.network/cs/rewarder'
 
 export const CelsiusService = () => ({
-  registerLender(firstName, lastName, email, password, phoneNumber, appToken) {
+  registerLender (firstName, lastName, email, password, phoneNumber, appToken) {
     console.log(firstName, lastName)
     const request = {
       headers: {
@@ -33,7 +33,7 @@ export const CelsiusService = () => ({
    *
    * @return Promise<Response>
    * */
-  getLenderRewardPoints(walletAddress, token) {
+  getLenderRewardPoints (walletAddress, token) {
     const request = {
       headers: {
         'Content-Type': 'application/json',
