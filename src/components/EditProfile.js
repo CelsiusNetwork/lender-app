@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {StyleSheet, View, ImageBackground, Image} from 'react-native'
 import {Button, Form, Input, Item, Label, Text, Content, Container} from 'native-base'
-import {updateRegisterForm, updateProfile} from '../actions'
+import {updateRegisterForm, updateProfile, getLenderRewardPoints} from '../actions'
 
 class EditProfile extends Component {
   // constructor(props) {
@@ -12,7 +12,7 @@ class EditProfile extends Component {
   // }
 
   componentDidMount () {
-    const {lender, registerForm, updateRegisterForm} = this.props
+    const {lender, registerForm, updateRegisterForm, walletAddress, getLenderRewardPoints, token} = this.props
 
     // Prepopulate form fields with lender data
     updateRegisterForm({
@@ -25,11 +25,15 @@ class EditProfile extends Component {
       // password: '',
       // phoneNumber: ''
     })
+
+    getLenderRewardPoints(walletAddress, token)
   }
 
   componentWillUnmount () {
     // cleans form & errors
-    this.props.updateRegisterForm()
+    const {updateRegisterForm} = this.props
+
+    updateRegisterForm()
   }
 
   onFirstNameChange (text) {
@@ -60,7 +64,7 @@ class EditProfile extends Component {
   }
 
   render () {
-    const {loading, registerForm} = this.props
+    const {loading, registerForm, lenderRewardPoint} = this.props
     const {firstName, lastName, email, picture, phoneNumber} = registerForm
     return (
       <View style={styles.container}>
@@ -72,10 +76,11 @@ class EditProfile extends Component {
                 <View style={styles.avatarSection}>
                   <View style={styles.pts}>
                     <Image source={require('../../assets/images/icon-score.png')} style={styles.score} />
-                    <Text style={styles.ptsText}>2559</Text>
+                    <Text style={styles.ptsText}>{lenderRewardPoint}</Text>
                     <Text style={styles.ptsTextExt}>pts</Text>
                   </View>
-                  <ImageBackground source={require('../../assets/images/avatar-wrapper.png')} style={styles.avatarWrapper}>
+                  <ImageBackground source={require('../../assets/images/avatar-wrapper.png')}
+                    style={styles.avatarWrapper}>
                     <Image
                       source={{uri: picture}}
                       style={styles.avatar}
@@ -352,7 +357,10 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
   return {
+    token: state.auth.token,
     registerForm: state.lender.registerForm,
+    walletAddress: state.lender.walletAddress,
+    lenderRewardPoint: state.lender.lenderRewardPoint,
     lender: state.lender.lender,
     picture: state.lender.lender.picture,
     error: state.lender.error
@@ -361,7 +369,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
   updateRegisterForm,
-  updateProfile
+  updateProfile,
+  getLenderRewardPoints
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditProfile)

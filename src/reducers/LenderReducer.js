@@ -18,13 +18,13 @@ const LENDER_INITIAL_STATE = {
     password: '',
     phoneNumber: ''
   },
+  lenderRewardPoint: 0,
   loading: false,
   error: null
 }
 
 export default (state = LENDER_INITIAL_STATE, action) => {
   switch (action.type) {
-
     case types.FETCH_LENDER_LOADING:
       return { ...state, loading: true }
 
@@ -46,13 +46,16 @@ export default (state = LENDER_INITIAL_STATE, action) => {
       errorMsg = 'Lender fetch fail'
       return { ...state, error: errorMsg, loading: false }
 
+    case types.FETCH_LENDER_REWARD_POINTS_SUCCESS:
+      return { ...state, lenderRewardPoint: action.payload }
+
     case types.UPDATE_REGISTER_FORM:
       console.log('here')
 
       return {
         ...state,
         registerForm: action.payload ? { ...action.payload } : { ...LENDER_INITIAL_STATE.registerForm },
-        error: null,
+        error: null
       }
 
     case types.REGISTER_LENDER_LOADING:
