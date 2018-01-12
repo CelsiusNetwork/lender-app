@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {StyleSheet, View, ImageBackground, Image} from 'react-native'
+import {StyleSheet, View, ImageBackground, Image, TouchableOpacity} from 'react-native'
 import {Button, Form, Input, Item, Label, Text, Content, Container} from 'native-base'
-import {updateRegisterForm, updateProfile, getLenderRewardPoints} from '../actions'
+import {updateRegisterForm, updateProfile, getLenderRewardPoints, logoutLender} from '../actions'
 
 class EditProfile extends Component {
   // constructor(props) {
@@ -58,19 +58,34 @@ class EditProfile extends Component {
     updateRegisterForm(registerForm)
   }
 
+  onLogoutPress () {
+    this.props.logoutLender()
+  }
+
   onButtonPress () {
     const {updateProfile, registerForm} = this.props
     updateProfile(registerForm)
   }
 
   render () {
-    const {loading, registerForm, lenderRewardPoint} = this.props
+    const {registerForm, lenderRewardPoint} = this.props
     const {firstName, lastName, email, picture, phoneNumber} = registerForm
     return (
       <View style={styles.container}>
         <ImageBackground source={require('../../assets/images/background-blur.png')} style={styles.background}>
           <View style={styles.body}>
-            <Text style={styles.header}>PROFILE</Text>
+            <View style={[{marginTop: 64, marginBottom: 33}]}>
+              <View style={styles.cellLeft}>
+                <Text style={[styles.header, {marginLeft: 65}]}>PROFILE</Text>
+              </View>
+              <View style={styles.cellRight}>
+                <TouchableOpacity onPress={this.onLogoutPress.bind(this)}>
+                  <View style={styles.cellRight}>
+                    <Image source={require('../../assets/images/log-out.png')} style={styles.logoutBtn} />
+                  </View>
+                </TouchableOpacity>
+              </View>
+            </View>
             <Container>
               <Content>
                 <View style={styles.avatarSection}>
@@ -212,7 +227,7 @@ const styles = StyleSheet.create({
     paddingRight: 30,
     marginBottom: 10,
     fontWeight: 'bold',
-    textAlign: 'center',
+    textAlign: 'right',
     marginTop: 20
   },
   formContainer: {
@@ -352,6 +367,11 @@ const styles = StyleSheet.create({
     marginLeft: 15,
     marginTop: 10,
     color: '#FF9494'
+  },
+  logoutBtn: {
+    width: 30,
+    height: 30,
+    marginTop: 5
   }
 })
 
@@ -370,7 +390,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = {
   updateRegisterForm,
   updateProfile,
-  getLenderRewardPoints
+  getLenderRewardPoints,
+  logoutLender
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditProfile)

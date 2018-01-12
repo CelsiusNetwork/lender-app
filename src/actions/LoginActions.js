@@ -33,6 +33,17 @@ export const loginLender = ({ email, password }) => {
   }
 }
 
+export const logoutLender = () => {
+  return (dispatch) => {
+    dispatch(NavigationActions.reset({
+      index: 0,
+      actions: [
+        NavigationActions.navigate({routeName: 'Welcome'})
+      ]
+    }))
+  }
+}
+
 // export const fetchLenderInfo = ({ lender }, token) => {
 //   console.log('FETCHlENDERiNFO()')
 //   console.log(lender.sub)
