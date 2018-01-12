@@ -66,7 +66,7 @@ class Register extends Component {
             <Content>
               <Form style={styles.form}>
                 <Item floatingLabel style={styles.floatingWrapper}>
-                  <Label style={{color: '#ffffff'}}>First Name</Label>
+                  <Label style={{color: '#9CA9B6', fontSize: 18}}>First Name</Label>
                   <Input
                     style={styles.input}
                     onChangeText={this.onFirstNameChange.bind(this)}
@@ -76,7 +76,7 @@ class Register extends Component {
                     autoFocus autoCapitalize='none' />
                 </Item>
                 <Item floatingLabel style={styles.floatingWrapper}>
-                  <Label style={{color: '#ffffff'}}>Last Name</Label>
+                  <Label style={{color: '#9CA9B6', fontSize: 18}}>Last Name</Label>
                   <Input
                     style={styles.input}
                     onChangeText={this.onLastNameChange.bind(this)}
@@ -85,7 +85,7 @@ class Register extends Component {
                     autoCapitalize='none' />
                 </Item>
                 <Item floatingLabel style={styles.floatingWrapper}>
-                  <Label style={{color: '#ffffff'}}>Your email</Label>
+                  <Label style={{color: '#9CA9B6', fontSize: 18}}>Your email</Label>
                   <Input
                     style={styles.input}
                     onChangeText={this.onEmailChange.bind(this)}
@@ -95,7 +95,7 @@ class Register extends Component {
                     autoCapitalize='none' />
                 </Item>
                 <Item floatingLabel style={styles.floatingWrapper}>
-                  <Label style={{color: '#ffffff'}}>Password</Label>
+                  <Label style={{color: '#9CA9B6', fontSize: 18}}>Password</Label>
                   <Input
                     style={styles.input}
                     onChangeText={this.onPasswordChange.bind(this)}
@@ -103,7 +103,7 @@ class Register extends Component {
                     secureTextEntry returnKeyType='done' autoCorrect={false} />
                 </Item>
                 <Item floatingLabel style={styles.floatingWrapper}>
-                  <Label style={{color: '#ffffff'}}>Phone number</Label>
+                  <Label style={{color: '#9CA9B6', fontSize: 18}}>Phone number</Label>
                   <Input
                     style={styles.input}
                     onChangeText={this.onPhoneNumberChange.bind(this)}
@@ -120,7 +120,7 @@ class Register extends Component {
                   { loading ? (
                     <Image source={require('../../assets/images/animated_spinner.gif')} style={styles.loader} />
                   ) : (
-                    <Text style={styles.buttonText}>Register</Text>
+                    <Text style={styles.buttonText}>Verify your profile</Text>
                   )}
                 </Button>
 
@@ -149,15 +149,16 @@ const styles = StyleSheet.create({
     // position: 'absolute',
     width: 140,
     height: 40,
-    marginLeft: 35,
+    marginLeft: 25,
     marginBottom: 5,
-    resizeMode: 'contain'
+    resizeMode: 'contain',
+    marginTop: 10
   },
   formContainer: {
     marginTop: 100
   },
   floatingLabel: {
-    color: '#ffffff'
+    color: '#9CA9B6'
   },
   floatingWrapper: {
     borderBottomWidth: 0
@@ -167,7 +168,7 @@ const styles = StyleSheet.create({
     width: 300,
     borderColor: 'rgba(255,255,255,0.3)',
     borderBottomWidth: 2,
-    color: '#ffffff',
+    color: '#9CA9B6',
     marginBottom: 10,
     fontSize: 14
   },
