@@ -9,16 +9,13 @@ class IncomeHistory extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        fontLoaded: false,
-        eth: 10.000,
-        deg: 2.984,
-        change: ' ▲ +3.24%',
-        user: {
-          name: "Alex"
-        },
     }
+
+    this.refreshTransactionsInterval = null
   }
   async componentDidMount() {
+    const { fetchTransactionsHistory, walletAddress } = this.props
+
     await Font.loadAsync({
       'barlow-semi-bold': require('../../../assets/fonts/Barlow-SemiBold.otf'),
     });
@@ -30,19 +27,61 @@ class IncomeHistory extends Component {
     });
     this.setState({ fontLoaded: true });
 
-    this.props.fetchTransactionsHistory(this.props.walletAddress);
+    fetchTransactionsHistory(walletAddress);
+    // this.refreshTransactionsInterval = setInterval(() => {
+    //   fetchTransactionsHistory(walletAddress);
+    // }, 15000)
+  }
+
+  componentWillUnmount() {
+    console.log('clearing interval')
+    // clearInterval(this.refreshTransactionsInterval)
   }
 
   handleTransacationPress(transaction) {
     const { navigation, setActiveTransaction } = this.props
-    console.log(this.props)
     setActiveTransaction(transaction)
     navigation.navigate('HistoryDetail')
+  }
+
+  renderTransaction(t) {
+    const { walletAddress } = this.props
+
+    if (!t.isDegreeTransaction) {
+      return (
+        <TouchableOpacity key={ t.timestamp } style={styles.tableRow} onPress={() => this.handleTransacationPress(t) }>
+          <View>
+            <Image source={require('../../../assets/images/icon-etherium.png')} style={styles.icon} />
+          </View>
+          <View style={styles.value}>
+            { this.state.fontLoaded ? (<Text style={[styles.valueText, { fontFamily: 'barlow-semi-bold' }]}>{ t.ethValue } ETH</Text>) : null }
+          </View>
+          { t.to === walletAddress ? (
+            <View style={[styles.status, styles.greenStatus]}>
+              { this.state.fontLoaded ? (<Text style={[styles.statusText, styles.greenText, { fontFamily: 'barlow' }]}>RECEIVED</Text>) : null }
+            </View>
+          ) : (
+            <View style={[styles.status, styles.orangeStatus]}>
+              { this.state.fontLoaded ? (<Text style={[styles.statusText, styles.orangeText, { fontFamily: 'barlow' }]}>SOLD</Text>) : null }
+            </View>
+          )}
+          <View style={styles.created}>
+            { this.state.fontLoaded ? (<Text style={[styles.createdText, { fontFamily: 'barlow' }]}>{ t.dateDisplay }</Text>) : null }
+            <Image source={require('../../../assets/images/icon-time.png')} style={styles.clock} />
+            { this.state.fontLoaded ? (<Text style={[styles.createdText, { fontFamily: 'barlow' }]}>{ t.timeDisplay }</Text>) : null }
+          </View>
+        </TouchableOpacity>
+      )
+    }
+
+    return null
   }
 
   render () {
     const { navigate } = this.props.navigation
     const { transactions } = this.props
+
+    console.log(transactions)
 
     return (
       <View style={styles.welcomeContainer}>
@@ -72,30 +111,7 @@ class IncomeHistory extends Component {
               </View>
             </View> */}
             <View style={styles.tableWrapper}>
-              { transactions.map((t, i) => (
-                <TouchableOpacity key={ i } style={styles.tableRow} onPress={() => this.handleTransacationPress(t) }>
-                  <View>
-                  <Image source={require('../../../assets/images/icon-etherium.png')} style={styles.icon} />
-                  </View>
-                  <View style={styles.value}>
-                    { this.state.fontLoaded ? (<Text style={[styles.valueText, { fontFamily: 'barlow-semi-bold' }]}>{ t.ethValue } ETH</Text>) : null }
-                  </View>
-                  { t.ethValue >= 0 ? (
-                    <View style={[styles.status, styles.greenStatus]}>
-                      { this.state.fontLoaded ? (<Text style={[styles.statusText, styles.greenText, { fontFamily: 'barlow' }]}>RECEIVED</Text>) : null }
-                    </View>
-                  ) : (
-                    <View style={[styles.status, styles.orangeStatus]}>
-                      { this.state.kurac ? (<Text style={[styles.statusText, styles.orangeText, { fontFamily: 'barlow' }]}>SOLD</Text>) : null }
-                    </View>
-                  )}
-                  <View style={styles.created}>
-                  { this.state.fontLoaded ? (<Text style={[styles.createdText, { fontFamily: 'barlow' }]}>{ t.dateDisplay }</Text>) : null }
-                  <Image source={require('../../../assets/images/icon-time.png')} style={styles.clock} />
-                  { this.state.fontLoaded ? (<Text style={[styles.createdText, { fontFamily: 'barlow' }]}>{ t.timeDisplay }</Text>) : null }
-                  </View>
-                </TouchableOpacity>
-              ))}
+              { transactions.map((t) => this.renderTransaction(t))}
             </View>
             <Text style={[styles.footer, {marginBottom: 50}]}>
               { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow' }]}>Income history</Text>) : null }
@@ -313,7 +329,6 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
   return {
-
   }
 }
 
