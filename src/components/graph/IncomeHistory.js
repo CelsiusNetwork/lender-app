@@ -57,7 +57,7 @@ class IncomeHistory extends Component {
           <View style={styles.value}>
             { this.state.fontLoaded ? (<Text style={[styles.valueText, { fontFamily: 'barlow-semi-bold' }]}>{ t.ethValue } ETH</Text>) : null }
           </View>
-          { t.to === walletAddress ? (
+          { t.isReceiving(walletAddress) ? (
             <View style={[styles.status, styles.greenStatus]}>
               { this.state.fontLoaded ? (<Text style={[styles.statusText, styles.greenText, { fontFamily: 'barlow' }]}>RECEIVED</Text>) : null }
             </View>
@@ -82,7 +82,7 @@ class IncomeHistory extends Component {
           <View style={styles.value}>
             { this.state.fontLoaded ? (<Text style={[styles.valueText, { fontFamily: 'barlow-semi-bold' }]}>{ t.degAmount } CEL</Text>) : null }
           </View>
-          { t.to === walletAddress ? (
+          { t.isReceiving(walletAddress) ? (
             <View style={[styles.status, styles.greenStatus]}>
               { this.state.fontLoaded ? (<Text style={[styles.statusText, styles.greenText, { fontFamily: 'barlow' }]}>RECEIVED</Text>) : null }
             </View>

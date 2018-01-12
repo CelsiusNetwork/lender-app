@@ -19,6 +19,16 @@ function Transaction (t) {
     // max celsius is 16^20, should be enough for now
     this.degAmount = Number.parseInt(t.input.slice(-20), 16).toFixed(2)
   }
+
+  this.isReceiving = isReceiving
+  this.isSending = isSending
+
+  function isReceiving(lenderWalletAddress) {
+    return this.to === lenderWalletAddress
+  }
+  function isSending(lenderWalletAddress) {
+    return this.from === lenderWalletAddress
+  }
 }
 
 export default Transaction

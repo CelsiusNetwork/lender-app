@@ -25,9 +25,28 @@ class HistoryDetail extends Component {
     this.setState({ fontLoaded: true });
   }
 
+  renderHeadingText() {
+    const { activeTransaction, walletAddress } = this.props
+    let heading = ''
+
+    if (activeTransaction.isReceiving(walletAddress)) {
+      heading = 'RECEIVED'
+    } else {
+      heading = 'SOLD'
+    }
+
+    if (activeTransaction.isDegreeTransaction) {
+      heading = `${heading} DEGREE`
+    } else {
+      heading = `${heading} ETHEREUM`
+    }
+
+    return heading
+  }
+
   render () {
     const { navigate } = this.props.navigation
-    const { activeTransaction } = this.props
+    const { activeTransaction, walletAddress } = this.props
 
     console.log(this.props)
     return (
@@ -35,24 +54,46 @@ class HistoryDetail extends Component {
         <ImageBackground source={require('../../../assets/images/background-blur.png')} style={styles.background}>
           <View style={styles.body}>
             {/* <Image source={require('../../../assets/images/logo-header.png')} style={styles.logo} /> */}
-            <Text style={styles.header}>{'Received Ethereum'.toUpperCase()}</Text>
+            <Text style={styles.header}>{ this.renderHeadingText() }</Text>
             <Container>
               <Content>
                 <View style={styles.aCenter}>
                   <View style={styles.ethWrapper}>
-                    <View style={[styles.arrowUp, styles.green]}>
-                      <Image source={require('../../../assets/images/icon-received.png')} style={styles.icon} />
-                    </View>
-                    <Image source={require('../../../assets/images/icon-eth.png')} style={styles.eth} />
+                    { activeTransaction.isReceiving(walletAddress) ? (
+                      <View style={[styles.arrowUp, styles.green]}>
+                        <Image source={require('../../../assets/images/icon-received.png')} style={styles.icon} />
+                      </View>
+                    ) : (
+                      <View style={[styles.arrowUp, styles.red]}>
+                        <Image source={require('../../../assets/images/icon-given.png')} style={styles.icon} />
+                      </View>
+                    )}
+                    { activeTransaction.isDegreeTransaction ? (
+                      <Image source={require('../../../assets/images/icon-coins.png')} style={styles.eth} />
+                    ) : (
+                      <Image source={require('../../../assets/images/icon-eth.png')} style={styles.eth} />
+                    )}
                   </View>
-                  <View style={styles.row}>
-                    <View style={styles.cellLeft}>
-                    { this.state.fontLoaded ? (<Text style={[styles.cellLeftText, { fontFamily: 'barlow' }]}>Amount of ETH</Text>) : null }
+                  { activeTransaction.isDegreeTransaction ? (
+                    <View style={styles.row}>
+                      <View style={styles.cellLeft}>
+                        { this.state.fontLoaded ? (<Text style={[styles.cellLeftText, { fontFamily: 'barlow' }]}>Amount of CEL</Text>) : null }
+                      </View>
+                      <View style={styles.cellRight}>
+                        { this.state.fontLoaded ? (<Text style={[styles.cellRightText, { fontFamily: 'barlow-semi-bold' }]}>{ activeTransaction.degAmount } CEL</Text>) : null }
+                      </View>
                     </View>
-                    <View style={styles.cellRight}>
-                    { this.state.fontLoaded ? (<Text style={[styles.cellRightText, { fontFamily: 'barlow-semi-bold' }]}>{ activeTransaction.ethValue } ETH</Text>) : null }
+                  ) : (
+                    <View style={styles.row}>
+                      <View style={styles.cellLeft}>
+                        { this.state.fontLoaded ? (<Text style={[styles.cellLeftText, { fontFamily: 'barlow' }]}>Amount of ETH</Text>) : null }
+                      </View>
+                      <View style={styles.cellRight}>
+                        { this.state.fontLoaded ? (<Text style={[styles.cellRightText, { fontFamily: 'barlow-semi-bold' }]}>{ activeTransaction.ethValue } ETH</Text>) : null }
+                      </View>
                     </View>
-                  </View>
+                  )}
+
                   <View style={styles.row}>
                     <View style={styles.cellLeft}>
                     { this.state.fontLoaded ? (<Text style={[styles.cellLeftText, { fontFamily: 'barlow' }]}>Points earned</Text>) : null }
@@ -285,9 +326,11 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
   const { activeTransaction } = state.transactions;
-  console.log(state);
+  const { walletAddress } = state.lender;
+
   return {
-    activeTransaction
+    activeTransaction,
+    walletAddress
   }
 }
 
