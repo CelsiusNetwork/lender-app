@@ -112,14 +112,13 @@ export const getLenderRewardPoints = (walletAddress, token) => {
  * @return function
  * */
 const handleLenderRewardPoints = (dispatch, response = {}) => {
-  if (response.ok === true) {
+  if (response.ok) {
+    const body = JSON.parse(response._bodyText)
     dispatch({
       type: types.FETCH_LENDER_REWARD_POINTS_SUCCESS,
-      payload: 123
+      payload: body.points
     })
-  }
-
-  if (response.ok === false) {
+  } else {
     dispatch({
       type: types.FETCH_LENDER_REWARD_POINTS_FAIL,
       payload: 0

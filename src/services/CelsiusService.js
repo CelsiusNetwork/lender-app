@@ -1,5 +1,5 @@
 const apiUrl = 'https://cs.celsius.network/cs/api/v1'
-const rewardApiUrl = 'https://cs.celsius.network/rewarder'
+const rewardApiUrl = 'https://cs.celsius.network/cs/rewarder'
 
 export const CelsiusService = () => ({
   registerLender(firstName, lastName, email, password, phoneNumber, appToken) {
