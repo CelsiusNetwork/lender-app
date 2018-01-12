@@ -1,6 +1,6 @@
 import * as types from './Types'
-import { NavigationActions } from 'react-navigation'
-import { CelsiusService } from '../services'
+import {NavigationActions} from 'react-navigation'
+import {CelsiusService} from '../services'
 
 export const registerLender = (registerForm, appToken) => {
   console.log('registerLender()x')
@@ -13,7 +13,7 @@ export const registerLender = (registerForm, appToken) => {
         type: types.REGISTER_LENDER_LOADING
       })
 
-      const { firstName, lastName, email, password, phoneNumber } = registerForm
+      const {firstName, lastName, email, password, phoneNumber} = registerForm
       CelsiusService().registerLender(firstName, lastName, email, password, phoneNumber, appToken)
         .then(response => {
           if (response.ok) {
@@ -23,12 +23,12 @@ export const registerLender = (registerForm, appToken) => {
           } else {
             console.log(JSON.parse(JSON.parse(response._bodyInit).error))
             const error = JSON.parse(JSON.parse(response._bodyInit).error).message
-            registerLenderFail(dispatch, getErrorText({ server: error }))
+            registerLenderFail(dispatch, getErrorText({server: error}))
           }
         })
         .catch((error) => {
           console.log(error)
-          registerLenderFail(dispatch, getErrorText({ server: true }))
+          registerLenderFail(dispatch, getErrorText({server: true}))
         })
     } else {
       registerLenderFail(dispatch, error)
@@ -38,7 +38,7 @@ export const registerLender = (registerForm, appToken) => {
 
 const registerLenderSuccess = (dispatch, resBody) => {
   dispatch({
-    type: types.REGISTER_LENDER_SUCCESS,
+    type: types.REGISTER_LENDER_SUCCESS
   })
   dispatch({
     type: types.FETCH_LENDER_SUCCESS,
@@ -47,7 +47,7 @@ const registerLenderSuccess = (dispatch, resBody) => {
   dispatch(NavigationActions.reset({
     index: 0,
     actions: [
-      NavigationActions.navigate({ routeName: 'Verification' })
+      NavigationActions.navigate({routeName: 'Verification'})
     ]
   }))
 }
@@ -87,25 +87,65 @@ export const updateRegisterForm = (registerForm) => {
   }
 }
 
-function validateRegisterForm (registrationForm) {
-  if (!registrationForm.firstName) return getErrorText({ notEmpty: { field: 'First Name' } })
-  if (registrationForm.firstName.length < 5) return getErrorText({ atLeast: { field: 'First Name', number: 3 } })
-  if (!registrationForm.lastName) return getErrorText({ notEmpty: { field: 'Last Name' } })
-  if (registrationForm.lastName.length < 5) return getErrorText({ atLeast: { field: 'First Name', number: 5 } })
-  if (!registrationForm.email) return getErrorText({ notEmpty: { field: 'Email' } })
-  if (!registrationForm.password) return getErrorText({ notEmpty: { field: 'Password' } })
-  if (registrationForm.password.length < 8) return getErrorText({ atLeast: { field: 'First Name', number: 8 } })
-  if (!registrationForm.phoneNumber) return getErrorText({ notEmpty: { field: 'Phone number' } })
+/**
+ * @name getLenderRewardPoints
+ * @description Call api-end point and get lender reward points
+ * @param walletAddress {string}
+ * @param token {string}
+ *
+ * @return function
+ * */
+export const getLenderRewardPoints = (walletAddress, token) => {
+  return (dispatch) => {
+    CelsiusService().getLenderRewardPoints(walletAddress, token).then(response => {
+      handleLenderRewardPoints(dispatch, response)
+    })
+  }
+}
+
+/**
+ * @name handleLenderRewardPoints
+ * @description handle server response and dispatch to set lender reward points into state
+ * @param dispatch {function}
+ * @param response {object}
+ *
+ * @return function
+ * */
+const handleLenderRewardPoints = (dispatch, response = {}) => {
+  if (response.ok === true) {
+    dispatch({
+      type: types.FETCH_LENDER_REWARD_POINTS_SUCCESS,
+      payload: 123
+    })
+  }
+
+  if (response.ok === false) {
+    dispatch({
+      type: types.FETCH_LENDER_REWARD_POINTS_FAIL,
+      payload: 0
+    })
+  }
+}
+
+function validateRegisterForm(registrationForm) {
+  if (!registrationForm.firstName) return getErrorText({notEmpty: {field: 'First Name'}})
+  if (registrationForm.firstName.length < 5) return getErrorText({atLeast: {field: 'First Name', number: 3}})
+  if (!registrationForm.lastName) return getErrorText({notEmpty: {field: 'Last Name'}})
+  if (registrationForm.lastName.length < 5) return getErrorText({atLeast: {field: 'First Name', number: 5}})
+  if (!registrationForm.email) return getErrorText({notEmpty: {field: 'Email'}})
+  if (!registrationForm.password) return getErrorText({notEmpty: {field: 'Password'}})
+  if (registrationForm.password.length < 8) return getErrorText({atLeast: {field: 'First Name', number: 8}})
+  if (!registrationForm.phoneNumber) return getErrorText({notEmpty: {field: 'Phone number'}})
   return false
 }
 
-function validateEditProfileForm (registrationForm) {
-  if (!registrationForm.firstName) return getErrorText({ notEmpty: { field: 'First Name' } })
-  if (registrationForm.firstName.length < 5) return getErrorText({ atLeast: { field: 'First Name', number: 3 } })
-  if (!registrationForm.lastName) return getErrorText({ notEmpty: { field: 'Last Name' } })
-  if (registrationForm.lastName.length < 5) return getErrorText({ atLeast: { field: 'First Name', number: 5 } })
-  if (!registrationForm.email) return getErrorText({ notEmpty: { field: 'Email' } })
-  if (!registrationForm.phoneNumber) return getErrorText({ notEmpty: { field: 'Phone number' } })
+function validateEditProfileForm(registrationForm) {
+  if (!registrationForm.firstName) return getErrorText({notEmpty: {field: 'First Name'}})
+  if (registrationForm.firstName.length < 5) return getErrorText({atLeast: {field: 'First Name', number: 3}})
+  if (!registrationForm.lastName) return getErrorText({notEmpty: {field: 'Last Name'}})
+  if (registrationForm.lastName.length < 5) return getErrorText({atLeast: {field: 'First Name', number: 5}})
+  if (!registrationForm.email) return getErrorText({notEmpty: {field: 'Email'}})
+  if (!registrationForm.phoneNumber) return getErrorText({notEmpty: {field: 'Phone number'}})
   return false
 }
 

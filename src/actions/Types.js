@@ -32,3 +32,6 @@ export const WITHDRAW_ETH_LOADING = 'withdraw_eth_loading'
 export const WITHDRAW_ETH_SUCCESS = 'withdraw_eth_success'
 export const WITHDRAW_ETH_ERROR = 'withdraw_eth_error'
 export const SET_ETH_WITHDRAW_AMOUNT = 'set_eth_withdraw_amount'
+
+export const FETCH_LENDER_REWARD_POINTS_SUCCESS = 'fetch_lender_reward_points_success'
+export const FETCH_LENDER_REWARD_POINTS_FAIL = 'fetch_lender_reward_points_fail'
