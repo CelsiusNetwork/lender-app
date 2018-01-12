@@ -45,6 +45,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',
+    padding: 48
   },
   contentContainer: {
     flex: 1
@@ -53,8 +54,8 @@ const styles = StyleSheet.create({
     fontSize: 38,
     backgroundColor: 'rgba(0,0,0,0)',
     color: 'white',
-    paddingLeft: 25,
-    paddingRight: 30,
+    // paddingLeft: 25,
+    // paddingRight: 30,
     marginBottom: 10,
     fontWeight: 'bold'
   },
@@ -62,8 +63,8 @@ const styles = StyleSheet.create({
     fontSize: 18,
     backgroundColor: 'rgba(0, 0, 0, 0)',
     color: '#9CA9B6',
-    padding: 30,
-    paddingLeft: 25,
+    paddingTop: 30,
+    paddingBottom: 30,
     lineHeight: 20
   },
   logo: {
@@ -71,7 +72,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: 60,
     height: 60,
-    marginLeft: 15,
+    // marginLeft: 15,
     marginBottom: 80,
     marginTop: 90
   }
