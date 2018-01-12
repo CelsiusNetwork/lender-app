@@ -2,6 +2,7 @@ import * as types from './Types'
 import { Auth0Service } from '../services'
 import { NavigationActions } from 'react-navigation'
 import jwtDecode from 'jwt-decode'
+import { storeLoggedUser } from './index'
 
 export const loginEmailChanged = (text) => {
   return {
@@ -18,15 +19,12 @@ export const loginPasswordChanged = (text) => {
 }
 
 export const loginLender = ({ email, password }) => {
-  console.log('lalalalal666')
   return (dispatch) => {
     console.log(dispatch)
     dispatch({
       type: types.LOGIN_LENDER_LOADING
     })
-    console.log('loginLender() email pass:')
-    console.log(email)
-    console.log(password)
+
     Auth0Service().siginInWithEmailAndPassword({ email, password })
       .then(response => handleResponse(dispatch, JSON.stringify(response)))
       .catch((error) => {
@@ -57,24 +55,26 @@ export const loginLender = ({ email, password }) => {
 // }
 
 const handleLenderInfo = (dispatch, response) => {
-  console.log('handleLenderInfo()')
   response = JSON.parse(response)
-  console.log(response._bodyInit)
   const user = JSON.parse(response._bodyInit)
   dispatch({
     type: types.FETCH_LENDER_SUCCESS,
     payload: user
   })
-  dispatch(NavigationActions.reset({
-    index: 0,
-    actions: [
-      NavigationActions.navigate({ routeName: 'Home' })
-    ]
-  }))
+    // set user id in secure store
+  storeLoggedUser(user.user_id).then(() => {
+    dispatch(NavigationActions.reset({
+      index: 0,
+      actions: [
+        NavigationActions.navigate({ routeName: 'Home' })
+      ]
+    }))
+  }).catch(error => {
+    console.error(error)
+  })
 }
 
 const handleResponse = (dispatch, response) => {
-  console.log('loginLenderSuccess() response: ')
   response = JSON.parse(response)
   const token = JSON.parse(response._bodyInit)
   const tokenId = token.id_token

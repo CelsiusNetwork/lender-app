@@ -1,5 +1,6 @@
 export * from './AppTokenActions'
-export * from './RegisterActions'
+export * from './LenderActions'
 export * from './LoginActions'
 export * from './WalletActions'
 export * from './TransactionActions'
+export * from './SecureStoreActions'

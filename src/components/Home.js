@@ -6,8 +6,8 @@ import {Pages} from 'react-native-pages'
 import DegIncome from './graph/DegIncome'
 import DegValue from './graph/DegValue'
 import IncomeHistory from './graph/IncomeHistory'
-import {fetchWalletBalance, fetchTransactionsHistory, setActiveTransaction, lenderAppInitToken} from '../actions'
-import {Font} from 'expo'
+import {fetchWalletBalance, fetchTransactionsHistory, setActiveTransaction, lenderAppInitToken, isAlreadyLoggedIn} from '../actions'
+import Expo, { Font } from 'expo'
 
 class Home extends Component {
   constructor (props) {
@@ -20,7 +20,8 @@ class Home extends Component {
       change: ' ▲ +3.24%',
       user: {
         name: 'Alex'
-      }
+      },
+      isAlreadyLogged: false
     }
     console.log('props: ')
     console.log(props)
@@ -30,6 +31,13 @@ class Home extends Component {
 
   componentWillMount () {
     const {props} = this
+
+    isAlreadyLoggedIn(this.props.authId).then(isAlreadyLogged => {
+      this.setState({isAlreadyLogged})
+    }).catch(error => {
+      console.error(error)
+    })
+
     this.fetchingInterval = setInterval(() => {
       props.fetchWalletBalance(props.walletAddress, props.token)
     }, 5000)
@@ -45,6 +53,7 @@ class Home extends Component {
     await Font.loadAsync({
       'barlow': require('../../assets/fonts/Barlow-Regular.otf')
     })
+
     this.setState({fontLoaded: true})
   }
 
@@ -67,7 +76,7 @@ class Home extends Component {
     const celBalance = this.props.celBalance || '0.00'
     const name = this.props.lender.name
 
-    if (parseFloat(ethBalance) === 0) {
+    if (!this.state.isAlreadyLogged) {
       return (
         <View style={styles.container}>
           <ImageBackground source={require('../../assets/images/background-blur.png')} style={styles.background}>
@@ -594,7 +603,7 @@ const mapStateToProps = state => {
 // The mapDispatchToProps function lets us inject
 // certain props into the React component that can dispatch actions
 const mapDispatchToProps = {
-  fetchWalletBalance, fetchTransactionsHistory, lenderAppInitToken, setActiveTransaction
+  fetchWalletBalance, fetchTransactionsHistory, lenderAppInitToken, setActiveTransaction, isAlreadyLoggedIn
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)

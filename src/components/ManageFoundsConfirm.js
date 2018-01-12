@@ -243,7 +243,7 @@ const mapStateToProps = state => {
     ethBalance: state.wallet.ethBalance,
     celBalance: state.wallet.celBalance,
     withdrawAmount: state.withdrawETH.withdrawAmount,
-    error: state.register.error,
+    // error: state.register.error,
     nav: state.nav
   }
 }

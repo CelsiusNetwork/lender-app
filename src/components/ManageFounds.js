@@ -373,7 +373,7 @@ const mapStateToProps = state => {
     nav: state.nav,
     ethBalance: state.wallet.ethBalance,
     celBalance: state.wallet.celBalance,
-    error: state.register.error
+    // error: state.register.error
 
   }
 }

@@ -1,85 +1,98 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { StyleSheet, View, ImageBackground, Image, TouchableOpacity } from 'react-native'
-import { Button, Form, Input, Item, Label, Text, Content, Header, Title, Container } from 'native-base'
-import { registerFirstNameChanged, registerLastNameChanged, registerEmailChanged, registerPasswordChanged, registerPhoneNumberChanged, registerLender } from '../actions'
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
+import {StyleSheet, View, ImageBackground, Image} from 'react-native'
+import {Button, Form, Input, Item, Label, Text, Content, Container} from 'native-base'
+import {updateRegisterForm, updateProfile} from '../actions'
 
 class EditProfile extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-        firstName: "Alex",
-        lastName: "Johnson",
-        email: "alex.johnson@gmail.com",
-        password: "123456",
-        passcode: "1111",
-        phoneNumber: "+1 213 221 49 51"
-      }
+  // constructor(props) {
+  // super(props)
+  // this.state = {
+  //   }
+  // }
+
+  componentDidMount () {
+    const {lender, registerForm, updateRegisterForm} = this.props
+
+    // Prepopulate form fields with lender data
+    updateRegisterForm({
+      ...registerForm,
+      firstName: lender.user_metadata.name,
+      lastName: lender.user_metadata.surname,
+      email: lender.email
+      // TODO(fj)
+      // picture: lender.picture,
+      // password: '',
+      // phoneNumber: ''
+    })
+  }
+
+  componentWillUnmount () {
+    // cleans form & errors
+    this.props.updateRegisterForm()
   }
 
   onFirstNameChange (text) {
-    this.props.registerFirstNameChanged(text)
+    this.updateField('firstName', text)
   }
 
   onLastNameChange (text) {
-    this.props.registerLastNameChanged(text)
+    this.updateField('lastName', text)
   }
 
   onEmailChange (text) {
-    this.props.registerEmailChanged(text)
-  }
-
-  onPasswordChange (text) {
-    this.props.registerPasswordChanged(text)
+    this.updateField('email', text)
   }
 
   onPhoneNumberChange (text) {
-    this.props.registerPhoneNumberChanged(text)
+    this.updateField('phoneNumber', text)
   }
 
-  onButtonPress (firstName, lastName, email, password, phoneNumber) {
-    // this.props.registerLender({ firstName, lastName, email, password, phoneNumber })
+  updateField (field, text) {
+    const {registerForm, updateRegisterForm} = this.props
+    registerForm[field] = text
+    updateRegisterForm(registerForm)
+  }
 
+  onButtonPress () {
+    const {updateProfile, registerForm} = this.props
+    updateProfile(registerForm)
   }
 
   render () {
-    const { navigate } = this.props.navigation
-    const firstName = this.props.name
-    const lastName = this.props.surname
-    const email = this.props.email
-    const phoneNumber = this.props.phoneNumber
-    const profilePicture = this.props.picture
+    const {loading, registerForm} = this.props
+    const {firstName, lastName, email, picture, phoneNumber} = registerForm
     return (
       <View style={styles.container}>
         <ImageBackground source={require('../../assets/images/background-blur.png')} style={styles.background}>
           <View style={styles.body}>
-            {/* <Image source={require('../../assets/images/logo-header.png')} style={styles.logo} /> */}
-            <Text style={styles.header}>{'Edit Profile'.toUpperCase()}</Text>
-            <View style={styles.avatarSection}>
-              <View style={styles.pts}>
-                <Image source={require('../../assets/images/icon-score.png')} style={styles.score} />
-                <Text style={styles.ptsText}>2559</Text>
-                <Text style={styles.ptsTextExt}>pts</Text>
-              </View>
-              <ImageBackground source={require('../../assets/images/avatar-wrapper.png')} style={styles.avatarWrapper}>
-                <Image
-                  source={{uri:profilePicture}}
-                  style={styles.avatar}
-                  resizeMode="cover"
-                  borderRadius={90} />
-              </ImageBackground>
-            </View>
+            <Text style={styles.header}>PROFILE</Text>
             <Container>
               <Content>
+                <View style={styles.avatarSection}>
+                  <View style={styles.pts}>
+                    <Image source={require('../../assets/images/icon-score.png')} style={styles.score} />
+                    <Text style={styles.ptsText}>2559</Text>
+                    <Text style={styles.ptsTextExt}>pts</Text>
+                  </View>
+                  <ImageBackground source={require('../../assets/images/avatar-wrapper.png')} style={styles.avatarWrapper}>
+                    <Image
+                      source={{uri: picture}}
+                      style={styles.avatar}
+                      resizeMode='cover'
+                      borderRadius={90} />
+                  </ImageBackground>
+                </View>
                 <Form style={styles.form}>
                   <Item floatingLabel style={styles.floatingWrapper}>
-                    <Label style={{color: 'rgba(156, 169, 182, 0.5)', fontSize: 12}}>{'First Name'.toUpperCase()}</Label>
+                    <Label
+                      style={{color: 'rgba(156, 169, 182, 0.5)', fontSize: 12}}>{'First Name'.toUpperCase()}</Label>
                     <Input
                       style={styles.input}
                       onChangeText={this.onFirstNameChange.bind(this)}
                       value={firstName}
                       autoCorrect={false}
-                      highlightColor="#00ACC1" // cyan600
+                      highlightColor='#00ACC1' // cyan600
                       autoCapitalize='none' />
                   </Item>
                   <Item floatingLabel style={styles.floatingWrapper}>
@@ -92,7 +105,8 @@ class EditProfile extends Component {
                       autoCapitalize='none' />
                   </Item>
                   <Item floatingLabel style={styles.floatingWrapper}>
-                    <Label style={{color: 'rgba(156, 169, 182, 0.5)', fontSize: 12}}>{'Your email'.toUpperCase()}</Label>
+                    <Label
+                      style={{color: 'rgba(156, 169, 182, 0.5)', fontSize: 12}}>{'Your email'.toUpperCase()}</Label>
                     <Input
                       style={styles.input}
                       onChangeText={this.onEmailChange.bind(this)}
@@ -102,23 +116,8 @@ class EditProfile extends Component {
                       autoCapitalize='none' />
                   </Item>
                   <Item floatingLabel style={styles.floatingWrapper}>
-                    <Label style={{color: 'rgba(156, 169, 182, 0.5)', fontSize: 12}}>{'Password'.toUpperCase()}</Label>
-                    <Input
-                      style={styles.input}
-                      onChangeText={this.onPasswordChange.bind(this)}
-                      value={this.state.password}
-                      secureTextEntry returnKeyType='done' autoCorrect={false} />
-                  </Item>
-                  <Item floatingLabel style={styles.floatingWrapper}>
-                    <Label style={{color: 'rgba(156, 169, 182, 0.5)', fontSize: 12}}>{'Passcode'.toUpperCase()}</Label>
-                    <Input
-                      style={styles.input}
-                      // onChangeText={this.onPasswordChange.bind(this)}
-                      value={this.state.passcode}
-                      secureTextEntry returnKeyType='done' autoCorrect={false} />
-                  </Item>
-                  <Item floatingLabel style={styles.floatingWrapper}>
-                    <Label style={{color: 'rgba(156, 169, 182, 0.5)', fontSize: 12}}>{'Phone number'.toUpperCase()}</Label>
+                    <Label
+                      style={{color: 'rgba(156, 169, 182, 0.5)', fontSize: 12}}>{'Phone number'.toUpperCase()}</Label>
                     <Input
                       style={styles.input}
                       onChangeText={this.onPhoneNumberChange.bind(this)}
@@ -131,8 +130,8 @@ class EditProfile extends Component {
                     <View style={styles.cellLeft}>
                       <Button
                         style={styles.button}
-                        // onPress={this.onButtonPress.bind(this)}
-                        onPress={() => navigate('VerifyPhoneNumber')}
+                        onPress={this.onButtonPress.bind(this)}
+                        // onPress={() => navigate('VerifyPhoneNumber')}
                         block primary>
                         <Text
                           style={styles.buttonText}
@@ -145,7 +144,7 @@ class EditProfile extends Component {
                         // onPress={this.onButtonPress.bind(this)}
                         onPress={() => this.props.navigation.goBack()}
                         // block primary
-                        >
+                      >
                         <Text
                           style={styles.buttonText2}
                         >Cancel</Text>
@@ -165,10 +164,11 @@ class EditProfile extends Component {
   }
 
   renderError () {
-    if (this.props.error !== '') { return (<Text style={styles.errorText}>{this.props.error}</Text>) }
+    if (this.props.error !== '') {
+      return (<Text style={styles.errorText}>{this.props.error}</Text>)
+    }
     return <View />
   }
-
 }
 
 const styles = StyleSheet.create({
@@ -181,7 +181,7 @@ const styles = StyleSheet.create({
   },
   background: {
     flex: 1,
-    flexDirection: 'row',
+    flexDirection: 'row'
     // justifyContent: 'top',
     // alignItems: 'center',
     // backgroundColor: 'red'
@@ -200,12 +200,12 @@ const styles = StyleSheet.create({
     marginBottom: 5
   },
   header: {
-		fontSize: 38,
-		backgroundColor: 'rgba(0,0,0,0)',
-		color: 'white',
-		paddingLeft: 30,
-		paddingRight: 30,
-		marginBottom: 10,
+    fontSize: 38,
+    backgroundColor: 'rgba(0,0,0,0)',
+    color: 'white',
+    paddingLeft: 30,
+    paddingRight: 30,
+    marginBottom: 10,
     fontWeight: 'bold',
     textAlign: 'center',
     marginTop: 20
@@ -223,7 +223,7 @@ const styles = StyleSheet.create({
     fontSize: 12
   },
   floatingWrapper: {
-    borderBottomWidth: 0,
+    borderBottomWidth: 0
   },
   input: {
     height: 40,
@@ -274,7 +274,7 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
     alignItems: 'center',
-    height: 50,
+    height: 50
     // borderTopColor: 'rgba(255, 255, 255, 0.1)',
     // borderTopWidth: 2
   },
@@ -284,7 +284,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
     marginLeft: 10,
-    height: 40,
+    height: 40
   },
   cellRight: {
     flex: 1,
@@ -292,13 +292,13 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     alignItems: 'center',
     marginRight: 10,
-    height: 40,
+    height: 40
   },
   avatarSection: {
     alignItems: 'center',
     marginTop: 10,
     marginBottom: 10,
-    position: 'relative',
+    position: 'relative'
   },
   avatarWrapper: {
     width: 196,
@@ -320,8 +320,8 @@ const styles = StyleSheet.create({
     zIndex: 5,
     bottom: 10,
     right: 50,
-    flexDirection:'row',
-    flexWrap:'wrap'
+    flexDirection: 'row',
+    flexWrap: 'wrap'
   },
   ptsText: {
     backgroundColor: 'rgba(255, 255, 255, 0)',
@@ -334,7 +334,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(255, 255, 255, 0)',
     fontSize: 12,
     color: '#3D4853',
-    marginTop: 10,
+    marginTop: 10
   },
   score: {
     width: 16,
@@ -342,28 +342,26 @@ const styles = StyleSheet.create({
     marginTop: 7,
     marginRight: 3,
     marginLeft: 7
+  },
+  errorText: {
+    marginLeft: 15,
+    marginTop: 10,
+    color: '#FF9494'
   }
 })
 
 const mapStateToProps = state => {
   return {
-    token: state.auth.token,
-    name: state.lender.name,
-    surname: state.lender.surname,
-    email: state.auth.email,
-    authId: state.auth.authId,
-    walletAddress: state.lender.walletAddress,
-    lender: state.lender,
-    ethBalance: state.wallet.ethBalance,
-    celBalance: state.wallet.celBalance,
+    registerForm: state.lender.registerForm,
+    lender: state.lender.lender,
     picture: state.lender.lender.picture,
-    error: state.register.error,
-    nav: state.nav
+    error: state.lender.error
   }
 }
 
 const mapDispatchToProps = {
-  registerFirstNameChanged, registerLastNameChanged, registerEmailChanged, registerPasswordChanged, registerPhoneNumberChanged, registerLender
+  updateRegisterForm,
+  updateProfile
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditProfile)

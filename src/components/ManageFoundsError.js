@@ -223,13 +223,13 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
   return {
-    firstName: state.register.firstName,
-    lastName: state.register.lastName,
-    email: state.register.email,
-    password: state.register.password,
-    phoneNumber: state.register.phoneNumber,
-
-    error: state.register.error,
+    // firstName: state.register.firstName,
+    // lastName: state.register.lastName,
+    // email: state.register.email,
+    // password: state.register.password,
+    // phoneNumber: state.register.phoneNumber,
+    //
+    // error: state.register.error,
     nav: state.nav
   }
 }
