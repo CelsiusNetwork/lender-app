@@ -73,6 +73,31 @@ class IncomeHistory extends Component {
           </View>
         </TouchableOpacity>
       )
+    } else {
+      return (
+        <TouchableOpacity key={ t.hash } style={[styles.tableRow]} onPress={() => this.handleTransacationPress(t) }>
+          <View>
+            <Image source={require('../../../assets/images/icon-coins.png')} style={styles.icon} />
+          </View>
+          <View style={styles.value}>
+            { this.state.fontLoaded ? (<Text style={[styles.valueText, { fontFamily: 'barlow-semi-bold' }]}>{ t.degAmount } CEL</Text>) : null }
+          </View>
+          { t.to === walletAddress ? (
+            <View style={[styles.status, styles.greenStatus]}>
+              { this.state.fontLoaded ? (<Text style={[styles.statusText, styles.greenText, { fontFamily: 'barlow' }]}>RECEIVED</Text>) : null }
+            </View>
+          ) : (
+            <View style={[styles.status, styles.orangeStatus]}>
+              { this.state.fontLoaded ? (<Text style={[styles.statusText, styles.orangeText, { fontFamily: 'barlow' }]}>SOLD</Text>) : null }
+            </View>
+          )}
+          <View style={styles.created}>
+            { this.state.fontLoaded ? (<Text style={[styles.createdText, { fontFamily: 'barlow' }]}>{ t.dateDisplay }</Text>) : null }
+            <Image source={require('../../../assets/images/icon-time.png')} style={styles.clock} />
+            { this.state.fontLoaded ? (<Text style={[styles.createdText, { fontFamily: 'barlow' }]}>{ t.timeDisplay }</Text>) : null }
+          </View>
+        </TouchableOpacity>
+      )
     }
 
     return null
