@@ -12,7 +12,7 @@ export default (state = TRANSACTIONS_STATE, action) => {
       console.log(action)
       return {
         ...state,
-        transactions: action.payload.map(t => new TransactionModel(t)).sort((a, b) => a.createdAt > b.createdAt).slice(0, 15)
+        transactions: action.payload.map(t => new TransactionModel(t)).sort((a, b) => a.createdAt < b.createdAt).slice(0, 15)
       }
 
     case types.SET_ACTIVE_TRANSACTION:
