@@ -1,9 +1,15 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Alert, ImageBackground, StyleSheet, View, Image, Text, TouchableOpacity, AsyncStorage, Animated } from 'react-native'
+import { StatusBar, Alert, ImageBackground, StyleSheet, View, Image, Text, TouchableOpacity, AsyncStorage, Animated } from 'react-native'
 import { Form, Input, Item, Label, Content, Container } from 'native-base'
 import { NavigationActions } from 'react-navigation'
 import { Font } from 'expo'
+
+const MyStatusBar = ({backgroundColor, ...props}) => (
+  <View style={[styles.statusBar, { backgroundColor }]}>
+    <StatusBar translucent backgroundColor={backgroundColor} {...props} />
+  </View>
+);
 
 export default class DegIncome extends Component {
   constructor(props) {
@@ -35,6 +41,7 @@ export default class DegIncome extends Component {
     const { navigate } = this.props.navigation
     return (
       <View style={styles.welcomeContainer}>
+        <MyStatusBar barStyle="light-content" />
         <Container style={styles.wrapper}>
           <Content>
 

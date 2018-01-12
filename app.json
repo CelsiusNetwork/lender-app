@@ -11,6 +11,9 @@
     },
     "android": {
       "package": "com.celsius.lender"
+    },
+    "androidStatusBar": {
+        "barStyle": "light-content"
     }
   }
 }

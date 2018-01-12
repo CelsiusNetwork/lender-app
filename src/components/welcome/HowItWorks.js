@@ -162,11 +162,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
     borderRadius: 5,
     padding: 5,
-    height: 50,
+    height: 60,
     justifyContent: 'center',
     alignItems: 'center',
-    marginRight: 30,
-    marginLeft: 30
+    marginRight: 43,
+    marginLeft: 43
   },
   buttonText: {
     color: '#3D4853',

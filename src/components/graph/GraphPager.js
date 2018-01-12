@@ -1,12 +1,18 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { StyleSheet, TouchableOpacity, View, Text, Image, ImageBackground } from 'react-native'
+import { StatusBar, StyleSheet, TouchableOpacity, View, Text, Image, ImageBackground } from 'react-native'
 import { Pages } from 'react-native-pages'
 import DegIncome from './DegIncome'
 import DegValue from './DegValue'
 import IncomeHistory from './IncomeHistory'
 import { lenderAppInitToken } from '../../actions'
 import { Font } from 'expo';
+
+const MyStatusBar = ({backgroundColor, ...props}) => (
+  <View style={[styles.statusBar, { backgroundColor }]}>
+    <StatusBar translucent backgroundColor={backgroundColor} {...props} />
+  </View>
+);
 
 class GraphPager extends Component {
   constructor(props) {
@@ -38,6 +44,7 @@ class GraphPager extends Component {
     const { navigate } = this.props.navigation
     return (
       <View style={styles.container}>
+        <MyStatusBar barStyle="light-content" />
         <ImageBackground
           source={require('../../../assets/images/background.png')}
           style={styles.background}>

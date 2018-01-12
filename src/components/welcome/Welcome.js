@@ -1,6 +1,12 @@
 import React, { Component } from 'react'
-import { StyleSheet, View, Text, Image } from 'react-native'
+import { StatusBar, Platform, StyleSheet, View, Text, Image } from 'react-native'
 import { Font } from 'expo';
+
+const MyStatusBar = ({backgroundColor, ...props}) => (
+  <View style={[styles.statusBar, { backgroundColor }]}>
+    <StatusBar translucent backgroundColor={backgroundColor} {...props} />
+  </View>
+);
 
 export default class Welcome extends Component {
   constructor(props) {
@@ -32,6 +38,7 @@ export default class Welcome extends Component {
   render () {
     return (
       <View style={styles.welcomeContainer}>
+        <MyStatusBar barStyle="light-content" />
         <Image source={require('../../../assets/images/Celsius_Symbol_white.png')} style={styles.logo} />
         { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow-bold'}, styles.header]}>WELCOME TO CELSIUS</Text>) : null }
         { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow'}, styles.text]}>A new global financial platform that seamlessly connects holders of crypto-assets with borrowers. Earn fees on your assets by allowing financial traders to borrow them.</Text>) : null }
