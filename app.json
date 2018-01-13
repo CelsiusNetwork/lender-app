@@ -1,8 +1,8 @@
 {
   "expo": {
     "name": "lender-app",
-    "icon": "./path/to/your/app-icon.png",
-    "version": "0.0.1rc1",
+    "icon": "./assets/celsius-logo.png",
+    "version": "0.0.1",
     "slug": "lender-app",
     "sdkVersion": "23.0.0",
     "orientation": "portrait",
@@ -13,7 +13,7 @@
       "package": "com.celsius.lender"
     },
     "androidStatusBar": {
-        "barStyle": "light-content"
+      "barStyle": "light-content"
     }
   }
 }
