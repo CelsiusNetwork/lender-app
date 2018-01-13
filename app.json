@@ -1,7 +1,19 @@
 {
   "expo": {
-    "name": "lander-app",
-    "slug": "lander-app",
-    "sdkVersion": "23.0.0"
+    "name": "lender-app",
+    "icon": "./assets/celsius-logo.png",
+    "version": "0.0.1",
+    "slug": "lender-app",
+    "sdkVersion": "23.0.0",
+    "orientation": "portrait",
+    "ios": {
+      "bundleIdentifier": "com.celsius.lender"
+    },
+    "android": {
+      "package": "com.celsius.lender"
+    },
+    "androidStatusBar": {
+      "barStyle": "light-content"
+    }
   }
 }
