@@ -4,36 +4,112 @@ import {StyleSheet, View, ImageBackground, Image, TouchableOpacity} from 'react-
 import {Button, Form, Input, Item, Label, Text, Content, Container} from 'native-base'
 import { updateRegisterForm, registerLender } from '../actions'
 
+const LABEL_TEXTS = {
+  firstNameActive: 'FIRST NAME',
+  firstNameInactive: 'First Name',
+  lastNameActive: 'LAST NAME',
+  lastNameInactive: 'Last Name',
+  emailActive: 'EMAIL',
+  emailInactive: 'your@email.sample',
+  passwordActive: 'PASSWORD',
+  passwordInactive: '********',
+  phoneNumberActive: 'PHONE NUMBER',
+  phoneNumberInactive: '+1 ... ... ....',
+}
+
 class Register extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      labels: {
+        firstName: LABEL_TEXTS.firstNameActive,
+        lastName: !props.registerForm.lastName ? LABEL_TEXTS.lastNameInactive : LABEL_TEXTS.lastNameActive,
+        email: !props.registerForm.email ? LABEL_TEXTS.emailInactive : LABEL_TEXTS.emailActive,
+        password: !props.registerForm.password ? LABEL_TEXTS.passwordInactive : LABEL_TEXTS.passwordActive,
+        phoneNumber: !props.registerForm.phoneNumber ? LABEL_TEXTS.phoneNumberInactive : LABEL_TEXTS.phoneNumberActive,
+      },
+      fields: {
+        firstName: 'firstName',
+        lastName: 'lastName',
+        email: 'email',
+        password: 'password',
+        phoneNumber: 'phoneNumber'
+      },
+      passHidden: true,
+    }
+
+    this.handleInputChange = this.handleInputChange.bind(this)
+    this.handleInputFocus = this.handleInputFocus.bind(this)
+    this.handleInputBlur = this.handleInputBlur.bind(this)
+    this.togglePasswordVisibility = this.togglePasswordVisibility.bind(this)
+  }
+
   componentWillUnmount() {
     // clear form data and errors
     this.props.updateRegisterForm()
   }
 
-  onFirstNameChange (text) {
-    this.updateField('firstName', text)
-  }
-
-  onLastNameChange (text) {
-    this.updateField('lastName', text)
-  }
-
-  onEmailChange (text) {
-    this.updateField('email', text)
-  }
-
-  onPasswordChange (text) {
-    this.updateField('password', text)
-  }
-
-  onPhoneNumberChange (text) {
-    this.updateField('phoneNumber', text)
-  }
-
-  updateField (field, text) {
+  handleInputChange (fieldName, text) {
     const { registerForm, updateRegisterForm } = this.props
-    registerForm[field] = text
+    registerForm[fieldName] = text
     updateRegisterForm(registerForm)
+  }
+
+  handleInputFocus (fieldName) {
+    const { labels } = this.state
+
+    let label = {}
+    label[fieldName] = LABEL_TEXTS[`${fieldName}Active`]
+
+    this.setState({
+      labels: {
+        ...labels,
+        ...label
+      }
+    })
+  }
+
+  handleInputBlur (fieldName) {
+    const { labels } = this.state
+    const { registerForm } = this.props
+
+    let label = {}
+    if (registerForm[fieldName]) {
+      label[fieldName] = LABEL_TEXTS[`${fieldName}Active`]
+    } else {
+      label[fieldName] = LABEL_TEXTS[`${fieldName}Inactive`]
+    }
+
+    this.setState({
+      labels: {
+        ...labels,
+        ...label
+      }
+    })
+  }
+
+  togglePasswordVisibility () {
+    console.log('toggling')
+    this.setState({ passHidden: !this.state.passHidden })
+  }
+
+  getLabelStyles(fieldName) {
+    const { labels } = this.state
+
+    if (labels[fieldName] === LABEL_TEXTS[`${fieldName}Active`]) {
+      return {
+        color: '#9CA9B6',
+        fontSize: 12,
+        top: 0
+      }
+    } else {
+      return {
+        color: '#9CA9B6',
+        fontSize: 21,
+        top: -3
+      }
+    }
   }
 
   onButtonPress () {
@@ -51,6 +127,7 @@ class Register extends Component {
   }
 
   render () {
+    const { labels, fields, passHidden } = this.state
     const { loading, navigation, registerForm} = this.props
     const { firstName, lastName, email, password, phoneNumber } = registerForm
     const { navigate } = navigation
@@ -66,47 +143,71 @@ class Register extends Component {
             <Content>
               <Form style={styles.form}>
                 <Item floatingLabel style={styles.floatingWrapper}>
-                  <Label style={{color: '#9CA9B6', fontSize: 18}}>First Name</Label>
+                  <Label style={ this.getLabelStyles(fields.firstName) }>{ labels.firstName }</Label>
                   <Input
                     style={styles.input}
-                    onChangeText={this.onFirstNameChange.bind(this)}
+                    onChangeText={ (text) => this.handleInputChange(fields.firstName, text) }
+                    onFocus={ () => this.handleInputFocus(fields.firstName) }
+                    onBlur={ () => this.handleInputBlur(fields.firstName) }
+                    keyboardAppearance="dark"
                     value={firstName}
                     autoCorrect={false}
                     highlightColor='#00ACC1' // cyan600
                     autoFocus autoCapitalize='none' />
                 </Item>
                 <Item floatingLabel style={styles.floatingWrapper}>
-                  <Label style={{color: '#9CA9B6', fontSize: 18}}>Last Name</Label>
+                  <Label style={ this.getLabelStyles(fields.lastName) }>{ labels.lastName }</Label>
                   <Input
                     style={styles.input}
-                    onChangeText={this.onLastNameChange.bind(this)}
+                    onChangeText={ (text) => this.handleInputChange(fields.lastName, text) }
+                    onFocus={ () => this.handleInputFocus(fields.lastName) }
+                    onBlur={ () => this.handleInputBlur(fields.lastName) }
+                    keyboardAppearance="dark"
                     value={lastName}
                     autoCorrect={false}
                     autoCapitalize='none' />
                 </Item>
                 <Item floatingLabel style={styles.floatingWrapper}>
-                  <Label style={{color: '#9CA9B6', fontSize: 18}}>Your email</Label>
+                  <Label style={ this.getLabelStyles(fields.email) }>{ labels.email }</Label>
                   <Input
                     style={styles.input}
-                    onChangeText={this.onEmailChange.bind(this)}
+                    onChangeText={ (text) => this.handleInputChange(fields.email, text) }
+                    onFocus={ () => this.handleInputFocus(fields.email) }
+                    onBlur={ () => this.handleInputBlur(fields.email) }
+                    keyboardAppearance="dark"
                     value={email}
                     keyboard-type='email-address'
                     autoCorrect={false}
                     autoCapitalize='none' />
                 </Item>
                 <Item floatingLabel style={styles.floatingWrapper}>
-                  <Label style={{color: '#9CA9B6', fontSize: 18}}>Password</Label>
+                  <Label style={ this.getLabelStyles(fields.password) }>{ labels.password }</Label>
                   <Input
                     style={styles.input}
-                    onChangeText={this.onPasswordChange.bind(this)}
+                    onChangeText={ (text) => this.handleInputChange(fields.password, text) }
+                    onFocus={ () => this.handleInputFocus(fields.password) }
+                    onBlur={ () => this.handleInputBlur(fields.password) }
+                    keyboardAppearance="dark"
                     value={password}
-                    secureTextEntry returnKeyType='done' autoCorrect={false} />
+                    secureTextEntry={ passHidden }
+                    returnKeyType='done' autoCorrect={false} />
                 </Item>
+                { registerForm.password ? (
+                  <TouchableOpacity onPress={this.togglePasswordVisibility} style={styles.eyeIconButton} >
+                    <Image
+                      source={require('../../assets/images/icon-coins.png')}
+                      style={styles.eyeIcon}
+                      resizeMode="contain"/>
+                  </TouchableOpacity>
+                ) : null }
                 <Item floatingLabel style={styles.floatingWrapper}>
-                  <Label style={{color: '#9CA9B6', fontSize: 18}}>Phone number</Label>
+                  <Label style={ this.getLabelStyles(fields.phoneNumber) }>{ labels.phoneNumber }</Label>
                   <Input
                     style={styles.input}
-                    onChangeText={this.onPhoneNumberChange.bind(this)}
+                    onChangeText={ (text) => this.handleInputChange(fields.phoneNumber, text) }
+                    onFocus={ () => this.handleInputFocus(fields.phoneNumber) }
+                    onBlur={ () => this.handleInputBlur(fields.phoneNumber) }
+                    keyboardAppearance="dark"
                     value={phoneNumber}
                     autoCorrect={false}
                     autoCapitalize='none' />
@@ -146,19 +247,18 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   logo: {
-    // position: 'absolute',
-    width: 140,
+    width: 128,
     height: 40,
-    marginLeft: 25,
-    marginBottom: 5,
-    resizeMode: 'contain',
-    marginTop: 10
+    left: 30,
+    top: 10,
+    marginBottom: 10,
+    resizeMode: 'contain'
   },
   formContainer: {
     marginTop: 100
   },
   floatingLabel: {
-    color: '#9CA9B6'
+    color: '#ffffff'
   },
   floatingWrapper: {
     borderBottomWidth: 0
@@ -168,9 +268,21 @@ const styles = StyleSheet.create({
     width: 300,
     borderColor: 'rgba(255,255,255,0.3)',
     borderBottomWidth: 2,
-    color: '#9CA9B6',
-    marginBottom: 10,
-    fontSize: 14
+    color: '#ffffff',
+    marginBottom: 20,
+    fontSize: 21
+  },
+  eyeIconButton: {
+    position: 'absolute',
+    top: 270,
+    right: 10,
+    width: 20,
+    height: 20,
+    backgroundColor: 'transparent'
+  },
+  eyeIcon: {
+    width: 20,
+    height: 20
   },
   button: {
     backgroundColor: '#ffffff',
@@ -188,7 +300,8 @@ const styles = StyleSheet.create({
   },
   form: {
     marginLeft: 20,
-    marginRight: 20
+    marginRight: 20,
+    paddingTop: 20
   },
   errorText: {
     marginLeft: 15,
