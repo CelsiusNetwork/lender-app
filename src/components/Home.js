@@ -284,15 +284,15 @@ const styles = StyleSheet.create({
     height: 40
   },
   logo: {
-    width: 40,
-    height: 40,
-    marginLeft: 10
+    width: 35,
+    height: 34,
+    marginLeft: 15
   },
   user: {
     // position: 'absolute',
     width: 26,
     height: 28,
-    marginRight: 27,
+    marginRight: 15,
     resizeMode: 'contain'
   },
   wrapper: {},
@@ -524,14 +524,14 @@ const stylesGraph = StyleSheet.create({
     // borderColor: 'red'
   },
   logo: {
-    width: 40,
-    height: 40,
-    marginLeft: 27
-  },
-  user: {
     width: 34,
     height: 34,
-    marginRight: 27,
+    marginLeft: 15
+  },
+  user: {
+    width: 26,
+    height: 29,
+    marginRight: 15,
     resizeMode: 'contain'
   },
   title: {
