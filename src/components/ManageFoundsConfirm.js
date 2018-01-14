@@ -218,7 +218,7 @@ const styles = StyleSheet.create({
   QRCodeWrapper: {
     position: 'absolute',
     top: 70,
-    right: 30
+    right: 10
   },
   QRCode: {
     width: 20,
@@ -235,7 +235,7 @@ const styles = StyleSheet.create({
   backButton: {
     position: 'absolute',
     zIndex: 10,
-    left: 20,
+    left: 10,
     top: 70,
     width: 30
   },
