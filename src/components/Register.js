@@ -14,11 +14,11 @@ const LABEL_TEXTS = {
   passwordActive: 'PASSWORD',
   passwordInactive: '********',
   phoneNumberActive: 'PHONE NUMBER',
-  phoneNumberInactive: '+1 ... ... ....',
+  phoneNumberInactive: '+1 ... ... ....'
 }
 
 class Register extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
 
     this.state = {
@@ -27,7 +27,7 @@ class Register extends Component {
         lastName: !props.registerForm.lastName ? LABEL_TEXTS.lastNameInactive : LABEL_TEXTS.lastNameActive,
         email: !props.registerForm.email ? LABEL_TEXTS.emailInactive : LABEL_TEXTS.emailActive,
         password: !props.registerForm.password ? LABEL_TEXTS.passwordInactive : LABEL_TEXTS.passwordActive,
-        phoneNumber: !props.registerForm.phoneNumber ? LABEL_TEXTS.phoneNumberInactive : LABEL_TEXTS.phoneNumberActive,
+        phoneNumber: !props.registerForm.phoneNumber ? LABEL_TEXTS.phoneNumberInactive : LABEL_TEXTS.phoneNumberActive
       },
       fields: {
         firstName: 'firstName',
@@ -36,7 +36,7 @@ class Register extends Component {
         password: 'password',
         phoneNumber: 'phoneNumber'
       },
-      passHidden: true,
+      passHidden: true
     }
 
     this.handleInputChange = this.handleInputChange.bind(this)
@@ -45,7 +45,7 @@ class Register extends Component {
     this.togglePasswordVisibility = this.togglePasswordVisibility.bind(this)
   }
 
-  componentWillUnmount() {
+  componentWillUnmount () {
     // clear form data and errors
     this.props.updateRegisterForm()
   }
@@ -94,7 +94,7 @@ class Register extends Component {
     this.setState({ passHidden: !this.state.passHidden })
   }
 
-  getLabelStyles(fieldName) {
+  getLabelStyles (fieldName) {
     const { labels } = this.state
 
     if (labels[fieldName] === LABEL_TEXTS[`${fieldName}Active`]) {
@@ -143,71 +143,71 @@ class Register extends Component {
             <Content>
               <Form style={styles.form}>
                 <Item floatingLabel style={styles.floatingWrapper}>
-                  <Label style={ this.getLabelStyles(fields.firstName) }>{ labels.firstName }</Label>
+                  <Label style={this.getLabelStyles(fields.firstName)}>{ labels.firstName }</Label>
                   <Input
                     style={styles.input}
-                    onChangeText={ (text) => this.handleInputChange(fields.firstName, text) }
-                    onFocus={ () => this.handleInputFocus(fields.firstName) }
-                    onBlur={ () => this.handleInputBlur(fields.firstName) }
-                    keyboardAppearance="dark"
+                    onChangeText={(text) => this.handleInputChange(fields.firstName, text)}
+                    onFocus={() => this.handleInputFocus(fields.firstName)}
+                    onBlur={() => this.handleInputBlur(fields.firstName)}
+                    keyboardAppearance='dark'
                     value={firstName}
                     autoCorrect={false}
                     highlightColor='#00ACC1' // cyan600
                     autoFocus autoCapitalize='none' />
                 </Item>
                 <Item floatingLabel style={styles.floatingWrapper}>
-                  <Label style={ this.getLabelStyles(fields.lastName) }>{ labels.lastName }</Label>
+                  <Label style={this.getLabelStyles(fields.lastName)}>{ labels.lastName }</Label>
                   <Input
                     style={styles.input}
-                    onChangeText={ (text) => this.handleInputChange(fields.lastName, text) }
-                    onFocus={ () => this.handleInputFocus(fields.lastName) }
-                    onBlur={ () => this.handleInputBlur(fields.lastName) }
-                    keyboardAppearance="dark"
+                    onChangeText={(text) => this.handleInputChange(fields.lastName, text)}
+                    onFocus={() => this.handleInputFocus(fields.lastName)}
+                    onBlur={() => this.handleInputBlur(fields.lastName)}
+                    keyboardAppearance='dark'
                     value={lastName}
                     autoCorrect={false}
                     autoCapitalize='none' />
                 </Item>
                 <Item floatingLabel style={styles.floatingWrapper}>
-                  <Label style={ this.getLabelStyles(fields.email) }>{ labels.email }</Label>
+                  <Label style={this.getLabelStyles(fields.email)}>{ labels.email }</Label>
                   <Input
                     style={styles.input}
-                    onChangeText={ (text) => this.handleInputChange(fields.email, text) }
-                    onFocus={ () => this.handleInputFocus(fields.email) }
-                    onBlur={ () => this.handleInputBlur(fields.email) }
-                    keyboardAppearance="dark"
+                    onChangeText={(text) => this.handleInputChange(fields.email, text)}
+                    onFocus={() => this.handleInputFocus(fields.email)}
+                    onBlur={() => this.handleInputBlur(fields.email)}
+                    keyboardAppearance='dark'
                     value={email}
                     keyboard-type='email-address'
                     autoCorrect={false}
                     autoCapitalize='none' />
                 </Item>
                 <Item floatingLabel style={styles.floatingWrapper}>
-                  <Label style={ this.getLabelStyles(fields.password) }>{ labels.password }</Label>
+                  <Label style={this.getLabelStyles(fields.password)}>{ labels.password }</Label>
                   <Input
                     style={styles.input}
-                    onChangeText={ (text) => this.handleInputChange(fields.password, text) }
-                    onFocus={ () => this.handleInputFocus(fields.password) }
-                    onBlur={ () => this.handleInputBlur(fields.password) }
-                    keyboardAppearance="dark"
+                    onChangeText={(text) => this.handleInputChange(fields.password, text)}
+                    onFocus={() => this.handleInputFocus(fields.password)}
+                    onBlur={() => this.handleInputBlur(fields.password)}
+                    keyboardAppearance='dark'
                     value={password}
-                    secureTextEntry={ passHidden }
+                    secureTextEntry={passHidden}
                     returnKeyType='done' autoCorrect={false} />
                 </Item>
                 { registerForm.password ? (
                   <TouchableOpacity onPress={this.togglePasswordVisibility} style={styles.eyeIconButton} >
                     <Image
-                      source={require('../../assets/images/icon-coins.png')}
+                      source={require('../../assets/images/icon-show.png')}
                       style={styles.eyeIcon}
-                      resizeMode="contain"/>
+                      resizeMode='contain' />
                   </TouchableOpacity>
                 ) : null }
                 <Item floatingLabel style={styles.floatingWrapper}>
-                  <Label style={ this.getLabelStyles(fields.phoneNumber) }>{ labels.phoneNumber }</Label>
+                  <Label style={this.getLabelStyles(fields.phoneNumber)}>{ labels.phoneNumber }</Label>
                   <Input
                     style={styles.input}
-                    onChangeText={ (text) => this.handleInputChange(fields.phoneNumber, text) }
-                    onFocus={ () => this.handleInputFocus(fields.phoneNumber) }
-                    onBlur={ () => this.handleInputBlur(fields.phoneNumber) }
-                    keyboardAppearance="dark"
+                    onChangeText={(text) => this.handleInputChange(fields.phoneNumber, text)}
+                    onFocus={() => this.handleInputFocus(fields.phoneNumber)}
+                    onBlur={() => this.handleInputBlur(fields.phoneNumber)}
+                    keyboardAppearance='dark'
                     value={phoneNumber}
                     autoCorrect={false}
                     autoCapitalize='none' />
@@ -310,7 +310,7 @@ const styles = StyleSheet.create({
   },
   loader: {
     width: 30,
-    height: 30,
+    height: 30
   }
 })
 
