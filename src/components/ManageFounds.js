@@ -57,7 +57,7 @@ class AddFounds extends Component {
             {/* <Image source={require('../../assets/images/logo-header.png')} style={styles.logo} /> */}
             <Container>
               <Content>
-                <Text style={styles.header}>{'Manage Funds'.toUpperCase()}</Text>
+                <Text style={styles.header}>MANAGE {'\n'} FUNDS</Text>
                 <Text style={styles.text}>You can safely withdraw your funds in <Text style={{color: '#ffffff'}}>7
                   days</Text> from now. If you do it earlier, you may lose seniority score and additional fees may
                   apply. </Text>
@@ -167,15 +167,15 @@ const styles = StyleSheet.create({
     marginBottom: 5
   },
   header: {
-    fontSize: 34,
+    fontSize: 38,
     backgroundColor: 'rgba(0,0,0,0)',
     color: 'white',
     paddingLeft: 30,
     paddingRight: 30,
-    marginBottom: 30,
+    marginBottom: 24,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginTop: 60
+    marginTop: 40
   },
   boxText1: {
     position: 'absolute',
@@ -237,7 +237,9 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: '#9CA9B6',
     marginLeft: 30,
-    marginRight: 30
+    marginRight: 30,
+    marginBottom: 32,
+    fontFamily: 'barlow'
   },
   formContainer: {
     marginTop: 100
@@ -258,7 +260,7 @@ const styles = StyleSheet.create({
     // marginRight: 30,
     // marginLeft: 30,
     marginTop: 30,
-    marginBottom: 30,
+    marginBottom: 10,
     width: 130
   },
   buttonText: {
@@ -306,8 +308,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0, 0, 0, 0.2)',
     borderRadius: 8,
     marginTop: 10,
-    marginLeft: 30,
-    marginRight: 30,
+    marginLeft: 20,
+    marginRight: 20,
     // flex: 1,
     // flexDirection: 'row',
     // position: 'relative',
@@ -372,7 +374,7 @@ const mapStateToProps = state => {
   return {
     nav: state.nav,
     ethBalance: state.wallet.ethBalance,
-    celBalance: state.wallet.celBalance,
+    celBalance: state.wallet.celBalance
     // error: state.register.error
 
   }
