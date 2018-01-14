@@ -3,54 +3,54 @@ import { connect } from 'react-redux'
 import { Alert, ImageBackground, StyleSheet, View, Image, Text, TouchableOpacity, AsyncStorage, Animated } from 'react-native'
 import { Form, Input, Item, Label, Content, Container } from 'native-base'
 import { NavigationActions } from 'react-navigation'
-import { Font } from 'expo';
+import { Font } from 'expo'
 
 class IncomeHistory extends Component {
-  constructor(props) {
-    super(props);
+  constructor (props) {
+    super(props)
     this.state = {
     }
 
     this.refreshTransactionsInterval = null
   }
-  async componentDidMount() {
+  async componentDidMount () {
     const { fetchTransactionsHistory, walletAddress } = this.props
 
     await Font.loadAsync({
-      'barlow-semi-bold': require('../../../assets/fonts/Barlow-SemiBold.otf'),
-    });
+      'barlow-semi-bold': require('../../../assets/fonts/Barlow-SemiBold.otf')
+    })
     await Font.loadAsync({
-      'barlow-light': require('../../../assets/fonts/Barlow-Light.otf'),
-    });
+      'barlow-light': require('../../../assets/fonts/Barlow-Light.otf')
+    })
     await Font.loadAsync({
-      'barlow': require('../../../assets/fonts/Barlow-Regular.otf'),
-    });
-    this.setState({ fontLoaded: true });
+      'barlow': require('../../../assets/fonts/Barlow-Regular.otf')
+    })
+    this.setState({ fontLoaded: true })
 
     // refresheshing transactions every 60s
-    fetchTransactionsHistory(walletAddress);
+    fetchTransactionsHistory(walletAddress)
     this.refreshTransactionsInterval = setInterval(() => {
-      fetchTransactionsHistory(walletAddress);
+      fetchTransactionsHistory(walletAddress)
     }, 60000)
   }
 
-  componentWillUnmount() {
+  componentWillUnmount () {
     console.log('clearing interval')
     clearInterval(this.refreshTransactionsInterval)
   }
 
-  handleTransacationPress(transaction) {
+  handleTransacationPress (transaction) {
     const { navigation, setActiveTransaction } = this.props
     setActiveTransaction(transaction)
     navigation.navigate('HistoryDetail')
   }
 
-  renderTransaction(t) {
+  renderTransaction (t) {
     const { walletAddress } = this.props
 
     if (!t.isDegreeTransaction) {
       return (
-        <TouchableOpacity key={ t.hash } style={styles.tableRow} onPress={() => this.handleTransacationPress(t) }>
+        <TouchableOpacity key={t.hash} style={styles.tableRow} onPress={() => this.handleTransacationPress(t)}>
           <View>
             <Image source={require('../../../assets/images/icon-etherium.png')} style={styles.icon} />
           </View>
@@ -75,7 +75,7 @@ class IncomeHistory extends Component {
       )
     } else {
       return (
-        <TouchableOpacity key={ t.hash } style={[styles.tableRow]} onPress={() => this.handleTransacationPress(t) }>
+        <TouchableOpacity key={t.hash} style={[styles.tableRow]} onPress={() => this.handleTransacationPress(t)}>
           <View>
             <Image source={require('../../../assets/images/icon-coins.png')} style={styles.icon} />
           </View>
@@ -113,35 +113,14 @@ class IncomeHistory extends Component {
       <View style={styles.welcomeContainer}>
         <Container style={styles.wrapper}>
           <Content>
-
-            {/* <Text style={styles.header}>
-              { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow-semi-bold' }]}>{ this.state.eth.toFixed(3) }</Text>) : null }
-              { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow-semi-bold' }]}> ETH</Text>) : null }
-            </Text>
-            <Text style={styles.header2}>
-              { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow-light' }]}>{ this.state.deg.toFixed(3) }</Text>) : null }
-              { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow-light' }]}> CEL</Text>) : null }
-              { this.state.fontLoaded ? (<Text style={[ styles.changeUp, { fontFamily: 'barlow-light' }]}> { this.state.change}</Text>) : null }
-            </Text> */}
-
-            {/* <View style={styles.row}>
-              <View style={styles.cellLeft}>
-                <TouchableOpacity style={styles.button} onPress={() => navigate('AddFounds')}>
-                  <Text style={styles.buttonText}>Add funds</Text>
-                </TouchableOpacity>
-              </View>
-              <View style={styles.cellRight}>
-                <TouchableOpacity style={styles.button2} onPress={() => navigate('Graph')}>
-                  <Text style={styles.button2Text}>Manage</Text>
-                </TouchableOpacity>
-              </View>
-            </View> */}
+            <View style={{borderBottomColor: '#305072', borderBottomWidth: 1, marginLeft: 12, marginRight: 12}} />
             <View style={styles.tableWrapper}>
               { transactions.map((t) => this.renderTransaction(t))}
             </View>
             <Text style={[styles.footer, {marginBottom: 50}]}>
               { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow' }]}>Income history</Text>) : null }
             </Text>
+            <View style={{borderBottomColor: '#305072', borderBottomWidth: 1, marginLeft: 12, marginRight: 12}} />
           </Content>
         </Container>
       </View>
@@ -154,27 +133,27 @@ const styles = StyleSheet.create({
     flex: 1
   },
   header: {
-		fontSize: 42,
-		backgroundColor: 'rgba(0,0,0,0)',
-		color: 'white',
-		paddingLeft: 30,
-		paddingRight: 30,
-		marginBottom: 10,
+    fontSize: 42,
+    backgroundColor: 'rgba(0,0,0,0)',
+    color: 'white',
+    paddingLeft: 30,
+    paddingRight: 30,
+    marginBottom: 10,
     fontWeight: 'bold',
     textAlign: 'center',
     marginTop: 20
   },
   row: {
     height: 140,
-    flexDirection: 'row',
+    flexDirection: 'row'
   },
   header2: {
-		fontSize: 24,
-		backgroundColor: 'rgba(0,0,0,0)',
-		color: '#9CA9B6',
-		paddingLeft: 30,
-		paddingRight: 30,
-		marginBottom: 10,
+    fontSize: 24,
+    backgroundColor: 'rgba(0,0,0,0)',
+    color: '#9CA9B6',
+    paddingLeft: 30,
+    paddingRight: 30,
+    marginBottom: 10,
     fontWeight: 'bold',
     textAlign: 'center',
     marginTop: 0
@@ -192,7 +171,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    marginLeft: 10,
+    marginLeft: 10
     // height: 40,
     // borderWidth: 1,
     // borderColor: 'green',
@@ -202,7 +181,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-end',
     alignItems: 'center',
-    marginRight: 10,
+    marginRight: 10
     // height: 40,
     // borderWidth: 1,
     // borderColor: 'red'
@@ -219,7 +198,7 @@ const styles = StyleSheet.create({
     // marginLeft: '5%',
     paddingLeft: 20,
     paddingRight: 20,
-    marginLeft: 30,
+    marginLeft: 30
   },
   buttonText: {
     color: '#333333',
@@ -239,7 +218,7 @@ const styles = StyleSheet.create({
     // marginLeft: '5%',
     paddingLeft: 20,
     paddingRight: 20,
-    marginRight: 30,
+    marginRight: 30
   },
   button2Text: {
     color: 'rgba(255, 255, 255, 0.5)',
@@ -249,7 +228,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     paddingLeft: 30,
-    paddingRight: 30,
+    paddingRight: 30
     // borderWidth: 1,
     // borderColor: 'blue'
 
@@ -261,17 +240,17 @@ const styles = StyleSheet.create({
     height: 340,
     // resizeMode: "contain",
     marginLeft: 20,
-    marginRight: 20,
+    marginRight: 20
     // borderWidth: 1,
     // borderColor: 'red'
   },
   footer: {
-		fontSize: 24,
-		backgroundColor: 'rgba(0,0,0,0)',
-		color: '#ffffff',
-		paddingLeft: 30,
-		paddingRight: 30,
-		marginBottom: 10,
+    fontSize: 24,
+    backgroundColor: 'rgba(0,0,0,0)',
+    color: '#ffffff',
+    paddingLeft: 10,
+    paddingRight: 30,
+    marginBottom: 22,
     fontWeight: 'bold',
     textAlign: 'center',
     marginTop: 0
@@ -285,16 +264,16 @@ const styles = StyleSheet.create({
   value: {
     position: 'absolute',
     top: 10,
-    left: 50,
+    left: 50
   },
   valueText: {
     color: '#ffffff',
-    fontSize: 21,
+    fontSize: 21
   },
   icon: {
     width: 40,
     height: 40,
-    resizeMode: "contain",
+    resizeMode: 'contain',
     marginLeft: 0,
     marginTop: 20
   },
@@ -308,11 +287,11 @@ const styles = StyleSheet.create({
     paddingTop: 0,
     paddingBottom: 2,
     paddingLeft: 15,
-    paddingRight: 15,
+    paddingRight: 15
   },
   statusText: {
     color: '#ffffff',
-    fontSize: 14,
+    fontSize: 14
   },
   created: {
     position: 'absolute',
@@ -320,16 +299,16 @@ const styles = StyleSheet.create({
     bottom: 5,
     flexWrap: 'wrap',
     alignItems: 'flex-start',
-    flexDirection:'row',
+    flexDirection: 'row',
     // borderWidth: 1,
     // borderColor: 'red',
-    width: '50%',
+    width: '50%'
   },
   clock: {
     width: 14,
     height: 14,
-    resizeMode: "contain",
-    flexDirection:'column',
+    resizeMode: 'contain',
+    flexDirection: 'column',
     marginLeft: 10,
     marginRight: 3,
     marginTop: 3
@@ -337,7 +316,7 @@ const styles = StyleSheet.create({
   createdText: {
     color: 'rgba(255, 255, 255, 0.5)',
     fontSize: 13,
-    flexDirection:'column',
+    flexDirection: 'column'
   },
   greenStatus: {
     borderColor: '#47CA53'

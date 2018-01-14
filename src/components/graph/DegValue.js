@@ -37,23 +37,14 @@ class DegValue extends Component {
       <View style={styles.welcomeContainer}>
         <Container style={styles.wrapper}>
           <Content>
-
-            {/* <Text style={styles.header}>
-              { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow-semi-bold' }]}>{ this.state.eth.toFixed(3) }</Text>) : null }
-              { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow-semi-bold' }]}> ETH</Text>) : null }
-            </Text>
-            <Text style={styles.header2}>
-              { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow-light' }]}>{ this.state.deg.toFixed(3) }</Text>) : null }
-              { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow-light' }]}> CEL</Text>) : null }
-              { this.state.fontLoaded ? (<Text style={[ styles.changeDown, { fontFamily: 'barlow-light' }]}> { this.state.change}</Text>) : null }
-            </Text> */}
-
+            <View style={{borderBottomColor: '#305072', borderBottomWidth: 1, marginLeft: 12, marginRight: 12}} />
             <View style={styles.graphWrapper}>
               <Image source={require('../../../assets/images/graph-token-value.png')} style={styles.graph} />
             </View>
             <Text style={styles.footer}>
               { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow' }]}>CEL Value</Text>) : null }
             </Text>
+            <View style={{borderBottomColor: '#305072', borderBottomWidth: 1, marginLeft: 12, marginRight: 12}} />
           </Content>
         </Container>
       </View>
@@ -183,7 +174,7 @@ const styles = StyleSheet.create({
 		color: '#ffffff',
 		paddingLeft: 30,
 		paddingRight: 30,
-		marginBottom: 10,
+		marginBottom: 21,
     fontWeight: 'bold',
     textAlign: 'center',
     marginTop: 0

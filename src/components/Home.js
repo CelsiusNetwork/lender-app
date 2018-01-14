@@ -194,7 +194,6 @@ class Home extends Component {
                 </TouchableOpacity>
               </View>
             </View>
-
             <View style={stylesGraph.pagesWrapper}>
               <Pages style={stylesGraph.pages}>
                 <DegIncome navigation={this.props.navigation} lenderAppInitToken={this.props.lenderAppInitToken} />
@@ -334,7 +333,8 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: '#333333',
-    fontSize: 16
+    fontSize: 16,
+    fontFamily: 'barlow-medium'
   },
   hr: {
     height: 1,
@@ -463,7 +463,7 @@ const stylesGraph = StyleSheet.create({
     color: '#9CA9B6',
     paddingLeft: 30,
     paddingRight: 30,
-    marginBottom: 10,
+    marginBottom: 30,
     fontWeight: 'bold',
     textAlign: 'center',
     marginTop: 0
@@ -478,7 +478,8 @@ const stylesGraph = StyleSheet.create({
   },
   pagesWrapper: {
     flex: 1,
-    flexDirection: 'row'
+    flexDirection: 'row',
+    marginTop: 47
   },
   pages: {
     flex: 1
@@ -505,7 +506,7 @@ const stylesGraph = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
     alignSelf: 'stretch',
-    marginLeft: 10,
+    marginLeft: 23,
     height: 50
     // borderWidth: 1,
     // borderColor: 'green',
@@ -516,7 +517,7 @@ const stylesGraph = StyleSheet.create({
     justifyContent: 'flex-end',
     alignItems: 'center',
     alignSelf: 'stretch',
-    marginRight: 10,
+    marginRight: 23,
     height: 50
     // borderWidth: 1,
     // borderColor: 'red'
@@ -585,7 +586,8 @@ const stylesGraph = StyleSheet.create({
   },
   button2Text: {
     color: 'rgba(255, 255, 255, 0.5)',
-    fontSize: 20
+    fontSize: 20,
+    fontFamily: 'barlow-medium'
   }
 })
 
