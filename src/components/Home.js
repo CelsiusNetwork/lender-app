@@ -479,7 +479,7 @@ const stylesGraph = StyleSheet.create({
   pagesWrapper: {
     flex: 1,
     flexDirection: 'row',
-    marginTop: 47
+    marginTop: 35
   },
   pages: {
     flex: 1
