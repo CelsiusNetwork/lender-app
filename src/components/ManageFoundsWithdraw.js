@@ -242,15 +242,11 @@ const styles = StyleSheet.create({
     left: 20,
     top: 60,
     width: 30
-    // borderColor: 'red', borderWidth: 1
   },
   back: {
     width: 28,
     height: 24,
     resizeMode: 'contain'
-    // marginLeft: 35,
-    // marginBottom: 30,
-    // marginTop: 30,
   },
   aCenter: {
     flexDirection: 'column',

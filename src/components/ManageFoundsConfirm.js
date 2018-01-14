@@ -44,7 +44,15 @@ class AddFounds extends Component {
             {/* <Image source={require('../../assets/images/logo-header.png')} style={styles.logo} /> */}
             <Container>
               <Content>
+                <TouchableOpacity onPress={() => this.props.navigation.goBack()} style={[styles.backButton]}>
+                  <Image source={require('../../assets/images/icon-back.png')} style={styles.back} />
+                </TouchableOpacity>
                 <Text style={styles.header}>{this.props.withdrawAmount} {'ETH'.toUpperCase()}</Text>
+                <TouchableOpacity style={styles.QRCodeWrapper} onPress={() => navigate('QRScanner')}
+                  // onPress={() => navigate('VerifyPhoneNumber')}
+                >
+                  <Image source={require('../../assets/images/icon-scan-qrcode.png')} style={styles.QRCode} />
+                </TouchableOpacity>
                 <Form style={styles.form}>
                   <Item floatingLabel style={styles.floatingWrapper}>
                     <Label style={{color: '#9CA9B6'}}>{'to'.toUpperCase()}</Label>
@@ -60,23 +68,18 @@ class AddFounds extends Component {
                     <Label style={{color: '#9CA9B6'}}>{'note'.toUpperCase()}</Label>
                     <Input
                       style={styles.input}
-                      // onChangeText={this.onLastNameChange.bind(this)}
                       value={this.state.note}
                       autoCorrect={false}
                       autoCapitalize='none' />
                   </Item>
-                  <TouchableOpacity style={styles.QRCodeWrapper} onPress={() => navigate('QRScanner')}
-                    // onPress={() => navigate('VerifyPhoneNumber')}
-                  >
-                    <Image source={require('../../assets/images/icon-scan-qrcode.png')} style={styles.QRCode} />
-                  </TouchableOpacity>
-
                 </Form>
                 <View style={styles.center}>
                   <TouchableOpacity style={styles.button}
                     onPress={() => this.props.withdrawETH('test42!', this.props.walletAddress, this.state.toAddress, this.props.withdrawAmount, this.props.token)}>
                     <Text style={styles.buttonText} />
-                    <Text style={styles.buttonText}>Confirm withdraw</Text>
+                    <Text style={styles.buttonText}>Confirm withdraw
+                      <Image source={require('../../assets/images/icon-arrow.png')} style={styles.buttonIcon} />
+                    </Text>
                   </TouchableOpacity>
                 </View>
                 <View style={styles.center}>
@@ -155,8 +158,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 0,
     color: '#ffffff',
     marginBottom: 10,
-    fontSize: 21,
-    paddingRight: 40
+    fontSize: 21
   },
   text: {
     textAlign: 'center',
@@ -181,13 +183,15 @@ const styles = StyleSheet.create({
     height: 50,
     justifyContent: 'center',
     alignItems: 'center',
-    marginRight: 30,
-    marginLeft: 30,
-    marginTop: 80,
+    marginRight: 63,
+    marginLeft: 62,
+    marginTop: 198,
     alignSelf: 'stretch'
   },
   buttonText: {
-    color: '#333333'
+    color: '#333333',
+    fontFamily: 'barlow-medium',
+    fontSize: 21
   },
   form: {
     marginLeft: 20,
@@ -208,12 +212,13 @@ const styles = StyleSheet.create({
     // height: 50,
   },
   floatingWrapper: {
-    position: 'relative'
+    position: 'relative',
+    marginRight: 15
   },
   QRCodeWrapper: {
     position: 'absolute',
-    top: 35,
-    right: 5
+    top: 70,
+    right: 30
   },
   QRCode: {
     width: 20,
@@ -221,13 +226,24 @@ const styles = StyleSheet.create({
     resizeMode: 'contain'
   },
   buttonIcon: {
+    width: 10,
+    height: 18,
+    resizeMode: 'contain',
+    marginLeft: 10,
+    marginTop: 3
+  },
+  backButton: {
     position: 'absolute',
-    left: 50,
-    top: 15,
-    width: 20,
-    height: 16,
+    zIndex: 10,
+    left: 20,
+    top: 70,
+    width: 30
+  },
+  back: {
+    width: 28,
+    height: 24,
     resizeMode: 'contain'
-  }
+  },
 })
 
 const mapStateToProps = state => {
