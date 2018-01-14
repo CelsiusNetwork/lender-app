@@ -59,7 +59,6 @@ class ManageFoundsWithdraw extends Component {
   }
 
   render () {
-    const {navigate} = this.props.navigation
     const ethBalance = this.props.ethBalance
 
     return (
@@ -234,7 +233,8 @@ const styles = StyleSheet.create({
     paddingRight: 30,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginTop: 0
+    marginTop: 0,
+    marginBottom: 55
   },
   backButton: {
     position: 'absolute',
@@ -255,7 +255,9 @@ const styles = StyleSheet.create({
   aCenter: {
     flexDirection: 'column',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    marginLeft: 15,
+    marginRight: 15
   },
   text: {
     fontSize: 16,
@@ -315,7 +317,6 @@ const styles = StyleSheet.create({
     marginRight: 10
   },
   aMiddle: {
-    borderRadius: 30,
     borderRadius: 40
   },
   dotRow: {
@@ -372,7 +373,8 @@ const styles = StyleSheet.create({
   },
   available: {
     color: '#9CA9B6',
-    fontSize: 18
+    fontSize: 18,
+    fontFamily: 'barlow'
   },
   delete: {
     width: 36,
@@ -390,12 +392,14 @@ const styles = StyleSheet.create({
     marginRight: 30,
     marginLeft: 30,
     marginBottom: 20,
-    marginTop: 30,
+    marginTop: 56,
     paddingLeft: 40,
     paddingRight: 40
   },
   buttonText: {
-    color: '#333333'
+    color: '#333333',
+    fontFamily: 'barlow-medium',
+    fontSize: 21
   },
   buttonIcon: {
     width: 10,
