@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {StyleSheet, View, ImageBackground, Image, TouchableOpacity} from 'react-native'
-import {Button, Form, Input, Item, Label, Text, Content, Header, Title, Container} from 'native-base'
+import {Text, Content, Container} from 'native-base'
 import {
   registerFirstNameChanged,
   registerLastNameChanged,
@@ -68,7 +68,7 @@ class AddFounds extends Component {
                       <Image source={require('../../assets/images/icon-eth.png')} style={styles.icon} />
                       <Text style={styles.boxText1}>
                         {this.state.fontLoaded ? (<Text
-                          style={[{fontFamily: 'barlow-semi-bold'}, styles.boxText1Inner]}>{ethBalance}</Text>) : null}
+                          style={[{fontFamily: 'barlow-semi-bold'}, styles.boxText1Inner]}>{parseInt(ethBalance).toFixed(3)}</Text>) : null}
                         {this.state.fontLoaded ? (
                           <Text style={[{fontFamily: 'barlow-semi-bold'}, styles.boxText1Inner]}> ETH</Text>) : null}
                       </Text>
@@ -82,7 +82,7 @@ class AddFounds extends Component {
                       <TouchableOpacity style={styles.boxButton} onPress={() => navigate('ManageFoundsWithdraw')}>
                         <Text style={styles.boxButtonText}><Image
                           source={require('../../assets/images/icon-transfer-arrows.png')}
-                          style={styles.buttonIcon} /><Text style={{color: '#ffffff'}}>Withdraw ETH</Text></Text>
+                          style={styles.buttonIcon} /><Text style={{color: '#ffffff', fontFamily: 'barlow'}}>{'   '}Withdraw ETH</Text></Text>
                       </TouchableOpacity>
                     </View>
                   </View>
@@ -94,7 +94,7 @@ class AddFounds extends Component {
                       <Image source={require('../../assets/images/icon-transfer.png')} style={styles.icon} />
                       <Text style={styles.boxText1}>
                         {this.state.fontLoaded ? (<Text
-                          style={[{fontFamily: 'barlow-semi-bold'}, styles.boxText1Inner]}>{celBalance}</Text>) : null}
+                          style={[{fontFamily: 'barlow-semi-bold'}, styles.boxText1Inner]}>{parseInt(celBalance).toFixed(3)}</Text>) : null}
                         {this.state.fontLoaded ? (
                           <Text style={[{fontFamily: 'barlow-semi-bold'}, styles.boxText1Inner]}> CEL</Text>) : null}
                       </Text>
@@ -333,8 +333,8 @@ const styles = StyleSheet.create({
     resizeMode: 'contain'
   },
   icon: {
-    width: 54,
-    height: 54,
+    width: 40,
+    height: 42,
     position: 'absolute',
     top: 20,
     left: 10,
