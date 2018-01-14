@@ -1,65 +1,62 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { ImageBackground, StyleSheet, View, Image, Text, TouchableOpacity } from 'react-native'
-import { Content, Container, Form, Input, Item, Label } from 'native-base'
-// import { NavigationActions } from 'react-navigation'
-import { Pages } from 'react-native-pages'
-import { lenderAppInitToken } from '../actions'
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
+import {ImageBackground, StyleSheet, View, Image, Text, TouchableOpacity} from 'react-native'
+import {Pages} from 'react-native-pages'
+import {lenderAppInitToken} from '../actions'
 
 import VerifyPhoneNumber from './VerifyPhoneNumber'
 import VerifyDocument from './VerifyDocument'
 import VerifyPhoto from './VerifyPhoto'
 import Agree from './Agree'
 
-
 class Verification extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = {
-        progress: 0,
-        progressLine: '0%',
-        step: 1,
-        btnTxt: 'Add your ID',
-        stepName: 'VERIFY PHONE NUMBER'
+      progress: 0,
+      progressLine: '0%',
+      step: 1,
+      btnTxt: 'Add your ID',
+      stepName: 'VERIFY PHONE NUMBER'
     }
   }
 
-  handleVerify () {
-  }
-
-  renderBtns() {
-    const { navigate } = this.props.navigation
+  renderBtns () {
+    const {navigate} = this.props.navigation
     if (this.state.step === 4) {
       return (
         <TouchableOpacity style={styles.button} onPress={() => navigate('Home')}>
-                <Text style={styles.buttonText}>{this.state.btnTxt}</Text>
-              </TouchableOpacity>
+          <Text style={styles.buttonText}>{this.state.btnTxt}</Text>
+        </TouchableOpacity>
       )
-   } else {
-     return (
-    <TouchableOpacity style={styles.button} onPress={() => this.refs.kungfoo.scrollToPage(this.state.step)}>
-      <Text style={styles.buttonText}>{this.state.btnTxt}</Text>
-    </TouchableOpacity>
-  )
-   }
-
-}
+    } else {
+      return (
+        <TouchableOpacity style={styles.button} onPress={() => this.refs.kungfoo.scrollToPage(this.state.step)}>
+          <Text style={styles.buttonText}>{this.state.btnTxt}
+          </Text>
+          <Image style={styles.buttonIcon}
+            source={require('../../assets/images/icon-arrow.png')}
+          />
+        </TouchableOpacity>
+      )
+    }
+  }
 
   scrolled (wasOnPage) {
-    var progress = this.state.progress+25
+    var progress = this.state.progress + 25
     this.setState({progress: progress})
-    this.setState({progressLine: progress+"%"})
+    this.setState({progressLine: progress + '%'})
     this.setState({btnTxt: 'Take a photo'})
     const currentStep = this.state.step
-    if(currentStep === 1) {
+    if (currentStep === 1) {
       this.setState({btnTxt: 'Take a photo'})
       this.setState({stepName: 'DOCUMENT CHECK'})
     }
-    if(currentStep === 2) {
+    if (currentStep === 2) {
       this.setState({btnTxt: 'Finish verification'})
       this.setState({stepName: 'TAKE A PICTURE'})
     }
-    if(currentStep === 3) {
+    if (currentStep === 3) {
       this.setState({btnTxt: 'Im done!'})
       this.setState({stepName: 'JUST ONE MORE THING...'})
     }
@@ -76,7 +73,8 @@ class Verification extends Component {
             {/* <Image source={require('../../assets/images/logo-header.png')} style={styles.logo} /> */}
             <Text style={styles.header}>{this.state.stepName}</Text>
             <ImageBackground source={require('../../assets/images/progress-line-bg.png')} style={styles.line}>
-              <ImageBackground source={require('../../assets/images/progress-line.png')} style={[styles.lineInner, {width: this.state.progressLine}]}></ImageBackground>
+              <ImageBackground source={require('../../assets/images/progress-line.png')}
+                style={[styles.lineInner, {width: this.state.progressLine}]} />
             </ImageBackground>
 
             <Pages
@@ -90,8 +88,6 @@ class Verification extends Component {
               <Agree />
             </Pages>
             {this.renderBtns()}
-
-
 
           </View>
 
@@ -112,7 +108,7 @@ const styles = StyleSheet.create({
   },
   background: {
     flex: 1,
-    flexDirection: 'row',
+    flexDirection: 'row'
     // justifyContent: 'top',
     // alignItems: 'center',
     // backgroundColor: 'red'
@@ -120,16 +116,17 @@ const styles = StyleSheet.create({
   body: {
     flex: 1,
     marginLeft: 10,
-    marginRight: 10,
+    marginRight: 10
   },
   aCenter: {
     alignItems: 'center'
   },
   line: {
-    height: 10,
     borderRadius: 2,
     height: 4,
-    marginBottom: 10
+    marginBottom: 10,
+    marginRight: 38,
+    marginLeft: 38
   },
   lineInner: {
     width: '33%',
@@ -142,18 +139,19 @@ const styles = StyleSheet.create({
     marginTop: 40,
     marginLeft: 30,
     width: 140,
-    height: 40,
+    height: 40
   },
   header: {
-		fontSize: 32,
-		backgroundColor: 'rgba(0,0,0,0)',
-		color: 'white',
-		paddingLeft: 30,
-		paddingRight: 30,
-		marginBottom: 10,
+    fontSize: 38,
+    backgroundColor: 'rgba(0,0,0,0)',
+    color: 'white',
+    paddingLeft: 30,
+    paddingRight: 30,
+    marginBottom: 28,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginTop: 50
+    marginTop: 54,
+    fontFamily: 'barlow-bold'
   },
   mobileWrapper: {
     width: 120,
@@ -181,7 +179,7 @@ const styles = StyleSheet.create({
     color: '#ffffff',
     marginBottom: 10,
     fontSize: 70,
-    textAlign: 'center',
+    textAlign: 'center'
   },
   inputDash: {
     height: 2
@@ -204,10 +202,20 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 30,
-    marginLeft: 30
+    marginLeft: 30,
+    marginBottom: 96,
+    flexDirection: 'row'
+  },
+  buttonIcon: {
+    width: 11,
+    height: 22,
+    resizeMode: 'contain',
+    marginLeft: 15
   },
   buttonText: {
-    color: '#333333'
+    color: '#333333',
+    fontFamily: 'barlow-medium',
+    fontSize: 21
   }
 })
 

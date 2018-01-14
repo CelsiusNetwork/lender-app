@@ -1,9 +1,29 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { ImageBackground, StyleSheet, View, Image, Text, TouchableOpacity } from 'react-native'
-import { Content, Container, Form, Input, Item, Label } from 'native-base'
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
+import {StyleSheet, View, Image, Text} from 'react-native'
+import {Content, Container, Input} from 'native-base'
+import {Font} from 'expo'
 
 class VerifyPhoneNumber extends Component {
+  constructor () {
+    super()
+    this.state = {
+      fontLoaded: false
+    }
+  }
+
+  async componentDidMount () {
+    await Font.loadAsync({
+      'barlow-semi-bold': require('../../assets/fonts/Barlow-SemiBold.otf')
+    })
+    await Font.loadAsync({
+      'barlow-light': require('../../assets/fonts/Barlow-Light.otf')
+    })
+    await Font.loadAsync({
+      'barlow': require('../../assets/fonts/Barlow-Regular.otf')
+    })
+    this.setState({fontLoaded: true})
+  }
 
   render () {
     return (
@@ -13,7 +33,8 @@ class VerifyPhoneNumber extends Component {
             <View style={styles.mobileWrapper}>
               <Image source={require('../../assets/images/icon-mobile.png')} style={styles.mobile} />
             </View>
-            <Text style={styles.text}>Phone number enables you 2-factor authentication. Please enter the code we’ve sent you via SMS.</Text>
+            <Text style={styles.text}>Phone number enables you 2-factor authentication. Please enter the code we’ve sent
+              you via SMS.</Text>
             <View style={styles.inputWrapper}>
               <Input
                 style={styles.input}
@@ -21,14 +42,8 @@ class VerifyPhoneNumber extends Component {
                 maxLength={6}
                 // placeholder='_ _ _ _ _ _'
                 returnKeyType='done' autoCorrect={false} />
-                <Image source={require('../../assets/images/dash-line.png')} style={styles.inputDash} />
             </View>
           </View>
-          {/* <TouchableOpacity style={styles.button}
-              // onPress={() => navigate('VerifyDocument')}
-              // onPress={() => this.goToPage()}
-            >
-          </TouchableOpacity> */}
         </Content>
       </Container>
     )
@@ -45,7 +60,7 @@ const styles = StyleSheet.create({
   },
   background: {
     flex: 1,
-    flexDirection: 'row',
+    flexDirection: 'row'
     // justifyContent: 'top',
     // alignItems: 'center',
     // backgroundColor: 'red'
@@ -53,13 +68,12 @@ const styles = StyleSheet.create({
   body: {
     flex: 1,
     marginLeft: 10,
-    marginRight: 10,
+    marginRight: 10
   },
   aCenter: {
     alignItems: 'center'
   },
   line: {
-    height: 10,
     borderRadius: 2,
     height: 4,
     marginBottom: 10
@@ -75,30 +89,31 @@ const styles = StyleSheet.create({
     marginTop: 40,
     marginLeft: 30,
     width: 140,
-    height: 40,
+    height: 40
   },
   header: {
-		fontSize: 32,
-		backgroundColor: 'rgba(0,0,0,0)',
-		color: 'white',
-		paddingLeft: 30,
-		paddingRight: 30,
-		marginBottom: 10,
+    fontSize: 38,
+    backgroundColor: 'rgba(0,0,0,0)',
+    color: 'white',
+    paddingLeft: 30,
+    paddingRight: 30,
+    marginBottom: 28,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginTop: 50
+    marginTop: 54,
+    fontFamily: 'barlow-bold'
   },
   mobileWrapper: {
-    width: 120,
-    height: 120,
-    borderRadius: 60,
-    backgroundColor: 'rgba(0,0,0,0.5)',
+    width: 150,
+    height: 150,
+    borderRadius: 75,
+    backgroundColor: 'rgba(0,0,0,0.2)',
     alignItems: 'center',
-    marginTop: 10,
-    marginBottom: 10
+    marginTop: 55,
+    marginBottom: 22
   },
   mobile: {
-    marginTop: 20
+    marginTop: 30
   },
   inputWrapper: {
     height: 70,
@@ -110,24 +125,26 @@ const styles = StyleSheet.create({
     height: 40,
     width: 300,
     borderColor: 'rgba(255,255,255,0.3)',
-    borderBottomWidth: 0,
+    borderBottomWidth: 1,
     color: '#ffffff',
     marginBottom: 10,
-    fontSize: 70,
+    fontSize: 58,
     textAlign: 'center',
+    fontFamily: 'barlow-semi-bold'
   },
   inputDash: {
     height: 2
   },
   text: {
-    fontSize: 14,
+    fontSize: 18,
     backgroundColor: 'rgba(0,0,0,0)',
     color: '#9ca9b7',
     paddingLeft: 30,
     paddingRight: 30,
     lineHeight: 20,
-    textAlign: 'center'
-
+    textAlign: 'center',
+    fontFamily: 'barlow',
+    marginTop: 22
   },
   button: {
     backgroundColor: '#ffffff',
@@ -145,11 +162,9 @@ const styles = StyleSheet.create({
 })
 
 const mapStateToProps = state => {
-  return {
-  }
+  return {}
 }
 
-const mapDispatchToProps = {
-}
+const mapDispatchToProps = {}
 
 export default connect(mapStateToProps, mapDispatchToProps)(VerifyPhoneNumber)
