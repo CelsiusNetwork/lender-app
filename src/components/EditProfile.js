@@ -252,8 +252,7 @@ const styles = StyleSheet.create({
     color: '#ffffff',
     marginBottom: 10,
     marginRight: 15,
-    paddingTop: 10,
-    fontSize: 14
+    fontSize: 21
   },
   button: {
     backgroundColor: '#ffffff',
@@ -371,7 +370,8 @@ const styles = StyleSheet.create({
   logoutBtn: {
     width: 30,
     height: 30,
-    marginTop: 5
+    marginTop: 5,
+    opacity: 0.2
   }
 })
 

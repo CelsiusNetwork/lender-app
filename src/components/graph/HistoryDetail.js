@@ -3,29 +3,29 @@ import { connect } from 'react-redux'
 import { ImageBackground, StyleSheet, View, Image, Text, TouchableOpacity } from 'react-native'
 import { Content, Container, Form, Input, Item, Label } from 'native-base'
 import { NavigationActions } from 'react-navigation'
-import { Font } from 'expo';
+import { Font } from 'expo'
 
 class HistoryDetail extends Component {
-  constructor(props) {
-    super(props);
+  constructor (props) {
+    super(props)
     this.state = {
-        fontLoaded: false,
+      fontLoaded: false
     }
   }
   navigate () {
 
   }
-  async componentDidMount() {
+  async componentDidMount () {
     await Font.loadAsync({
-      'barlow-semi-bold': require('../../../assets/fonts/Barlow-SemiBold.otf'),
-    });
+      'barlow-semi-bold': require('../../../assets/fonts/Barlow-SemiBold.otf')
+    })
     await Font.loadAsync({
-      'barlow': require('../../../assets/fonts/Barlow-Regular.otf'),
-    });
-    this.setState({ fontLoaded: true });
+      'barlow': require('../../../assets/fonts/Barlow-Regular.otf')
+    })
+    this.setState({ fontLoaded: true })
   }
 
-  renderHeadingText() {
+  renderHeadingText () {
     const { activeTransaction, walletAddress } = this.props
     let heading = ''
 
@@ -96,41 +96,41 @@ class HistoryDetail extends Component {
 
                   <View style={styles.row}>
                     <View style={styles.cellLeft}>
-                    { this.state.fontLoaded ? (<Text style={[styles.cellLeftText, { fontFamily: 'barlow' }]}>Points earned</Text>) : null }
+                      { this.state.fontLoaded ? (<Text style={[styles.cellLeftText, { fontFamily: 'barlow' }]}>Points earned</Text>) : null }
                     </View>
                     <View style={styles.cellRight}>
-                    { this.state.fontLoaded ? (<Text style={[styles.cellRightText, { fontFamily: 'barlow-semi-bold' }]}>100</Text>) : null }
-                    <Image source={require('../../../assets/images/icon-points.png')} style={styles.points} />
+                      { this.state.fontLoaded ? (<Text style={[styles.cellRightText, { fontFamily: 'barlow-semi-bold' }]}>100</Text>) : null }
+                      <Image source={require('../../../assets/images/icon-points.png')} style={styles.points} />
                     </View>
                   </View>
                   <View style={styles.row}>
                     <View style={styles.cellLeft}>
-                    { this.state.fontLoaded ? (<Text style={[styles.cellLeftText, { fontFamily: 'barlow' }]}>Date</Text>) : null }
+                      { this.state.fontLoaded ? (<Text style={[styles.cellLeftText, { fontFamily: 'barlow' }]}>Date</Text>) : null }
                     </View>
                     <View style={styles.cellRight}>
-                    { this.state.fontLoaded ? (<Text style={[styles.cellRightText, { fontFamily: 'barlow-semi-bold' }]}>{ activeTransaction.dateDisplay }</Text>) : null }
+                      { this.state.fontLoaded ? (<Text style={[styles.cellRightText, { fontFamily: 'barlow-semi-bold' }]}>{ activeTransaction.dateDisplay }</Text>) : null }
                     </View>
                   </View>
                   <View style={styles.row}>
                     <View style={styles.cellLeft}>
-                    { this.state.fontLoaded ? (<Text style={[styles.cellLeftText, { fontFamily: 'barlow' }]}>Time</Text>) : null }
+                      { this.state.fontLoaded ? (<Text style={[styles.cellLeftText, { fontFamily: 'barlow' }]}>Time</Text>) : null }
                     </View>
                     <View style={styles.cellRight}>
-                    { this.state.fontLoaded ? (<Text style={[styles.cellRightText, { fontFamily: 'barlow-semi-bold' }]}>{ activeTransaction.timeDisplay }</Text>) : null }
+                      { this.state.fontLoaded ? (<Text style={[styles.cellRightText, { fontFamily: 'barlow-semi-bold' }]}>{ activeTransaction.timeDisplay }</Text>) : null }
                     </View>
                   </View>
                   <View style={[styles.row, {borderBottomColor: 'rgba(255, 255, 255, 0.1)', borderBottomWidth: 2}]}>
                     <View style={styles.cellLeft}>
-                    { this.state.fontLoaded ? (<Text style={[styles.cellLeftText, { fontFamily: 'barlow' }]}>Status</Text>) : null }
+                      { this.state.fontLoaded ? (<Text style={[styles.cellLeftText, { fontFamily: 'barlow' }]}>Status</Text>) : null }
                     </View>
                     <View style={styles.cellRight}>
-                      <View style={styles.greenDow}></View>
-                    { this.state.fontLoaded ? (<Text style={[styles.cellRightText, { fontFamily: 'barlow-semi-bold' }]}>Complete</Text>) : null }
+                      <View style={styles.greenDow} />
+                      { this.state.fontLoaded ? (<Text style={[styles.cellRightText, { fontFamily: 'barlow-semi-bold' }]}>Complete</Text>) : null }
                     </View>
                   </View>
 
                   <TouchableOpacity style={styles.button}
-                      onPress={() => this.props.navigation.goBack()}
+                    onPress={() => this.props.navigation.goBack()}
                     >
                     <Text style={styles.buttonText}>Close</Text>
                   </TouchableOpacity>
@@ -156,7 +156,7 @@ const styles = StyleSheet.create({
   },
   background: {
     flex: 1,
-    flexDirection: 'row',
+    flexDirection: 'row'
     // justifyContent: 'top',
     // alignItems: 'center',
     // backgroundColor: 'red'
@@ -164,14 +164,13 @@ const styles = StyleSheet.create({
   body: {
     flex: 1,
     marginLeft: 10,
-    marginRight: 10,
+    marginRight: 10
   },
   aCenter: {
     flex: 1,
     alignItems: 'center'
   },
   line: {
-    height: 10,
     borderRadius: 2,
     height: 4,
     marginBottom: 10
@@ -187,15 +186,15 @@ const styles = StyleSheet.create({
     marginTop: 40,
     marginLeft: 30,
     width: 140,
-    height: 40,
+    height: 40
   },
   header: {
-		fontSize: 32,
-		backgroundColor: 'rgba(0,0,0,0)',
-		color: 'white',
-		paddingLeft: 30,
-		paddingRight: 30,
-		marginBottom: 10,
+    fontSize: 32,
+    backgroundColor: 'rgba(0,0,0,0)',
+    color: 'white',
+    paddingLeft: 30,
+    paddingRight: 30,
+    marginBottom: 10,
     fontWeight: 'bold',
     textAlign: 'center',
     marginTop: 50
@@ -204,17 +203,17 @@ const styles = StyleSheet.create({
     width: 150,
     height: 150,
     borderRadius: 75,
-    backgroundColor: 'rgba(0,0,0,0.5)',
+    backgroundColor: 'rgba(0,0,0,0.2)',
     alignItems: 'center',
     marginTop: 10,
-    marginBottom: 10,
+    marginBottom: 38,
     position: 'relative'
   },
   eth: {
     marginTop: 35,
     width: 80,
     height: 80,
-    resizeMode: "contain"
+    resizeMode: 'contain'
   },
   text: {
     fontSize: 14,
@@ -238,10 +237,12 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: '#ffffff',
     width: 150,
-    marginTop: 20
+    marginTop: 40
   },
   buttonText: {
-    color: '#ffffff'
+    color: '#ffffff',
+    fontSize: 21,
+    fontFamily: 'barlow-medium',
   },
   green: {
     position: 'absolute',
@@ -271,12 +272,12 @@ const styles = StyleSheet.create({
     marginTop: 10,
     width: 22,
     height: 22,
-    resizeMode: "contain"
+    resizeMode: 'contain'
   },
   points: {
     width: 20,
     height: 20,
-    resizeMode: "contain",
+    resizeMode: 'contain',
     marginTop: 1,
     marginLeft: 5
   },
@@ -285,18 +286,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     height: 50,
     borderTopColor: 'rgba(255, 255, 255, 0.1)',
-    borderTopWidth: 2
+    borderTopWidth: 2,
+    marginRight: 8,
+    marginLeft: 8
   },
   cellLeft: {
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    marginLeft: 10,
+    marginLeft: 10
   },
   cellLeftText: {
     color: 'rgba(255, 255, 255, 0.5)',
-    fontSize: 18
+    fontSize: 21
   },
   cellRight: {
     flex: 1,
@@ -304,13 +307,14 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
     marginRight: 10,
+    paddingLeft: 20
     // borderColor: 'red',
     // borderWidth: 1
   },
   cellRightText: {
     color: 'rgba(255, 255, 255, 1)',
-    fontSize: 18,
-    textAlign: 'left',
+    fontSize: 21,
+    textAlign: 'left'
     // borderColor: 'green',
     // borderWidth: 1
   },
@@ -319,14 +323,14 @@ const styles = StyleSheet.create({
     height: 10,
     backgroundColor: '#47CA53',
     borderRadius: 5,
-    marginTop: 10,
+    marginTop: 7,
     marginRight: 5
   }
 })
 
 const mapStateToProps = state => {
-  const { activeTransaction } = state.transactions;
-  const { walletAddress } = state.lender;
+  const { activeTransaction } = state.transactions
+  const { walletAddress } = state.lender
 
   return {
     activeTransaction,

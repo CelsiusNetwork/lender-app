@@ -106,9 +106,9 @@ class Home extends Component {
                     <Text> CEL</Text>
                   </Text>
                   <View style={styles.btnsContainer}>
-                    <View style={styles.cellLeft}>
-                      <TouchableOpacity style={styles.button} onPress={() => navigate('AddFounds')}>
-                        <Text style={styles.buttonText}>Add funds</Text>
+                    <View>
+                      <TouchableOpacity style={[styles.button, {width: 150, height: 50, marginLeft: 113, marginTop: 30, marginBottom: 47}]} onPress={() => navigate('AddFounds')}>
+                        <Text style={[styles.buttonText, {fontFamily: 'barlow-medium', fontSize: 21}]}>Add funds</Text>
                       </TouchableOpacity>
                     </View>
                   </View>
@@ -194,7 +194,6 @@ class Home extends Component {
                 </TouchableOpacity>
               </View>
             </View>
-
             <View style={stylesGraph.pagesWrapper}>
               <Pages style={stylesGraph.pages}>
                 <DegIncome navigation={this.props.navigation} lenderAppInitToken={this.props.lenderAppInitToken} />
@@ -285,16 +284,15 @@ const styles = StyleSheet.create({
     height: 40
   },
   logo: {
-    // position: 'absolute',
     width: 35,
-    height: 35,
-    marginLeft: 10
+    height: 34,
+    marginLeft: 15
   },
   user: {
     // position: 'absolute',
-    width: 25,
-    height: 25,
-    marginRight: 0,
+    width: 26,
+    height: 28,
+    marginRight: 15,
     resizeMode: 'contain'
   },
   wrapper: {},
@@ -334,37 +332,39 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: '#333333',
-    fontSize: 16
+    fontSize: 16,
+    fontFamily: 'barlow-medium'
   },
   hr: {
     height: 1,
     marginLeft: 10,
     marginRight: 10,
     marginTop: 10,
-    marginBottom: 10,
+    marginBottom: 20,
     backgroundColor: 'rgba(255, 255, 255, 0.1)'
   },
   welcomeTitle: {
-    marginLeft: 20,
-    marginRight: 20,
-    marginTop: 10,
+    marginLeft: 36,
+    marginRight: 36,
     marginBottom: 10,
     color: '#ffffff',
-    fontSize: 20
+    fontSize: 24,
+    fontFamily: 'barlow'
   },
   welcomeText: {
-    marginLeft: 20,
-    marginRight: 20,
+    marginLeft: 36,
+    marginRight: 36,
     marginTop: 10,
     marginBottom: 10,
     color: '#9CA9B6',
-    fontSize: 16
+    fontSize: 18,
+    fontFamily: 'barlow'
   },
   box: {
     backgroundColor: 'rgba(255, 255, 255, 0.2)',
     height: 80,
-    marginLeft: 20,
-    marginRight: 20,
+    marginLeft: 30,
+    marginRight: 30,
     marginTop: 5,
     marginBottom: 5,
     borderRadius: 5,
@@ -380,7 +380,8 @@ const styles = StyleSheet.create({
   boxText: {
     color: '#ffffff',
     fontSize: 16,
-    paddingRight: 10
+    paddingRight: 10,
+    fontFamily: 'barlow'
   },
   boxIconWrapper: {
     flex: 1,
@@ -463,7 +464,7 @@ const stylesGraph = StyleSheet.create({
     color: '#9CA9B6',
     paddingLeft: 30,
     paddingRight: 30,
-    marginBottom: 10,
+    marginBottom: 30,
     fontWeight: 'bold',
     textAlign: 'center',
     marginTop: 0
@@ -478,7 +479,8 @@ const stylesGraph = StyleSheet.create({
   },
   pagesWrapper: {
     flex: 1,
-    flexDirection: 'row'
+    flexDirection: 'row',
+    marginTop: 35
   },
   pages: {
     flex: 1
@@ -505,7 +507,7 @@ const stylesGraph = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
     alignSelf: 'stretch',
-    marginLeft: 10,
+    marginLeft: 23,
     height: 50
     // borderWidth: 1,
     // borderColor: 'green',
@@ -516,20 +518,20 @@ const stylesGraph = StyleSheet.create({
     justifyContent: 'flex-end',
     alignItems: 'center',
     alignSelf: 'stretch',
-    marginRight: 10,
+    marginRight: 23,
     height: 50
     // borderWidth: 1,
     // borderColor: 'red'
   },
   logo: {
-    width: 30,
-    height: 30,
+    width: 34,
+    height: 34,
     marginLeft: 15
   },
   user: {
-    width: 30,
-    height: 30,
-    marginRight: 35,
+    width: 26,
+    height: 29,
+    marginRight: 15,
     resizeMode: 'contain'
   },
   title: {
@@ -585,7 +587,8 @@ const stylesGraph = StyleSheet.create({
   },
   button2Text: {
     color: 'rgba(255, 255, 255, 0.5)',
-    fontSize: 20
+    fontSize: 20,
+    fontFamily: 'barlow-medium'
   }
 })
 

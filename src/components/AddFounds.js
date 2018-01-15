@@ -39,17 +39,17 @@ class AddFounds extends Component {
 
   async componentDidMount () {
     await Font.loadAsync({
-      'inconsolata': require('../../assets/fonts/Inconsolata-Regular.ttf'),
-    });
+      'inconsolata': require('../../assets/fonts/Inconsolata-Regular.ttf')
+    })
     await Font.loadAsync({
-      'barlow-semi-bold': require('../../assets/fonts/Barlow-SemiBold.otf'),
-    });
+      'barlow-semi-bold': require('../../assets/fonts/Barlow-SemiBold.otf')
+    })
     await Font.loadAsync({
-      'barlow-light': require('../../assets/fonts/Barlow-Light.otf'),
-    });
+      'barlow-light': require('../../assets/fonts/Barlow-Light.otf')
+    })
     await Font.loadAsync({
-      'barlow': require('../../assets/fonts/Barlow-Regular.otf'),
-    });
+      'barlow': require('../../assets/fonts/Barlow-Regular.otf')
+    })
     this.setState({ fontLoaded: true })
   }
 
@@ -65,7 +65,6 @@ class AddFounds extends Component {
             <Container>
               <Content>
                 <Text style={styles.header}>{'Add Funds'.toUpperCase()}</Text>
-                {/* <Text style={styles.text}>Transfer your funds from another Ethereum wallet to your Celsius account by sending ETH to your unique Celsius address.</Text> */}
                 { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow' }, styles.text]}>Transfer your funds from another Ethereum wallet to your Celsius account by sending ETH to your unique Celsius address.</Text>) : null }
                 <View style={styles.center}>
                   <View style={styles.qrWrapper}>
@@ -73,7 +72,7 @@ class AddFounds extends Component {
                       value={this.props.walletAddress}
                       size={160}
                       bgColor='black'
-                      fgColor='white'/>
+                      fgColor='white' />
                   </View>
                 </View>
                 { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow', marginBottom: 0 }, styles.text]}>Your Celsius ETH address:</Text>) : null }
@@ -83,16 +82,16 @@ class AddFounds extends Component {
                   { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'inconsolata' }, styles.codeText]}>{this.props.walletAddress}</Text>) : null }
                   <View style={styles.row}>
                     {/* <View style={styles.cellLeft}> */}
-                      <TouchableOpacity style={[styles.cellLeft, styles.buttonLeft]} onPress={this.onButtonPress.bind(this)}>
-                        <Image source={require('../../assets/images/icon-send.png')} style={styles.iconLeft} />
-                        <Text style={styles.buttonLeftText}>Share</Text>
-                      </TouchableOpacity>
+                    <TouchableOpacity style={[styles.cellLeft, styles.buttonLeft]} onPress={this.onButtonPress.bind(this)}>
+                      <Image source={require('../../assets/images/icon-send.png')} style={styles.iconLeft} />
+                      <Text style={styles.buttonLeftText}>Share</Text>
+                    </TouchableOpacity>
                     {/* </View> */}
                     {/* <View style={styles.cellRight}> */}
-                      <TouchableOpacity style={[styles.cellRight, styles.buttonRight]} onPress={this.onCopyButtonPress.bind(this)}>
-                        <Image source={require('../../assets/images/icon-copy.png')} style={styles.iconRight} />
-                        <Text style={styles.buttonRightText}>Copy</Text>
-                      </TouchableOpacity>
+                    <TouchableOpacity style={[styles.cellRight, styles.buttonRight]} onPress={this.onCopyButtonPress.bind(this)}>
+                      <Image source={require('../../assets/images/icon-copy.png')} style={styles.iconRight} />
+                      <Text style={styles.buttonRightText}>Copy</Text>
+                    </TouchableOpacity>
                     {/* </View> */}
                   </View>
                 </View>
@@ -118,7 +117,6 @@ class AddFounds extends Component {
     if (this.props.error !== '') { return (<Text style={styles.errorText}>{this.props.error}</Text>) }
     return <View />
   }
-
 }
 
 const styles = StyleSheet.create({
@@ -131,7 +129,7 @@ const styles = StyleSheet.create({
   },
   background: {
     flex: 1,
-    flexDirection: 'row',
+    flexDirection: 'row'
     // justifyContent: 'top',
     // alignItems: 'center',
     // backgroundColor: 'red'
@@ -150,23 +148,24 @@ const styles = StyleSheet.create({
     marginBottom: 5
   },
   header: {
-		fontSize: 32,
-		backgroundColor: 'rgba(0,0,0,0)',
-		color: 'white',
-		paddingLeft: 30,
-		paddingRight: 30,
-		marginBottom: 20,
+    fontSize: 32,
+    backgroundColor: 'rgba(0,0,0,0)',
+    color: 'white',
+    paddingLeft: 30,
+    paddingRight: 30,
+    marginBottom: 36,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginTop: 30,
+    marginTop: 30
   },
   text: {
     textAlign: 'center',
-    fontSize: 16,
+    fontSize: 18,
     color: '#9CA9B6',
     marginLeft: 30,
     marginRight: 30,
-    paddingBottom: 15
+    paddingBottom: 15,
+    fontFamily: 'barlow'
   },
   formContainer: {
     marginTop: 100
@@ -186,23 +185,25 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     // marginRight: 30,
     // marginLeft: 30,
-    marginTop: 10,
+    marginTop: 29,
     marginBottom: 30,
-    width: 130
+    width: 150
   },
   buttonText: {
-    color: '#ffffff'
+    color: '#ffffff',
+    fontFamily: 'barlow-medium',
+    fontSize: 21
   },
   form: {
     marginLeft: 20,
     marginRight: 20
   },
   center: {
-    alignItems: 'center',
+    alignItems: 'center'
   },
   row: {
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'center'
     // height: 50,
   },
   cellLeft: {
@@ -211,7 +212,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
     // marginLeft: 10,
-    height: 40,
+    height: 40
   },
   cellRight: {
     flex: 1,
@@ -219,23 +220,23 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     alignItems: 'center',
     // marginRight: 10,
-    height: 40,
+    height: 40
   },
   qrWrapper: {
-    width: 200,
-    height: 200,
+    width: 225,
+    height: 225,
     borderRadius: 8,
     backgroundColor: '#ffffff',
     alignItems: 'center',
-    paddingTop: 20,
+    paddingTop: 34,
     marginTop: 20,
-    marginBottom: 30,
+    marginBottom: 34
   },
   codeWrapper: {
     borderRadius: 8,
     backgroundColor: 'rgba(0, 0, 0, 0.2)',
-    marginRight: 30,
-    marginLeft: 30,
+    marginRight: 60,
+    marginLeft: 60,
     // paddingTop: 20,
     marginTop: 0,
     marginBottom: 20
@@ -257,13 +258,15 @@ const styles = StyleSheet.create({
     borderRightWidth: 1,
     padding: 10,
     borderBottomLeftRadius: 8,
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   buttonLeftText: {
     color: '#9CA9B6',
     textAlign: 'left',
     // marginLeft: 50
     paddingLeft: 5,
+    fontFamily: 'barlow',
+    fontSize: 18
   },
   buttonRight: {
     position: 'relative',
@@ -273,13 +276,14 @@ const styles = StyleSheet.create({
     // borderRightWidth: 1,
     padding: 10,
     borderBottomRightRadius: 8,
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   buttonRightText: {
     color: '#9CA9B6',
     textAlign: 'left',
     paddingLeft: 5,
-
+    fontFamily: 'barlow',
+    fontSize: 18
   },
   iconLeft: {
     // position: 'absolute',
@@ -302,7 +306,7 @@ const styles = StyleSheet.create({
 const mapStateToProps = state => {
   return {
     nav: state.nav,
-    walletAddress: state.lender.walletAddress,
+    walletAddress: state.lender.walletAddress
     // error: state.register.error
   }
 }

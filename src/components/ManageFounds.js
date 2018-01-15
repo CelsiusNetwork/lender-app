@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {StyleSheet, View, ImageBackground, Image, TouchableOpacity} from 'react-native'
-import {Button, Form, Input, Item, Label, Text, Content, Header, Title, Container} from 'native-base'
+import {Text, Content, Container} from 'native-base'
 import {
   registerFirstNameChanged,
   registerLastNameChanged,
@@ -57,7 +57,7 @@ class AddFounds extends Component {
             {/* <Image source={require('../../assets/images/logo-header.png')} style={styles.logo} /> */}
             <Container>
               <Content>
-                <Text style={styles.header}>{'Manage Funds'.toUpperCase()}</Text>
+                <Text style={styles.header}>MANAGE {'\n'} FUNDS</Text>
                 <Text style={styles.text}>You can safely withdraw your funds in <Text style={{color: '#ffffff'}}>7
                   days</Text> from now. If you do it earlier, you may lose seniority score and additional fees may
                   apply. </Text>
@@ -68,7 +68,7 @@ class AddFounds extends Component {
                       <Image source={require('../../assets/images/icon-eth.png')} style={styles.icon} />
                       <Text style={styles.boxText1}>
                         {this.state.fontLoaded ? (<Text
-                          style={[{fontFamily: 'barlow-semi-bold'}, styles.boxText1Inner]}>{ethBalance}</Text>) : null}
+                          style={[{fontFamily: 'barlow-semi-bold'}, styles.boxText1Inner]}>{parseInt(ethBalance).toFixed(3)}</Text>) : null}
                         {this.state.fontLoaded ? (
                           <Text style={[{fontFamily: 'barlow-semi-bold'}, styles.boxText1Inner]}> ETH</Text>) : null}
                       </Text>
@@ -82,7 +82,7 @@ class AddFounds extends Component {
                       <TouchableOpacity style={styles.boxButton} onPress={() => navigate('ManageFoundsWithdraw')}>
                         <Text style={styles.boxButtonText}><Image
                           source={require('../../assets/images/icon-transfer-arrows.png')}
-                          style={styles.buttonIcon} /><Text style={{color: '#ffffff'}}>Withdraw ETH</Text></Text>
+                          style={styles.buttonIcon} /><Text style={{color: '#ffffff', fontFamily: 'barlow'}}>{'   '}Withdraw ETH</Text></Text>
                       </TouchableOpacity>
                     </View>
                   </View>
@@ -94,7 +94,7 @@ class AddFounds extends Component {
                       <Image source={require('../../assets/images/icon-transfer.png')} style={styles.icon} />
                       <Text style={styles.boxText1}>
                         {this.state.fontLoaded ? (<Text
-                          style={[{fontFamily: 'barlow-semi-bold'}, styles.boxText1Inner]}>{celBalance}</Text>) : null}
+                          style={[{fontFamily: 'barlow-semi-bold'}, styles.boxText1Inner]}>{parseInt(celBalance).toFixed(3)}</Text>) : null}
                         {this.state.fontLoaded ? (
                           <Text style={[{fontFamily: 'barlow-semi-bold'}, styles.boxText1Inner]}> CEL</Text>) : null}
                       </Text>
@@ -167,15 +167,15 @@ const styles = StyleSheet.create({
     marginBottom: 5
   },
   header: {
-    fontSize: 34,
+    fontSize: 38,
     backgroundColor: 'rgba(0,0,0,0)',
     color: 'white',
     paddingLeft: 30,
     paddingRight: 30,
-    marginBottom: 30,
+    marginBottom: 24,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginTop: 60
+    marginTop: 40
   },
   boxText1: {
     position: 'absolute',
@@ -237,7 +237,9 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: '#9CA9B6',
     marginLeft: 30,
-    marginRight: 30
+    marginRight: 30,
+    marginBottom: 32,
+    fontFamily: 'barlow'
   },
   formContainer: {
     marginTop: 100
@@ -258,7 +260,7 @@ const styles = StyleSheet.create({
     // marginRight: 30,
     // marginLeft: 30,
     marginTop: 30,
-    marginBottom: 30,
+    marginBottom: 10,
     width: 130
   },
   buttonText: {
@@ -306,8 +308,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0, 0, 0, 0.2)',
     borderRadius: 8,
     marginTop: 10,
-    marginLeft: 30,
-    marginRight: 30,
+    marginLeft: 20,
+    marginRight: 20,
     // flex: 1,
     // flexDirection: 'row',
     // position: 'relative',
@@ -331,8 +333,8 @@ const styles = StyleSheet.create({
     resizeMode: 'contain'
   },
   icon: {
-    width: 54,
-    height: 54,
+    width: 40,
+    height: 42,
     position: 'absolute',
     top: 20,
     left: 10,
@@ -372,7 +374,7 @@ const mapStateToProps = state => {
   return {
     nav: state.nav,
     ethBalance: state.wallet.ethBalance,
-    celBalance: state.wallet.celBalance,
+    celBalance: state.wallet.celBalance
     // error: state.register.error
 
   }
