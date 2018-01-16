@@ -144,7 +144,7 @@ class IncomeHistory extends Component {
             <Text style={[styles.footer, {marginBottom: 50}]}>
               {this.state.fontLoaded ? (<Text style={[{fontFamily: 'barlow'}]}>Activity</Text>) : null}
             </Text>
-            <View style={{borderBottomColor: '#305072', borderBottomWidth: 1, marginLeft: 12, marginRight: 12}} />
+            <View style={{borderBottomColor: 'rgba(255,255,255,0.1)', borderBottomWidth: 1, marginLeft: 12, marginRight: 12}} />
           </Content>
         </Container>
       </View>

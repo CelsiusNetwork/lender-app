@@ -133,7 +133,7 @@ function validateRegisterForm(registrationForm) {
   if (registrationForm.lastName.length < 5) return getErrorText({atLeast: {field: 'First Name', number: 5}})
   if (!registrationForm.email) return getErrorText({notEmpty: {field: 'Email'}})
   if (!registrationForm.password) return getErrorText({notEmpty: {field: 'Password'}})
-  if (registrationForm.password.length < 8) return getErrorText({atLeast: {field: 'First Name', number: 8}})
+  if (registrationForm.password.length < 8) return getErrorText({atLeast: {field: 'Password', number: 8}})
   if (!registrationForm.phoneNumber) return getErrorText({notEmpty: {field: 'Phone number'}})
   return false
 }
