@@ -4,12 +4,19 @@ import { Content, Header, Title, Container } from 'native-base'
 import { connect } from 'react-redux'
 import { NavigationActions } from 'react-navigation'
 import { Font } from 'expo';
+import { Pages } from 'react-native-pages'
+
+import Slide1 from './Slide1'
+import Slide2 from './Slide2'
+import Slide3 from './Slide3'
 
 class HowItWorks extends Component {
   constructor(props) {
     super(props);
     this.state = {
         fontLoaded: false,
+        toLeft:0,
+        toRight:1
       }
   }
 
@@ -40,6 +47,26 @@ class HowItWorks extends Component {
     this.props.lenderAppInitToken()
   }
 
+  scrollLeft(){
+    this.refs.scroller.scrollToPage(this.state.toLeft)
+  }
+
+  scrollRight(){
+    this.refs.scroller.scrollToPage(this.state.toRight)
+  }
+
+  scrolled (wasOnPage) {
+    if(wasOnPage == 0){
+      this.setState({toLeft:0, toRight: 1});
+    }
+    if(wasOnPage == 1){
+      this.setState({toLeft:0, toRight: 2});
+    }
+    if(wasOnPage == 2){
+      this.setState({toLeft:1, toRight: 2});
+    }
+  }
+
   render () {
     const { navigate } = this.props.navigation
     return (
@@ -49,21 +76,31 @@ class HowItWorks extends Component {
 
             <Image source={require('../../../assets/images/logo-header.png')} style={styles.logo} />
             { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow-bold'}, styles.header]}>{'How it works?'.toUpperCase()}</Text>) : null }
-            {/* <Text style={styles.header}>{'How it works?'.toUpperCase()}</Text> */}
-            <View style={styles.circleWrapper}>
-                  <Image
-                    source={require('../../../assets/images/arrow-left.png')}
-                    resizeMode="contain"
-                    style={styles.aLeft} />
-                  <Image source={require('../../../assets/images/how-it-works.png')} style={styles.circle} />
-                  <Image
-                    source={require('../../../assets/images/arrow-right.png')}
-                    resizeMode="contain"
-                    style={styles.aRight} />
-            </View>
 
-            { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow'}, styles.text]}>To join our trusted community of members, you need to create Celsius account from which you will be able to lend and borrow money.</Text>) : null }
-            {/* <Text style={styles.text}>To join our trusted community of members, you need to create Celsius account from which you will be able to lend and borrow money.</Text> */}
+            <View style={styles.circleWrapper}>
+              <TouchableOpacity style={styles.aLeftWrapper} onPress={this.scrollLeft.bind(this)}>
+                <Image
+                  source={require('../../../assets/images/arrow-left.png')}
+                  resizeMode="contain"
+                  style={[styles.aLeft]} />
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.aRightWrapper} onPress={this.scrollRight.bind(this)}>
+                <Image
+                  source={require('../../../assets/images/arrow-right.png')}
+                  resizeMode="contain"
+                  style={styles.aRight} />
+              </TouchableOpacity>
+              <Pages
+              // scrollEnabled={false}
+              onScrollEnd={this.scrolled.bind(this)}
+              indicatorPosition='none'
+              ref='scroller'
+              style={styles.slideshowWrapper}>
+                <Slide1 />
+                <Slide2 />
+                <Slide3 />
+              </Pages>
+            </View>
 
             <TouchableOpacity style={styles.button}
               onPress={this.onButtonPress.bind(this)}
@@ -132,27 +169,42 @@ const styles = StyleSheet.create({
   circleWrapper: {
     flexDirection: 'row',
     alignItems: 'center',
-    height: 180,
-    marginTop: 40,
-    marginBottom: 20
+    height: 340,
+    marginTop: 30,
+    marginBottom: 20,
+    position: 'relative',
+    // borderColor: 'red',
+    // borderWidth: 1
+  },
+  aLeftWrapper: {
+    position: 'absolute',
+    left: 40,
+    top: 80,
+    zIndex: 10
+  },
+  aRightWrapper: {
+    position: 'absolute',
+    right: 40,
+    top: 80,
+    zIndex: 20
   },
   aLeft: {
     width: 20,
     height: 37,
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    marginLeft: 0
+    // flex: 1,
+    // flexDirection: 'row',
+    // alignItems: 'center',
+    // justifyContent: 'flex-start',
+    // marginLeft: 0
   },
   aRight: {
     width: 20,
     height: 37,
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-    marginRight: 0
+    // flex: 1,
+    // flexDirection: 'row',
+    // justifyContent: 'flex-end',
+    // alignItems: 'center',
+    // marginRight: 0
   },
   circle: {
     width: 186,
@@ -184,6 +236,9 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     color: 'rgba(156, 169, 182, 0.3)',
     fontSize: 18
+  },
+  slideshowWrapper: {
+    height: 320
   }
 })
 
