@@ -1,6 +1,6 @@
 import * as types from './Types'
 import { Auth0Service } from '../services'
-import { NavigationActions } from 'react-navigation'
+import { NavigationActions, CardStackStyleInterpolator } from 'react-navigation'
 import jwtDecode from 'jwt-decode'
 import { storeLoggedUser } from './index'
 
@@ -38,7 +38,7 @@ export const logoutLender = () => {
     dispatch(NavigationActions.reset({
       index: 0,
       actions: [
-        NavigationActions.navigate({routeName: 'Welcome'})
+        NavigationActions.navigate({ routeName: 'Welcome' })
       ]
     }))
   }
@@ -69,9 +69,9 @@ const handleLenderInfo = (dispatch, response) => {
   response = JSON.parse(response)
   const user = JSON.parse(response._bodyInit)
   dispatch({
-    type: types.FETCH_LENDER_SUCCESS,
-    payload: user
-  })
+      type: types.FETCH_LENDER_SUCCESS,
+      payload: user
+    })
     // set user id in secure store
   storeLoggedUser(user.user_id).then(() => {
     dispatch(NavigationActions.reset({
