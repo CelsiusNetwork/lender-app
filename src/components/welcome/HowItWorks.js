@@ -169,7 +169,7 @@ const styles = StyleSheet.create({
   circleWrapper: {
     flexDirection: 'row',
     alignItems: 'center',
-    height: 340,
+    height: 350,
     marginTop: 30,
     marginBottom: 20,
     position: 'relative',
@@ -238,7 +238,7 @@ const styles = StyleSheet.create({
     fontSize: 18
   },
   slideshowWrapper: {
-    height: 320
+    height: 350
   }
 })
 
