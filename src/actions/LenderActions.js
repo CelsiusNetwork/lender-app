@@ -128,9 +128,9 @@ const handleLenderRewardPoints = (dispatch, response = {}) => {
 
 function validateRegisterForm(registrationForm) {
   if (!registrationForm.firstName) return getErrorText({notEmpty: {field: 'First Name'}})
-  if (registrationForm.firstName.length < 5) return getErrorText({atLeast: {field: 'First Name', number: 3}})
+  if (registrationForm.firstName.length < 2) return getErrorText({atLeast: {field: 'First Name', number: 2}})
   if (!registrationForm.lastName) return getErrorText({notEmpty: {field: 'Last Name'}})
-  if (registrationForm.lastName.length < 5) return getErrorText({atLeast: {field: 'First Name', number: 5}})
+  if (registrationForm.lastName.length < 2) return getErrorText({atLeast: {field: 'Last Name', number: 2}})
   if (!registrationForm.email) return getErrorText({notEmpty: {field: 'Email'}})
   if (!registrationForm.password) return getErrorText({notEmpty: {field: 'Password'}})
   if (registrationForm.password.length < 8) return getErrorText({atLeast: {field: 'Password', number: 8}})
@@ -140,9 +140,9 @@ function validateRegisterForm(registrationForm) {
 
 function validateEditProfileForm(registrationForm) {
   if (!registrationForm.firstName) return getErrorText({notEmpty: {field: 'First Name'}})
-  if (registrationForm.firstName.length < 5) return getErrorText({atLeast: {field: 'First Name', number: 3}})
+  if (registrationForm.firstName.length < 5) return getErrorText({atLeast: {field: 'First Name', number: 2}})
   if (!registrationForm.lastName) return getErrorText({notEmpty: {field: 'Last Name'}})
-  if (registrationForm.lastName.length < 5) return getErrorText({atLeast: {field: 'First Name', number: 5}})
+  if (registrationForm.lastName.length < 5) return getErrorText({atLeast: {field: 'First Name', number: 3}})
   if (!registrationForm.email) return getErrorText({notEmpty: {field: 'Email'}})
   if (!registrationForm.phoneNumber) return getErrorText({notEmpty: {field: 'Phone number'}})
   return false
