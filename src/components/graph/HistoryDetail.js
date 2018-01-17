@@ -54,6 +54,9 @@ class HistoryDetail extends Component {
         <ImageBackground source={require('../../../assets/images/background-blur.png')} style={styles.background}>
           <View style={styles.body}>
             {/* <Image source={require('../../../assets/images/logo-header.png')} style={styles.logo} /> */}
+            <TouchableOpacity onPress={() => this.props.navigation.goBack()} style={[styles.backButton]}>
+              <Image source={require('../../../assets/images/icon-back.png')} style={styles.back} />
+            </TouchableOpacity>
             <Text style={styles.header}>{ this.renderHeadingText() }</Text>
             <Container>
               <Content>
@@ -166,6 +169,18 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     marginRight: 10
   },
+  backButton: {
+    position: 'absolute',
+    zIndex: 10,
+    left: 20,
+    top: 60,
+    width: 30
+  },
+  back: {
+    width: 28,
+    height: 24,
+    resizeMode: 'contain'
+  },
   aCenter: {
     flex: 1,
     alignItems: 'center'
@@ -192,8 +207,8 @@ const styles = StyleSheet.create({
     fontSize: 32,
     backgroundColor: 'rgba(0,0,0,0)',
     color: 'white',
-    paddingLeft: 30,
-    paddingRight: 30,
+    paddingLeft: 50,
+    paddingRight: 50,
     marginBottom: 10,
     fontWeight: 'bold',
     textAlign: 'center',
