@@ -74,17 +74,16 @@ class EditProfile extends Component {
       <View style={styles.container}>
         <ImageBackground source={require('../../assets/images/background-blur.png')} style={styles.background}>
           <View style={styles.body}>
-            <View style={[{marginTop: 64, marginBottom: 33}]}>
-              <View style={styles.cellLeft}>
-                <Text style={[styles.header, {marginLeft: 65}]}>PROFILE</Text>
-              </View>
-              <View style={styles.cellRight}>
-                <TouchableOpacity onPress={this.onLogoutPress.bind(this)}>
-                  <View style={styles.cellRight}>
-                    <Image source={require('../../assets/images/log-out.png')} style={styles.logoutBtn} />
-                  </View>
-                </TouchableOpacity>
-              </View>
+            <View style={[{marginTop: 10, marginBottom: 10}]}>
+              <TouchableOpacity onPress={() => this.props.navigation.goBack()} style={[styles.backButton]}>
+                <Image source={require('../../assets/images/icon-back.png')} style={styles.back} />
+              </TouchableOpacity>
+              <Text style={[styles.header]}>PROFILE</Text>
+              <TouchableOpacity style={styles.logoutWrapper} onPress={this.onLogoutPress.bind(this)}>
+                <View style={styles.cellRight}>
+                  <Image source={require('../../assets/images/log-out.png')} style={styles.logoutBtn} />
+                </View>
+              </TouchableOpacity>
             </View>
             <Container>
               <Content>
@@ -212,6 +211,18 @@ const styles = StyleSheet.create({
     marginRight: 10,
     marginTop: 20
   },
+  backButton: {
+    position: 'absolute',
+    zIndex: 10,
+    left: 20,
+    top: 30,
+    width: 30
+  },
+  back: {
+    width: 28,
+    height: 24,
+    resizeMode: 'contain'
+  },
   logo: {
     // position: 'absolute',
     width: 140,
@@ -221,14 +232,17 @@ const styles = StyleSheet.create({
   },
   header: {
     fontSize: 38,
-    backgroundColor: 'rgba(0,0,0,0)',
+    backgroundColor: 'transparent',
     color: 'white',
     paddingLeft: 30,
     paddingRight: 30,
     marginBottom: 10,
     fontWeight: 'bold',
     textAlign: 'right',
-    marginTop: 20
+    marginTop: 20,
+    textAlign: 'center',
+    // borderWidth: 1,
+    // borderColor: 'red'
   },
   formContainer: {
     marginTop: 100,
@@ -366,6 +380,13 @@ const styles = StyleSheet.create({
     marginLeft: 15,
     marginTop: 10,
     color: '#FF9494'
+  },
+  logoutWrapper: {
+    position: 'absolute',
+    zIndex: 10,
+    right: 20,
+    top: 20,
+    width: 30
   },
   logoutBtn: {
     width: 30,

@@ -55,6 +55,10 @@ class AddFounds extends Component {
         <ImageBackground source={require('../../assets/images/background-blur.png')} style={styles.background}>
           <View style={styles.body}>
             {/* <Image source={require('../../assets/images/logo-header.png')} style={styles.logo} /> */}
+            <TouchableOpacity onPress={() => this.props.navigation.goBack()} style={[styles.backButton]}>
+              <Image source={require('../../assets/images/icon-back.png')} style={styles.back} />
+            </TouchableOpacity>
+
             <Container>
               <Content>
                 <Text style={styles.header}>MANAGE {'\n'} FUNDS</Text>
@@ -177,6 +181,19 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: 40
   },
+  backButton: {
+    position: 'absolute',
+    zIndex: 10,
+    left: 20,
+    top: 60,
+    width: 30
+  },
+  back: {
+    width: 28,
+    height: 24,
+    resizeMode: 'contain'
+  },
+
   boxText1: {
     position: 'absolute',
     left: 50,
