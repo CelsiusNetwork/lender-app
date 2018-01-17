@@ -32,7 +32,9 @@ export default class Welcome extends Component {
   render () {
     return (
       <View style={styles.slideContainer}>
-        <Image source={require('../../../assets/images/icon-cel.png')} style={styles.icon} />
+        <View style={styles.circle}>
+          <Image source={require('../../../assets/images/icon-cel.png')} style={styles.icon} />
+        </View>
         { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow'}, styles.text]}>Celsius wallet is the first online crypto wallet designed to allow members to earn interest on deposited coins.</Text>) : null }
       </View>
     )
@@ -57,14 +59,21 @@ const styles = StyleSheet.create({
     marginRight: 40,
     textAlign: 'center'
   },
+  circle: {
+    width: 186,
+    height: 186,
+    borderRadius: 193,
+    backgroundColor: 'rgba(0, 0, 0, 0.2)',
+    alignItems: 'center',
+  },
   icon: {
     // justifyContent: 'center',
     // alignItems: 'center',
-    width: 186,
-    height: 186,
+    width: 110,
+    height: 110,
     // marginLeft: 15,
     marginBottom: 10,
-    marginTop: 15,
+    marginTop: 35,
     resizeMode: 'contain',
   }
 })

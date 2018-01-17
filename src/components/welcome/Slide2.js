@@ -32,7 +32,9 @@ export default class Welcome extends Component {
   render () {
     return (
       <View style={styles.slideContainer}>
-        <Image source={require('../../../assets/images/icon-wallet-slide.png')} style={styles.icon} />
+        <View style={styles.circle}>
+          <Image source={require('../../../assets/images/icon-wallet-slide.png')} style={styles.icon} />
+        </View>
         { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow'}, styles.text]}>Members who deposit coins in their Celsius Wallets will earn Degree Tokens as a reward for lending to the network.</Text>) : null }
       </View>
     )
@@ -57,14 +59,21 @@ const styles = StyleSheet.create({
     marginRight: 40,
     textAlign: 'center'
   },
+  circle: {
+    width: 186,
+    height: 186,
+    borderRadius: 193,
+    backgroundColor: 'rgba(0, 0, 0, 0.2)',
+    alignItems: 'center',
+  },
   icon: {
     // justifyContent: 'center',
     // alignItems: 'center',
-    width: 186,
-    height: 186,
+    width: 110,
+    height: 110,
     // marginLeft: 15,
     marginBottom: 10,
-    marginTop: 20,
+    marginTop: 35,
     resizeMode: 'contain',
   }
 })
