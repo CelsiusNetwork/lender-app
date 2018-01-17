@@ -226,7 +226,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   header: {
-    fontSize: 34,
+    fontSize: 30,
     backgroundColor: 'rgba(0,0,0,0)',
     color: 'white',
     paddingLeft: 30,
@@ -266,8 +266,8 @@ const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
     marginTop: 50,
-    marginLeft: 30,
-    marginRight: 30,
+    marginLeft: 20,
+    marginRight: 20,
     justifyContent: 'center',
     alignItems: 'center'
     // borderWidth: 1,
@@ -389,10 +389,11 @@ const styles = StyleSheet.create({
     marginLeft: 30,
     marginBottom: 20,
     marginTop: 56,
-    paddingLeft: 40,
-    paddingRight: 40
+    paddingLeft: 20,
+    paddingRight: 20
   },
   buttonText: {
+    backgroundColor: 'transparent',
     color: '#333333',
     fontFamily: 'barlow-medium',
     fontSize: 21

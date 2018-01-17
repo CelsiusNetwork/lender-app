@@ -64,6 +64,9 @@ class AddFounds extends Component {
             {/* <Image source={require('../../assets/images/logo-header.png')} style={styles.logo} /> */}
             <Container>
               <Content>
+                <TouchableOpacity onPress={() => this.props.navigation.goBack()} style={[styles.backButton]}>
+                  <Image source={require('../../assets/images/icon-back.png')} style={styles.back} />
+                </TouchableOpacity>
                 <Text style={styles.header}>{'Add Funds'.toUpperCase()}</Text>
                 { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow' }, styles.text]}>Transfer your funds from another Ethereum wallet to your Celsius account by sending ETH to your unique Celsius address.</Text>) : null }
                 <View style={styles.center}>
@@ -139,6 +142,18 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     marginRight: 10,
     marginTop: 20
+  },
+  backButton: {
+    position: 'absolute',
+    zIndex: 10,
+    left: 20,
+    top: 40,
+    width: 30
+  },
+  back: {
+    width: 28,
+    height: 24,
+    resizeMode: 'contain'
   },
   logo: {
     // position: 'absolute',

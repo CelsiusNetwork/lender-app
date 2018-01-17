@@ -86,9 +86,11 @@ class Home extends Component {
           <ImageBackground source={require('../../assets/images/background-blur.png')} style={styles.background}>
             <View style={styles.body}>
               <View style={[styles.row, {marginBottom: 20, marginTop: 60}]}>
+              <TouchableOpacity onPress={() => navigate('Home')}>
                 <View style={styles.cellLeft}>
                   <Image source={require('../../assets/images/Celsius_Symbol_white.png')} style={styles.logo} />
                 </View>
+              </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigate('EditProfile')}>
                   <View style={styles.cellRight}>
                     <Image source={require('../../assets/images/icon-user.png')} style={styles.user} />
