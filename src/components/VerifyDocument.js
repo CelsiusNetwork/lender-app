@@ -54,7 +54,7 @@ class VerifyDocument extends React.Component {
       return (
         <Container>
           <Content>
-            <View style={styles.row}>
+            <View style={[styles.row, {marginTop: 30, marginBottom: 30, marginLeft: 10, marginRight: 10}]}>
               <TouchableOpacity
                 style={[styles.checkLeft, this.state.backgroundColorLeft]}
                 onPress={this.pressLeft.bind(this)}
@@ -211,7 +211,8 @@ const styles = StyleSheet.create({
 		marginBottom: 10,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginTop: 50
+    marginTop: 50,
+    fontFamily: 'barlow'
   },
   mobileWrapper: {
     width: 120,
@@ -245,7 +246,7 @@ const styles = StyleSheet.create({
     height: 2
   },
   text: {
-    fontSize: 14,
+    fontSize: 18,
     backgroundColor: 'rgba(0,0,0,0)',
     color: '#9ca9b7',
     paddingLeft: 30,
