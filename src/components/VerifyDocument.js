@@ -8,6 +8,7 @@ import { Camera, Permissions } from 'expo';
 class VerifyDocument extends React.Component {
 
   state = {
+    showDocCamera: false,
     hasCameraPermission: null,
     type: Camera.Constants.Type.back,
     backgroundColorLeft: {backgroundColor: 'rgba(255,255, 255, 0.2)', borderColor: 'rgba(255,255, 255, 0)'},
@@ -44,6 +45,33 @@ class VerifyDocument extends React.Component {
   }
 
   render () {
+    var camera = this.state.showDocCamera ? <Camera style={{ flex: 1 }}
+    type={this.state.type}
+    ref={ref => { this.camera = ref; }}
+    >
+      <View
+        style={{
+          flex: 1,
+          backgroundColor: 'transparent',
+          flexDirection: 'row',
+        }}>
+        <TouchableOpacity
+          style={{
+            flex: 0.1,
+            alignSelf: 'flex-end',
+            alignItems: 'center',
+          }}
+          onPress={() => {
+            this.setState({
+              type: this.state.type === Camera.Constants.Type.back
+                ? Camera.Constants.Type.front
+                : Camera.Constants.Type.back,
+            });
+          }}>
+          <Image source={require('../../assets/images/camera-flip.png')} style={styles.flip} />
+        </TouchableOpacity>
+      </View>
+    </Camera> : null;
     // const { navigate } = this.props.navigation
     const { hasCameraPermission } = this.state;
     if (hasCameraPermission === null) {
@@ -54,7 +82,7 @@ class VerifyDocument extends React.Component {
       return (
         <Container>
           <Content>
-            <View style={styles.row}>
+            <View style={[styles.row, {marginTop: 30, marginBottom: 30, marginLeft: 10, marginRight: 10}]}>
               <TouchableOpacity
                 style={[styles.checkLeft, this.state.backgroundColorLeft]}
                 onPress={this.pressLeft.bind(this)}
@@ -67,33 +95,7 @@ class VerifyDocument extends React.Component {
             <View style={styles.aCenter}>
               <ImageBackground source={require('../../assets/images/scanner.png')} style={styles.cameraWrapper}>
                 <View style={{ flex: 1, height: 200, width: 290 }}>
-                  <Camera style={{ flex: 1 }}
-                  type={this.state.type}
-                  ref={ref => { this.camera = ref; }}
-                  >
-                    <View
-                      style={{
-                        flex: 1,
-                        backgroundColor: 'transparent',
-                        flexDirection: 'row',
-                      }}>
-                      <TouchableOpacity
-                        style={{
-                          flex: 0.1,
-                          alignSelf: 'flex-end',
-                          alignItems: 'center',
-                        }}
-                        onPress={() => {
-                          this.setState({
-                            type: this.state.type === Camera.Constants.Type.back
-                              ? Camera.Constants.Type.front
-                              : Camera.Constants.Type.back,
-                          });
-                        }}>
-                        <Image source={require('../../assets/images/camera-flip.png')} style={styles.flip} />
-                      </TouchableOpacity>
-                    </View>
-                  </Camera>
+                  {camera}
                 </View>
               </ImageBackground>
             </View>
@@ -211,7 +213,8 @@ const styles = StyleSheet.create({
 		marginBottom: 10,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginTop: 50
+    marginTop: 50,
+    fontFamily: 'barlow'
   },
   mobileWrapper: {
     width: 120,
@@ -245,7 +248,7 @@ const styles = StyleSheet.create({
     height: 2
   },
   text: {
-    fontSize: 14,
+    fontSize: 18,
     backgroundColor: 'rgba(0,0,0,0)',
     color: '#9ca9b7',
     paddingLeft: 30,

@@ -327,7 +327,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
   updateRegisterForm,
-  registerLender
+  registerLender,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Register)

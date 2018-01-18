@@ -19,9 +19,8 @@ class EditProfile extends Component {
       ...registerForm,
       firstName: lender.user_metadata.name,
       lastName: lender.user_metadata.surname,
-      email: lender.email
-      // TODO(fj)
-      // picture: lender.picture,
+      email: lender.email,
+      picture: lender.picture
       // password: '',
       // phoneNumber: ''
     })

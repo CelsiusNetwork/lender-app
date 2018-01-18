@@ -126,7 +126,8 @@ const styles = StyleSheet.create({
     height: 4,
     marginBottom: 10,
     marginRight: 38,
-    marginLeft: 38
+    marginLeft: 38,
+    overflow: 'hidden'
   },
   lineInner: {
     width: '33%',
@@ -203,7 +204,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginRight: 30,
     marginLeft: 30,
-    marginBottom: 96,
+    marginBottom: 46,
     flexDirection: 'row'
   },
   buttonIcon: {

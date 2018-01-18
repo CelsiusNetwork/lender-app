@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Content, Container, ImageBackground, StyleSheet, View, Image, Text, TouchableOpacity, AsyncStorage } from 'react-native'
-import { Form, Input, Item, Label } from 'native-base'
+import { ImageBackground, StyleSheet, View, Image, Text, TouchableOpacity, AsyncStorage } from 'react-native'
+import { Form, Input, Item, Label, Content, Container } from 'native-base'
 // import { NavigationActions } from 'react-navigation'
 import { Camera, Permissions } from 'expo';
 
 class VerifyPhoto extends React.Component {
 
   state = {
+    showPhotoCamera: false,
     hasPhotoCameraPermission: null,
     type: Camera.Constants.Type.back,
   };
@@ -32,6 +33,42 @@ class VerifyPhoto extends React.Component {
   }
 
   render () {
+    var camera = this.props.showPhotoCamera ? <Camera style={{ flex: 1 }}
+    type={this.state.type}
+    ref={ref => { this.photoCamera = ref; }}
+    >
+      <View
+        style={{
+          flex: 1,
+          backgroundColor: 'transparent',
+          flexDirection: 'row',
+        }}>
+      </View>
+    </Camera> : null;
+    var cameraFlip = this.state.showPhotoCamera ? <Camera style={{ flex: 1 }}
+    type={this.state.type}
+    ref={ref => { this.photoCamera = ref; }}
+    >
+      <View
+        style={{
+          flex: 1,
+          backgroundColor: 'transparent',
+          flexDirection: 'row',
+        }}>
+      </View>
+    </Camera> : null;
+
+    var cameraFlip = this.state.showPhotoCameraFlip ? <TouchableOpacity
+    style={[styles.cameraFlip, {flex: 0.1, alignSelf: 'flex-end', alignItems: 'center',}]}
+      onPress={() => {
+        this.setState({
+          type: this.state.type === Camera.Constants.Type.back
+            ? Camera.Constants.Type.front
+            : Camera.Constants.Type.back,
+        });
+      }}>
+      <Image source={require('../../assets/images/camera-flip.png')} style={styles.flip} />
+    </TouchableOpacity> : null;
     // const { navigate } = this.props.navigation
     const { hasPhotoCameraPermission } = this.state;
     if (hasPhotoCameraPermission === null) {
@@ -40,42 +77,19 @@ class VerifyPhoto extends React.Component {
       return <Text>No access to camera</Text>;
     } else {
       return (
-        <View style={styles.aCenter}>
-          <ImageBackground source={require('../../assets/images/scanner.png')} style={styles.cameraWrapper}>
-            <View style={{ flex: 1, height: 200, width: 290 }}>
-              <Camera style={{ flex: 1 }}
-              type={this.state.type}
-              ref={ref => { this.photoCamera = ref; }}
-              >
-                <View
-                  style={{
-                    flex: 1,
-                    backgroundColor: 'transparent',
-                    flexDirection: 'row',
-                  }}>
-                  <TouchableOpacity
-                    style={{
-                      flex: 0.1,
-                      alignSelf: 'flex-end',
-                      alignItems: 'center',
-                    }}
-                    onPress={() => {
-                      this.setState({
-                        type: this.state.type === Camera.Constants.Type.back
-                          ? Camera.Constants.Type.front
-                          : Camera.Constants.Type.back,
-                      });
-                    }}>
-                    <Image source={require('../../assets/images/camera-flip.png')} style={styles.flip} />
-                  </TouchableOpacity>
+        <Container>
+          <Content>
+            <View style={[styles.aCenter, {position: 'relative'}]}>
+              {cameraFlip}
+              <View style={styles.cameraWrapper}>
+                <View style={{ flex: 1, height: 330, width: 280 }}>
+                  {camera}
                 </View>
-              </Camera>
+              </View>
+              <Text style={styles.text}>Please center your face in the frame above and take a selfie. We need your recent picture to compare it with the one on the passport.</Text>
             </View>
-          </ImageBackground>
-
-          <Text style={styles.text}>Please center your face in the frame above and take a selfie. We need your recent picture to compare it with the one on the passport.</Text>
-
-        </View>
+          </Content>
+        </Container>
       )
     }
   }
@@ -101,11 +115,26 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     marginRight: 10,
   },
+  cameraFlip: {
+    position: 'absolute',
+    left: 10,
+    top: 300
+  },
   cameraWrapper: {
     alignItems: 'center',
-    width: 298,
-    height: 208,
-    padding: 4
+    backgroundColor: 'rgba(0, 0, 0, 0.2)',
+    width: 260,
+    height: 260,
+    // padding: 4,
+    borderRadius: 140,
+    overflow: 'hidden',
+    transform: [
+      {scaleY: 1.13}
+    ],
+    // borderColor: 'red',
+    // borderWidth: 1,
+    marginTop: 20,
+    marginBottom: 20
   },
   line: {
     height: 10,
@@ -135,7 +164,8 @@ const styles = StyleSheet.create({
 		marginBottom: 10,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginTop: 50
+    marginTop: 50,
+    fontFamily: 'barlow'
   },
   mobileWrapper: {
     width: 120,
