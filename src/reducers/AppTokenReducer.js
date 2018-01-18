@@ -13,7 +13,7 @@ export default (state = APP_TOKEN_INITIAL_STATE, action) => {
       return { ...state, loading: true }
     case types.APP_TOKEN_SUCCESS:
       console.log('App token reducer')
-      const a = JSON.parse(action.payload)
+      let a = JSON.parse(action.payload)
       a = JSON.parse(a._bodyText)
       console.log(a.access_token)
       return {
