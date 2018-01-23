@@ -5,8 +5,9 @@ import {Font, AppLoading} from 'expo'
 
 import Navigator from './Navigator'
 import configureStore from './configureStore'
-import { cacheImages } from './utils'
+import {cacheImages} from './utils'
 
+// Create-configure redux store
 const store = configureStore({})
 
 class App extends React.Component {
@@ -18,15 +19,7 @@ class App extends React.Component {
     }
   }
 
-  static async loadAssetsAsync () {
-    const imageAssets = cacheImages([
-      require('../assets/images/background.png'),
-      require('../assets/images/background-blur.png')
-    ])
-
-    await Promise.all([...imageAssets])
-  }
-
+  // Component Lifecycle Methods
   async componentWillMount () {
     await Font.loadAsync({
       'Roboto': require('native-base/Fonts/Roboto.ttf'),
@@ -37,11 +30,12 @@ class App extends React.Component {
     this.setState({loading: false})
   }
 
+  // Rendering methods
   render () {
     if (!this.state.isReady) {
       return (
         <AppLoading
-          startAsync={App.loadAssetsAsync}
+          startAsync={loadAssetsAsync}
           onFinish={() => this.setState({isReady: true})}
           onError={console.warn}
         />
@@ -56,6 +50,21 @@ class App extends React.Component {
       )
     }
   }
+}
+
+/**
+ * @name loadAssetsAsync
+ * @description load background image before init application
+ *
+ * @return Promise
+ */
+const loadAssetsAsync = async () => {
+  const imageAssets = cacheImages([
+    require('../assets/images/background.png'),
+    require('../assets/images/background-blur.png')
+  ])
+
+  await Promise.all([...imageAssets])
 }
 
 export default (App)
