@@ -1,6 +1,6 @@
 import * as types from './Types'
 import { Auth0Service } from '../services'
-import { NavigationActions, CardStackStyleInterpolator } from 'react-navigation'
+import { NavigationActions } from 'react-navigation'
 import jwtDecode from 'jwt-decode'
 import { storeLoggedUser } from './index'
 
@@ -25,7 +25,7 @@ export const loginLender = ({ email, password }) => {
       type: types.LOGIN_LENDER_LOADING
     })
 
-    Auth0Service().siginInWithEmailAndPassword({ email, password })
+    Auth0Service().signInWithEmailAndPassword({ email, password })
       .then(response => handleResponse(dispatch, JSON.stringify(response)))
       .catch((error) => {
         loginLenderFail(dispatch, error)
