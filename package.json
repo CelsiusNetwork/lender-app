@@ -28,6 +28,7 @@
     "react-native-pages": "^0.6.1",
     "react-native-pasteboard": "^1.3.0",
     "react-native-qrcode": "^0.2.6",
+    "react-native-sentry": "^0.32.1",
     "react-native-svg": "^6.0.1-rc.1",
     "react-native-vector-icons": "^4.4.2",
     "react-native-vibration": "^0.2.0",
@@ -38,6 +39,7 @@
     "redux": "3.7.2",
     "redux-persist": "^5.4.0",
     "redux-thunk": "2.2.0",
+    "sentry-expo": "^1.7.0",
     "web3": "1.0.0-beta.26"
   },
   "devDependencies": {

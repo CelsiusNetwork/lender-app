@@ -7,7 +7,8 @@ import DegIncome from './graph/DegIncome'
 import DegValue from './graph/DegValue'
 import IncomeHistory from './graph/IncomeHistory'
 import {fetchWalletBalance, fetchTransactionsHistory, setActiveTransaction, lenderAppInitToken, isAlreadyLoggedIn} from '../actions'
-import Expo, { Font } from 'expo'
+import { Font } from 'expo'
+import Sentry from 'sentry-expo'
 
 class Home extends Component {
   constructor (props) {
@@ -45,9 +46,9 @@ class Home extends Component {
     }, 60000)
   }
 
-
   // TODO: font should be loded before DOM is initializes, into componentWillMount()
   async componentDidMount () {
+    const { email, authId, surname} = this.props
     await Font.loadAsync({
       'barlow-semi-bold': require('../../assets/fonts/Barlow-SemiBold.otf')
     })
@@ -59,6 +60,12 @@ class Home extends Component {
     })
 
     this.setState({fontLoaded: true})
+
+    Sentry.setUserContext({
+      email: email,
+      userID: authId,
+      surname
+    })
   }
 
   componentWillReceiveProps (nextProps) {
