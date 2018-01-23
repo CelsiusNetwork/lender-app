@@ -1,17 +1,13 @@
 import React from 'react'
 import {Container} from 'native-base'
 import {Provider} from 'react-redux'
-import {applyMiddleware, createStore} from 'redux'
-import {Image} from 'react-native'
-import thunk from 'redux-thunk'
-import {Font, AppLoading, Asset} from 'expo'
+import {Font, AppLoading} from 'expo'
 
-import reducers from './reducers/index'
 import Navigator from './Navigator'
+import configureStore from './configureStore'
+import { cacheImages } from './utils'
 
-import {composeWithDevTools} from 'remote-redux-devtools'
-
-const store = createStore(reducers, {}, composeWithDevTools(applyMiddleware(thunk)))
+const store = configureStore({})
 
 class App extends React.Component {
   constructor () {
@@ -60,16 +56,6 @@ class App extends React.Component {
       )
     }
   }
-}
-
-function cacheImages (images) {
-  return images.map(image => {
-    if (typeof image === 'string') {
-      return Image.prefetch(image)
-    } else {
-      return Asset.fromModule(image).downloadAsync()
-    }
-  })
 }
 
 export default (App)
