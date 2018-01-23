@@ -1,32 +1,25 @@
 import React from 'react'
-import { Container } from 'native-base'
-import { Provider } from 'react-redux'
-import { applyMiddleware, createStore } from 'redux'
-import { Image } from 'react-native'
+import {Container} from 'native-base'
+import {Provider} from 'react-redux'
+import {applyMiddleware, createStore} from 'redux'
+import {Image} from 'react-native'
 import thunk from 'redux-thunk'
-import { Font, AppLoading, Asset } from 'expo'
+import {Font, AppLoading, Asset} from 'expo'
 
 import reducers from './reducers/index'
 import Navigator from './Navigator'
 
-import { composeWithDevTools } from 'remote-redux-devtools'
+import {composeWithDevTools} from 'remote-redux-devtools'
 
 const store = createStore(reducers, {}, composeWithDevTools(applyMiddleware(thunk)))
-
-function cacheImages (images) {
-  return images.map(image => {
-    if (typeof image === 'string') {
-      return Image.prefetch(image)
-    } else {
-      return Asset.fromModule(image).downloadAsync()
-    }
-  })
-}
 
 class App extends React.Component {
   constructor () {
     super()
-    this.state = { loading: true }
+    this.state = {
+      isReady: false,
+      loading: true
+    }
   }
 
   static async loadAssetsAsync () {
@@ -45,7 +38,7 @@ class App extends React.Component {
       'barlow-medium': require('../assets/fonts/Barlow-Medium.ttf')
     })
 
-    this.setState({ loading: false })
+    this.setState({loading: false})
   }
 
   render () {
@@ -53,20 +46,30 @@ class App extends React.Component {
       return (
         <AppLoading
           startAsync={App.loadAssetsAsync}
-          onFinish={() => this.setState({ isReady: true })}
+          onFinish={() => this.setState({isReady: true})}
           onError={console.warn}
         />
       )
+    } else {
+      return (
+        <Provider store={store}>
+          <Container>
+            <Navigator />
+          </Container>
+        </Provider>
+      )
     }
-
-    return (
-      <Provider store={store}>
-        <Container>
-          <Navigator />
-        </Container>
-      </Provider>
-    )
   }
+}
+
+function cacheImages (images) {
+  return images.map(image => {
+    if (typeof image === 'string') {
+      return Image.prefetch(image)
+    } else {
+      return Asset.fromModule(image).downloadAsync()
+    }
+  })
 }
 
 export default (App)
