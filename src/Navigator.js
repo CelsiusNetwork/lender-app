@@ -1,14 +1,12 @@
-import React from "react"
-import { BackHandler } from "react-native"
-import { connect } from "react-redux"
-import { addNavigationHelpers, NavigationActions, StackNavigator } from "react-navigation"
+import React from 'react'
+import { BackHandler } from 'react-native'
+import { connect } from 'react-redux'
+import { addNavigationHelpers, NavigationActions, StackNavigator } from 'react-navigation'
 
+import WelcomePager from './components/welcome/WelcomePager'
 
-import WelcomePager from "./components/welcome/WelcomePager"
-// import WelcomePager from "./components/Verification"
-
-import GraphPager from "./components/graph/GraphPager.js"
-import HistoryDetail from "./components/graph/HistoryDetail.js"
+import GraphPager from './components/graph/GraphPager.js'
+import HistoryDetail from './components/graph/HistoryDetail.js'
 
 import Register from './components/Register'
 import LoginForm from './components/LoginForm'
@@ -118,43 +116,47 @@ export const Navigator = StackNavigator({
     headerMode: 'screen'
   }
 }, {
-  // see next line
-  headerMode: 'none',
-});
+  headerMode: 'none'
+})
 
 class LenderNavigation extends React.Component {
-  componentDidMount() {
-    BackHandler.addEventListener("hardwareBackPress", this.onBackPress);
-  }
+  // Event Handlers
+  onBackPress () {
+    const { dispatch, nav } = this.props
 
-  componentWillUnmount() {
-    BackHandler.removeEventListener("hardwareBackPress", this.onBackPress);
-  }
-
-  onBackPress = () => {
-    const { dispatch, nav } = this.props;
     if (nav.index === 0) {
-      return false;
+      return false
     }
-    dispatch(NavigationActions.back());
-    return true;
+
+    dispatch(NavigationActions.back())
+    return true
   }
 
-  render() {
-    const { dispatch, nav } = this.props;
-    // passing navigation prop (consisting of dispatch and state) to Navigator
+  // Component Lifecycle Methods
+  componentDidMount () {
+    BackHandler.addEventListener('hardwareBackPress', this.onBackPress)
+  }
+
+  componentWillUnmount () {
+    BackHandler.removeEventListener('hardwareBackPress', this.onBackPress)
+  }
+
+  // Rendering methods
+  render () {
+    const { dispatch, nav } = this.props
+
     const navigation = addNavigationHelpers({
       dispatch,
       state: nav
-    });
+    })
 
-    return <Navigator navigation = { navigation }
-    />;
+    return <Navigator navigation={navigation}
+    />
   }
 }
 
 const mapStateToProps = state => ({
   nav: state.nav
-});
+})
 
 export default connect(mapStateToProps)(LenderNavigation)
