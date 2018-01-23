@@ -3,6 +3,14 @@ import thunk from 'redux-thunk'
 import reducers from './reducers'
 import {composeWithDevTools} from 'remote-redux-devtools'
 
+/**
+ * @name configureStore
+ * @description Redux Store Configuration
+ *
+ * @param initialState [Object]
+ *
+ * @return Store
+ */
 const configureStore = (initialState) => {
   const middleware = applyMiddleware(thunk)
 
