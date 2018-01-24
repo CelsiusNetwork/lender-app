@@ -1,17 +1,24 @@
-import axios from 'axios';
+import axios from 'axios'
 const apiUrl = 'http://rinkeby.etherscan.io/api'
 const apiKey = 'HV2XA43VKN29EK777RYNNU9HWFK1MIUMT2'
 
 export const TestEtherScanService = () => ({
+  /**
+   * @name fetchTransactionList
+   * @description get all transactions for the user
+   *
+   * @param walletAddress [string] user wallet address
+   *
+   * @return AxiosPromise server response
+   * */
   fetchTransactionList (walletAddress) {
-    // const defaultWalletAddress = '0xe97593a00882369600beaaf690a0fa51a6e07a0b'
     const params = {
       module: 'account',
       action: 'txlist',
       address: walletAddress,
-      apikey: apiKey,
-    };
+      apiKey
+    }
 
-    return axios.get(apiUrl, { params });
+    return axios.get(apiUrl, { params })
   }
 })
