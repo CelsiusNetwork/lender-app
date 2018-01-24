@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {StyleSheet, View, ImageBackground, Image, TouchableOpacity, Text, Button} from 'react-native'
-import {Form, Input, Item, Label, Content, Container} from 'native-base'
+import {StyleSheet, View, ImageBackground, Image, TouchableOpacity, Text} from 'react-native'
+import {Button, Form, Input, Item, Label, Content, Container} from 'native-base'
 import {loginEmailChanged, loginPasswordChanged, loginLender} from '../actions'
 
 class LoginForm extends Component {
