@@ -24,7 +24,10 @@ class App extends React.Component {
     await Font.loadAsync({
       'Roboto': require('native-base/Fonts/Roboto.ttf'),
       'Roboto_medium': require('native-base/Fonts/Roboto_medium.ttf'),
-      'barlow-medium': require('../assets/fonts/Barlow-Medium.ttf')
+      'barlow-medium': require('../assets/fonts/Barlow-Medium.ttf'),
+      'barlow-semi-bold': require('../assets/fonts/Barlow-SemiBold.otf'),
+      'barlow-light': require('../assets/fonts/Barlow-Light.otf'),
+      'barlow': require('../assets/fonts/Barlow-Regular.otf')
     })
 
     this.setState({loading: false})

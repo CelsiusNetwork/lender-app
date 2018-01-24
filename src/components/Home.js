@@ -6,16 +6,20 @@ import {Pages} from 'react-native-pages'
 import DegIncome from './graph/DegIncome'
 import DegValue from './graph/DegValue'
 import IncomeHistory from './graph/IncomeHistory'
-import {fetchWalletBalance, fetchTransactionsHistory, setActiveTransaction, lenderAppInitToken, isAlreadyLoggedIn} from '../actions'
-import { Font } from 'expo'
+import {
+  fetchWalletBalance,
+  fetchTransactionsHistory,
+  setActiveTransaction,
+  lenderAppInitToken,
+  isAlreadyLoggedIn
+} from '../actions'
 import Sentry from 'sentry-expo'
 
 class Home extends Component {
-  constructor (props) {
-    super(props)
+  constructor () {
+    super()
 
     this.state = {
-      fontLoaded: false,
       eth: 10.000,
       deg: 2.984,
       change: ' ▲ +3.24%',
@@ -24,12 +28,11 @@ class Home extends Component {
       },
       isAlreadyLogged: false
     }
-    console.log('props: ')
-    console.log(props)
 
     this.fetchingBalanceInterval = null
   }
 
+  // Component Lifecycle Methods
   componentWillMount () {
     const {props} = this
 
@@ -39,41 +42,23 @@ class Home extends Component {
       console.error(error)
     })
 
-    // refrest eth & cel balance every 60s
     props.fetchWalletBalance(props.walletAddress, props.token)
     this.fetchingBalanceInterval = setInterval(() => {
       props.fetchWalletBalance(props.walletAddress, props.token)
     }, 60000)
   }
 
-  // TODO: font should be loded before DOM is initializes, into componentWillMount()
-  async componentDidMount () {
-    const { email, authId, surname} = this.props
-    await Font.loadAsync({
-      'barlow-semi-bold': require('../../assets/fonts/Barlow-SemiBold.otf')
-    })
-    await Font.loadAsync({
-      'barlow-light': require('../../assets/fonts/Barlow-Light.otf')
-    })
-    await Font.loadAsync({
-      'barlow': require('../../assets/fonts/Barlow-Regular.otf')
-    })
-
-    this.setState({fontLoaded: true})
+  componentDidMount () {
+    const {email, authId, surname} = this.props
 
     Sentry.setUserContext({
-      email: email,
+      email,
       userID: authId,
       surname
     })
   }
 
   componentWillReceiveProps (nextProps) {
-    // nextProps are the next set of props that this component
-    // will be rendered with
-    // this.props is still the old set of props
-    console.log('received props: ')
-    console.log(nextProps)
     this.props = nextProps
   }
 
@@ -81,6 +66,7 @@ class Home extends Component {
     clearInterval(this.fetchingBalanceInterval)
   }
 
+  // Rendering methods
   render () {
     const {navigate} = this.props.navigation
     const ethBalance = this.props.ethBalance || '0.00'
@@ -93,11 +79,11 @@ class Home extends Component {
           <ImageBackground source={require('../../assets/images/background-blur.png')} style={styles.background}>
             <View style={styles.body}>
               <View style={[styles.row, {marginBottom: 20, marginTop: 60}]}>
-              <TouchableOpacity onPress={() => navigate('Home')}>
-                <View style={styles.cellLeft}>
-                  <Image source={require('../../assets/images/Celsius_Symbol_white.png')} style={styles.logo} />
-                </View>
-              </TouchableOpacity>
+                <TouchableOpacity onPress={() => navigate('Home')}>
+                  <View style={styles.cellLeft}>
+                    <Image source={require('../../assets/images/Celsius_Symbol_white.png')} style={styles.logo} />
+                  </View>
+                </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigate('EditProfile')}>
                   <View style={styles.cellRight}>
                     <Image source={require('../../assets/images/icon-user.png')} style={styles.user} />
@@ -107,12 +93,10 @@ class Home extends Component {
               <Container style={styles.wrapper}>
                 <Content>
                   <Text style={styles.header}>
-                    <Text>{ethBalance}</Text>
-                    <Text> ETH</Text>
+                    <Text>{ethBalance} ETH</Text>
                   </Text>
                   <Text style={styles.header2}>
-                    <Text>{celBalance}</Text>
-                    <Text> CEL</Text>
+                    <Text>{celBalance} CEL</Text>
                   </Text>
                   <View style={styles.btnsContainer}>
                     <View>
@@ -181,14 +165,11 @@ class Home extends Component {
             </View>
 
             <Text style={stylesGraph.headerText}>
-              {this.state.fontLoaded ? (<Text style={[{fontFamily: 'barlow-semi-bold'}]}>{ethBalance}</Text>) : null}
-              {this.state.fontLoaded ? (<Text style={[{fontFamily: 'barlow-semi-bold'}]}> ETH</Text>) : null}
+              <Text style={[{fontFamily: 'barlow-semi-bold'}]}>{ethBalance} ETH</Text>
             </Text>
             <Text style={stylesGraph.header2Text}>
-              {this.state.fontLoaded ? (<Text style={[{fontFamily: 'barlow-light'}]}>{celBalance}</Text>) : null}
-              {this.state.fontLoaded ? (<Text style={[{fontFamily: 'barlow-light'}]}> CEL</Text>) : null}
-              {this.state.fontLoaded ? (
-                <Text style={[stylesGraph.changeUp, {fontFamily: 'barlow-light'}]}> {this.state.change}</Text>) : null}
+              <Text style={[{fontFamily: 'barlow-light'}]}>{celBalance} CEL</Text>
+              <Text style={[stylesGraph.changeUp, {fontFamily: 'barlow-light'}]}> {this.state.change}</Text>
             </Text>
 
             <View style={stylesGraph.row}>
@@ -203,6 +184,7 @@ class Home extends Component {
                 </TouchableOpacity>
               </View>
             </View>
+
             <View style={stylesGraph.pagesWrapper}>
               <Pages style={stylesGraph.pages}>
                 <DegIncome navigation={this.props.navigation} lenderAppInitToken={this.props.lenderAppInitToken} />
@@ -235,16 +217,12 @@ const styles = StyleSheet.create({
   background: {
     flex: 1,
     flexDirection: 'row'
-    // justifyContent: 'top',
-    // alignItems: 'center',
-    // backgroundColor: 'red'
   },
   body: {
     flex: 1,
     marginTop: 20
   },
   line: {
-    height: 10,
     borderRadius: 2,
     height: 4,
     marginBottom: 10
@@ -281,8 +259,6 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     marginLeft: 10,
     height: 40
-    // borderWidth: 1,
-    // borderColor: 'red'
   },
   cellRight: {
     flex: 1,
@@ -298,13 +274,11 @@ const styles = StyleSheet.create({
     marginLeft: 15
   },
   user: {
-    // position: 'absolute',
     width: 26,
     height: 28,
     marginRight: 15,
     resizeMode: 'contain'
   },
-  wrapper: {},
   text: {
     fontSize: 14,
     backgroundColor: 'rgba(0,0,0,0)',
@@ -332,11 +306,8 @@ const styles = StyleSheet.create({
     width: '95%',
     justifyContent: 'center',
     alignItems: 'center',
-    // marginRight: '5%',
-    // marginLeft: '5%',
     paddingLeft: 20,
     paddingRight: 20,
-    // marginLeft: 20,
     alignSelf: 'stretch'
   },
   buttonText: {
@@ -419,11 +390,8 @@ const styles = StyleSheet.create({
     width: '95%',
     justifyContent: 'center',
     alignItems: 'center',
-    // marginRight: '5%',
-    // marginLeft: '5%',
     paddingLeft: 20,
     paddingRight: 20,
-    // marginRight: 20,
     alignSelf: 'stretch'
   },
   button2Text: {
@@ -433,20 +401,6 @@ const styles = StyleSheet.create({
 })
 
 const stylesGraph = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'center',
-    marginLeft: 0,
-    marginRight: 0
-  },
-  background: {
-    flex: 1,
-    flexDirection: 'row'
-    // justifyContent: 'top',
-    // alignItems: 'center',
-    // backgroundColor: 'red'
-  },
   header: {
     flexDirection: 'row',
     marginBottom: 15,
@@ -518,8 +472,6 @@ const stylesGraph = StyleSheet.create({
     alignSelf: 'stretch',
     marginLeft: 23,
     height: 50
-    // borderWidth: 1,
-    // borderColor: 'green',
   },
   buttonCellRight: {
     flex: 1,
@@ -529,8 +481,6 @@ const stylesGraph = StyleSheet.create({
     alignSelf: 'stretch',
     marginRight: 23,
     height: 50
-    // borderWidth: 1,
-    // borderColor: 'red'
   },
   logo: {
     width: 34,
@@ -565,11 +515,6 @@ const stylesGraph = StyleSheet.create({
     width: '95%',
     justifyContent: 'center',
     alignItems: 'center',
-    // marginRight: '5%',
-    // marginLeft: '5%',
-    // paddingLeft: 20,
-    // paddingRight: 20,
-    // marginLeft: 30,
     alignSelf: 'stretch'
   },
   buttonText: {
@@ -577,7 +522,6 @@ const stylesGraph = StyleSheet.create({
     fontSize: 20
   },
   button2: {
-    // flex: 1,
     backgroundColor: 'rgba(255, 255, 255, 0.0)',
     borderColor: 'rgba(255, 255, 255, 0.5)',
     borderWidth: 2,
@@ -587,11 +531,6 @@ const stylesGraph = StyleSheet.create({
     width: '95%',
     justifyContent: 'center',
     alignItems: 'center',
-    // marginRight: '5%',
-    // marginLeft: '5%',
-    // paddingLeft: 20,
-    // paddingRight: 20,
-    // marginRight: 30,
     alignSelf: 'stretch'
   },
   button2Text: {
@@ -616,10 +555,12 @@ const mapStateToProps = state => {
   }
 }
 
-// The mapDispatchToProps function lets us inject
-// certain props into the React component that can dispatch actions
 const mapDispatchToProps = {
-  fetchWalletBalance, fetchTransactionsHistory, lenderAppInitToken, setActiveTransaction, isAlreadyLoggedIn
+  fetchWalletBalance,
+  fetchTransactionsHistory,
+  lenderAppInitToken,
+  setActiveTransaction,
+  isAlreadyLoggedIn
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)
