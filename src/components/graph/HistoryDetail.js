@@ -8,21 +8,9 @@ import { Font } from 'expo'
 class HistoryDetail extends Component {
   constructor (props) {
     super(props)
-    this.state = {
-      fontLoaded: false
-    }
   }
   navigate () {
 
-  }
-  async componentDidMount () {
-    await Font.loadAsync({
-      'barlow-semi-bold': require('../../../assets/fonts/Barlow-SemiBold.otf')
-    })
-    await Font.loadAsync({
-      'barlow': require('../../../assets/fonts/Barlow-Regular.otf')
-    })
-    this.setState({ fontLoaded: true })
   }
 
   renderHeadingText () {
@@ -80,61 +68,59 @@ class HistoryDetail extends Component {
                   { activeTransaction.isDegreeTransaction ? (
                     <View style={styles.row}>
                       <View style={styles.cellLeft}>
-                        { this.state.fontLoaded ? (<Text style={[styles.cellLeftText, { fontFamily: 'barlow' }]}>Amount of CEL</Text>) : null }
+                        <Text style={[styles.cellLeftText, { fontFamily: 'barlow' }]}>Amount of CEL</Text>
                       </View>
                       <View style={styles.cellRight}>
-                        { this.state.fontLoaded ? (<Text style={[styles.cellRightText, { fontFamily: 'barlow-semi-bold' }]}>{ activeTransaction.degAmount } CEL</Text>) : null }
+                        <Text style={[styles.cellRightText, { fontFamily: 'barlow-semi-bold' }]}>{ activeTransaction.degAmount } CEL</Text>
                       </View>
                     </View>
                   ) : (
                     <View style={styles.row}>
                       <View style={styles.cellLeft}>
-                        { this.state.fontLoaded ? (<Text style={[styles.cellLeftText, { fontFamily: 'barlow' }]}>Amount of ETH</Text>) : null }
+                        <Text style={[styles.cellLeftText, { fontFamily: 'barlow' }]}>Amount of ETH</Text>
                       </View>
                       <View style={styles.cellRight}>
-                        { this.state.fontLoaded ? (<Text style={[styles.cellRightText, { fontFamily: 'barlow-semi-bold' }]}>{ activeTransaction.ethValue } ETH</Text>) : null }
+                        <Text style={[styles.cellRightText, { fontFamily: 'barlow-semi-bold' }]}>{ activeTransaction.ethValue } ETH</Text>
                       </View>
                     </View>
                   )}
 
                   <View style={styles.row}>
                     <View style={styles.cellLeft}>
-                      { this.state.fontLoaded ? (<Text style={[styles.cellLeftText, { fontFamily: 'barlow' }]}>Points earned</Text>) : null }
+                      <Text style={[styles.cellLeftText, { fontFamily: 'barlow' }]}>Points earned</Text>
                     </View>
                     <View style={styles.cellRight}>
-                      { this.state.fontLoaded ? (<Text style={[styles.cellRightText, { fontFamily: 'barlow-semi-bold' }]}>100</Text>) : null }
+                      <Text style={[styles.cellRightText, { fontFamily: 'barlow-semi-bold' }]}>100</Text>
                       <Image source={require('../../../assets/images/icon-points.png')} style={styles.points} />
                     </View>
                   </View>
                   <View style={styles.row}>
                     <View style={styles.cellLeft}>
-                      { this.state.fontLoaded ? (<Text style={[styles.cellLeftText, { fontFamily: 'barlow' }]}>Date</Text>) : null }
+                      <Text style={[styles.cellLeftText, { fontFamily: 'barlow' }]}>Date</Text>
                     </View>
                     <View style={styles.cellRight}>
-                      { this.state.fontLoaded ? (<Text style={[styles.cellRightText, { fontFamily: 'barlow-semi-bold' }]}>{ activeTransaction.dateDisplay }</Text>) : null }
+                      <Text style={[styles.cellRightText, { fontFamily: 'barlow-semi-bold' }]}>{ activeTransaction.dateDisplay }</Text>
                     </View>
                   </View>
                   <View style={styles.row}>
                     <View style={styles.cellLeft}>
-                      { this.state.fontLoaded ? (<Text style={[styles.cellLeftText, { fontFamily: 'barlow' }]}>Time</Text>) : null }
+                      <Text style={[styles.cellLeftText, { fontFamily: 'barlow' }]}>Time</Text>
                     </View>
                     <View style={styles.cellRight}>
-                      { this.state.fontLoaded ? (<Text style={[styles.cellRightText, { fontFamily: 'barlow-semi-bold' }]}>{ activeTransaction.timeDisplay }</Text>) : null }
+                      <Text style={[styles.cellRightText, { fontFamily: 'barlow-semi-bold' }]}>{ activeTransaction.timeDisplay }</Text>
                     </View>
                   </View>
                   <View style={[styles.row, {borderBottomColor: 'rgba(255, 255, 255, 0.1)', borderBottomWidth: 2}]}>
                     <View style={styles.cellLeft}>
-                      { this.state.fontLoaded ? (<Text style={[styles.cellLeftText, { fontFamily: 'barlow' }]}>Status</Text>) : null }
+                      <Text style={[styles.cellLeftText, { fontFamily: 'barlow' }]}>Status</Text>
                     </View>
                     <View style={styles.cellRight}>
                       <View style={styles.greenDow} />
-                      { this.state.fontLoaded ? (<Text style={[styles.cellRightText, { fontFamily: 'barlow-semi-bold' }]}>Complete</Text>) : null }
+                      <Text style={[styles.cellRightText, { fontFamily: 'barlow-semi-bold' }]}>Complete</Text>
                     </View>
                   </View>
 
-                  <TouchableOpacity style={styles.button}
-                    onPress={() => this.props.navigation.goBack()}
-                    >
+                  <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.goBack()}>
                     <Text style={styles.buttonText}>Close</Text>
                   </TouchableOpacity>
                 </View>

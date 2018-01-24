@@ -16,7 +16,6 @@ class Passcode extends Component {
     super();
     // this.state = {
     this.state = {
-      fontLoaded: false,
       count: 0,
       enterCode: "",
       color1: 'rgba(255, 255, 255, 0.0)',
@@ -25,14 +24,6 @@ class Passcode extends Component {
       color4: 'rgba(255, 255, 255, 0.0)',
     };
   }
-
-  async componentDidMount() {
-    await Font.loadAsync({
-      'helvetica-neue-lt': require('../../assets/fonts/helvetica-neue-lt-std-45-light.ttf'),
-    });
-    this.setState({ fontLoaded: true });
-  }
-
 
   _onPressButton(index) {
     // console.log(index)
@@ -102,90 +93,79 @@ class Passcode extends Component {
                 <View style={styles.aCenter}>
                   <View style={styles.dotRow}>
                     <View style={[styles.dotCell, {marginLeft: 15}]}>
-                      <View style={[styles.dot, {backgroundColor: this.state.color1}]}></View>
+                      <View style={[styles.dot, {backgroundColor: this.state.color1}]} />
                     </View>
                     <View style={styles.dotCell}>
-                      <View style={[styles.dot, {backgroundColor: this.state.color2}]}></View>
+                      <View style={[styles.dot, {backgroundColor: this.state.color2}]} />
                     </View>
                     <View style={styles.dotCell}>
-                      <View style={[styles.dot, {backgroundColor: this.state.color3}]}></View>
+                      <View style={[styles.dot, {backgroundColor: this.state.color3}]} />
                     </View>
                     <View style={styles.dotCell}>
-                      <View style={[styles.dot, {backgroundColor: this.state.color4}]}></View>
+                      <View style={[styles.dot, {backgroundColor: this.state.color4}]} />
                     </View>
                   </View>
 
                   <View style={styles.row}>
                     <View
-                      style={styles.aLeft}><TouchableOpacity onPress={ this._onPressButton.bind(this, 1) } style={styles.circle}>
-                      {
-                        this.state.fontLoaded ? (
-                          <Text style={[styles.circleText, { fontFamily: 'helvetica-neue-lt' }]}>1</Text>
-                        ) : null
-                      }
+                      style={styles.aLeft}>
+                      <TouchableOpacity onPress={ this._onPressButton.bind(this, 1) } style={styles.circle}>
+                        <Text style={[styles.circleText, { fontFamily: 'helvetica-neue-lt' }]}>1</Text>
                       </TouchableOpacity>
                     </View>
                     <View
-                      style={styles.aMiddle}><TouchableOpacity onPress={ this._onPressButton.bind(this, 2) } style={styles.circle}>{
-                        this.state.fontLoaded ? (
-                          <Text style={[styles.circleText, { fontFamily: 'helvetica-neue-lt' }]}>2</Text>
-                        ) : null
-                      }</TouchableOpacity>
+                      style={styles.aMiddle}>
+                      <TouchableOpacity onPress={ this._onPressButton.bind(this, 2) } style={styles.circle}>
+                        <Text style={[styles.circleText, { fontFamily: 'helvetica-neue-lt' }]}>2</Text>
+                      </TouchableOpacity>
                     </View>
                     <View
-                      style={styles.aRight}><TouchableOpacity onPress={ this._onPressButton.bind(this, 3) } style={styles.circle}>{
-                        this.state.fontLoaded ? (
-                          <Text style={[styles.circleText, { fontFamily: 'helvetica-neue-lt' }]}>3</Text>
-                        ) : null
-                      }</TouchableOpacity>
+                      style={styles.aRight}>
+                      <TouchableOpacity onPress={ this._onPressButton.bind(this, 3) } style={styles.circle}>
+                        <Text style={[styles.circleText, { fontFamily: 'helvetica-neue-lt' }]}>3</Text>
+                      </TouchableOpacity>
                     </View>
                   </View>
 
                   <View style={styles.row}>
                     <View
-                      style={styles.aLeft}><TouchableOpacity onPress={ this._onPressButton.bind(this, 4) } style={styles.circle}>{
-                        this.state.fontLoaded ? (
-                          <Text style={[styles.circleText, { fontFamily: 'helvetica-neue-lt' }]}>4</Text>
-                        ) : null
-                      }</TouchableOpacity>
+                      style={styles.aLeft}>
+                      <TouchableOpacity onPress={ this._onPressButton.bind(this, 4) } style={styles.circle}>
+                        <Text style={[styles.circleText, { fontFamily: 'helvetica-neue-lt' }]}>4</Text>
+                      </TouchableOpacity>
                     </View>
                     <View
-                      style={styles.aMiddle}><TouchableOpacity onPress={ this._onPressButton.bind(this, 5) } style={styles.circle}>{
-                        this.state.fontLoaded ? (
-                          <Text style={[styles.circleText, { fontFamily: 'helvetica-neue-lt' }]}>5</Text>
-                        ) : null
-                      }</TouchableOpacity>
+                      style={styles.aMiddle}>
+                      <TouchableOpacity onPress={ this._onPressButton.bind(this, 5) } style={styles.circle}>
+                        <Text style={[styles.circleText, { fontFamily: 'helvetica-neue-lt' }]}>5</Text>
+                      </TouchableOpacity>
                     </View>
                     <View
-                      style={styles.aRight}><TouchableOpacity onPress={ this._onPressButton.bind(this, 6) } style={styles.circle}>{
-                        this.state.fontLoaded ? (
-                          <Text style={[styles.circleText, { fontFamily: 'helvetica-neue-lt' }]}>6</Text>
-                        ) : null
-                      }</TouchableOpacity>
+                      style={styles.aRight}>
+                      <TouchableOpacity onPress={ this._onPressButton.bind(this, 6) } style={styles.circle}>
+                        <Text style={[styles.circleText, { fontFamily: 'helvetica-neue-lt' }]}>6</Text>
+                      </TouchableOpacity>
                     </View>
                   </View>
 
                   <View style={styles.row}>
                     <View
-                      style={styles.aLeft}><TouchableOpacity onPress={ this._onPressButton.bind(this, 7) } style={styles.circle}>{
-                        this.state.fontLoaded ? (
-                          <Text style={[styles.circleText, { fontFamily: 'helvetica-neue-lt' }]}>7</Text>
-                        ) : null
-                      }</TouchableOpacity>
+                      style={styles.aLeft}>
+                      <TouchableOpacity onPress={ this._onPressButton.bind(this, 7) } style={styles.circle}>
+                        <Text style={[styles.circleText, { fontFamily: 'helvetica-neue-lt' }]}>7</Text>
+                      </TouchableOpacity>
                     </View>
                     <View
-                      style={styles.aMiddle}><TouchableOpacity onPress={ this._onPressButton.bind(this, 8) } style={styles.circle}>{
-                        this.state.fontLoaded ? (
-                          <Text style={[styles.circleText, { fontFamily: 'helvetica-neue-lt' }]}>8</Text>
-                        ) : null
-                      }</TouchableOpacity>
+                      style={styles.aMiddle}>
+                      <TouchableOpacity onPress={ this._onPressButton.bind(this, 8) } style={styles.circle}>
+                        <Text style={[styles.circleText, { fontFamily: 'helvetica-neue-lt' }]}>8</Text>
+                      </TouchableOpacity>
                     </View>
                     <View
-                      style={styles.aRight}><TouchableOpacity onPress={ this._onPressButton.bind(this, 9) } style={styles.circle}>{
-                        this.state.fontLoaded ? (
-                          <Text style={[styles.circleText, { fontFamily: 'helvetica-neue-lt' }]}>9</Text>
-                        ) : null
-                      }</TouchableOpacity>
+                      style={styles.aRight}>
+                      <TouchableOpacity onPress={ this._onPressButton.bind(this, 9) } style={styles.circle}>
+                        <Text style={[styles.circleText, { fontFamily: 'helvetica-neue-lt' }]}>9</Text>
+                      </TouchableOpacity>
                     </View>
                   </View>
 
@@ -194,11 +174,10 @@ class Passcode extends Component {
                       style={styles.aLeft}>
                     </View>
                     <View
-                      style={styles.aMiddle}><TouchableOpacity onPress={ this._onPressButton.bind(this, 0) } style={styles.circle}>{
-                        this.state.fontLoaded ? (
-                          <Text style={[styles.circleText, { fontFamily: 'helvetica-neue-lt' }]}>0</Text>
-                        ) : null
-                      }</TouchableOpacity>
+                      style={styles.aMiddle}>
+                      <TouchableOpacity onPress={ this._onPressButton.bind(this, 0) } style={styles.circle}>
+                        <Text style={[styles.circleText, { fontFamily: 'helvetica-neue-lt' }]}>0</Text>
+                      </TouchableOpacity>
                     </View>
                     <View
                       style={styles.aRight}>

@@ -15,7 +15,6 @@ export default class DegIncome extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      fontLoaded: false,
       eth: 10.000,
       deg: 2.984,
       change: ' ▲ +3.24%',
@@ -23,18 +22,6 @@ export default class DegIncome extends Component {
         name: 'Alex'
       }
     }
-  }
-  async componentDidMount () {
-    await Font.loadAsync({
-      'barlow-semi-bold': require('../../../assets/fonts/Barlow-SemiBold.otf')
-    })
-    await Font.loadAsync({
-      'barlow-light': require('../../../assets/fonts/Barlow-Light.otf')
-    })
-    await Font.loadAsync({
-      'barlow': require('../../../assets/fonts/Barlow-Regular.otf')
-    })
-    this.setState({ fontLoaded: true })
   }
 
   render () {
@@ -49,7 +36,7 @@ export default class DegIncome extends Component {
               <Image source={require('../../../assets/images/graph-token-earnings.png')} style={styles.graph} />
             </View>
             <Text style={styles.footer}>
-              { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow' }]}>CEL Earnings</Text>) : null }
+              <Text style={[{ fontFamily: 'barlow' }]}>CEL Earnings</Text>
             </Text>
             <View style={{borderBottomColor: 'rgba(255,255,255,0.1)', borderBottomWidth: 1, marginLeft: 12, marginRight: 12}} />
           </Content>

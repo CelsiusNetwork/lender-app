@@ -14,29 +14,9 @@ class HowItWorks extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        fontLoaded: false,
         toLeft:0,
         toRight:1
       }
-  }
-
-  async componentDidMount() {
-    await Font.loadAsync({
-      'inconsolata': require('../../../assets/fonts/Inconsolata-Regular.ttf'),
-    });
-    await Font.loadAsync({
-      'barlow-semi-bold': require('../../../assets/fonts/Barlow-SemiBold.otf'),
-    });
-    await Font.loadAsync({
-      'barlow-light': require('../../../assets/fonts/Barlow-Light.otf'),
-    });
-    await Font.loadAsync({
-      'barlow-bold': require('../../../assets/fonts/Barlow-Bold.otf'),
-    });
-    await Font.loadAsync({
-      'barlow': require('../../../assets/fonts/Barlow-Regular.otf'),
-    });
-    this.setState({ fontLoaded: true });
   }
 
   static navigationOptions = {
@@ -75,7 +55,7 @@ class HowItWorks extends Component {
           <Content>
 
             <Image source={require('../../../assets/images/logo-header.png')} style={styles.logo} />
-            { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow-bold'}, styles.header]}>{'How it works?'.toUpperCase()}</Text>) : null }
+            <Text style={[{ fontFamily: 'barlow-bold'}, styles.header]}>{'How it works?'.toUpperCase()}</Text>
 
             <View style={styles.circleWrapper}>
               <TouchableOpacity style={styles.aLeftWrapper} onPress={this.scrollLeft.bind(this)}>
@@ -106,11 +86,11 @@ class HowItWorks extends Component {
               onPress={this.onButtonPress.bind(this)}
               //onPress={() => navigate('Register')}
               >
-              { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow'}, styles.buttonText]}>Create account</Text>) : null }
+              <Text style={[{ fontFamily: 'barlow'}, styles.buttonText]}>Create account</Text>
             </TouchableOpacity>
 
             <TouchableOpacity style={styles.loginTouchable} onPress={() => navigate('LoginForm')}>
-              { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow'}, styles.loginText]}>Already have one?</Text>) : null }
+              <Text style={[{ fontFamily: 'barlow'}, styles.loginText]}>Already have one?</Text>
             </TouchableOpacity>
 
           </Content>

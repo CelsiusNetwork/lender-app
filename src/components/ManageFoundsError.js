@@ -9,25 +9,7 @@ import { NavigationActions } from 'react-navigation'
 class AddFounds extends Component {
   constructor (props) {
     super(props)
-    this.state = {
-      fontLoaded: false,
-    }
-  }
-
-  async componentDidMount() {
-    await Font.loadAsync({
-      'inconsolata': require('../../assets/fonts/Inconsolata-Regular.ttf'),
-    });
-    await Font.loadAsync({
-      'barlow-semi-bold': require('../../assets/fonts/Barlow-SemiBold.otf'),
-    });
-    await Font.loadAsync({
-      'barlow-light': require('../../assets/fonts/Barlow-Light.otf'),
-    });
-    await Font.loadAsync({
-      'barlow': require('../../assets/fonts/Barlow-Regular.otf'),
-    });
-    this.setState({ fontLoaded: true });
+    this.state = {}
   }
 
   render () {
@@ -45,34 +27,34 @@ class AddFounds extends Component {
 {/*
                   <View style={styles.row}>
                     <View style={styles.cellLeft}>
-                    { this.state.fontLoaded ? (<Text style={[styles.cellLeftText, { fontFamily: 'barlow' }]}>Amount of ETH</Text>) : null }
+                    <Text style={[styles.cellLeftText, { fontFamily: 'barlow' }]}>Amount of ETH</Text>)
                     </View>
                     <View style={styles.cellRight}>
-                    { this.state.fontLoaded ? (<Text style={[styles.cellRightText, { fontFamily: 'barlow-semi-bold' }]}>6.350 ETH</Text>) : null }
+                    <Text style={[styles.cellRightText, { fontFamily: 'barlow-semi-bold' }]}>6.350 ETH</Text>)
                     </View>
                   </View>
                   <View style={styles.row}>
                     <View style={styles.cellLeft}>
-                    { this.state.fontLoaded ? (<Text style={[styles.cellLeftText, { fontFamily: 'barlow' }]}>Sent to wallet</Text>) : null }
+                    <Text style={[styles.cellLeftText, { fontFamily: 'barlow' }]}>Sent to wallet</Text>)
                     </View>
                     <View style={styles.cellRight}>
-                    { this.state.fontLoaded ? (<Text style={[styles.cellRightText, { fontFamily: 'barlow-semi-bold' }]}>0x901933014…</Text>) : null }
+                    <Text style={[styles.cellRightText, { fontFamily: 'barlow-semi-bold' }]}>0x901933014…</Text>)
                     </View>
                   </View>
                   <View style={styles.row}>
                     <View style={styles.cellLeft}>
-                    { this.state.fontLoaded ? (<Text style={[styles.cellLeftText, { fontFamily: 'barlow' }]}>Date</Text>) : null }
+                    <Text style={[styles.cellLeftText, { fontFamily: 'barlow' }]}>Date</Text>)
                     </View>
                     <View style={styles.cellRight}>
-                    { this.state.fontLoaded ? (<Text style={[styles.cellRightText, { fontFamily: 'barlow-semi-bold' }]}>Dec 22, 2017</Text>) : null }
+                    <Text style={[styles.cellRightText, { fontFamily: 'barlow-semi-bold' }]}>Dec 22, 2017</Text>)
                     </View>
                   </View>
                   <View style={styles.row}>
                     <View style={styles.cellLeft}>
-                    { this.state.fontLoaded ? (<Text style={[styles.cellLeftText, { fontFamily: 'barlow' }]}>Time</Text>) : null }
+                    <Text style={[styles.cellLeftText, { fontFamily: 'barlow' }]}>Time</Text>)
                     </View>
                     <View style={styles.cellRight}>
-                    { this.state.fontLoaded ? (<Text style={[styles.cellRightText, { fontFamily: 'barlow-semi-bold' }]}>2:24PM</Text>) : null }
+                    <Text style={[styles.cellRightText, { fontFamily: 'barlow-semi-bold' }]}>2:24PM</Text>)
                     </View>
                   </View>
 

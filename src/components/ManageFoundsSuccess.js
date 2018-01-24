@@ -10,26 +10,9 @@ import { withdrawETH, gotoHome } from '../actions'
 class AddFounds extends Component {
   constructor (props) {
     super(props)
-    this.state = {
-      fontLoaded: false,
-    }
+    this.state = {}
   }
 
-  async componentDidMount () {
-    await Font.loadAsync({
-      'inconsolata': require('../../assets/fonts/Inconsolata-Regular.ttf'),
-    })
-    await Font.loadAsync({
-      'barlow-semi-bold': require('../../assets/fonts/Barlow-SemiBold.otf'),
-    })
-    await Font.loadAsync({
-      'barlow-light': require('../../assets/fonts/Barlow-Light.otf'),
-    })
-    await Font.loadAsync({
-      'barlow': require('../../assets/fonts/Barlow-Regular.otf'),
-    })
-    this.setState({ fontLoaded: true })
-  }
   close () {
     console.log('hitting ')
   }
@@ -45,40 +28,40 @@ class AddFounds extends Component {
                 <View style={styles.center}>
                   <Image source={require('../../assets/images/icon-success.png')} style={styles.success} />
                 </View>
-                  <View style={styles.row}>
-                    <View style={styles.cellLeft}>
-                    { this.state.fontLoaded ? (<Text style={[styles.cellLeftText, { fontFamily: 'barlow' }]}>Amount of ETH</Text>) : null }
-                    </View>
-                    <View style={styles.cellRight}>
-                    { this.state.fontLoaded ? (<Text style={[styles.cellRightText, { fontFamily: 'barlow-semi-bold' }]}>6.350 ETH</Text>) : null }
-                    </View>
+                <View style={styles.row}>
+                  <View style={styles.cellLeft}>
+                    <Text style={[styles.cellLeftText, { fontFamily: 'barlow' }]}>Amount of ETH</Text>
                   </View>
-                  <View style={styles.row}>
-                    <View style={styles.cellLeft}>
-                    { this.state.fontLoaded ? (<Text style={[styles.cellLeftText, { fontFamily: 'barlow' }]}>Sent to wallet</Text>) : null }
-                    </View>
-                    <View style={styles.cellRight}>
-                    { this.state.fontLoaded ? (<Text style={[styles.cellRightText, { fontFamily: 'barlow-semi-bold' }]}>0x901933014…</Text>) : null }
-                    </View>
+                  <View style={styles.cellRight}>
+                    <Text style={[styles.cellRightText, { fontFamily: 'barlow-semi-bold' }]}>6.350 ETH</Text>
                   </View>
-                  <View style={styles.row}>
-                    <View style={styles.cellLeft}>
-                    { this.state.fontLoaded ? (<Text style={[styles.cellLeftText, { fontFamily: 'barlow' }]}>Date</Text>) : null }
-                    </View>
-                    <View style={styles.cellRight}>
-                    { this.state.fontLoaded ? (<Text style={[styles.cellRightText, { fontFamily: 'barlow-semi-bold' }]}>Dec 22, 2017</Text>) : null }
-                    </View>
+                </View>
+                <View style={styles.row}>
+                  <View style={styles.cellLeft}>
+                    <Text style={[styles.cellLeftText, { fontFamily: 'barlow' }]}>Sent to wallet</Text>
                   </View>
-                  <View style={styles.row}>
-                    <View style={styles.cellLeft}>
-                    { this.state.fontLoaded ? (<Text style={[styles.cellLeftText, { fontFamily: 'barlow' }]}>Time</Text>) : null }
-                    </View>
-                    <View style={styles.cellRight}>
-                    { this.state.fontLoaded ? (<Text style={[styles.cellRightText, { fontFamily: 'barlow-semi-bold' }]}>2:24PM</Text>) : null }
-                    </View>
+                  <View style={styles.cellRight}>
+                    <Text style={[styles.cellRightText, { fontFamily: 'barlow-semi-bold' }]}>0x901933014…</Text>
                   </View>
+                </View>
+                <View style={styles.row}>
+                  <View style={styles.cellLeft}>
+                    <Text style={[styles.cellLeftText, { fontFamily: 'barlow' }]}>Date</Text>
+                  </View>
+                  <View style={styles.cellRight}>
+                    <Text style={[styles.cellRightText, { fontFamily: 'barlow-semi-bold' }]}>Dec 22, 2017</Text>
+                  </View>
+                </View>
+                <View style={styles.row}>
+                  <View style={styles.cellLeft}>
+                    <Text style={[styles.cellLeftText, { fontFamily: 'barlow' }]}>Time</Text>
+                  </View>
+                  <View style={styles.cellRight}>
+                    <Text style={[styles.cellRightText, { fontFamily: 'barlow-semi-bold' }]}>2:24PM</Text>
+                  </View>
+                </View>
 
-                  <Text style={styles.text}>Feel free to add funds back to Celsius wallet anytime you want.</Text>
+                <Text style={styles.text}>Feel free to add funds back to Celsius wallet anytime you want.</Text>
 
                 <View style={styles.center}>
                   <TouchableOpacity style={styles.button} onPress={() => navigate('Home')}>

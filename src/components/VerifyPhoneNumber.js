@@ -7,22 +7,8 @@ import {Font} from 'expo'
 class VerifyPhoneNumber extends Component {
   constructor () {
     super()
-    this.state = {
-      fontLoaded: false
-    }
-  }
+    this.state = {}
 
-  async componentDidMount () {
-    await Font.loadAsync({
-      'barlow-semi-bold': require('../../assets/fonts/Barlow-SemiBold.otf')
-    })
-    await Font.loadAsync({
-      'barlow-light': require('../../assets/fonts/Barlow-Light.otf')
-    })
-    await Font.loadAsync({
-      'barlow': require('../../assets/fonts/Barlow-Regular.otf')
-    })
-    this.setState({fontLoaded: true})
   }
 
   render () {

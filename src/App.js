@@ -20,10 +20,9 @@ class App extends React.Component {
 
   // Component Lifecycle Methods
   async componentWillMount () {
-    console.log('yo')
+    // Preloading assets
     await loadFontsAsync()
     await loadAssetsAsync()
-    console.log('yo after')
 
     this.setState({ isLoadingAssets: false })
   }

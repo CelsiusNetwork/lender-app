@@ -18,7 +18,6 @@ class GraphPager extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        fontLoaded: false,
         eth: 10.000,
         deg: 2.984,
         change: ' ▲ +3.24%',
@@ -26,18 +25,6 @@ class GraphPager extends Component {
           name: "Alex"
         },
     }
-  }
-  async componentDidMount() {
-    await Font.loadAsync({
-      'barlow-semi-bold': require('../../../assets/fonts/Barlow-SemiBold.otf'),
-    });
-    await Font.loadAsync({
-      'barlow-light': require('../../../assets/fonts/Barlow-Light.otf'),
-    });
-    await Font.loadAsync({
-      'barlow': require('../../../assets/fonts/Barlow-Regular.otf'),
-    });
-    this.setState({ fontLoaded: true });
   }
 
   render () {
@@ -62,13 +49,13 @@ class GraphPager extends Component {
           </View>
 
           <Text style={styles.headerText}>
-              { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow-semi-bold' }]}>{ this.state.eth.toFixed(3) }</Text>) : null }
-              { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow-semi-bold' }]}> ETH</Text>) : null }
+            <Text style={[{ fontFamily: 'barlow-semi-bold' }]}>{ this.state.eth.toFixed(3) }</Text>
+            <Text style={[{ fontFamily: 'barlow-semi-bold' }]}> ETH</Text>
           </Text>
           <Text style={styles.header2Text}>
-            { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow-light' }]}>{ this.state.deg.toFixed(3) }</Text>) : null }
-            { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow-light' }]}> CEL</Text>) : null }
-            { this.state.fontLoaded ? (<Text style={[ styles.changeUp, { fontFamily: 'barlow-light' }]}> { this.state.change}</Text>) : null }
+            <Text style={[{ fontFamily: 'barlow-light' }]}>{ this.state.deg.toFixed(3) }</Text>
+            <Text style={[{ fontFamily: 'barlow-light' }]}> CEL</Text>
+            <Text style={[ styles.changeUp, { fontFamily: 'barlow-light' }]}> { this.state.change}</Text>
           </Text>
 
           <View style={styles.pagesWrapper}>

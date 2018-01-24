@@ -18,8 +18,6 @@ class AddFounds extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      fontLoaded: false,
-
       eth: 10.000,
       ethFiat: '≈ $8,095.10',
       ethChange: ' ▲ +5.84%',
@@ -28,22 +26,6 @@ class AddFounds extends Component {
       degFiat: '≈ $0.02',
       degChange: ' ▲ +0.01%'
     }
-  }
-
-  async componentDidMount () {
-    await Font.loadAsync({
-      'inconsolata': require('../../assets/fonts/Inconsolata-Regular.ttf')
-    })
-    await Font.loadAsync({
-      'barlow-semi-bold': require('../../assets/fonts/Barlow-SemiBold.otf')
-    })
-    await Font.loadAsync({
-      'barlow-light': require('../../assets/fonts/Barlow-Light.otf')
-    })
-    await Font.loadAsync({
-      'barlow': require('../../assets/fonts/Barlow-Regular.otf')
-    })
-    this.setState({fontLoaded: true})
   }
 
   render () {
@@ -66,21 +48,18 @@ class AddFounds extends Component {
                   days</Text> from now. If you do it earlier, you may lose seniority score and additional fees may
                   apply. </Text>
                 <View style={styles.center}>
-
                   <View style={styles.boxWrapper}>
                     <View style={styles.box}>
                       <Image source={require('../../assets/images/icon-eth.png')} style={styles.icon} />
                       <Text style={styles.boxText1}>
-                        {this.state.fontLoaded ? (<Text
-                          style={[{fontFamily: 'barlow-semi-bold'}, styles.boxText1Inner]}>{parseInt(ethBalance).toFixed(3)}</Text>) : null}
-                        {this.state.fontLoaded ? (
-                          <Text style={[{fontFamily: 'barlow-semi-bold'}, styles.boxText1Inner]}> ETH</Text>) : null}
+                        <Text style={[{fontFamily: 'barlow-semi-bold'}, styles.boxText1Inner]}>{parseInt(ethBalance).toFixed(3)}</Text>
+                        <Text style={[{fontFamily: 'barlow-semi-bold'}, styles.boxText1Inner]}> ETH</Text>
                       </Text>
                       <Text style={styles.boxText2}>
-                        {this.state.fontLoaded ? (<Text style={[{fontFamily: 'barlow-light'}, styles.boxText2Inner]}>=
-                          ${(ethBalance * 1250).toFixed(2)}</Text>) : null}
-                        {this.state.fontLoaded ? (<Text
-                          style={[styles.changeUp, {fontFamily: 'barlow-light'}]}> {this.state.ethChange}</Text>) : null}
+                        <Text style={[{fontFamily: 'barlow-light'}, styles.boxText2Inner]}>=
+                          ${(ethBalance * 1250).toFixed(2)}</Text>
+                        <Text
+                          style={[styles.changeUp, {fontFamily: 'barlow-light'}]}> {this.state.ethChange}</Text>
                       </Text>
                       <Image source={require('../../assets/images/graph1.png')} style={styles.graph} />
                       <TouchableOpacity style={styles.boxButton} onPress={() => navigate('ManageFoundsWithdraw')}>
@@ -97,16 +76,12 @@ class AddFounds extends Component {
                     <View style={styles.box}>
                       <Image source={require('../../assets/images/icon-transfer.png')} style={styles.icon} />
                       <Text style={styles.boxText1}>
-                        {this.state.fontLoaded ? (<Text
-                          style={[{fontFamily: 'barlow-semi-bold'}, styles.boxText1Inner]}>{parseInt(celBalance).toFixed(3)}</Text>) : null}
-                        {this.state.fontLoaded ? (
-                          <Text style={[{fontFamily: 'barlow-semi-bold'}, styles.boxText1Inner]}> CEL</Text>) : null}
+                        <Text style={[{fontFamily: 'barlow-semi-bold'}, styles.boxText1Inner]}>{parseInt(celBalance).toFixed(3)}</Text>
+                        <Text style={[{fontFamily: 'barlow-semi-bold'}, styles.boxText1Inner]}> CEL</Text>
                       </Text>
                       <Text style={styles.boxText2}>
-                        {this.state.fontLoaded ? (<Text
-                          style={[{fontFamily: 'barlow-light'}, styles.boxText2Inner]}>{this.state.degFiat}</Text>) : null}
-                        {this.state.fontLoaded ? (<Text
-                          style={[styles.changeUp, {fontFamily: 'barlow-light'}]}> {this.state.degChange}</Text>) : null}
+                        <Text style={[{fontFamily: 'barlow-light'}, styles.boxText2Inner]}>{this.state.degFiat}</Text>
+                        <Text style={[styles.changeUp, {fontFamily: 'barlow-light'}]}> {this.state.degChange}</Text>
                       </Text>
                       <Image source={require('../../assets/images/graph1.png')} style={styles.graph} />
                       <TouchableOpacity style={styles.boxButton}>
@@ -114,14 +89,11 @@ class AddFounds extends Component {
                       </TouchableOpacity>
                     </View>
                   </View>
-
                 </View>
 
                 <View style={styles.center}>
                   <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.goBack()}>
-                    <Text style={styles.buttonText}>
-                      Close
-                    </Text>
+                    <Text style={styles.buttonText}>Close</Text>
                   </TouchableOpacity>
                 </View>
               </Content>

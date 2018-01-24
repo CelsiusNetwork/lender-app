@@ -11,28 +11,10 @@ const MyStatusBar = ({backgroundColor, ...props}) => (
 export default class Welcome extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-        fontLoaded: false,
-      }
+    this.state = {}
   }
 
   async componentDidMount() {
-    await Font.loadAsync({
-      'inconsolata': require('../../../assets/fonts/Inconsolata-Regular.ttf'),
-    });
-    await Font.loadAsync({
-      'barlow-semi-bold': require('../../../assets/fonts/Barlow-SemiBold.otf'),
-    });
-    await Font.loadAsync({
-      'barlow-light': require('../../../assets/fonts/Barlow-Light.otf'),
-    });
-    await Font.loadAsync({
-      'barlow-bold': require('../../../assets/fonts/Barlow-Bold.otf'),
-    });
-    await Font.loadAsync({
-      'barlow': require('../../../assets/fonts/Barlow-Regular.otf'),
-    });
-    this.setState({ fontLoaded: true });
   }
 
   render () {
@@ -40,8 +22,8 @@ export default class Welcome extends Component {
       <View style={styles.welcomeContainer}>
         <MyStatusBar barStyle="light-content" />
         <Image source={require('../../../assets/images/Celsius_Symbol_white.png')} style={styles.logo} />
-        { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow-bold'}, styles.header]}>WELCOME TO CELSIUS</Text>) : null }
-        { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow'}, styles.text]}>A new global financial platform that seamlessly connects holders of crypto-assets with borrowers. Earn fees on your assets by allowing financial traders to borrow them.</Text>) : null }
+        <Text style={[{ fontFamily: 'barlow-bold'}, styles.header]}>WELCOME TO CELSIUS</Text>
+        <Text style={[{ fontFamily: 'barlow'}, styles.text]}>A new global financial platform that seamlessly connects holders of crypto-assets with borrowers. Earn fees on your assets by allowing financial traders to borrow them.</Text>
       </View>
     )
   }

@@ -5,28 +5,7 @@ import { Font } from 'expo';
 export default class Welcome extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-        fontLoaded: false,
-      }
-  }
-
-  async componentDidMount() {
-    await Font.loadAsync({
-      'inconsolata': require('../../../assets/fonts/Inconsolata-Regular.ttf'),
-    });
-    await Font.loadAsync({
-      'barlow-semi-bold': require('../../../assets/fonts/Barlow-SemiBold.otf'),
-    });
-    await Font.loadAsync({
-      'barlow-light': require('../../../assets/fonts/Barlow-Light.otf'),
-    });
-    await Font.loadAsync({
-      'barlow-bold': require('../../../assets/fonts/Barlow-Bold.otf'),
-    });
-    await Font.loadAsync({
-      'barlow': require('../../../assets/fonts/Barlow-Regular.otf'),
-    });
-    this.setState({ fontLoaded: true });
+    this.state = {}
   }
 
   render () {
@@ -35,7 +14,7 @@ export default class Welcome extends Component {
         <View style={styles.circle}>
           <Image source={require('../../../assets/images/icon-wallet-slide.png')} style={styles.icon} />
         </View>
-        { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow'}, styles.text]}>Members who deposit coins in their Celsius Wallets will earn Degree Tokens as a reward for lending to the network.</Text>) : null }
+        <Text style={[{ fontFamily: 'barlow'}, styles.text]}>Members who deposit coins in their Celsius Wallets will earn Degree Tokens as a reward for lending to the network.</Text>
       </View>
     )
   }

@@ -26,17 +26,6 @@ class IncomeHistory extends Component {
   async componentDidMount () {
     const {fetchTransactionsHistory, walletAddress} = this.props
 
-    await Font.loadAsync({
-      'barlow-semi-bold': require('../../../assets/fonts/Barlow-SemiBold.otf')
-    })
-    await Font.loadAsync({
-      'barlow-light': require('../../../assets/fonts/Barlow-Light.otf')
-    })
-    await Font.loadAsync({
-      'barlow': require('../../../assets/fonts/Barlow-Regular.otf')
-    })
-    this.setState({fontLoaded: true})
-
     // refresheshing transactions every 60s
     fetchTransactionsHistory(walletAddress)
     this.refreshTransactionsInterval = setInterval(() => {
@@ -69,26 +58,21 @@ class IncomeHistory extends Component {
             <Image source={require('../../../assets/images/icon-etherium.png')} style={styles.icon} />
           </View>
           <View style={styles.value}>
-            {this.state.fontLoaded ? (
-              <Text style={[styles.valueText, {fontFamily: 'barlow-semi-bold'}]}>{t.ethValue} ETH</Text>) : null}
+            <Text style={[styles.valueText, {fontFamily: 'barlow-semi-bold'}]}>{t.ethValue} ETH</Text>
           </View>
           {t.isReceiving(walletAddress) ? (
             <View style={[styles.status, styles.greenStatus]}>
-              {this.state.fontLoaded ? (
-                <Text style={[styles.statusText, styles.greenText, {fontFamily: 'barlow'}]}>RECEIVED</Text>) : null}
+              <Text style={[styles.statusText, styles.greenText, {fontFamily: 'barlow'}]}>RECEIVED</Text>
             </View>
           ) : (
             <View style={[styles.status, styles.orangeStatus]}>
-              {this.state.fontLoaded ? (
-                <Text style={[styles.statusText, styles.orangeText, {fontFamily: 'barlow'}]}>SOLD</Text>) : null}
+              <Text style={[styles.statusText, styles.orangeText, {fontFamily: 'barlow'}]}>SOLD</Text>
             </View>
           )}
           <View style={styles.created}>
-            {this.state.fontLoaded ? (
-              <Text style={[styles.createdText, {fontFamily: 'barlow'}]}>{t.dateDisplay}</Text>) : null}
+            <Text style={[styles.createdText, {fontFamily: 'barlow'}]}>{t.dateDisplay}</Text>
             <Image source={require('../../../assets/images/icon-time.png')} style={styles.clock} />
-            {this.state.fontLoaded ? (
-              <Text style={[styles.createdText, {fontFamily: 'barlow'}]}>{t.timeDisplay}</Text>) : null}
+            <Text style={[styles.createdText, {fontFamily: 'barlow'}]}>{t.timeDisplay}</Text>
           </View>
         </TouchableOpacity>
       )
@@ -99,26 +83,21 @@ class IncomeHistory extends Component {
             <Image source={require('../../../assets/images/icon-coins.png')} style={styles.icon} />
           </View>
           <View style={styles.value}>
-            {this.state.fontLoaded ? (
-              <Text style={[styles.valueText, {fontFamily: 'barlow-semi-bold'}]}>{t.degAmount} CEL</Text>) : null}
+            <Text style={[styles.valueText, {fontFamily: 'barlow-semi-bold'}]}>{t.degAmount} CEL</Text>
           </View>
           {t.isReceiving(walletAddress) ? (
             <View style={[styles.status, styles.greenStatus]}>
-              {this.state.fontLoaded ? (
-                <Text style={[styles.statusText, styles.greenText, {fontFamily: 'barlow'}]}>RECEIVED</Text>) : null}
+              <Text style={[styles.statusText, styles.greenText, {fontFamily: 'barlow'}]}>RECEIVED</Text>
             </View>
           ) : (
             <View style={[styles.status, styles.orangeStatus]}>
-              {this.state.fontLoaded ? (
-                <Text style={[styles.statusText, styles.orangeText, {fontFamily: 'barlow'}]}>SOLD</Text>) : null}
+              <Text style={[styles.statusText, styles.orangeText, {fontFamily: 'barlow'}]}>SOLD</Text>
             </View>
           )}
           <View style={styles.created}>
-            {this.state.fontLoaded ? (
-              <Text style={[styles.createdText, {fontFamily: 'barlow'}]}>{t.dateDisplay}</Text>) : null}
+            <Text style={[styles.createdText, {fontFamily: 'barlow'}]}>{t.dateDisplay}</Text>
             <Image source={require('../../../assets/images/icon-time.png')} style={styles.clock} />
-            {this.state.fontLoaded ? (
-              <Text style={[styles.createdText, {fontFamily: 'barlow'}]}>{t.timeDisplay}</Text>) : null}
+            <Text style={[styles.createdText, {fontFamily: 'barlow'}]}>{t.timeDisplay}</Text>
           </View>
         </TouchableOpacity>
       )
@@ -142,7 +121,7 @@ class IncomeHistory extends Component {
               {transactions.map((t) => this.renderTransaction(t))}
             </View>
             <Text style={[styles.footer, {marginBottom: 50}]}>
-              {this.state.fontLoaded ? (<Text style={[{fontFamily: 'barlow'}]}>Activity</Text>) : null}
+              <Text style={[{fontFamily: 'barlow'}]}>Activity</Text>
             </Text>
             <View style={{borderBottomColor: 'rgba(255,255,255,0.1)', borderBottomWidth: 1, marginLeft: 12, marginRight: 12}} />
           </Content>

@@ -8,7 +8,6 @@ class AddFounds extends Component {
   constructor () {
     super()
     this.state = {
-      fontLoaded: false,
       qrcode: null
     }
   }
@@ -37,19 +36,6 @@ class AddFounds extends Component {
 
   // Component Lifecycle Methods
   async componentDidMount () {
-    // await Font.loadAsync({
-    //   'inconsolata': require('../../assets/fonts/Inconsolata-Regular.ttf')
-    // })
-    // await Font.loadAsync({
-    //   'barlow-semi-bold': require('../../assets/fonts/Barlow-SemiBold.otf')
-    // })
-    // await Font.loadAsync({
-    //   'barlow-light': require('../../assets/fonts/Barlow-Light.otf')
-    // })
-    // await Font.loadAsync({
-    //   'barlow': require('../../assets/fonts/Barlow-Regular.otf')
-    // })
-    // this.setState({fontLoaded: true})
     this.setState({qrcode: this.props.walletAddress})
   }
 
