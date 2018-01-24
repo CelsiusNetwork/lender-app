@@ -1,40 +1,11 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {StyleSheet, View, ImageBackground, Image, TouchableOpacity} from 'react-native'
-import {Button, Form, Input, Item, Label, Text, Content, Container} from 'native-base'
+import {StyleSheet, View, ImageBackground, Image, TouchableOpacity, Text} from 'react-native'
+import {Button, Form, Input, Item, Label, Content, Container} from 'native-base'
 import {updateRegisterForm, updateProfile, getLenderRewardPoints, logoutLender} from '../actions'
 
 class EditProfile extends Component {
-  // constructor(props) {
-  // super(props)
-  // this.state = {
-  //   }
-  // }
-
-  componentDidMount () {
-    const {lender, registerForm, updateRegisterForm, walletAddress, getLenderRewardPoints, token} = this.props
-
-    // Prepopulate form fields with lender data
-    updateRegisterForm({
-      ...registerForm,
-      firstName: lender.user_metadata.name,
-      lastName: lender.user_metadata.surname,
-      email: lender.email,
-      picture: lender.picture
-      // password: '',
-      // phoneNumber: ''
-    })
-
-    getLenderRewardPoints(walletAddress, token)
-  }
-
-  componentWillUnmount () {
-    // cleans form & errors
-    const {updateRegisterForm} = this.props
-
-    updateRegisterForm()
-  }
-
+  // Event Handlers
   onFirstNameChange (text) {
     this.updateField('firstName', text)
   }
@@ -64,6 +35,29 @@ class EditProfile extends Component {
   onButtonPress () {
     const {updateProfile, registerForm} = this.props
     updateProfile(registerForm)
+  }
+
+  componentDidMount () {
+    const {lender, registerForm, updateRegisterForm, walletAddress, getLenderRewardPoints, token} = this.props
+
+    // Pre-populate form fields with lender data
+    updateRegisterForm({
+      ...registerForm,
+      firstName: lender.user_metadata.name,
+      lastName: lender.user_metadata.surname,
+      email: lender.email,
+      picture: lender.picture
+      // password: '',
+      // phoneNumber: ''
+    })
+
+    getLenderRewardPoints(walletAddress, token)
+  }
+
+  // Component Lifecycle Methods
+  componentWillUnmount () {
+    const {updateRegisterForm} = this.props
+    updateRegisterForm()
   }
 
   render () {
@@ -159,9 +153,7 @@ class EditProfile extends Component {
                     <View style={styles.cellRight}>
                       <Button
                         style={styles.button2}
-                        // onPress={this.onButtonPress.bind(this)}
                         onPress={() => this.props.navigation.goBack()}
-                        // block primary
                       >
                         <Text
                           style={styles.buttonText2}
@@ -200,9 +192,6 @@ const styles = StyleSheet.create({
   background: {
     flex: 1,
     flexDirection: 'row'
-    // justifyContent: 'top',
-    // alignItems: 'center',
-    // backgroundColor: 'red'
   },
   body: {
     flex: 1,
@@ -223,7 +212,6 @@ const styles = StyleSheet.create({
     resizeMode: 'contain'
   },
   logo: {
-    // position: 'absolute',
     width: 140,
     height: 40,
     marginLeft: 35,
@@ -237,11 +225,8 @@ const styles = StyleSheet.create({
     paddingRight: 30,
     marginBottom: 10,
     fontWeight: 'bold',
-    textAlign: 'right',
     marginTop: 20,
-    textAlign: 'center',
-    // borderWidth: 1,
-    // borderColor: 'red'
+    textAlign: 'center'
   },
   formContainer: {
     marginTop: 100,
@@ -252,7 +237,6 @@ const styles = StyleSheet.create({
     fontSize: 12
   },
   label: {
-    // color: '#9CA9B6',
     fontSize: 12
   },
   floatingWrapper: {
@@ -274,8 +258,6 @@ const styles = StyleSheet.create({
     height: 50,
     justifyContent: 'center',
     alignItems: 'center',
-    // marginRight: 30,
-    // marginLeft: 30,
     marginTop: 30,
     width: '95%'
   },
@@ -288,8 +270,6 @@ const styles = StyleSheet.create({
     height: 50,
     justifyContent: 'center',
     alignItems: 'center',
-    // marginRight: 30,
-    // marginLeft: 30,
     marginTop: 30,
     width: '95%'
   },
@@ -307,8 +287,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     height: 50
-    // borderTopColor: 'rgba(255, 255, 255, 0.1)',
-    // borderTopWidth: 2
   },
   cellLeft: {
     flex: 1,
