@@ -1,11 +1,20 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { StyleSheet, View, ImageBackground, Image, TouchableOpacity, Share, Clipboard } from 'react-native'
-import { Text, Content, Container } from 'native-base'
-import { Font } from 'expo'
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
+import {StyleSheet, View, ImageBackground, Image, TouchableOpacity, Text, Share, Clipboard} from 'react-native'
+import {Content, Container} from 'native-base'
+import {Font} from 'expo'
 import QRCode from 'react-native-qrcode'
 
 class AddFounds extends Component {
+  constructor () {
+    super()
+    this.state = {
+      fontLoaded: false,
+      qrcode: this.props.walletAddress
+    }
+  }
+
+  // Event Handlers
   onButtonPress () {
     Share.share({
       message: 'Wallet Address',
@@ -18,25 +27,16 @@ class AddFounds extends Component {
       excludedActivityTypes: [
         'com.apple.UIKit.activity.PostToTwitter'
       ]
+    }).catch(error => {
+      console.error(error)
     })
   }
 
   onCopyButtonPress () {
-    console.log()
     Clipboard.setString(this.props.walletAddress)
   }
 
-  constructor (props) {
-    super(props)
-    console.log('ADD FUNDS')
-    console.log(this.props.walletAddress)
-    const qr = this.props.walletAddress
-    this.state = {
-      fontLoaded: false,
-      qrcode: qr
-    }
-  }
-
+  // Component Lifecycle Methods
   async componentDidMount () {
     await Font.loadAsync({
       'inconsolata': require('../../assets/fonts/Inconsolata-Regular.ttf')
@@ -50,25 +50,23 @@ class AddFounds extends Component {
     await Font.loadAsync({
       'barlow': require('../../assets/fonts/Barlow-Regular.otf')
     })
-    this.setState({ fontLoaded: true })
+    this.setState({fontLoaded: true})
   }
 
+  // Rendering methods
   render () {
-    const { navigate } = this.props.navigation
-    const walletAddress = this.props.walletAddres
-
     return (
       <View style={styles.container}>
         <ImageBackground source={require('../../assets/images/background-blur.png')} style={styles.background}>
           <View style={styles.body}>
-            {/* <Image source={require('../../assets/images/logo-header.png')} style={styles.logo} /> */}
             <Container>
               <Content>
                 <TouchableOpacity onPress={() => this.props.navigation.goBack()} style={[styles.backButton]}>
                   <Image source={require('../../assets/images/icon-back.png')} style={styles.back} />
                 </TouchableOpacity>
                 <Text style={styles.header}>{'Add Funds'.toUpperCase()}</Text>
-                { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow' }, styles.text]}>Transfer your funds from another Ethereum wallet to your Celsius account by sending ETH to your unique Celsius address.</Text>) : null }
+                <Text style={[{fontFamily: 'barlow'}, styles.text]}>Transfer your funds from another Ethereum wallet to
+                  your Celsius account by sending ETH to your unique Celsius address.</Text>
                 <View style={styles.center}>
                   <View style={styles.qrWrapper}>
                     <QRCode
@@ -78,46 +76,43 @@ class AddFounds extends Component {
                       fgColor='white' />
                   </View>
                 </View>
-                { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow', marginBottom: 0 }, styles.text]}>Your Celsius ETH address:</Text>) : null }
-                {/* <Text style={styles.text}>Your Celsius ETH address:</Text> */}
+                {this.state.fontLoaded ? (
+                  <Text style={[{fontFamily: 'barlow', marginBottom: 0}, styles.text]}>Your Celsius ETH
+                    address:</Text>) : null}
 
                 <View style={styles.codeWrapper}>
-                  { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'inconsolata' }, styles.codeText]}>{this.props.walletAddress}</Text>) : null }
+                  {this.state.fontLoaded ? (<Text
+                    style={[{fontFamily: 'inconsolata'}, styles.codeText]}>{this.props.walletAddress}</Text>) : null}
                   <View style={styles.row}>
-                    {/* <View style={styles.cellLeft}> */}
-                    <TouchableOpacity style={[styles.cellLeft, styles.buttonLeft]} onPress={this.onButtonPress.bind(this)}>
+                    <TouchableOpacity style={[styles.cellLeft, styles.buttonLeft]}
+                      onPress={this.onButtonPress.bind(this)}>
                       <Image source={require('../../assets/images/icon-send.png')} style={styles.iconLeft} />
                       <Text style={styles.buttonLeftText}>Share</Text>
                     </TouchableOpacity>
-                    {/* </View> */}
-                    {/* <View style={styles.cellRight}> */}
-                    <TouchableOpacity style={[styles.cellRight, styles.buttonRight]} onPress={this.onCopyButtonPress.bind(this)}>
+                    <TouchableOpacity style={[styles.cellRight, styles.buttonRight]}
+                      onPress={this.onCopyButtonPress.bind(this)}>
                       <Image source={require('../../assets/images/icon-copy.png')} style={styles.iconRight} />
                       <Text style={styles.buttonRightText}>Copy</Text>
                     </TouchableOpacity>
-                    {/* </View> */}
                   </View>
                 </View>
                 <View style={styles.center}>
-                  <TouchableOpacity
-                    onPress={() => this.props.navigation.goBack()}
-                    style={styles.button}>
-                    <Text style={styles.buttonText}>
-                      Done
-                    </Text>
+                  <TouchableOpacity onPress={() => this.props.navigation.goBack()} style={styles.button}>
+                    <Text style={styles.buttonText}>Done</Text>
                   </TouchableOpacity>
                 </View>
               </Content>
             </Container>
           </View>
-
         </ImageBackground>
       </View>
     )
   }
 
   renderError () {
-    if (this.props.error !== '') { return (<Text style={styles.errorText}>{this.props.error}</Text>) }
+    if (this.props.error !== '') {
+      return (<Text style={styles.errorText}>{this.props.error}</Text>)
+    }
     return <View />
   }
 }
@@ -133,9 +128,6 @@ const styles = StyleSheet.create({
   background: {
     flex: 1,
     flexDirection: 'row'
-    // justifyContent: 'top',
-    // alignItems: 'center',
-    // backgroundColor: 'red'
   },
   body: {
     flex: 1,
@@ -156,7 +148,6 @@ const styles = StyleSheet.create({
     resizeMode: 'contain'
   },
   logo: {
-    // position: 'absolute',
     width: 140,
     height: 40,
     marginLeft: 35,
@@ -198,8 +189,6 @@ const styles = StyleSheet.create({
     height: 50,
     justifyContent: 'center',
     alignItems: 'center',
-    // marginRight: 30,
-    // marginLeft: 30,
     marginTop: 29,
     marginBottom: 30,
     width: 150
@@ -219,14 +208,12 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
     alignItems: 'center'
-    // height: 50,
   },
   cellLeft: {
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    // marginLeft: 10,
     height: 40
   },
   cellRight: {
@@ -234,7 +221,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-end',
     alignItems: 'center',
-    // marginRight: 10,
     height: 40
   },
   qrWrapper: {
@@ -252,7 +238,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0, 0, 0, 0.2)',
     marginRight: 60,
     marginLeft: 60,
-    // paddingTop: 20,
     marginTop: 0,
     marginBottom: 20
   },
@@ -267,7 +252,6 @@ const styles = StyleSheet.create({
   },
   buttonLeft: {
     position: 'relative',
-    // width: '50%',
     backgroundColor: 'rgba(0, 0, 0, 0.2)',
     borderRightColor: '#3D4B54',
     borderRightWidth: 1,
@@ -278,17 +262,13 @@ const styles = StyleSheet.create({
   buttonLeftText: {
     color: '#9CA9B6',
     textAlign: 'left',
-    // marginLeft: 50
     paddingLeft: 5,
     fontFamily: 'barlow',
     fontSize: 18
   },
   buttonRight: {
     position: 'relative',
-    // width: '50%',
     backgroundColor: 'rgba(0, 0, 0, 0.2)',
-    // borderRightColor: '#3D4B54',
-    // borderRightWidth: 1,
     padding: 10,
     borderBottomRightRadius: 8,
     justifyContent: 'center'
@@ -301,16 +281,12 @@ const styles = StyleSheet.create({
     fontSize: 18
   },
   iconLeft: {
-    // position: 'absolute',
-    // left: 35,
     width: 16,
     height: 16,
     resizeMode: 'contain',
     marginRight: 5
   },
   iconRight: {
-    // position: 'absolute',
-    // left: 35,
     width: 16,
     height: 16,
     resizeMode: 'contain',
@@ -322,11 +298,9 @@ const mapStateToProps = state => {
   return {
     nav: state.nav,
     walletAddress: state.lender.walletAddress
-    // error: state.register.error
   }
 }
 
-const mapDispatchToProps = {
-}
+const mapDispatchToProps = {}
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddFounds)
