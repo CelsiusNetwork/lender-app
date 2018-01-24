@@ -14,44 +14,31 @@ class App extends React.Component {
   constructor () {
     super()
     this.state = {
-      isReady: false,
-      loading: true
+      isLoadingAssets: true
     }
   }
 
   // Component Lifecycle Methods
   async componentWillMount () {
-    await Font.loadAsync({
-      'Roboto': require('native-base/Fonts/Roboto.ttf'),
-      'Roboto_medium': require('native-base/Fonts/Roboto_medium.ttf'),
-      'barlow-medium': require('../assets/fonts/Barlow-Medium.ttf'),
-      'barlow-semi-bold': require('../assets/fonts/Barlow-SemiBold.otf'),
-      'barlow-light': require('../assets/fonts/Barlow-Light.otf'),
-      'barlow': require('../assets/fonts/Barlow-Regular.otf')
-    })
+    console.log('yo')
+    await loadFontsAsync()
+    await loadAssetsAsync()
+    console.log('yo after')
 
-    this.setState({loading: false})
+    this.setState({ isLoadingAssets: false })
   }
 
   // Rendering methods
   render () {
-    if (!this.state.isReady) {
-      return (
-        <AppLoading
-          startAsync={loadAssetsAsync}
-          onFinish={() => this.setState({isReady: true})}
-          onError={console.warn}
-        />
-      )
-    } else {
-      return (
-        <Provider store={store}>
-          <Container>
-            <Navigator />
-          </Container>
-        </Provider>
-      )
-    }
+    if (this.state.isLoadingAssets) return <AppLoading />
+
+    return (
+      <Provider store={store}>
+        <Container>
+          <Navigator />
+        </Container>
+      </Provider>
+    )
   }
 }
 
@@ -68,6 +55,26 @@ const loadAssetsAsync = async () => {
   ])
 
   await Promise.all([...imageAssets])
+}
+
+/**
+ * @name loadFontsAsync
+ * @description load all fonts before init application
+ *
+ * @return Promise
+ */
+const loadFontsAsync = async () => {
+  await Font.loadAsync({
+    Roboto: require('native-base/Fonts/Roboto.ttf'),
+    Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
+    'helvetica-neue-lt': require('../assets/fonts/helvetica-neue-lt-std-45-light.ttf'),
+    'inconsolata': require('../assets/fonts/Inconsolata-Regular.ttf'),
+    'barlow-medium': require('../assets/fonts/Barlow-Medium.ttf'),
+    'barlow-bold': require('../assets/fonts/Barlow-Bold.otf'),
+    'barlow-semi-bold': require('../assets/fonts/Barlow-SemiBold.otf'),
+    'barlow-light': require('../assets/fonts/Barlow-Light.otf'),
+    'barlow': require('../assets/fonts/Barlow-Regular.otf')
+  })
 }
 
 export default (App)
