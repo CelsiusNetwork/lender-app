@@ -8,7 +8,7 @@ export const WalletService = () => ({
    * @param walletAddress [string] user wallet address
    * @param token [string] oAuth access token
    *
-   * @return Promise server response
+   * @return Promise<Response>
    */
   getBalance (walletAddress, token) {
     const request = {
@@ -31,7 +31,7 @@ export const WalletService = () => ({
    * @param value [number] ETH amount
    * @param token [string] oAuth user access token
    *
-   * @return Promise server response
+   * @return Promise<Response>
    */
   sendETH (password, fromAddress, toAddress, value, token) {
     const request = {

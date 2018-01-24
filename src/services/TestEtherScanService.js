@@ -9,7 +9,7 @@ export const TestEtherScanService = () => ({
    *
    * @param walletAddress [string] user wallet address
    *
-   * @return AxiosPromise server response
+   * @return AxiosPromise<Response>
    * */
   fetchTransactionList (walletAddress) {
     const params = {

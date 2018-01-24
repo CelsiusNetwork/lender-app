@@ -8,7 +8,7 @@ export const Auth0Service = () => ({
    * @param email [string] user email
    * @param password [string] plain user password
    *
-   * @return Promise server response
+   * @return Promise<Response>
    * */
   signInWithEmailAndPassword ({ email, password }) {
     const request = {
@@ -30,7 +30,7 @@ export const Auth0Service = () => ({
    * @name initCredentials
    * @description
    *
-   * @return Promise server response
+   * @return Promise<Response>
    * */
   initClientCredentials () {
     const request = {
@@ -55,7 +55,7 @@ export const Auth0Service = () => ({
    * @param id [String] user id
    * @param token [String] oAuth access token
    *
-   * @return Promise server response
+   * @return Promise<Response>
    * */
   getUser (id, token) {
     const request = {
