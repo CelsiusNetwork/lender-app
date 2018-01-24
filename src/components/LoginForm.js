@@ -1,16 +1,11 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { StyleSheet, View, ImageBackground, Image, TouchableOpacity } from 'react-native'
-import { Button, Form, Input, Item, Label, Text, Spinner, Content, Header, Title, Container } from 'native-base'
-import { loginEmailChanged, loginPasswordChanged, loginLender } from '../actions'
-import { NavigationActions } from 'react-navigation'
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
+import {StyleSheet, View, ImageBackground, Image, TouchableOpacity} from 'react-native'
+import {Button, Form, Input, Item, Label, Text, Content, Container} from 'native-base'
+import {loginEmailChanged, loginPasswordChanged, loginLender} from '../actions'
 
 class LoginForm extends Component {
-
-  static navigationOptions = ( {navigation} ) => ({
-    title: 'Login'
-  })
-
+  // Event Handlers
   onEmailChange (text) {
     this.props.loginEmailChanged(text)
   }
@@ -20,17 +15,20 @@ class LoginForm extends Component {
   }
 
   onButtonPress () {
-    const { email, password } = this.props
-    this.props.loginLender({ email, password })
+    const {email, password} = this.props
+    this.props.loginLender({email, password})
   }
 
+  // Render methods
   renderError () {
-    if (this.props.error !== '') { return (<Text style={styles.errorText}>{this.props.error}</Text>) }
+    if (this.props.error !== '') {
+      return (<Text style={styles.errorText}>{this.props.error}</Text>)
+    }
     return <View />
   }
 
   render () {
-    const { navigate } = this.props.navigation
+    const {navigate} = this.props.navigation
     const loading = this.props.loading
 
     return (
@@ -38,8 +36,7 @@ class LoginForm extends Component {
         <ImageBackground source={require('../../assets/images/background.png')} style={styles.background}>
           <Container style={styles.formContainer}>
             <Content>
-              <TouchableOpacity
-                onPress={() => navigate('Welcome')}>
+              <TouchableOpacity onPress={() => navigate('Welcome')}>
                 <Image source={require('../../assets/images/Celsius_Symbol_white.png')} style={styles.logo} />
               </TouchableOpacity>
               <Form style={styles.form}>
@@ -64,7 +61,7 @@ class LoginForm extends Component {
 
                 {this.renderError()}
                 <Button style={styles.button} onPress={this.onButtonPress.bind(this)} block primary>
-                  { loading ? (
+                  {loading ? (
                     <Image source={require('../../assets/images/animated_spinner.gif')} style={styles.loader} />
                   ) : (
                     <Text style={styles.buttonText}>Log in</Text>
@@ -180,14 +177,14 @@ const styles = StyleSheet.create({
   },
   loader: {
     width: 30,
-    height: 30,
+    height: 30
   }
 })
 
 const mapStateToProps = state => {
   return {
-    email: "branislav@celsius.network",
-    password: "test42!",
+    email: 'branislav@celsius.network',
+    password: 'test42!',
     // email: state.auth.email,
     // password: state.auth.password,
     loading: state.auth.loading,
