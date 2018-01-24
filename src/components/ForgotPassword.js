@@ -44,7 +44,7 @@ class ForgotPassword extends Component {
                 onPress={() => navigate('Welcome')}>
                 <Image source={require('../../assets/images/Celsius_Symbol_white.png')} style={styles.logo} />
               </TouchableOpacity>
-              <Text style={styles.header}>{'Forgot Password'.toUpperCase()}</Text>
+              <Text style={styles.header}>FORGOT PASSWORD</Text>
               <Form style={styles.form}>
                 <Item floatingLabel style={styles.floatingWrapper}>
                   <Label style={{color: '#ffffff', fontSize: 12}}>E-MAIL</Label>
