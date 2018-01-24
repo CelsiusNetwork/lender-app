@@ -60,6 +60,7 @@ class EditProfile extends Component {
     updateRegisterForm()
   }
 
+  // Rendering methods
   render () {
     const {registerForm, lenderRewardPoint} = this.props
     const {firstName, lastName, email, picture, phoneNumber} = registerForm

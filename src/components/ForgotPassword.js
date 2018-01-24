@@ -1,15 +1,16 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { StyleSheet, View, ImageBackground, Image, TouchableOpacity } from 'react-native'
-import { Button, Form, Input, Item, Label, Text, Spinner, Content, Header, Title, Container } from 'native-base'
+import { StyleSheet, View, ImageBackground, Image, TouchableOpacity, Text } from 'react-native'
+import { Button, Form, Input, Item, Label, Spinner, Content, Container } from 'native-base'
 import { loginEmailChanged, loginPasswordChanged, loginLender } from '../actions'
 
 class ForgotPassword extends Component {
-  onButtonPress () {
-    // this.props.loginUser({ email, password })
-    console.log(this.props.navigation)
+  // Event Handlers
+  onEmailChange (text) {
+    this.props.emailChanged(text)
   }
 
+  // Render methods
   renderButton () {
     if (this.props.loading) {
       return <Spinner color='black' />
@@ -32,14 +33,6 @@ class ForgotPassword extends Component {
     return <View />
   }
 
-  onEmailChange (text) {
-    this.props.emailChanged(text)
-  }
-
-  onPasswordChange (text) {
-    this.props.passwordChanged(text)
-  }
-
   render () {
     const { navigate } = this.props.navigation
     return (
@@ -52,7 +45,7 @@ class ForgotPassword extends Component {
                 <Image source={require('../../assets/images/Celsius_Symbol_white.png')} style={styles.logo} />
               </TouchableOpacity>
               <Text style={styles.header}>{'Forgot Password'.toUpperCase()}</Text>
-                <Form style={styles.form}>
+              <Form style={styles.form}>
                 <Item floatingLabel style={styles.floatingWrapper}>
                   <Label style={{color: '#ffffff', fontSize: 12}}>E-MAIL</Label>
                   <Input
@@ -63,7 +56,6 @@ class ForgotPassword extends Component {
                     autoCorrect={false}
                     autoFocus autoCapitalize='none' />
                 </Item>
-
                 {this.renderError()}
                 {this.renderButton()}
               </Form>
@@ -79,7 +71,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   background: {
     flex: 1,
@@ -88,7 +80,6 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   logo: {
-    // position: 'absolute',
     width: 30,
     height: 30,
     marginLeft: 35,
@@ -98,7 +89,7 @@ const styles = StyleSheet.create({
   welcomeContainer: {
     flex: 1,
     flexDirection: 'column',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   text: {
     fontSize: 16,
@@ -114,7 +105,7 @@ const styles = StyleSheet.create({
   forgotPassword: {
     backgroundColor: 'rgba(0,0,0,0)',
     color: '#a3b0be',
-    padding: 10,
+    padding: 10
   },
   header: {
     fontSize: 32,
@@ -132,11 +123,7 @@ const styles = StyleSheet.create({
     color: '#ffffff'
   },
   floatingWrapper: {
-    borderBottomWidth: 0,
-  },
-  form: {
-    marginLeft: 20,
-    marginRight: 20,
+    borderBottomWidth: 0
   },
   input: {
     height: 40,
@@ -145,7 +132,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 2,
     color: '#ffffff',
     marginBottom: 10,
-    fontSize: 14,
+    fontSize: 14
   },
   button: {
     backgroundColor: '#ffffff',
@@ -182,7 +169,9 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = {
-  loginEmailChanged, loginPasswordChanged, loginLender
+  loginEmailChanged,
+  loginPasswordChanged,
+  loginLender
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ForgotPassword)
