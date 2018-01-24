@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {StyleSheet, View, ImageBackground, Image, TouchableOpacity, Text, Share, Clipboard} from 'react-native'
 import {Content, Container} from 'native-base'
-import {Font} from 'expo'
 import QRCode from 'react-native-qrcode'
 
 class AddFounds extends Component {
@@ -10,12 +9,12 @@ class AddFounds extends Component {
     super()
     this.state = {
       fontLoaded: false,
-      qrcode: this.props.walletAddress
+      qrcode: null
     }
   }
 
   // Event Handlers
-  onButtonPress () {
+  onShareButtonPress () {
     Share.share({
       message: 'Wallet Address',
       url: 'http://www.celsius.network',
@@ -38,19 +37,20 @@ class AddFounds extends Component {
 
   // Component Lifecycle Methods
   async componentDidMount () {
-    await Font.loadAsync({
-      'inconsolata': require('../../assets/fonts/Inconsolata-Regular.ttf')
-    })
-    await Font.loadAsync({
-      'barlow-semi-bold': require('../../assets/fonts/Barlow-SemiBold.otf')
-    })
-    await Font.loadAsync({
-      'barlow-light': require('../../assets/fonts/Barlow-Light.otf')
-    })
-    await Font.loadAsync({
-      'barlow': require('../../assets/fonts/Barlow-Regular.otf')
-    })
-    this.setState({fontLoaded: true})
+    // await Font.loadAsync({
+    //   'inconsolata': require('../../assets/fonts/Inconsolata-Regular.ttf')
+    // })
+    // await Font.loadAsync({
+    //   'barlow-semi-bold': require('../../assets/fonts/Barlow-SemiBold.otf')
+    // })
+    // await Font.loadAsync({
+    //   'barlow-light': require('../../assets/fonts/Barlow-Light.otf')
+    // })
+    // await Font.loadAsync({
+    //   'barlow': require('../../assets/fonts/Barlow-Regular.otf')
+    // })
+    // this.setState({fontLoaded: true})
+    this.setState({qrcode: this.props.walletAddress})
   }
 
   // Rendering methods
@@ -76,16 +76,13 @@ class AddFounds extends Component {
                       fgColor='white' />
                   </View>
                 </View>
-                {this.state.fontLoaded ? (
-                  <Text style={[{fontFamily: 'barlow', marginBottom: 0}, styles.text]}>Your Celsius ETH
-                    address:</Text>) : null}
-
+                <Text style={[{fontFamily: 'barlow', marginBottom: 0}, styles.text]}>Your Celsius ETH address:</Text>
                 <View style={styles.codeWrapper}>
-                  {this.state.fontLoaded ? (<Text
-                    style={[{fontFamily: 'inconsolata'}, styles.codeText]}>{this.props.walletAddress}</Text>) : null}
+                  <Text
+                    style={[{fontFamily: 'inconsolata'}, styles.codeText]}>{this.props.walletAddress}</Text>
                   <View style={styles.row}>
                     <TouchableOpacity style={[styles.cellLeft, styles.buttonLeft]}
-                      onPress={this.onButtonPress.bind(this)}>
+                      onPress={this.onShareButtonPress.bind(this)}>
                       <Image source={require('../../assets/images/icon-send.png')} style={styles.iconLeft} />
                       <Text style={styles.buttonLeftText}>Share</Text>
                     </TouchableOpacity>
