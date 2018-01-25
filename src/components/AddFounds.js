@@ -43,12 +43,12 @@ class AddFounds extends Component {
   render () {
     return (
       <View style={styles.container}>
-        <ImageBackground source={require('../../assets/images/background-blur.png')} style={styles.background}>
+        <ImageBackground source={require('../assets/images/background-blur.png')} style={styles.background}>
           <View style={styles.body}>
             <Container>
               <Content>
                 <TouchableOpacity onPress={() => this.props.navigation.goBack()} style={[styles.backButton]}>
-                  <Image source={require('../../assets/images/icon-back.png')} style={styles.back} />
+                  <Image source={require('../assets/images/icon-back.png')} style={styles.back} />
                 </TouchableOpacity>
                 <Text style={styles.header}>{'Add Funds'.toUpperCase()}</Text>
                 <Text style={[{fontFamily: 'barlow'}, styles.text]}>Transfer your funds from another Ethereum wallet to
@@ -69,12 +69,12 @@ class AddFounds extends Component {
                   <View style={styles.row}>
                     <TouchableOpacity style={[styles.cellLeft, styles.buttonLeft]}
                       onPress={this.onShareButtonPress.bind(this)}>
-                      <Image source={require('../../assets/images/icon-send.png')} style={styles.iconLeft} />
+                      <Image source={require('../assets/images/icon-send.png')} style={styles.iconLeft} />
                       <Text style={styles.buttonLeftText}>Share</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={[styles.cellRight, styles.buttonRight]}
                       onPress={this.onCopyButtonPress.bind(this)}>
-                      <Image source={require('../../assets/images/icon-copy.png')} style={styles.iconRight} />
+                      <Image source={require('../assets/images/icon-copy.png')} style={styles.iconRight} />
                       <Text style={styles.buttonRightText}>Copy</Text>
                     </TouchableOpacity>
                   </View>

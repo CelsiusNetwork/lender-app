@@ -20,13 +20,13 @@ class AddFounds extends Component {
     const { navigate } = this.props.navigation
     return (
       <View style={styles.container}>
-        <ImageBackground source={require('../../assets/images/background-blur.png')} style={styles.background}>
+        <ImageBackground source={require('../assets/images/background-blur.png')} style={styles.background}>
           <View style={styles.body}>
             <Container>
               <Content>
                 <Text style={styles.header}>{'SUCCESS!'.toUpperCase()}</Text>
                 <View style={styles.center}>
-                  <Image source={require('../../assets/images/icon-success.png')} style={styles.success} />
+                  <Image source={require('../assets/images/icon-success.png')} style={styles.success} />
                 </View>
                 <View style={styles.row}>
                   <View style={styles.cellLeft}>

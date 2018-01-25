@@ -33,7 +33,7 @@ export default class DegIncome extends Component {
           <Content>
             <View style={{borderBottomColor: '#305072', borderBottomWidth: 1, marginLeft: 12, marginRight: 12}} />
             <View style={styles.graphWrapper}>
-              <Image source={require('../../../assets/images/graph-token-earnings.png')} style={styles.graph} />
+              <Image source={require('../../assets/images/graph-token-earnings.png')} style={styles.graph} />
             </View>
             <Text style={styles.footer}>
               <Text style={[{ fontFamily: 'barlow' }]}>CEL Earnings</Text>

@@ -11,7 +11,7 @@ class WelcomePager extends Component {
     return (
       <View style={styles.container}>
         <ImageBackground
-          source={require('../../../assets/images/background.png')}
+          source={require('../../assets/images/background.png')}
           style={styles.background}>
           <Pages
             style={styles.pagesWrapper}>

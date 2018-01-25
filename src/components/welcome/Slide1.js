@@ -12,7 +12,7 @@ export default class Welcome extends Component {
     return (
       <View style={styles.slideContainer}>
         <View style={styles.circle}>
-          <Image source={require('../../../assets/images/icon-cel.png')} style={styles.icon} />
+          <Image source={require('../../assets/images/icon-cel.png')} style={styles.icon} />
         </View>
         <Text style={[{ fontFamily: 'barlow'}, styles.text]}>Celsius wallet is the first online crypto wallet designed to allow members to earn interest on deposited coins.</Text>
       </View>

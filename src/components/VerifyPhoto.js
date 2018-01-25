@@ -67,7 +67,7 @@ class VerifyPhoto extends React.Component {
             : Camera.Constants.Type.back,
         });
       }}>
-      <Image source={require('../../assets/images/camera-flip.png')} style={styles.flip} />
+      <Image source={require('../assets/images/camera-flip.png')} style={styles.flip} />
     </TouchableOpacity> : null;
     // const { navigate } = this.props.navigation
     const { hasPhotoCameraPermission } = this.state;

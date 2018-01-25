@@ -76,17 +76,17 @@ class Home extends Component {
     if (!this.state.isAlreadyLogged) {
       return (
         <View style={styles.container}>
-          <ImageBackground source={require('../../assets/images/background-blur.png')} style={styles.background}>
+          <ImageBackground source={require('../assets/images/background-blur.png')} style={styles.background}>
             <View style={styles.body}>
               <View style={[styles.row, {marginBottom: 20, marginTop: 60}]}>
                 <TouchableOpacity onPress={() => navigate('Home')}>
                   <View style={styles.cellLeft}>
-                    <Image source={require('../../assets/images/Celsius_Symbol_white.png')} style={styles.logo} />
+                    <Image source={require('../assets/images/Celsius_Symbol_white.png')} style={styles.logo} />
                   </View>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigate('EditProfile')}>
                   <View style={styles.cellRight}>
-                    <Image source={require('../../assets/images/icon-user.png')} style={styles.user} />
+                    <Image source={require('../assets/images/icon-user.png')} style={styles.user} />
                   </View>
                 </TouchableOpacity>
               </View>
@@ -113,7 +113,7 @@ class Home extends Component {
                   <View style={styles.hr} />
                   <TouchableOpacity style={styles.box}>
                     <View style={styles.boxIconWrapper}>
-                      <Image source={require('../../assets/images/icon-wallet.png')} style={styles.icon} />
+                      <Image source={require('../assets/images/icon-wallet.png')} style={styles.icon} />
                     </View>
                     <View style={styles.boxTextWrapper}>
                       <Text style={styles.boxText}>Transfer funds to your newly created Celsius wallet to start earning
@@ -122,7 +122,7 @@ class Home extends Component {
                   </TouchableOpacity>
                   <TouchableOpacity style={styles.box}>
                     <View style={styles.boxIconWrapper}>
-                      <Image source={require('../../assets/images/icon-transfer.png')} style={styles.icon} />
+                      <Image source={require('../assets/images/icon-transfer.png')} style={styles.icon} />
                     </View>
                     <View style={styles.boxTextWrapper}>
                       <Text style={styles.boxText}>By lending money to borrowers, you earn Degree which you can later on
@@ -131,7 +131,7 @@ class Home extends Component {
                   </TouchableOpacity>
                   <TouchableOpacity style={styles.box}>
                     <View style={styles.boxIconWrapper}>
-                      <Image source={require('../../assets/images/icon-network.png')} style={styles.icon} />
+                      <Image source={require('../assets/images/icon-network.png')} style={styles.icon} />
                     </View>
                     <View style={styles.boxTextWrapper}>
                       <Text style={styles.boxText}>Improve your seniority score by sticking longer with Celsius and earn
@@ -149,17 +149,17 @@ class Home extends Component {
       return (
         <View style={stylesGraph.container}>
           <ImageBackground
-            source={require('../../assets/images/background.png')}
+            source={require('../assets/images/background.png')}
             style={stylesGraph.background}>
             <View style={stylesGraph.header}>
               <View style={stylesGraph.cellLeft}>
                 <TouchableOpacity onPress={() => navigate('Home')}>
-                  <Image source={require('../../assets/images/logo-small.png')} style={stylesGraph.logo} />
+                  <Image source={require('../assets/images/logo-small.png')} style={stylesGraph.logo} />
                 </TouchableOpacity>
               </View>
               <View style={stylesGraph.cellRight}>
                 <TouchableOpacity onPress={() => navigate('EditProfile')}>
-                  <Image source={require('../../assets/images/icon-user.png')} style={stylesGraph.user} />
+                  <Image source={require('../assets/images/icon-user.png')} style={stylesGraph.user} />
                 </TouchableOpacity>
               </View>
             </View>

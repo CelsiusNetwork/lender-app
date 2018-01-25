@@ -39,11 +39,11 @@ class HistoryDetail extends Component {
     console.log(this.props)
     return (
       <View style={styles.container}>
-        <ImageBackground source={require('../../../assets/images/background-blur.png')} style={styles.background}>
+        <ImageBackground source={require('../../assets/images/background-blur.png')} style={styles.background}>
           <View style={styles.body}>
-            {/* <Image source={require('../../../assets/images/logo-header.png')} style={styles.logo} /> */}
+            {/* <Image source={require('../../assets/images/logo-header.png')} style={styles.logo} /> */}
             <TouchableOpacity onPress={() => this.props.navigation.goBack()} style={[styles.backButton]}>
-              <Image source={require('../../../assets/images/icon-back.png')} style={styles.back} />
+              <Image source={require('../../assets/images/icon-back.png')} style={styles.back} />
             </TouchableOpacity>
             <Text style={styles.header}>{ this.renderHeadingText() }</Text>
             <Container>
@@ -52,17 +52,17 @@ class HistoryDetail extends Component {
                   <View style={styles.ethWrapper}>
                     { activeTransaction.isReceiving(walletAddress) ? (
                       <View style={[styles.arrowUp, styles.green]}>
-                        <Image source={require('../../../assets/images/icon-received.png')} style={styles.icon} />
+                        <Image source={require('../../assets/images/icon-received.png')} style={styles.icon} />
                       </View>
                     ) : (
                       <View style={[styles.arrowUp, styles.red]}>
-                        <Image source={require('../../../assets/images/icon-given.png')} style={styles.icon} />
+                        <Image source={require('../../assets/images/icon-given.png')} style={styles.icon} />
                       </View>
                     )}
                     { activeTransaction.isDegreeTransaction ? (
-                      <Image source={require('../../../assets/images/icon-coins.png')} style={styles.eth} />
+                      <Image source={require('../../assets/images/icon-coins.png')} style={styles.eth} />
                     ) : (
-                      <Image source={require('../../../assets/images/icon-eth.png')} style={styles.eth} />
+                      <Image source={require('../../assets/images/icon-eth.png')} style={styles.eth} />
                     )}
                   </View>
                   { activeTransaction.isDegreeTransaction ? (
@@ -91,7 +91,7 @@ class HistoryDetail extends Component {
                     </View>
                     <View style={styles.cellRight}>
                       <Text style={[styles.cellRightText, { fontFamily: 'barlow-semi-bold' }]}>100</Text>
-                      <Image source={require('../../../assets/images/icon-points.png')} style={styles.points} />
+                      <Image source={require('../../assets/images/icon-points.png')} style={styles.points} />
                     </View>
                   </View>
                   <View style={styles.row}>

@@ -33,17 +33,17 @@ class GraphPager extends Component {
       <View style={styles.container}>
         <MyStatusBar barStyle="light-content" />
         <ImageBackground
-          source={require('../../../assets/images/background.png')}
+          source={require('../../assets/images/background.png')}
           style={styles.background}>
           <View style={styles.header}>
             <View style={styles.cellLeft}>
               <TouchableOpacity onPress={() => navigate('LoginForm')}>
-                <Image source={require('../../../assets/images/logo-small.png')} style={styles.logo} />
+                <Image source={require('../../assets/images/logo-small.png')} style={styles.logo} />
               </TouchableOpacity>
             </View>
             <View style={styles.cellRight}>
               <TouchableOpacity onPress={() => navigate('EditProfile')}>
-                <Image source={require('../../../assets/images/icon-user.png')} style={styles.user} />
+                <Image source={require('../../assets/images/icon-user.png')} style={styles.user} />
               </TouchableOpacity>
             </View>
           </View>

@@ -66,16 +66,16 @@ class EditProfile extends Component {
     const {firstName, lastName, email, picture, phoneNumber} = registerForm
     return (
       <View style={styles.container}>
-        <ImageBackground source={require('../../assets/images/background-blur.png')} style={styles.background}>
+        <ImageBackground source={require('../assets/images/background-blur.png')} style={styles.background}>
           <View style={styles.body}>
             <View style={[{marginTop: 10, marginBottom: 10}]}>
               <TouchableOpacity onPress={() => this.props.navigation.goBack()} style={[styles.backButton]}>
-                <Image source={require('../../assets/images/icon-back.png')} style={styles.back} />
+                <Image source={require('../assets/images/icon-back.png')} style={styles.back} />
               </TouchableOpacity>
               <Text style={[styles.header]}>PROFILE</Text>
               <TouchableOpacity style={styles.logoutWrapper} onPress={this.onLogoutPress.bind(this)}>
                 <View style={styles.cellRight}>
-                  <Image source={require('../../assets/images/log-out.png')} style={styles.logoutBtn} />
+                  <Image source={require('../assets/images/log-out.png')} style={styles.logoutBtn} />
                 </View>
               </TouchableOpacity>
             </View>
@@ -83,11 +83,11 @@ class EditProfile extends Component {
               <Content>
                 <View style={styles.avatarSection}>
                   <View style={styles.pts}>
-                    <Image source={require('../../assets/images/icon-score.png')} style={styles.score} />
+                    <Image source={require('../assets/images/icon-score.png')} style={styles.score} />
                     <Text style={styles.ptsText}>{lenderRewardPoint}</Text>
                     <Text style={styles.ptsTextExt}>pts</Text>
                   </View>
-                  <ImageBackground source={require('../../assets/images/avatar-wrapper.png')}
+                  <ImageBackground source={require('../assets/images/avatar-wrapper.png')}
                     style={styles.avatarWrapper}>
                     <Image
                       source={{uri: picture}}

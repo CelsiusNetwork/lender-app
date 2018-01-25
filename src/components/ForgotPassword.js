@@ -37,12 +37,12 @@ class ForgotPassword extends Component {
     const { navigate } = this.props.navigation
     return (
       <View style={styles.container}>
-        <ImageBackground source={require('../../assets/images/background.png')} style={styles.background}>
+        <ImageBackground source={require('../assets/images/background.png')} style={styles.background}>
           <Container style={styles.formContainer}>
             <Content>
               <TouchableOpacity
                 onPress={() => navigate('Welcome')}>
-                <Image source={require('../../assets/images/Celsius_Symbol_white.png')} style={styles.logo} />
+                <Image source={require('../assets/images/Celsius_Symbol_white.png')} style={styles.logo} />
               </TouchableOpacity>
               <Text style={styles.header}>FORGOT PASSWORD</Text>
               <Form style={styles.form}>

@@ -55,7 +55,7 @@ class IncomeHistory extends Component {
       return (
         <TouchableOpacity key={t.hash} style={styles.tableRow} onPress={() => this.handleTransacationPress(t)}>
           <View>
-            <Image source={require('../../../assets/images/icon-etherium.png')} style={styles.icon} />
+            <Image source={require('../../assets/images/icon-etherium.png')} style={styles.icon} />
           </View>
           <View style={styles.value}>
             <Text style={[styles.valueText, {fontFamily: 'barlow-semi-bold'}]}>{t.ethValue} ETH</Text>
@@ -71,7 +71,7 @@ class IncomeHistory extends Component {
           )}
           <View style={styles.created}>
             <Text style={[styles.createdText, {fontFamily: 'barlow'}]}>{t.dateDisplay}</Text>
-            <Image source={require('../../../assets/images/icon-time.png')} style={styles.clock} />
+            <Image source={require('../../assets/images/icon-time.png')} style={styles.clock} />
             <Text style={[styles.createdText, {fontFamily: 'barlow'}]}>{t.timeDisplay}</Text>
           </View>
         </TouchableOpacity>
@@ -80,7 +80,7 @@ class IncomeHistory extends Component {
       return (
         <TouchableOpacity key={t.hash} style={[styles.tableRow]} onPress={() => this.handleTransacationPress(t)}>
           <View>
-            <Image source={require('../../../assets/images/icon-coins.png')} style={styles.icon} />
+            <Image source={require('../../assets/images/icon-coins.png')} style={styles.icon} />
           </View>
           <View style={styles.value}>
             <Text style={[styles.valueText, {fontFamily: 'barlow-semi-bold'}]}>{t.degAmount} CEL</Text>
@@ -96,7 +96,7 @@ class IncomeHistory extends Component {
           )}
           <View style={styles.created}>
             <Text style={[styles.createdText, {fontFamily: 'barlow'}]}>{t.dateDisplay}</Text>
-            <Image source={require('../../../assets/images/icon-time.png')} style={styles.clock} />
+            <Image source={require('../../assets/images/icon-time.png')} style={styles.clock} />
             <Text style={[styles.createdText, {fontFamily: 'barlow'}]}>{t.timeDisplay}</Text>
           </View>
         </TouchableOpacity>

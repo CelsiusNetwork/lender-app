@@ -54,19 +54,19 @@ class HowItWorks extends Component {
         <Container>
           <Content>
 
-            <Image source={require('../../../assets/images/logo-header.png')} style={styles.logo} />
+            <Image source={require('../../assets/images/logo-header.png')} style={styles.logo} />
             <Text style={[{ fontFamily: 'barlow-bold'}, styles.header]}>{'How it works?'.toUpperCase()}</Text>
 
             <View style={styles.circleWrapper}>
               <TouchableOpacity style={styles.aLeftWrapper} onPress={this.scrollLeft.bind(this)}>
                 <Image
-                  source={require('../../../assets/images/arrow-left.png')}
+                  source={require('../../assets/images/arrow-left.png')}
                   resizeMode="contain"
                   style={[styles.aLeft]} />
               </TouchableOpacity>
               <TouchableOpacity style={styles.aRightWrapper} onPress={this.scrollRight.bind(this)}>
                 <Image
-                  source={require('../../../assets/images/arrow-right.png')}
+                  source={require('../../assets/images/arrow-right.png')}
                   resizeMode="contain"
                   style={styles.aRight} />
               </TouchableOpacity>

@@ -22,19 +22,19 @@ class AddFounds extends Component {
     const {navigate} = this.props.navigation
     return (
       <View style={styles.container}>
-        <ImageBackground source={require('../../assets/images/background-blur.png')} style={styles.background}>
+        <ImageBackground source={require('../assets/images/background-blur.png')} style={styles.background}>
           <View style={styles.body}>
-            {/* <Image source={require('../../assets/images/logo-header.png')} style={styles.logo} /> */}
+            {/* <Image source={require('../assets/images/logo-header.png')} style={styles.logo} /> */}
             <Container>
               <Content>
                 <TouchableOpacity onPress={() => this.props.navigation.goBack()} style={[styles.backButton]}>
-                  <Image source={require('../../assets/images/icon-back.png')} style={styles.back} />
+                  <Image source={require('../assets/images/icon-back.png')} style={styles.back} />
                 </TouchableOpacity>
                 <Text style={styles.header}>{this.props.withdrawAmount} {'ETH'.toUpperCase()}</Text>
                 <TouchableOpacity style={styles.QRCodeWrapper} onPress={() => navigate('QRScanner')}
                   // onPress={() => navigate('VerifyPhoneNumber')}
                 >
-                  <Image source={require('../../assets/images/icon-scan-qrcode.png')} style={styles.QRCode} />
+                  <Image source={require('../assets/images/icon-scan-qrcode.png')} style={styles.QRCode} />
                 </TouchableOpacity>
                 <Form style={styles.form}>
                   <Item floatingLabel style={styles.floatingWrapper}>
@@ -61,7 +61,7 @@ class AddFounds extends Component {
                     onPress={() => this.props.withdrawETH('test42!', this.props.walletAddress, this.state.toAddress, this.props.withdrawAmount, this.props.token)}>
                     <Text style={styles.buttonText} />
                     <Text style={styles.buttonText}>Confirm withdraw
-                      <Image source={require('../../assets/images/icon-arrow.png')} style={styles.buttonIcon} />
+                      <Image source={require('../assets/images/icon-arrow.png')} style={styles.buttonIcon} />
                     </Text>
                   </TouchableOpacity>
                 </View>

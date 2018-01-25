@@ -12,7 +12,7 @@ export default class Welcome extends Component {
     return (
       <View style={styles.slideContainer}>
         <View style={styles.circle}>
-          <Image source={require('../../../assets/images/icon-wallet-slide.png')} style={styles.icon} />
+          <Image source={require('../../assets/images/icon-wallet-slide.png')} style={styles.icon} />
         </View>
         <Text style={[{ fontFamily: 'barlow'}, styles.text]}>Members who deposit coins in their Celsius Wallets will earn Degree Tokens as a reward for lending to the network.</Text>
       </View>

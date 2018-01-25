@@ -68,7 +68,7 @@ class VerifyDocument extends React.Component {
                 : Camera.Constants.Type.back,
             });
           }}>
-          <Image source={require('../../assets/images/camera-flip.png')} style={styles.flip} />
+          <Image source={require('../assets/images/camera-flip.png')} style={styles.flip} />
         </TouchableOpacity>
       </View>
     </Camera> : null;
@@ -93,7 +93,7 @@ class VerifyDocument extends React.Component {
                 ><Text style={styles.checkText}>ID Card</Text></TouchableOpacity>
             </View>
             <View style={styles.aCenter}>
-              <ImageBackground source={require('../../assets/images/scanner.png')} style={styles.cameraWrapper}>
+              <ImageBackground source={require('../assets/images/scanner.png')} style={styles.cameraWrapper}>
                 <View style={{ flex: 1, height: 200, width: 290 }}>
                   {camera}
                 </View>

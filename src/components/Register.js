@@ -134,11 +134,11 @@ class Register extends Component {
 
     return (
       <View style={styles.container}>
-        <ImageBackground source={require('../../assets/images/background.png')} style={styles.background}>
+        <ImageBackground source={require('../assets/images/background.png')} style={styles.background}>
           <Container style={styles.formContainer}>
             <TouchableOpacity
               onPress={() => navigate('Welcome')}>
-              <Image source={require('../../assets/images/logo-header.png')} style={styles.logo} />
+              <Image source={require('../assets/images/logo-header.png')} style={styles.logo} />
             </TouchableOpacity>
             <Content>
               <Form style={styles.form}>
@@ -195,7 +195,7 @@ class Register extends Component {
                 { registerForm.password ? (
                   <TouchableOpacity onPress={this.togglePasswordVisibility} style={styles.eyeIconButton} >
                     <Image
-                      source={require('../../assets/images/icon-show.png')}
+                      source={require('../assets/images/icon-show.png')}
                       style={styles.eyeIcon}
                       resizeMode='contain' />
                   </TouchableOpacity>
@@ -219,7 +219,7 @@ class Register extends Component {
                   // onPress={() => navigate('VerifyPhoneNumber')}
                   block primary>
                   { loading ? (
-                    <Image source={require('../../assets/images/animated_spinner.gif')} style={styles.loader} />
+                    <Image source={require('../assets/images/animated_spinner.gif')} style={styles.loader} />
                   ) : (
                     <Text style={styles.buttonText}>Verify your profile</Text>
                   )}

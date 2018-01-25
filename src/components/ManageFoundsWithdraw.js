@@ -48,11 +48,11 @@ class ManageFoundsWithdraw extends Component {
 
     return (
       <View style={styles.container}>
-        <ImageBackground source={require('../../assets/images/background.png')} style={styles.background}>
+        <ImageBackground source={require('../assets/images/background.png')} style={styles.background}>
           <Container>
             <Content>
               <TouchableOpacity onPress={() => this.props.navigation.goBack()} style={[styles.backButton]}>
-                <Image source={require('../../assets/images/icon-back.png')} style={styles.back} />
+                <Image source={require('../assets/images/icon-back.png')} style={styles.back} />
               </TouchableOpacity>
               <View style={styles.wrapper}>
                 <View style={styles.aCenter}>
@@ -135,7 +135,7 @@ class ManageFoundsWithdraw extends Component {
                     </View>
                     <View style={styles.aRight}>
                       <TouchableOpacity onPress={this._onPressButton.bind(this, -1)} style={styles.field}>
-                        <Image source={require('../../assets/images/icon-delete.png')} style={styles.delete} />
+                        <Image source={require('../assets/images/icon-delete.png')} style={styles.delete} />
                       </TouchableOpacity></View>
                   </View>
 
@@ -145,7 +145,7 @@ class ManageFoundsWithdraw extends Component {
                       onPress={() => this.props.setWithdrawAmount(this.state.amount)}>
                       <Text style={styles.buttonText}>
                         Withdraw ETH
-                        <Image source={require('../../assets/images/icon-arrow.png')} style={styles.buttonIcon} />
+                        <Image source={require('../assets/images/icon-arrow.png')} style={styles.buttonIcon} />
                       </Text>
                     </TouchableOpacity>
                   </View>

@@ -12,7 +12,7 @@ export default class Welcome extends Component {
     return (
       <View style={styles.slideContainer}>
         <View style={styles.circle}>
-          <Image source={require('../../../assets/images/icon-community.png')} style={styles.icon} />
+          <Image source={require('../../assets/images/icon-community.png')} style={styles.icon} />
         </View>
         <Text style={[{ fontFamily: 'barlow'}, styles.text]}>You can cash-out earned Degree Tokens anytime, and as more people join the Celsius ecosystem, the more everyone benefits.</Text>
       </View>

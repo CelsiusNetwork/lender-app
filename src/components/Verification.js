@@ -35,7 +35,7 @@ class Verification extends Component {
           <Text style={styles.buttonText}>{this.state.btnTxt}
           </Text>
           <Image style={styles.buttonIcon}
-            source={require('../../assets/images/icon-arrow.png')}
+            source={require('../assets/images/icon-arrow.png')}
           />
         </TouchableOpacity>
       )
@@ -68,12 +68,12 @@ class Verification extends Component {
 
     return (
       <View style={styles.container}>
-        <ImageBackground source={require('../../assets/images/background-blur.png')} style={styles.background}>
+        <ImageBackground source={require('../assets/images/background-blur.png')} style={styles.background}>
           <View style={styles.body}>
-            {/* <Image source={require('../../assets/images/logo-header.png')} style={styles.logo} /> */}
+            {/* <Image source={require('../assets/images/logo-header.png')} style={styles.logo} /> */}
             <Text style={styles.header}>{this.state.stepName}</Text>
-            <ImageBackground source={require('../../assets/images/progress-line-bg.png')} style={styles.line}>
-              <ImageBackground source={require('../../assets/images/progress-line.png')}
+            <ImageBackground source={require('../assets/images/progress-line-bg.png')} style={styles.line}>
+              <ImageBackground source={require('../assets/images/progress-line.png')}
                 style={[styles.lineInner, {width: this.state.progressLine}]} />
             </ImageBackground>
 

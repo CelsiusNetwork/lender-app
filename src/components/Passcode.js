@@ -81,12 +81,12 @@ class Passcode extends Component {
     const { navigate } = this.props.navigation
     return (
       <View style={styles.container}>
-        <ImageBackground source={require('../../assets/images/background.png')} style={styles.background}>
+        <ImageBackground source={require('../assets/images/background.png')} style={styles.background}>
           <Container>
             <Content>
               <View style={styles.wrapper}>
                 <View style={styles.aCenter}>
-                  <Image source={require('../../assets/images/logo-small.png')} style={styles.logo} />
+                  <Image source={require('../assets/images/logo-small.png')} style={styles.logo} />
                   <Text style={styles.text}>Touch ID or Enter Passcode</Text>
                 </View>
 

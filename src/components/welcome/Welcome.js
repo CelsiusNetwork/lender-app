@@ -21,7 +21,7 @@ export default class Welcome extends Component {
     return (
       <View style={styles.welcomeContainer}>
         <MyStatusBar barStyle="light-content" />
-        <Image source={require('../../../assets/images/Celsius_Symbol_white.png')} style={styles.logo} />
+        <Image source={require('../../assets/images/Celsius_Symbol_white.png')} style={styles.logo} />
         <Text style={[{ fontFamily: 'barlow-bold'}, styles.header]}>WELCOME TO CELSIUS</Text>
         <Text style={[{ fontFamily: 'barlow'}, styles.text]}>A new global financial platform that seamlessly connects holders of crypto-assets with borrowers. Earn fees on your assets by allowing financial traders to borrow them.</Text>
       </View>

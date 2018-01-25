@@ -16,13 +16,13 @@ class AddFounds extends Component {
     const { navigate } = this.props.navigation
     return (
       <View style={styles.container}>
-        <ImageBackground source={require('../../assets/images/background-blur.png')} style={styles.background}>
+        <ImageBackground source={require('../assets/images/background-blur.png')} style={styles.background}>
           <View style={styles.body}>
             <Container>
               <Content>
                 <Text style={styles.header}>{'Error!'.toUpperCase()}</Text>
                 <View style={styles.center}>
-                  <Image source={require('../../assets/images/icon-error.png')} style={styles.error} />
+                  <Image source={require('../assets/images/icon-error.png')} style={styles.error} />
                 </View>
 {/*
                   <View style={styles.row}>

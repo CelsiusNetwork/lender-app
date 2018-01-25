@@ -34,11 +34,11 @@ class AddFounds extends Component {
     const celBalance = this.props.celBalance
     return (
       <View style={styles.container}>
-        <ImageBackground source={require('../../assets/images/background-blur.png')} style={styles.background}>
+        <ImageBackground source={require('../assets/images/background-blur.png')} style={styles.background}>
           <View style={styles.body}>
-            {/* <Image source={require('../../assets/images/logo-header.png')} style={styles.logo} /> */}
+            {/* <Image source={require('../assets/images/logo-header.png')} style={styles.logo} /> */}
             <TouchableOpacity onPress={() => this.props.navigation.goBack()} style={[styles.backButton]}>
-              <Image source={require('../../assets/images/icon-back.png')} style={styles.back} />
+              <Image source={require('../assets/images/icon-back.png')} style={styles.back} />
             </TouchableOpacity>
 
             <Container>
@@ -50,7 +50,7 @@ class AddFounds extends Component {
                 <View style={styles.center}>
                   <View style={styles.boxWrapper}>
                     <View style={styles.box}>
-                      <Image source={require('../../assets/images/icon-eth.png')} style={styles.icon} />
+                      <Image source={require('../assets/images/icon-eth.png')} style={styles.icon} />
                       <Text style={styles.boxText1}>
                         <Text style={[{fontFamily: 'barlow-semi-bold'}, styles.boxText1Inner]}>{parseInt(ethBalance).toFixed(3)}</Text>
                         <Text style={[{fontFamily: 'barlow-semi-bold'}, styles.boxText1Inner]}> ETH</Text>
@@ -61,10 +61,10 @@ class AddFounds extends Component {
                         <Text
                           style={[styles.changeUp, {fontFamily: 'barlow-light'}]}> {this.state.ethChange}</Text>
                       </Text>
-                      <Image source={require('../../assets/images/graph1.png')} style={styles.graph} />
+                      <Image source={require('../assets/images/graph1.png')} style={styles.graph} />
                       <TouchableOpacity style={styles.boxButton} onPress={() => navigate('ManageFoundsWithdraw')}>
                         <Text style={styles.boxButtonText}><Image
-                          source={require('../../assets/images/icon-transfer-arrows.png')}
+                          source={require('../assets/images/icon-transfer-arrows.png')}
                           style={styles.buttonIcon} /><Text style={{color: '#ffffff', fontFamily: 'barlow'}}>{'   '}Withdraw ETH</Text></Text>
                       </TouchableOpacity>
                     </View>
@@ -74,7 +74,7 @@ class AddFounds extends Component {
 
                   <View style={styles.boxWrapper}>
                     <View style={styles.box}>
-                      <Image source={require('../../assets/images/icon-transfer.png')} style={styles.icon} />
+                      <Image source={require('../assets/images/icon-transfer.png')} style={styles.icon} />
                       <Text style={styles.boxText1}>
                         <Text style={[{fontFamily: 'barlow-semi-bold'}, styles.boxText1Inner]}>{parseInt(celBalance).toFixed(3)}</Text>
                         <Text style={[{fontFamily: 'barlow-semi-bold'}, styles.boxText1Inner]}> CEL</Text>
@@ -83,7 +83,7 @@ class AddFounds extends Component {
                         <Text style={[{fontFamily: 'barlow-light'}, styles.boxText2Inner]}>{this.state.degFiat}</Text>
                         <Text style={[styles.changeUp, {fontFamily: 'barlow-light'}]}> {this.state.degChange}</Text>
                       </Text>
-                      <Image source={require('../../assets/images/graph1.png')} style={styles.graph} />
+                      <Image source={require('../assets/images/graph1.png')} style={styles.graph} />
                       <TouchableOpacity style={styles.boxButton}>
                         <Text style={styles.boxButtonTextDisabled}>Withdraw coming soon…</Text>
                       </TouchableOpacity>

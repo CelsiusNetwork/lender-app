@@ -17,7 +17,7 @@ class VerifyPhoneNumber extends Component {
         <Content>
           <View style={styles.aCenter}>
             <View style={styles.mobileWrapper}>
-              <Image source={require('../../assets/images/icon-mobile.png')} style={styles.mobile} />
+              <Image source={require('../assets/images/icon-mobile.png')} style={styles.mobile} />
             </View>
             <Text style={styles.text}>Phone number enables you 2-factor authentication. Please enter the code we’ve sent
               you via SMS.</Text>

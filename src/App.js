@@ -49,8 +49,8 @@ class App extends React.Component {
  */
 const loadAssetsAsync = async () => {
   const imageAssets = cacheImages([
-    require('../assets/images/background.png'),
-    require('../assets/images/background-blur.png')
+    require('./assets/images/background.png'),
+    require('./assets/images/background-blur.png')
   ])
 
   await Promise.all([...imageAssets])
