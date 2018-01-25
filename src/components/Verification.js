@@ -10,8 +10,8 @@ import VerifyPhoto from './VerifyPhoto'
 import Agree from './Agree'
 
 class Verification extends Component {
-  constructor (props) {
-    super(props)
+  constructor () {
+    super()
     this.state = {
       progress: 0,
       progressLine: '0%',
@@ -21,7 +21,29 @@ class Verification extends Component {
     }
   }
 
-  renderBtns () {
+  scrolled () {
+    const progress = this.state.progress + 25
+    this.setState({progress: progress})
+    this.setState({progressLine: progress + '%'})
+    this.setState({btnTxt: 'Take a photo'})
+    const currentStep = this.state.step
+    if (currentStep === 1) {
+      this.setState({btnTxt: 'Take a photo'})
+      this.setState({stepName: 'DOCUMENT CHECK'})
+    }
+    if (currentStep === 2) {
+      this.setState({btnTxt: 'Finish verification'})
+      this.setState({stepName: 'TAKE A PICTURE'})
+    }
+    if (currentStep === 3) {
+      this.setState({btnTxt: 'Im done!'})
+      this.setState({stepName: 'JUST ONE MORE THING...'})
+    }
+    this.setState({step: currentStep + 1})
+  }
+
+  // Rendering methods
+  renderButtons () {
     const {navigate} = this.props.navigation
     if (this.state.step === 4) {
       return (
@@ -42,41 +64,16 @@ class Verification extends Component {
     }
   }
 
-  scrolled (wasOnPage) {
-    var progress = this.state.progress + 25
-    this.setState({progress: progress})
-    this.setState({progressLine: progress + '%'})
-    this.setState({btnTxt: 'Take a photo'})
-    const currentStep = this.state.step
-    if (currentStep === 1) {
-      this.setState({btnTxt: 'Take a photo'})
-      this.setState({stepName: 'DOCUMENT CHECK'})
-    }
-    if (currentStep === 2) {
-      this.setState({btnTxt: 'Finish verification'})
-      this.setState({stepName: 'TAKE A PICTURE'})
-    }
-    if (currentStep === 3) {
-      this.setState({btnTxt: 'Im done!'})
-      this.setState({stepName: 'JUST ONE MORE THING...'})
-    }
-    this.setState({step: currentStep + 1})
-  }
-
   render () {
-    // const { navigate } = this.props.navigation
-
     return (
       <View style={styles.container}>
         <ImageBackground source={require('../assets/images/background-blur.png')} style={styles.background}>
           <View style={styles.body}>
-            {/* <Image source={require('../assets/images/logo-header.png')} style={styles.logo} /> */}
             <Text style={styles.header}>{this.state.stepName}</Text>
             <ImageBackground source={require('../assets/images/progress-line-bg.png')} style={styles.line}>
               <ImageBackground source={require('../assets/images/progress-line.png')}
                 style={[styles.lineInner, {width: this.state.progressLine}]} />
             </ImageBackground>
-
             <Pages
               scrollEnabled={false}
               onScrollEnd={this.scrolled.bind(this)}
@@ -87,13 +84,10 @@ class Verification extends Component {
               <VerifyPhoto />
               <Agree />
             </Pages>
-            {this.renderBtns()}
-
+            {this.renderButtons()}
           </View>
-
         </ImageBackground>
       </View>
-
     )
   }
 }
@@ -109,9 +103,6 @@ const styles = StyleSheet.create({
   background: {
     flex: 1,
     flexDirection: 'row'
-    // justifyContent: 'top',
-    // alignItems: 'center',
-    // backgroundColor: 'red'
   },
   body: {
     flex: 1,
@@ -135,8 +126,6 @@ const styles = StyleSheet.create({
     height: 4
   },
   logo: {
-    // flex: 1,
-    // position: 'absolute',
     marginTop: 40,
     marginLeft: 30,
     width: 140,
