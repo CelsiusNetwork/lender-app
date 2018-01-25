@@ -1,20 +1,12 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { ImageBackground, StyleSheet, View, Image, Text, TouchableOpacity } from 'react-native'
-import { Content, Container, Form, Input, Item, Label } from 'native-base'
-import { NavigationActions } from 'react-navigation'
-import { Font } from 'expo'
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
+import {ImageBackground, StyleSheet, View, Image, Text, TouchableOpacity} from 'react-native'
+import {Content, Container} from 'native-base'
 
 class HistoryDetail extends Component {
-  constructor (props) {
-    super(props)
-  }
-  navigate () {
-
-  }
-
+  // Rendering methods
   renderHeadingText () {
-    const { activeTransaction, walletAddress } = this.props
+    const {activeTransaction, walletAddress} = this.props
     let heading = ''
 
     if (activeTransaction.isReceiving(walletAddress)) {
@@ -33,90 +25,92 @@ class HistoryDetail extends Component {
   }
 
   render () {
-    const { navigate } = this.props.navigation
-    const { activeTransaction, walletAddress } = this.props
+    const {activeTransaction, walletAddress} = this.props
 
     console.log(this.props)
     return (
       <View style={styles.container}>
         <ImageBackground source={require('../../assets/images/background-blur.png')} style={styles.background}>
           <View style={styles.body}>
-            {/* <Image source={require('../../assets/images/logo-header.png')} style={styles.logo} /> */}
             <TouchableOpacity onPress={() => this.props.navigation.goBack()} style={[styles.backButton]}>
               <Image source={require('../../assets/images/icon-back.png')} style={styles.back} />
             </TouchableOpacity>
-            <Text style={styles.header}>{ this.renderHeadingText() }</Text>
+            <Text style={styles.header}>{this.renderHeadingText()}</Text>
             <Container>
               <Content>
                 <View style={styles.aCenter}>
                   <View style={styles.ethWrapper}>
-                    { activeTransaction.isReceiving(walletAddress) ? (
-                      <View style={[styles.arrowUp, styles.green]}>
+                    {activeTransaction.isReceiving(walletAddress) ? (
+                      <View style={styles.green}>
                         <Image source={require('../../assets/images/icon-received.png')} style={styles.icon} />
                       </View>
                     ) : (
-                      <View style={[styles.arrowUp, styles.red]}>
+                      <View style={styles.red}>
                         <Image source={require('../../assets/images/icon-given.png')} style={styles.icon} />
                       </View>
                     )}
-                    { activeTransaction.isDegreeTransaction ? (
+                    {activeTransaction.isDegreeTransaction ? (
                       <Image source={require('../../assets/images/icon-coins.png')} style={styles.eth} />
                     ) : (
                       <Image source={require('../../assets/images/icon-eth.png')} style={styles.eth} />
                     )}
                   </View>
-                  { activeTransaction.isDegreeTransaction ? (
+                  {activeTransaction.isDegreeTransaction ? (
                     <View style={styles.row}>
                       <View style={styles.cellLeft}>
-                        <Text style={[styles.cellLeftText, { fontFamily: 'barlow' }]}>Amount of CEL</Text>
+                        <Text style={[styles.cellLeftText, {fontFamily: 'barlow'}]}>Amount of CEL</Text>
                       </View>
                       <View style={styles.cellRight}>
-                        <Text style={[styles.cellRightText, { fontFamily: 'barlow-semi-bold' }]}>{ activeTransaction.degAmount } CEL</Text>
+                        <Text
+                          style={[styles.cellRightText, {fontFamily: 'barlow-semi-bold'}]}>{activeTransaction.degAmount} CEL</Text>
                       </View>
                     </View>
                   ) : (
                     <View style={styles.row}>
                       <View style={styles.cellLeft}>
-                        <Text style={[styles.cellLeftText, { fontFamily: 'barlow' }]}>Amount of ETH</Text>
+                        <Text style={[styles.cellLeftText, {fontFamily: 'barlow'}]}>Amount of ETH</Text>
                       </View>
                       <View style={styles.cellRight}>
-                        <Text style={[styles.cellRightText, { fontFamily: 'barlow-semi-bold' }]}>{ activeTransaction.ethValue } ETH</Text>
+                        <Text
+                          style={[styles.cellRightText, {fontFamily: 'barlow-semi-bold'}]}>{activeTransaction.ethValue} ETH</Text>
                       </View>
                     </View>
                   )}
 
                   <View style={styles.row}>
                     <View style={styles.cellLeft}>
-                      <Text style={[styles.cellLeftText, { fontFamily: 'barlow' }]}>Points earned</Text>
+                      <Text style={[styles.cellLeftText, {fontFamily: 'barlow'}]}>Points earned</Text>
                     </View>
                     <View style={styles.cellRight}>
-                      <Text style={[styles.cellRightText, { fontFamily: 'barlow-semi-bold' }]}>100</Text>
+                      <Text style={[styles.cellRightText, {fontFamily: 'barlow-semi-bold'}]}>100</Text>
                       <Image source={require('../../assets/images/icon-points.png')} style={styles.points} />
                     </View>
                   </View>
                   <View style={styles.row}>
                     <View style={styles.cellLeft}>
-                      <Text style={[styles.cellLeftText, { fontFamily: 'barlow' }]}>Date</Text>
+                      <Text style={[styles.cellLeftText, {fontFamily: 'barlow'}]}>Date</Text>
                     </View>
                     <View style={styles.cellRight}>
-                      <Text style={[styles.cellRightText, { fontFamily: 'barlow-semi-bold' }]}>{ activeTransaction.dateDisplay }</Text>
+                      <Text
+                        style={[styles.cellRightText, {fontFamily: 'barlow-semi-bold'}]}>{activeTransaction.dateDisplay}</Text>
                     </View>
                   </View>
                   <View style={styles.row}>
                     <View style={styles.cellLeft}>
-                      <Text style={[styles.cellLeftText, { fontFamily: 'barlow' }]}>Time</Text>
+                      <Text style={[styles.cellLeftText, {fontFamily: 'barlow'}]}>Time</Text>
                     </View>
                     <View style={styles.cellRight}>
-                      <Text style={[styles.cellRightText, { fontFamily: 'barlow-semi-bold' }]}>{ activeTransaction.timeDisplay }</Text>
+                      <Text
+                        style={[styles.cellRightText, {fontFamily: 'barlow-semi-bold'}]}>{activeTransaction.timeDisplay}</Text>
                     </View>
                   </View>
                   <View style={[styles.row, {borderBottomColor: 'rgba(255, 255, 255, 0.1)', borderBottomWidth: 2}]}>
                     <View style={styles.cellLeft}>
-                      <Text style={[styles.cellLeftText, { fontFamily: 'barlow' }]}>Status</Text>
+                      <Text style={[styles.cellLeftText, {fontFamily: 'barlow'}]}>Status</Text>
                     </View>
                     <View style={styles.cellRight}>
                       <View style={styles.greenDow} />
-                      <Text style={[styles.cellRightText, { fontFamily: 'barlow-semi-bold' }]}>Complete</Text>
+                      <Text style={[styles.cellRightText, {fontFamily: 'barlow-semi-bold'}]}>Complete</Text>
                     </View>
                   </View>
 
@@ -146,9 +140,6 @@ const styles = StyleSheet.create({
   background: {
     flex: 1,
     flexDirection: 'row'
-    // justifyContent: 'top',
-    // alignItems: 'center',
-    // backgroundColor: 'red'
   },
   body: {
     flex: 1,
@@ -182,8 +173,6 @@ const styles = StyleSheet.create({
     height: 4
   },
   logo: {
-    // flex: 1,
-    // position: 'absolute',
     marginTop: 40,
     marginLeft: 30,
     width: 140,
@@ -243,7 +232,7 @@ const styles = StyleSheet.create({
   buttonText: {
     color: '#ffffff',
     fontSize: 21,
-    fontFamily: 'barlow-medium',
+    fontFamily: 'barlow-medium'
   },
   green: {
     position: 'absolute',
@@ -316,8 +305,6 @@ const styles = StyleSheet.create({
     color: 'rgba(255, 255, 255, 1)',
     fontSize: 21,
     textAlign: 'left'
-    // borderColor: 'green',
-    // borderWidth: 1
   },
   greenDow: {
     width: 10,
@@ -330,8 +317,8 @@ const styles = StyleSheet.create({
 })
 
 const mapStateToProps = state => {
-  const { activeTransaction } = state.transactions
-  const { walletAddress } = state.lender
+  const {activeTransaction} = state.transactions
+  const {walletAddress} = state.lender
 
   return {
     activeTransaction,
@@ -339,8 +326,6 @@ const mapStateToProps = state => {
   }
 }
 
-const mapDispatchToProps = {
-
-}
+const mapDispatchToProps = {}
 
 export default connect(mapStateToProps, mapDispatchToProps)(HistoryDetail)
