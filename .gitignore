@@ -9,3 +9,4 @@ package-lock.json
 #IDEs
 .idea
 .python-version
+.vscode
