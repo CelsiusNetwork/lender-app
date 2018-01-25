@@ -64,15 +64,15 @@ const loadAssetsAsync = async () => {
  */
 const loadFontsAsync = async () => {
   await Font.loadAsync({
-    Roboto: require('native-base/Fonts/Roboto.ttf'),
-    Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
-    'helvetica-neue-lt': require('../assets/fonts/helvetica-neue-lt-std-45-light.ttf'),
-    'inconsolata': require('../assets/fonts/Inconsolata-Regular.ttf'),
-    'barlow-medium': require('../assets/fonts/Barlow-Medium.ttf'),
-    'barlow-bold': require('../assets/fonts/Barlow-Bold.otf'),
-    'barlow-semi-bold': require('../assets/fonts/Barlow-SemiBold.otf'),
-    'barlow-light': require('../assets/fonts/Barlow-Light.otf'),
-    'barlow': require('../assets/fonts/Barlow-Regular.otf')
+    'Roboto': require('native-base/Fonts/Roboto.ttf'),
+    'Roboto_medium': require('native-base/Fonts/Roboto_medium.ttf'),
+    'helvetica-neue-lt': require('./assets/fonts/helvetica-neue-lt-std-45-light.ttf'),
+    'inconsolata': require('./assets/fonts/Inconsolata-Regular.ttf'),
+    'barlow-medium': require('./assets/fonts/Barlow-Medium.ttf'),
+    'barlow-bold': require('./assets/fonts/Barlow-Bold.otf'),
+    'barlow-semi-bold': require('./assets/fonts/Barlow-SemiBold.otf'),
+    'barlow-light': require('./assets/fonts/Barlow-Light.otf'),
+    'barlow': require('./assets/fonts/Barlow-Regular.otf')
   })
 }
 
