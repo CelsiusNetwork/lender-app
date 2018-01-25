@@ -78,11 +78,11 @@ class HowItWorks extends Component {
             </View>
 
             <TouchableOpacity style={styles.button} onPress={this.onButtonPress.bind(this)}>
-              <Text style={[{ fontFamily: 'barlow'}, styles.buttonText]}>Create account</Text>
+              <Text style={[{fontFamily: 'barlow'}, styles.buttonText]}>Create account</Text>
             </TouchableOpacity>
 
             <TouchableOpacity style={styles.loginTouchable} onPress={() => navigate('LoginForm')}>
-              <Text style={[{ fontFamily: 'barlow'}, styles.loginText]}>Already have one?</Text>
+              <Text style={[{fontFamily: 'barlow'}, styles.loginText]}>Already have one?</Text>
             </TouchableOpacity>
 
           </Content>

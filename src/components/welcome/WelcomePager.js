@@ -27,7 +27,7 @@ class WelcomePager extends Component {
 
 const styles = StyleSheet.create({
   pagesWrapper: {
-    flex: 1,
+    flex: 1
   },
   title: {
     fontSize: 38,
