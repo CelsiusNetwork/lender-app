@@ -9,7 +9,8 @@
     "android": "react-native-scripts android",
     "ios": "react-native-scripts ios",
     "standard": "standard './src/**/*.js'",
-    "react-devtools": "react-devtools"
+    "react-devtools": "react-devtools",
+    "plop": "plop"
   },
   "dependencies": {
     "react": "16.2.0",
@@ -40,6 +41,7 @@
     "exp": "^47.4.0",
     "husky": "0.14.3",
     "jwt-decode": "^2.2.0",
+    "plop": "^1.9.1",
     "react-devtools": "^3.0.0",
     "react-native-scripts": "^1.8.0",
     "remote-redux-devtools": "0.5.0",
