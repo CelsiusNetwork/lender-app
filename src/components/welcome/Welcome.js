@@ -7,6 +7,7 @@ export default class Welcome extends Component {
     this.state = {}
   }
 
+  // Rendering Methods
   render () {
     return (
       <View style={styles.welcomeContainer}>

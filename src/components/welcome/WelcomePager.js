@@ -7,6 +7,7 @@ import HowItWorks from './HowItWorks'
 import { lenderAppInitToken } from '../../actions'
 
 class WelcomePager extends Component {
+  // Rendering Methods
   render () {
     return (
       <View style={styles.container}>
