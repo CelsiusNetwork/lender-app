@@ -6,24 +6,23 @@ import DegIncome from './DegIncome'
 import DegValue from './DegValue'
 import IncomeHistory from './IncomeHistory'
 import { lenderAppInitToken } from '../../actions'
-import { Font } from 'expo';
 
 const MyStatusBar = ({backgroundColor, ...props}) => (
   <View style={[styles.statusBar, { backgroundColor }]}>
     <StatusBar translucent backgroundColor={backgroundColor} {...props} />
   </View>
-);
+)
 
 class GraphPager extends Component {
-  constructor(props) {
-    super(props);
+  constructor () {
+    super()
     this.state = {
-        eth: 10.000,
-        deg: 2.984,
-        change: ' ▲ +3.24%',
-        user: {
-          name: "Alex"
-        },
+      eth: 10.000,
+      deg: 2.984,
+      change: ' ▲ +3.24%',
+      user: {
+        name: 'Alex'
+      }
     }
   }
 
@@ -31,7 +30,7 @@ class GraphPager extends Component {
     const { navigate } = this.props.navigation
     return (
       <View style={styles.container}>
-        <MyStatusBar barStyle="light-content" />
+        <MyStatusBar barStyle='light-content' />
         <ImageBackground
           source={require('../../assets/images/background.png')}
           style={styles.background}>
@@ -49,13 +48,11 @@ class GraphPager extends Component {
           </View>
 
           <Text style={styles.headerText}>
-            <Text style={[{ fontFamily: 'barlow-semi-bold' }]}>{ this.state.eth.toFixed(3) }</Text>
-            <Text style={[{ fontFamily: 'barlow-semi-bold' }]}> ETH</Text>
+            <Text style={[{fontFamily: 'barlow-semi-bold' }]}>{ this.state.eth.toFixed(3) } ETH</Text>
           </Text>
           <Text style={styles.header2Text}>
-            <Text style={[{ fontFamily: 'barlow-light' }]}>{ this.state.deg.toFixed(3) }</Text>
-            <Text style={[{ fontFamily: 'barlow-light' }]}> CEL</Text>
-            <Text style={[ styles.changeUp, { fontFamily: 'barlow-light' }]}> { this.state.change}</Text>
+            <Text style={[{fontFamily: 'barlow-light' }]}>{ this.state.deg.toFixed(3) } CEL</Text>
+            <Text style={[styles.changeUp, { fontFamily: 'barlow-light' }]}> { this.state.change}</Text>
           </Text>
 
           <View style={styles.pagesWrapper}>
@@ -78,27 +75,27 @@ const styles = StyleSheet.create({
     marginTop: 40
   },
   headerText: {
-		fontSize: 42,
-		backgroundColor: 'rgba(0,0,0,0)',
-		color: 'white',
-		paddingLeft: 30,
-		paddingRight: 30,
-		marginBottom: 10,
+    fontSize: 42,
+    backgroundColor: 'rgba(0,0,0,0)',
+    color: 'white',
+    paddingLeft: 30,
+    paddingRight: 30,
+    marginBottom: 10,
     fontWeight: 'bold',
     textAlign: 'center',
     marginTop: 20
   },
   row: {
     height: 140,
-    flexDirection: 'row',
+    flexDirection: 'row'
   },
   header2Text: {
-		fontSize: 24,
-		backgroundColor: 'rgba(0,0,0,0)',
-		color: '#9CA9B6',
-		paddingLeft: 30,
-		paddingRight: 30,
-		marginBottom: 10,
+    fontSize: 24,
+    backgroundColor: 'rgba(0,0,0,0)',
+    color: '#9CA9B6',
+    paddingLeft: 30,
+    paddingRight: 30,
+    marginBottom: 10,
     fontWeight: 'bold',
     textAlign: 'center',
     marginTop: 0
@@ -113,10 +110,10 @@ const styles = StyleSheet.create({
   },
   pagesWrapper: {
     flex: 1,
-    flexDirection: 'row',
+    flexDirection: 'row'
   },
   pages: {
-    flex: 1,
+    flex: 1
   },
   cellLeft: {
     flex: 1,
@@ -124,7 +121,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
     marginLeft: 10,
-    height: 40,
+    height: 40
   },
   cellRight: {
     flex: 1,
@@ -132,18 +129,18 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     alignItems: 'center',
     marginRight: 10,
-    height: 40,
+    height: 40
   },
   logo: {
     width: 30,
     height: 30,
-    marginLeft: 15,
+    marginLeft: 15
   },
   user: {
     width: 30,
     height: 30,
     marginRight: 35,
-    resizeMode: "contain"
+    resizeMode: 'contain'
   },
   title: {
     fontSize: 38,
