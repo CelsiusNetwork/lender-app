@@ -5,10 +5,10 @@ function Transaction (t) {
 
   // Value is in Weis -> https://etherconverter.online/
   // 1 ETH = 1,000,000,000,000,000,000 Weis
-  this.ethValue = (Number(this.value) / 1000000000000000000).toFixed(2);
-  this.createdAt = Number(this.timeStamp * 1000);
-  this.dateDisplay = moment(Number(this.timeStamp * 1000)).format('MMM D, YYYY');
-  this.timeDisplay = moment(Number(this.timeStamp * 1000)).format('hh:mm A');
+  this.ethValue = (Number(this.value) / 1000000000000000000).toFixed(2)
+  this.createdAt = Number(this.timeStamp * 1000)
+  this.dateDisplay = moment(Number(this.timeStamp * 1000)).format('MMM D, YYYY')
+  this.timeDisplay = moment(Number(this.timeStamp * 1000)).format('hh:mm A')
 
   if (this.input === '0x' && this.ethValue) {
     this.isDegreeTransaction = false
@@ -23,10 +23,11 @@ function Transaction (t) {
   this.isReceiving = isReceiving
   this.isSending = isSending
 
-  function isReceiving(lenderWalletAddress) {
+  function isReceiving (lenderWalletAddress) {
     return this.to === lenderWalletAddress
   }
-  function isSending(lenderWalletAddress) {
+
+  function isSending (lenderWalletAddress) {
     return this.from === lenderWalletAddress
   }
 }

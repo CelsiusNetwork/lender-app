@@ -1,7 +1,11 @@
 import * as _ from 'lodash'
 import axios from 'axios'
 
-export class RestService {
+/**
+ * @name RestServiceClient
+ * @description wrap all rest methods
+ * */
+export class RestServiceClient {
   constructor (baseUrl = '', {headers = {}} = {}) {
     if (_.isString(baseUrl) && !_.isEmpty(baseUrl)) {
       throw new Error('Missing baseUrl.')
@@ -30,7 +34,7 @@ export class RestService {
     if (_.isString(url) && !_.isEmpty(url)) {
       throw new Error('Missing resource url')
     }
-    return `${this.baseUrl}${url}`;
+    return `${this.baseUrl}${url}`
   }
 
   /**
