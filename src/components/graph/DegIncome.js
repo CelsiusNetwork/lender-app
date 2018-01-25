@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { StatusBar, Alert, ImageBackground, StyleSheet, View, Image, Text, TouchableOpacity, AsyncStorage, Animated } from 'react-native'
-import { Form, Input, Item, Label, Content, Container } from 'native-base'
-import { NavigationActions } from 'react-navigation'
-import { Font } from 'expo'
+import { StatusBar, StyleSheet, View, Image, Text } from 'react-native'
+import { Content, Container } from 'native-base'
 
 const MyStatusBar = ({backgroundColor, ...props}) => (
   <View style={[styles.statusBar, { backgroundColor }]}>
@@ -12,8 +9,8 @@ const MyStatusBar = ({backgroundColor, ...props}) => (
 )
 
 export default class DegIncome extends Component {
-  constructor (props) {
-    super(props)
+  constructor () {
+    super()
     this.state = {
       eth: 10.000,
       deg: 2.984,
@@ -24,8 +21,8 @@ export default class DegIncome extends Component {
     }
   }
 
+  // Rendering methods
   render () {
-    const { navigate } = this.props.navigation
     return (
       <View style={styles.welcomeContainer}>
         <MyStatusBar barStyle='light-content' />
@@ -90,9 +87,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
     marginLeft: 10
-    // height: 40,
-    // borderWidth: 1,
-    // borderColor: 'green',
   },
   cellRight: {
     flex: 1,
@@ -100,20 +94,14 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     alignItems: 'center',
     marginRight: 10
-    // height: 40,
-    // borderWidth: 1,
-    // borderColor: 'red'
   },
   button: {
     backgroundColor: '#ffffff',
     borderRadius: 5,
     padding: 5,
     height: 50,
-    // width: 150,
     justifyContent: 'center',
     alignItems: 'center',
-    // marginRight: '5%',
-    // marginLeft: '5%',
     paddingLeft: 20,
     paddingRight: 20,
     marginLeft: 30
@@ -129,11 +117,8 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     padding: 5,
     height: 50,
-    // width: 150,
     justifyContent: 'center',
     alignItems: 'center',
-    // marginRight: '5%',
-    // marginLeft: '5%',
     paddingLeft: 20,
     paddingRight: 20,
     marginRight: 30
@@ -147,22 +132,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingLeft: 30,
     paddingRight: 30
-    // borderWidth: 1,
-    // borderColor: 'blue'
-
   },
   graph: {
-    // flex: 1,
-    // flexDirection: 'row',
     width: 300,
     minHeight: 1,
     height: 340,
     resizeMode: 'contain',
     marginLeft: 20,
     marginRight: 20
-    // borderWidth: 1,
-    // borderColor: 'red',
-    // alignSelf: 'stretch'
   },
   footer: {
     fontSize: 24,
@@ -176,14 +153,3 @@ const styles = StyleSheet.create({
     marginTop: 0
   }
 })
-
-const mapStateToProps = state => {
-  return {
-
-  }
-}
-
-const mapDispatchToProps = {
-}
-
-// export default connect(mapStateToProps, mapDispatchToProps)(DegIncome)
