@@ -2,13 +2,11 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {StyleSheet, View, Image, Text} from 'react-native'
 import {Content, Container, Input} from 'native-base'
-import {Font} from 'expo'
 
 class VerifyPhoneNumber extends Component {
   constructor () {
     super()
     this.state = {}
-
   }
 
   render () {
@@ -26,7 +24,6 @@ class VerifyPhoneNumber extends Component {
                 style={styles.input}
                 keyboardType='numeric'
                 maxLength={6}
-                // placeholder='_ _ _ _ _ _'
                 returnKeyType='done' autoCorrect={false} />
             </View>
           </View>
@@ -47,9 +44,6 @@ const styles = StyleSheet.create({
   background: {
     flex: 1,
     flexDirection: 'row'
-    // justifyContent: 'top',
-    // alignItems: 'center',
-    // backgroundColor: 'red'
   },
   body: {
     flex: 1,
@@ -70,8 +64,6 @@ const styles = StyleSheet.create({
     height: 4
   },
   logo: {
-    // flex: 1,
-    // position: 'absolute',
     marginTop: 40,
     marginLeft: 30,
     width: 140,

@@ -11,7 +11,7 @@ class Agree extends React.Component {
       checked: false
     }
 
-    this.onCheckBoxPress = this.onCheckBoxPress().bind(this)
+    this.onCheckBoxPress = this.onCheckBoxPress.bind(this)
   }
 
   // Event Handlers
