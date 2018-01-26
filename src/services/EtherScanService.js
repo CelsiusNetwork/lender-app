@@ -11,7 +11,7 @@ export class EtherScanService extends RestServiceClient {
    * @name fetchTransactionList
    * @description get all transactions for the user
    *
-   * @return AxiosPromise server response
+   * @return Promise<AxiosResponse> server response
    * */
   fetchTransactionList () {
     const params = {
