@@ -4,7 +4,7 @@ import { StyleSheet, View, ImageBackground, Image, TouchableOpacity } from 'reac
 import { Text, Content, Container } from 'native-base'
 import { registerFirstNameChanged, registerLastNameChanged, registerEmailChanged, registerPasswordChanged, registerPhoneNumberChanged, registerLender } from '../actions'
 
-class AddFounds extends Component {
+class AddFunds extends Component {
   constructor (props) {
     super(props)
     this.state = {}
@@ -212,4 +212,4 @@ const mapDispatchToProps = {
   registerFirstNameChanged, registerLastNameChanged, registerEmailChanged, registerPasswordChanged, registerPhoneNumberChanged, registerLender
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddFounds)
+export default connect(mapStateToProps, mapDispatchToProps)(AddFunds)

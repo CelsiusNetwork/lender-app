@@ -4,7 +4,7 @@ import {StyleSheet, View, ImageBackground, Image, TouchableOpacity} from 'react-
 import {Form, Input, Item, Label, Text, Content, Container} from 'native-base'
 import {withdrawETH} from '../actions'
 
-class AddFounds extends Component {
+class AddFunds extends Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -250,4 +250,4 @@ const mapDispatchToProps = {
   withdrawETH
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddFounds)
+export default connect(mapStateToProps, mapDispatchToProps)(AddFunds)

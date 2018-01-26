@@ -4,7 +4,7 @@ import {StyleSheet, View, ImageBackground, Image, TouchableOpacity} from 'react-
 import {Text, Content, Container} from 'native-base'
 import {setWithdrawAmount} from '../actions'
 
-class ManageFoundsWithdraw extends Component {
+class ManageFundsWithdraw extends Component {
   constructor () {
     super()
     this.state = {
@@ -367,4 +367,4 @@ const mapDispatchToProps = {
   setWithdrawAmount
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ManageFoundsWithdraw)
+export default connect(mapStateToProps, mapDispatchToProps)(ManageFundsWithdraw)

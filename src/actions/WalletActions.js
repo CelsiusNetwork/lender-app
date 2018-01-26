@@ -34,9 +34,9 @@ export const setWithdrawAmount = (text) => {
       payload: text
     })
     dispatch(NavigationActions.navigate({
-      routeName: 'ManageFoundsConfirm',
+      routeName: 'ManageFundsConfirm',
       actions: [
-        NavigationActions.navigate({ routeName: 'ManageFoundsConfirm' })
+        NavigationActions.navigate({ routeName: 'ManageFundsConfirm' })
       ]
     }))
   }
@@ -51,17 +51,17 @@ const handleWithdrawETH = (dispatch, response) => {
 
     // TODO (djs): Check with team
     // dispatch(NavigationActions.navigate({
-    //   routeName: 'ManageFoundsSuccess',
+    //   routeName: 'ManageFundsSuccess',
     //   actions: [
-    //     NavigationActions.navigate({ routeName: 'ManageFoundsSuccess' })
+    //     NavigationActions.navigate({ routeName: 'ManageFundsSuccess' })
     //   ]
     // }))
   }
   if (response.ok === false) {
     // dispatch(NavigationActions.navigate({
-    //   routeName: 'ManageFoundsConfirm',
+    //   routeName: 'ManageFundsConfirm',
     //   actions: [
-    //     NavigationActions.navigate({ routeName: 'ManageFoundsError' })
+    //     NavigationActions.navigate({ routeName: 'ManageFundsError' })
     //   ]
     // }))
   }

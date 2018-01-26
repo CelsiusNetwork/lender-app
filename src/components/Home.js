@@ -100,7 +100,7 @@ class Home extends Component {
                   </Text>
                   <View style={styles.btnsContainer}>
                     <View>
-                      <TouchableOpacity style={[styles.button, {width: 150, height: 50, marginLeft: 113, marginTop: 30, marginBottom: 47}]} onPress={() => navigate('AddFounds')}>
+                      <TouchableOpacity style={[styles.button, {width: 150, height: 50, marginLeft: 113, marginTop: 30, marginBottom: 47}]} onPress={() => navigate('AddFunds')}>
                         <Text style={[styles.buttonText, {fontFamily: 'barlow-medium', fontSize: 21}]}>Add funds</Text>
                       </TouchableOpacity>
                     </View>
@@ -174,12 +174,12 @@ class Home extends Component {
 
             <View style={stylesGraph.row}>
               <View style={stylesGraph.buttonCellLeft}>
-                <TouchableOpacity style={stylesGraph.button} onPress={() => navigate('AddFounds')}>
+                <TouchableOpacity style={stylesGraph.button} onPress={() => navigate('AddFunds')}>
                   <Text style={stylesGraph.buttonText}>Add funds</Text>
                 </TouchableOpacity>
               </View>
               <View style={stylesGraph.buttonCellRight}>
-                <TouchableOpacity style={stylesGraph.button2} onPress={() => navigate('ManageFounds')}>
+                <TouchableOpacity style={stylesGraph.button2} onPress={() => navigate('ManageFunds')}>
                   <Text style={stylesGraph.button2Text}>Manage</Text>
                 </TouchableOpacity>
               </View>

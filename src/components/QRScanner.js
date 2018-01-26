@@ -42,9 +42,9 @@ export default class App extends Component {
     if (result.data !== this.state.lastScannedUrl) {
       LayoutAnimation.spring()
       this.setState({ lastScannedUrl: result.data })
-      navigate('ManageFoundsConfirm')
+      navigate('ManageFundsConfirm')
       // this.props.navigation.push({
-      //   component: 'ManageFoundsConfirm',
+      //   component: 'ManageFundsConfirm',
       //   props: { to: "asdf" }
       // });
     }

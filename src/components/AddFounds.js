@@ -4,7 +4,7 @@ import {StyleSheet, View, ImageBackground, Image, TouchableOpacity, Text, Share,
 import {Content, Container} from 'native-base'
 import QRCode from 'react-native-qrcode'
 
-class AddFounds extends Component {
+class AddFunds extends Component {
   constructor () {
     super()
     this.state = {
@@ -286,4 +286,4 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {}
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddFounds)
+export default connect(mapStateToProps, mapDispatchToProps)(AddFunds)

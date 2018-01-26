@@ -11,7 +11,7 @@ import {
   registerLender
 } from '../actions'
 
-class AddFounds extends Component {
+class AddFunds extends Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -59,7 +59,7 @@ class AddFounds extends Component {
                           style={[styles.changeUp, {fontFamily: 'barlow-light'}]}> {this.state.ethChange}</Text>
                       </Text>
                       <Image source={require('../assets/images/graph1.png')} style={styles.graph} />
-                      <TouchableOpacity style={styles.boxButton} onPress={() => navigate('ManageFoundsWithdraw')}>
+                      <TouchableOpacity style={styles.boxButton} onPress={() => navigate('ManageFundsWithdraw')}>
                         <Text style={styles.boxButtonText}><Image
                           source={require('../assets/images/icon-transfer-arrows.png')}
                           style={styles.buttonIcon} /><Text style={{color: '#ffffff', fontFamily: 'barlow'}}>{'   '}Withdraw ETH</Text></Text>
@@ -375,4 +375,4 @@ const mapDispatchToProps = {
   registerLender
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddFounds)
+export default connect(mapStateToProps, mapDispatchToProps)(AddFunds)

@@ -17,13 +17,13 @@ import VerifyDocument from './components/VerifyDocument'
 import VerifyPhoto from './components/VerifyPhoto'
 import Agree from './components/Agree'
 import EditProfile from './components/EditProfile'
-import AddFounds from './components/AddFounds'
-import ManageFounds from './components/ManageFounds'
-import ManageFoundsWithdraw from './components/ManageFoundsWithdraw'
-import ManageFoundsConfirm from './components/ManageFoundsConfirm'
+import AddFunds from './components/AddFounds'
+import ManageFunds from './components/ManageFounds'
+import ManageFundsWithdraw from './components/ManageFoundsWithdraw'
+import ManageFundsConfirm from './components/ManageFoundsConfirm'
 import QRScanner from './components/QRScanner'
-import ManageFoundsSuccess from './components/ManageFoundsSuccess'
-import ManageFoundsError from './components/ManageFoundsError'
+import ManageFundsSuccess from './components/ManageFoundsSuccess'
+import ManageFundsError from './components/ManageFoundsError'
 import Home from './components/Home'
 
 export const Navigator = StackNavigator({
@@ -83,32 +83,32 @@ export const Navigator = StackNavigator({
     screen: EditProfile,
     headerMode: 'screen'
   },
-  AddFounds: {
-    screen: AddFounds,
+  AddFunds: {
+    screen: AddFunds,
     headerMode: 'screen'
   },
-  ManageFounds: {
-    screen: ManageFounds,
+  ManageFunds: {
+    screen: ManageFunds,
     headerMode: 'screen'
   },
-  ManageFoundsWithdraw: {
-    screen: ManageFoundsWithdraw,
+  ManageFundsWithdraw: {
+    screen: ManageFundsWithdraw,
     headerMode: 'screen'
   },
-  ManageFoundsConfirm: {
-    screen: ManageFoundsConfirm,
+  ManageFundsConfirm: {
+    screen: ManageFundsConfirm,
     headerMode: 'screen'
   },
   QRScanner: {
     screen: QRScanner,
     headerMode: 'screen'
   },
-  ManageFoundsSuccess: {
-    screen: ManageFoundsSuccess,
+  ManageFundsSuccess: {
+    screen: ManageFundsSuccess,
     headerMode: 'screen'
   },
-  ManageFoundsError: {
-    screen: ManageFoundsError,
+  ManageFundsError: {
+    screen: ManageFundsError,
     headerMode: 'screen'
   }
 }, {

@@ -4,7 +4,7 @@ import { StyleSheet, View, ImageBackground, Image, TouchableOpacity } from 'reac
 import { Text, Content, Container } from 'native-base'
 import { withdrawETH, gotoHome } from '../actions'
 
-class AddFounds extends Component {
+class AddFunds extends Component {
   constructor (props) {
     super(props)
     this.state = {}
@@ -214,4 +214,4 @@ const mapDispatchToProps = {
   withdrawETH, gotoHome
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddFounds)
+export default connect(mapStateToProps, mapDispatchToProps)(AddFunds)
