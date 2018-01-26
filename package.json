@@ -8,10 +8,14 @@
     "eject": "react-native-scripts eject",
     "android": "react-native-scripts android",
     "ios": "react-native-scripts ios",
-    "standard": "standard './src/**/*.js'",
+    "standard": "standard './src/**/*.js' | snazzy",
+    "standard:fix": "standard --fix",
     "react-devtools": "react-devtools",
     "plop": "plop"
   },
+  "pre-commit": [
+    "standard"
+  ],
   "dependencies": {
     "axios": "0.17.1",
     "expo": "23.0.4",
@@ -43,11 +47,13 @@
     "husky": "0.14.3",
     "jwt-decode": "^2.2.0",
     "plop": "^1.9.1",
+    "pre-commit": "^1.2.2",
     "react-devtools": "^3.0.0",
     "react-native-scripts": "^1.8.0",
     "remote-redux-devtools": "0.5.0",
     "remote-redux-devtools-on-debugger": "^0.8.0",
     "rimraf": "^2.6.2",
+    "snazzy": "^7.0.0",
     "standard": "^10.0.3",
     "watchman": "^1.0.0"
   }
