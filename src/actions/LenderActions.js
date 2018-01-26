@@ -3,25 +3,18 @@ import {NavigationActions} from 'react-navigation'
 import {CelsiusService} from '../services'
 
 export const registerLender = (registerForm, appToken) => {
-  console.log('registerLender()x')
-  console.log(registerForm, appToken)
-
   return (dispatch) => {
     const error = validateRegisterForm(registerForm)
     if (!error) {
-      dispatch({
-        type: types.REGISTER_LENDER_LOADING
-      })
+      dispatch({type: types.REGISTER_LENDER_LOADING})
 
-      const {firstName, lastName, email, password, phoneNumber} = registerForm
-      CelsiusService().registerLender(firstName, lastName, email, password, phoneNumber, appToken)
+      let service = new CelsiusService(appToken)
+
+      service.registerLender(registerForm)
         .then(response => {
           if (response.ok) {
-            console.log('Great Success!')
-            console.log(JSON.parse(response._bodyInit))
             registerLenderSuccess(dispatch, JSON.parse(response._bodyInit))
           } else {
-            console.log(JSON.parse(JSON.parse(response._bodyInit).error))
             const error = JSON.parse(JSON.parse(response._bodyInit).error).message
             registerLenderFail(dispatch, getErrorText({server: error}))
           }
@@ -73,13 +66,6 @@ export const updateProfile = (registerForm) => {
   }
 }
 
-// const editLenderFail = (dispatch, error) => {
-//   dispatch({
-//     type: types.EDIT_LENDER_FAILURE,
-//     payload: error
-//   })
-// }
-
 export const updateRegisterForm = (registerForm) => {
   return {
     type: types.UPDATE_REGISTER_FORM,
@@ -97,9 +83,12 @@ export const updateRegisterForm = (registerForm) => {
  * */
 export const getLenderRewardPoints = (walletAddress, token) => {
   return (dispatch) => {
-    CelsiusService().getLenderRewardPoints(walletAddress, token).then(response => {
-      handleLenderRewardPoints(dispatch, response)
-    })
+    let service = new CelsiusService(token)
+
+    service.getLenderRewardPoints(walletAddress)
+      .then(response => {
+        handleLenderRewardPoints(dispatch, response)
+      })
   }
 }
 
@@ -126,7 +115,7 @@ const handleLenderRewardPoints = (dispatch, response = {}) => {
   }
 }
 
-function validateRegisterForm (registrationForm) {
+function validateRegisterForm(registrationForm) {
   if (!registrationForm.firstName) return getErrorText({notEmpty: {field: 'First Name'}})
   if (registrationForm.firstName.length < 2) return getErrorText({atLeast: {field: 'First Name', number: 2}})
   if (!registrationForm.lastName) return getErrorText({notEmpty: {field: 'Last Name'}})
@@ -138,7 +127,7 @@ function validateRegisterForm (registrationForm) {
   return false
 }
 
-function validateEditProfileForm (registrationForm) {
+function validateEditProfileForm(registrationForm) {
   if (!registrationForm.firstName) return getErrorText({notEmpty: {field: 'First Name'}})
   if (registrationForm.firstName.length < 5) return getErrorText({atLeast: {field: 'First Name', number: 2}})
   if (!registrationForm.lastName) return getErrorText({notEmpty: {field: 'Last Name'}})
@@ -148,7 +137,7 @@ function validateEditProfileForm (registrationForm) {
   return false
 }
 
-function getErrorText (error) {
+function getErrorText(error) {
   // error format { atLeast: { field, number }}
   if (error.atLeast) return `Ooops... ${error.atLeast.field} must have at least ${error.atLeast.number} letters!`
   // error format { notEmpty: { field }}

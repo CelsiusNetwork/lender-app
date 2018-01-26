@@ -1,11 +1,11 @@
 import {RestServiceClient} from './RestServiceClient'
-import {CS_CELSIUS_API_V1_URL} from 'react-native-dotenv'
+import {CS_CELSIUS_API_URL} from 'react-native-dotenv'
 
 export class WalletService extends RestServiceClient {
   constructor (token) {
-    super(CS_CELSIUS_API_V1_URL, {authorizationToken: token})
+    super(CS_CELSIUS_API_URL, {authorizationToken: token})
     this.token = token
-    this.lenderEndPoint = '/lender/tx'
+    this.lenderEndPoint = '/api/v1/lender/tx'
   }
 
   /**
