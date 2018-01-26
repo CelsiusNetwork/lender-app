@@ -5,6 +5,7 @@ export class WalletService extends RestServiceClient {
   constructor (token) {
     super(CS_CELSIUS_API_V1_URL, {authorizationToken: token})
     this.token = token
+    this.lenderEndPoint = '/lender/tx'
   }
 
   /**
@@ -16,7 +17,7 @@ export class WalletService extends RestServiceClient {
    * @return Promise<Response>
    */
   getBalance (walletAddress) {
-    return this.GET(`/lender/tx/balance/${walletAddress}`)
+    return this.GET(`${this.lenderEndPoint}/balance/${walletAddress}`)
   }
 
   /**
@@ -30,12 +31,6 @@ export class WalletService extends RestServiceClient {
    * @return Promise<Response>
    */
   sendETH (fromAddress, toAddress, value) {
-    let body = JSON.stringify({
-      fromAddress,
-      toAddress,
-      value
-    })
-
-    return this.POST(`/tx/eth/send`, body)
+    return this.POST(`${this.lenderEndPoint}/eth/send`, {fromAddress, toAddress, value})
   }
 }

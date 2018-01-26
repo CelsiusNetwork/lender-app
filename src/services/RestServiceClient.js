@@ -1,5 +1,6 @@
 import * as _ from 'lodash'
 import axios from 'axios'
+import {ErrorModel} from '../models/ErrorModel'
 
 /**
  * @name RestServiceClient
@@ -25,21 +26,64 @@ export class RestServiceClient {
     this.baseUrl = baseUrl
   }
 
-  processResponse (response) {
-    return response.data
-  }
-
-  processErrorResponse (response) {
-    console.group()
-    console.error('Something went wrong with server response. See error stack trace.')
-    console.error(response)
-    console.groupEnd()
-
-    return response
+  /**
+   * @name processResponse
+   * @description handle server response
+   *
+   * @param response [object]
+   *
+   * return Object
+   */
+  static processResponse (response) {
+    if ('content-type' in response.headers) {
+      let contentType = response.headers['content-type']
+      if (contentType.startsWith('application/json') > -1) {
+        return response.data
+      } else if (contentType.startsWith('text/plain') > -1) {
+        return response // TODO (djs): ....
+      }
+    }
   }
 
   /**
-   * @private
+   * @name processErrorResponse
+   * @description handle server response
+   *
+   * @param error [object]
+   *
+   * return ErrorModel
+   */
+  static processErrorResponse (error) {
+    const { stack } = error
+
+    let errorModel = new ErrorModel()
+    errorModel.details = stack
+
+    if (error.response) {
+      const { status, data } = error.response
+
+      errorModel.statusCode = status
+      try {
+        errorModel.message = data.error.msg.message
+        errorModel.errorName = data.error.msg.name
+      } catch (e) {
+        errorModel.message = `Something went wrong.`
+        errorModel.errorName = `Name isn't defined`
+      }
+    } else {
+      errorModel.errorName = error.name
+      errorModel.message = error.message
+    }
+
+    console.group()
+    console.error(`${errorModel.errorName} details: ${errorModel.message}`)
+    console.error(errorModel)
+    console.groupEnd()
+
+    return errorModel
+  }
+
+  /**
    * @name fullApiUrl
    * @description concat baseUrl with resource url
    *
@@ -69,8 +113,8 @@ export class RestServiceClient {
    */
   POST (url, payload, params = {}) {
     return axios.post(this.fullApiUrl(url), payload, {params, headers: this.headers})
-      .then(response => this.processResponse(response))
-      .catch(error => this.processErrorResponse(error))
+      .then(response => RestServiceClient.processResponse(response))
+      .catch(error => RestServiceClient.processErrorResponse(error))
   }
 
   /**
@@ -85,8 +129,8 @@ export class RestServiceClient {
    */
   GET (url, params = {}) {
     return axios.get(this.fullApiUrl(url), {params, headers: this.headers})
-      .then(response => this.processResponse(response))
-      .catch(response => this.processErrorResponse(response))
+      .then(response => RestServiceClient.processResponse(response))
+      .catch(error => RestServiceClient.processErrorResponse(error))
   }
 
   /**
@@ -103,8 +147,8 @@ export class RestServiceClient {
    */
   PUT (url, payload, params = {}) {
     return axios.put(this.fullApiUrl(url), payload, {params, headers: this.headers})
-      .then(response => this.processResponse(response))
-      .catch(error => this.processErrorResponse(error))
+      .then(response => RestServiceClient.processResponse(response))
+      .catch(error => RestServiceClient.processErrorResponse(error))
   }
 
   /**
@@ -118,7 +162,7 @@ export class RestServiceClient {
    */
   DELETE (url) {
     return axios.delete(this.fullApiUrl(url))
-      .then(response => this.processResponse(response))
-      .catch(error => this.processErrorResponse(error))
+      .then(response => RestServiceClient.processResponse(response))
+      .catch(error => RestServiceClient.processErrorResponse(error))
   }
 }
