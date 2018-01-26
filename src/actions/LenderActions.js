@@ -1,6 +1,7 @@
 import * as types from './Types'
 import {NavigationActions} from 'react-navigation'
 import {CelsiusService} from '../services'
+import {ErrorModel} from '../models/ErrorModel'
 
 export const registerLender = (registerForm, appToken) => {
   return (dispatch) => {
@@ -12,16 +13,11 @@ export const registerLender = (registerForm, appToken) => {
 
       service.registerLender(registerForm)
         .then(response => {
-          if (response.ok) {
-            registerLenderSuccess(dispatch, JSON.parse(response._bodyInit))
-          } else {
-            const error = JSON.parse(JSON.parse(response._bodyInit).error).message
+          if (response instanceof ErrorModel) {
             registerLenderFail(dispatch, getErrorText({server: error}))
+          } else {
+            registerLenderSuccess(dispatch, response)
           }
-        })
-        .catch((error) => {
-          console.log(error)
-          registerLenderFail(dispatch, getErrorText({server: true}))
         })
     } else {
       registerLenderFail(dispatch, error)
@@ -29,13 +25,13 @@ export const registerLender = (registerForm, appToken) => {
   }
 }
 
-const registerLenderSuccess = (dispatch, resBody) => {
+const registerLenderSuccess = (dispatch, response) => {
   dispatch({
     type: types.REGISTER_LENDER_SUCCESS
   })
   dispatch({
     type: types.FETCH_LENDER_SUCCESS,
-    payload: resBody.user
+    payload: response.user
   })
   dispatch(NavigationActions.reset({
     index: 0,
@@ -46,8 +42,6 @@ const registerLenderSuccess = (dispatch, resBody) => {
 }
 
 const registerLenderFail = (dispatch, error) => {
-  console.log('registerLenderFail() FCK!')
-  console.log(error)
   dispatch({
     type: types.REGISTER_LENDER_FAILURE,
     payload: error
@@ -101,21 +95,18 @@ export const getLenderRewardPoints = (walletAddress, token) => {
  * @return function
  * */
 const handleLenderRewardPoints = (dispatch, response = {}) => {
-  if (response.ok) {
-    const body = JSON.parse(response._bodyText)
-    dispatch({
-      type: types.FETCH_LENDER_REWARD_POINTS_SUCCESS,
-      payload: body.points
-    })
+  let action
+
+  if (response instanceof ErrorModel) {
+    action = {type: types.FETCH_LENDER_REWARD_POINTS_FAIL, payload: 0}
   } else {
-    dispatch({
-      type: types.FETCH_LENDER_REWARD_POINTS_FAIL,
-      payload: 0
-    })
+    action = {type: types.FETCH_LENDER_REWARD_POINTS_SUCCESS, payload: response.points}
   }
+
+  dispatch(action)
 }
 
-function validateRegisterForm(registrationForm) {
+function validateRegisterForm (registrationForm) {
   if (!registrationForm.firstName) return getErrorText({notEmpty: {field: 'First Name'}})
   if (registrationForm.firstName.length < 2) return getErrorText({atLeast: {field: 'First Name', number: 2}})
   if (!registrationForm.lastName) return getErrorText({notEmpty: {field: 'Last Name'}})
@@ -127,7 +118,7 @@ function validateRegisterForm(registrationForm) {
   return false
 }
 
-function validateEditProfileForm(registrationForm) {
+function validateEditProfileForm (registrationForm) {
   if (!registrationForm.firstName) return getErrorText({notEmpty: {field: 'First Name'}})
   if (registrationForm.firstName.length < 5) return getErrorText({atLeast: {field: 'First Name', number: 2}})
   if (!registrationForm.lastName) return getErrorText({notEmpty: {field: 'Last Name'}})
@@ -137,12 +128,12 @@ function validateEditProfileForm(registrationForm) {
   return false
 }
 
-function getErrorText(error) {
+function getErrorText (error) {
   // error format { atLeast: { field, number }}
-  if (error.atLeast) return `Ooops... ${error.atLeast.field} must have at least ${error.atLeast.number} letters!`
+  if (error.atLeast) return `Oops... ${error.atLeast.field} must have at least ${error.atLeast.number} letters!`
   // error format { notEmpty: { field }}
-  if (error.notEmpty) return `Ooops... ${error.notEmpty.field} cannot be empty!`
+  if (error.notEmpty) return `Oops... ${error.notEmpty.field} cannot be empty!`
   // error format { server: String | true }
-  if (error.server) return error.server === true ? `Ooops... Something went wrong with our servers :(` : error.server
-  return 'Ooops... Something went terribly wrong :( We are working nonstop to fix it!'
+  if (error.server) return error.server === true ? `Oops... Something went wrong with our servers ` : error.server
+  return 'Oops... Something went terribly wrong :( We are working nonstop to fix it!'
 }

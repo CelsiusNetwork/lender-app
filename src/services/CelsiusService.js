@@ -16,7 +16,21 @@ export class CelsiusService extends RestServiceClient {
    * @return Promise<Response>
    * */
   registerLender (payload) {
-    return this.POST(`/api/v1/lender/register`, payload)
+    const {email, password, firstName, lastName} = payload
+
+    let request = {
+      email,
+      password,
+      user_metadata: {
+        name: firstName,
+        surname: lastName
+      },
+      wallet: {
+        password
+      }
+    }
+
+    return this.POST(`/api/v1/lender/register`, request)
   }
 
   /**
