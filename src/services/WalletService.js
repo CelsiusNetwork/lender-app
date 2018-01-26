@@ -1,53 +1,41 @@
-const { fetch } = window
-const apiUrl = 'https://cs.celsius.network/cs/api/v1/lender'
+import {RestServiceClient} from './RestServiceClient'
+import {CS_CELSIUS_API_V1_URL} from 'react-native-dotenv'
 
-export const WalletService = () => ({
+export class WalletService extends RestServiceClient {
+  constructor (token) {
+    super(CS_CELSIUS_API_V1_URL, {authorizationToken: token})
+    this.token = token
+  }
+
   /**
    * @name getBalance
    * @description get balance for the specific wallet address
    *
    * @param walletAddress [string] user wallet address
-   * @param token [string] oAuth access token
    *
    * @return Promise<Response>
    */
-  getBalance (walletAddress, token) {
-    const request = {
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + token
-      },
-      method: 'get'
-    }
-    return fetch(apiUrl + '/tx/balance/' + walletAddress, request)
-  },
+  getBalance (walletAddress) {
+    return this.GET(`/lender/tx/balance/${walletAddress}`)
+  }
 
   /**
    * @name sendETH (withdraw)
    * @description send ETH to another wallet address
    *
-   * @param password [string] user plain password
    * @param fromAddress [string] user wallet address
    * @param toAddress [string] where to send ETH
    * @param value [number] ETH amount
-   * @param token [string] oAuth user access token
    *
    * @return Promise<Response>
    */
-  sendETH (password, fromAddress, toAddress, value, token) {
-    const request = {
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + token
-      },
-      method: 'post',
-      body: JSON.stringify({
-        fromAddress: fromAddress,
-        toAddress: toAddress,
-        value: value
-      })
-    }
-    return fetch(apiUrl + '/tx/eth/send', request)
-  }
+  sendETH (fromAddress, toAddress, value) {
+    let body = JSON.stringify({
+      fromAddress,
+      toAddress,
+      value
+    })
 
-})
+    return this.POST(`/tx/eth/send`, body)
+  }
+}

@@ -12,10 +12,7 @@ export default (state = LENDER_WALLET_STATE, action) => {
     case types.FETCH_WALLET_BALANCE_LOADING:
       return { ...state, loading: true }
     case types.FETCH_WALLET_BALANCE_SUCCESS:
-      console.log('FETCH_WALLET_BALANCE_SUCCESS yea:')
-      var a = JSON.parse(action.payload)
-      console.log(a.ether)
-
+      const a = action.payload
       return {
         ...state,
         ethBalance: a.ether.toFixed(2),

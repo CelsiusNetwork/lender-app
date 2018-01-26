@@ -1,6 +1,6 @@
 import * as types from './Types'
-import { WalletService } from '../services'
-import { NavigationActions } from 'react-navigation'
+import {WalletService} from '../services'
+import {NavigationActions} from 'react-navigation'
 
 export const withdrawETH = (password, fromAddress, toAddress, value, token) => {
   return (dispatch) => {
@@ -13,7 +13,7 @@ export const withdrawETH = (password, fromAddress, toAddress, value, token) => {
       dispatch(NavigationActions.reset({
         index: 0,
         actions: [
-          NavigationActions.navigate({ routeName: 'Home' })
+          NavigationActions.navigate({routeName: 'Home'})
         ]
       }))
 
@@ -22,7 +22,8 @@ export const withdrawETH = (password, fromAddress, toAddress, value, token) => {
       })
     }, 3000)
 
-    WalletService().sendETH(password, fromAddress, toAddress, value, token)
+    let service = new WalletService(token)
+    service.sendETH(fromAddress, toAddress, value)
       .then(response => handleWithdrawETH(dispatch, response))
   }
 }
@@ -36,7 +37,7 @@ export const setWithdrawAmount = (text) => {
     dispatch(NavigationActions.navigate({
       routeName: 'ManageFundsConfirm',
       actions: [
-        NavigationActions.navigate({ routeName: 'ManageFundsConfirm' })
+        NavigationActions.navigate({routeName: 'ManageFundsConfirm'})
       ]
     }))
   }
@@ -48,46 +49,29 @@ const handleWithdrawETH = (dispatch, response) => {
       type: types.WITHDRAW_ETH_SUCCESS,
       payload: response._bodyText
     })
-
-    // TODO (djs): Check with team
-    // dispatch(NavigationActions.navigate({
-    //   routeName: 'ManageFundsSuccess',
-    //   actions: [
-    //     NavigationActions.navigate({ routeName: 'ManageFundsSuccess' })
-    //   ]
-    // }))
+    // TODO (djs):
   }
   if (response.ok === false) {
-    // dispatch(NavigationActions.navigate({
-    //   routeName: 'ManageFundsConfirm',
-    //   actions: [
-    //     NavigationActions.navigate({ routeName: 'ManageFundsError' })
-    //   ]
-    // }))
+    // TODO (djs):
   }
 }
 
 export const fetchWalletBalance = (walletAddress, token) => {
-  console.log('FETCH WALLET BALANCE')
   return (dispatch) => {
     dispatch({
       type: types.FETCH_WALLET_BALANCE_LOADING
     })
-    WalletService().getBalance(walletAddress, token)
+
+    let service = new WalletService(token)
+
+    service.getBalance(walletAddress)
       .then(response => handleWalletBalance(dispatch, response))
   }
 }
 
 const handleWalletBalance = (dispatch, response) => {
-  console.log('handleWalletBalance')
-    // response = JSON.parse(response)
-  if (response.ok === true) {
-    dispatch({
-      type: types.FETCH_WALLET_BALANCE_SUCCESS,
-      payload: response._bodyText
-    })
-  }
-  if (response.ok === false) {
-    // handle this beach
-  }
+  dispatch({
+    type: types.FETCH_WALLET_BALANCE_SUCCESS,
+    payload: response
+  })
 }

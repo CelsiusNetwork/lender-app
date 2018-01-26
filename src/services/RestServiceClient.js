@@ -6,7 +6,7 @@ import axios from 'axios'
  * @description wrap all restFul methods
  * */
 export class RestServiceClient {
-  constructor (baseUrl = '', {headers = {}} = {}) {
+  constructor (baseUrl = '', {headers = {}, authorizationToken = null} = {}) {
     if (!_.isString(baseUrl) && !_.isEmpty(baseUrl)) {
       throw new Error('Missing baseUrl.')
     }
@@ -16,9 +16,26 @@ export class RestServiceClient {
       'Content-Type': 'application/json'
     }
 
+    if (_.isString(authorizationToken) && !_.isEmpty(authorizationToken)) {
+      this.headers = {...this.headers, Authorization: `Bearer ${authorizationToken}`}
+    }
+
     Object.assign(this.headers, headers)
 
     this.baseUrl = baseUrl
+  }
+
+  processResponse (response) {
+    return response.data
+  }
+
+  processErrorResponse (response) {
+    console.group()
+    console.error('Something went wrong with server response. See error stack trace.')
+    console.error(response)
+    console.groupEnd()
+
+    return response
   }
 
   /**
@@ -45,12 +62,15 @@ export class RestServiceClient {
    * @method POST
    *
    * @param url (url of endpoint)
-   * @param payload
+   * @param payload [Object] (data which will sent to server)
+   * @param params [Object] request params
    *
-   * @return AxiosPromise
+   * @return Promise<AxiosResponse>
    */
-  POST (url, payload) {
-    return axios.post(this.fullApiUrl(url), payload)
+  POST (url, payload, params = {}) {
+    return axios.post(this.fullApiUrl(url), payload, {params, headers: this.headers})
+      .then(response => this.processResponse(response))
+      .catch(error => this.processErrorResponse(error))
   }
 
   /**
@@ -61,10 +81,12 @@ export class RestServiceClient {
    * @param url (url of endpoint)
    * @param params [Object] request params
    *
-   * @return AxiosPromise
+   * @return Promise<AxiosResponse>
    */
   GET (url, params = {}) {
-    return axios.get(this.fullApiUrl(url), params)
+    return axios.get(this.fullApiUrl(url), {params, headers: this.headers})
+      .then(response => this.processResponse(response))
+      .catch(response => this.processErrorResponse(response))
   }
 
   /**
@@ -73,13 +95,16 @@ export class RestServiceClient {
    * then API may decide to create a new resource or not).
    * @method PUT
    *
-   * @param payload [Object/json] (data which will sent to server)
    * @param url [string] resource url
+   * @param payload [Object] (data which will sent to server)
+   * @param params [Object] headers and etc.
    *
-   * @return AxiosPromise
+   * @return Promise<AxiosResponse>
    */
-  PUT (url, payload) {
-    return axios.put(this.fullApiUrl(url), payload)
+  PUT (url, payload, params = {}) {
+    return axios.put(this.fullApiUrl(url), payload, {params, headers: this.headers})
+      .then(response => this.processResponse(response))
+      .catch(error => this.processErrorResponse(error))
   }
 
   /**
@@ -89,9 +114,11 @@ export class RestServiceClient {
    *
    * @param url [string] resource url
    *
-   * @return AxiosPromise
+   * @return Promise<AxiosResponse>
    */
   DELETE (url) {
     return axios.delete(this.fullApiUrl(url))
+      .then(response => this.processResponse(response))
+      .catch(error => this.processErrorResponse(error))
   }
 }
