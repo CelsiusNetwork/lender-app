@@ -1,30 +1,32 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
-import { ImageBackground, StyleSheet, View, Image, Text, TouchableOpacity, AsyncStorage } from 'react-native'
-import { Form, Input, Item, Label, Content, Container } from 'native-base'
+import { StyleSheet, View, Image, Text, TouchableOpacity, AsyncStorage } from 'react-native'
+import { Content, Container } from 'native-base'
 // import { NavigationActions } from 'react-navigation'
-import { Camera, Permissions } from 'expo';
+import { Camera, Permissions } from 'expo'
 
 class VerifyPhoto extends React.Component {
-
-  state = {
-    showPhotoCamera: false,
-    hasPhotoCameraPermission: null,
-    type: Camera.Constants.Type.back,
-  };
-
-  async componentWillMount() {
-    const { status } = await Permissions.askAsync(Permissions.CAMERA);
-    this.setState({ hasPhotoCameraPermission: status === 'granted' });
+  constructor (props) {
+    super(props)
+    this.state = {
+      showPhotoCamera: false,
+      hasPhotoCameraPermission: null,
+      type: Camera.Constants.Type.back
+    }
   }
 
-  snap = async () => {
+  async componentWillMount () {
+    const { status } = await Permissions.askAsync(Permissions.CAMERA)
+    this.setState({ hasPhotoCameraPermission: status === 'granted' })
+  }
+
+  async snap () {
     // const { navigate } = this.props.navigation
     if (this.photoCamera) {
-      let photo = await this.photoCamera.takePictureAsync();
+      let photo = await this.photoCamera.takePictureAsync()
       console.log(photo)
       try {
-        await AsyncStorage.setItem('@MySuperStore:photo', JSON.stringify(photo));
+        await AsyncStorage.setItem('@MySuperStore:photo', JSON.stringify(photo))
       } catch (error) {
         console.log(error.message)
       }
@@ -34,47 +36,45 @@ class VerifyPhoto extends React.Component {
 
   render () {
     var camera = this.props.showPhotoCamera ? <Camera style={{ flex: 1 }}
-    type={this.state.type}
-    ref={ref => { this.photoCamera = ref; }}
+      type={this.state.type}
+      ref={ref => { this.photoCamera = ref }}
     >
       <View
         style={{
           flex: 1,
           backgroundColor: 'transparent',
-          flexDirection: 'row',
-        }}>
-      </View>
-    </Camera> : null;
-    var cameraFlip = this.state.showPhotoCamera ? <Camera style={{ flex: 1 }}
-    type={this.state.type}
-    ref={ref => { this.photoCamera = ref; }}
+          flexDirection: 'row'
+        }} />
+    </Camera> : null
+    let cameraFlip = this.state.showPhotoCamera ? <Camera style={{ flex: 1 }}
+      type={this.state.type}
+      ref={ref => { this.photoCamera = ref }}
     >
       <View
         style={{
           flex: 1,
           backgroundColor: 'transparent',
-          flexDirection: 'row',
-        }}>
-      </View>
-    </Camera> : null;
+          flexDirection: 'row'
+        }} />
+    </Camera> : null
 
-    var cameraFlip = this.state.showPhotoCameraFlip ? <TouchableOpacity
-    style={[styles.cameraFlip, {flex: 0.1, alignSelf: 'flex-end', alignItems: 'center',}]}
+    cameraFlip = this.state.showPhotoCameraFlip ? <TouchableOpacity
+      style={[styles.cameraFlip, {flex: 0.1, alignSelf: 'flex-end', alignItems: 'center'}]}
       onPress={() => {
         this.setState({
           type: this.state.type === Camera.Constants.Type.back
             ? Camera.Constants.Type.front
-            : Camera.Constants.Type.back,
-        });
+            : Camera.Constants.Type.back
+        })
       }}>
       <Image source={require('../assets/images/camera-flip.png')} style={styles.flip} />
-    </TouchableOpacity> : null;
+    </TouchableOpacity> : null
     // const { navigate } = this.props.navigation
-    const { hasPhotoCameraPermission } = this.state;
+    const { hasPhotoCameraPermission } = this.state
     if (hasPhotoCameraPermission === null) {
-      return <View />;
+      return <View />
     } else if (hasPhotoCameraPermission === false) {
-      return <Text>No access to camera</Text>;
+      return <Text>No access to camera</Text>
     } else {
       return (
         <Container>
@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
   },
   background: {
     flex: 1,
-    flexDirection: 'row',
+    flexDirection: 'row'
     // justifyContent: 'top',
     // alignItems: 'center',
     // backgroundColor: 'red'
@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
   body: {
     flex: 1,
     marginLeft: 10,
-    marginRight: 10,
+    marginRight: 10
   },
   cameraFlip: {
     position: 'absolute',
@@ -137,7 +137,6 @@ const styles = StyleSheet.create({
     marginBottom: 20
   },
   line: {
-    height: 10,
     borderRadius: 2,
     height: 4,
     marginBottom: 10
@@ -153,15 +152,15 @@ const styles = StyleSheet.create({
     marginTop: 40,
     marginLeft: 30,
     width: 140,
-    height: 40,
+    height: 40
   },
   header: {
-		fontSize: 32,
-		backgroundColor: 'rgba(0,0,0,0)',
-		color: 'white',
-		paddingLeft: 30,
-		paddingRight: 30,
-		marginBottom: 10,
+    fontSize: 32,
+    backgroundColor: 'rgba(0,0,0,0)',
+    color: 'white',
+    paddingLeft: 30,
+    paddingRight: 30,
+    marginBottom: 10,
     fontWeight: 'bold',
     textAlign: 'center',
     marginTop: 50,
@@ -193,7 +192,7 @@ const styles = StyleSheet.create({
     color: '#ffffff',
     marginBottom: 10,
     fontSize: 70,
-    textAlign: 'center',
+    textAlign: 'center'
   },
   inputDash: {
     height: 2
@@ -222,12 +221,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginRight: 30,
     marginLeft: 30,
-    alignSelf: 'stretch',
+    alignSelf: 'stretch'
   },
   buttonText: {
     color: '#333333',
     alignSelf: 'stretch',
-    textAlign: 'center',
+    textAlign: 'center'
   },
   flip: {
     width: 50,

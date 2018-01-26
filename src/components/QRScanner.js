@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import {
   Alert,
   Linking,
@@ -8,17 +8,17 @@ import {
   View,
   StatusBar,
   StyleSheet,
-  TouchableOpacity,
-} from 'react-native';
-import { BarCodeScanner, Permissions } from 'expo';
+  TouchableOpacity
+} from 'react-native'
+import { BarCodeScanner, Permissions } from 'expo'
 
 export default class App extends Component {
-  constructor(props) {
-    super(props);
+  constructor (props) {
+    super(props)
     this.state = {
       hasCameraPermission: null,
-      lastScannedUrl: null,
-     }
+      lastScannedUrl: null
+    }
   }
 
   // state = {
@@ -26,22 +26,22 @@ export default class App extends Component {
   //   lastScannedUrl: null,
   // };
 
-  componentDidMount() {
-    this._requestCameraPermission();
+  componentDidMount () {
+    this._requestCameraPermission()
   }
 
-  _requestCameraPermission = async () => {
-    const { status } = await Permissions.askAsync(Permissions.CAMERA);
+  async _requestCameraPermission () {
+    const { status } = await Permissions.askAsync(Permissions.CAMERA)
     this.setState({
-      hasCameraPermission: status === 'granted',
-    });
+      hasCameraPermission: status === 'granted'
+    })
   };
 
-  _handleBarCodeRead = result => {
+  _handleBarCodeRead (result) {
     const { navigate } = this.props.navigation
     if (result.data !== this.state.lastScannedUrl) {
-      LayoutAnimation.spring();
-      this.setState({ lastScannedUrl: result.data });
+      LayoutAnimation.spring()
+      this.setState({ lastScannedUrl: result.data })
       navigate('ManageFoundsConfirm')
       // this.props.navigation.push({
       //   component: 'ManageFoundsConfirm',
@@ -50,8 +50,7 @@ export default class App extends Component {
     }
   };
 
-  render() {
-    const { navigate } = this.props.navigation
+  render () {
     return (
       <View style={styles.container}>
 
@@ -62,42 +61,42 @@ export default class App extends Component {
                   Camera permission is not granted
                 </Text>
               : <BarCodeScanner
-                  onBarCodeRead={this._handleBarCodeRead}
-                  style={{
-                    height: Dimensions.get('window').height,
-                    width: Dimensions.get('window').width,
-                  }}
+                onBarCodeRead={this._handleBarCodeRead}
+                style={{
+                  height: Dimensions.get('window').height,
+                  width: Dimensions.get('window').width
+                }}
                 />}
 
         {this._maybeRenderUrl()}
 
         <StatusBar hidden />
       </View>
-    );
+    )
   }
 
-  _handlePressUrl = () => {
+  _handlePressUrl () {
     Alert.alert(
       'Open this URL?',
       this.state.lastScannedUrl,
       [
         {
           text: 'Yes',
-          onPress: () => Linking.openURL(this.state.lastScannedUrl),
+          onPress: () => Linking.openURL(this.state.lastScannedUrl)
         },
-        { text: 'No', onPress: () => {} },
+        { text: 'No', onPress: () => {} }
       ],
       { cancellable: false }
-    );
+    )
   };
 
-  _handlePressCancel = () => {
-    this.setState({ lastScannedUrl: null });
+  _handlePressCancel () {
+    this.setState({ lastScannedUrl: null })
   };
 
-  _maybeRenderUrl = () => {
+  _maybeRenderUrl () {
     if (!this.state.lastScannedUrl) {
-      return;
+      return
     }
 
     return (
@@ -115,7 +114,7 @@ export default class App extends Component {
           </Text>
         </TouchableOpacity>
       </View>
-    );
+    )
   };
 }
 
@@ -124,7 +123,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#000',
+    backgroundColor: '#000'
   },
   bottomBar: {
     position: 'absolute',
@@ -133,22 +132,22 @@ const styles = StyleSheet.create({
     right: 0,
     backgroundColor: 'rgba(0,0,0,0.5)',
     padding: 15,
-    flexDirection: 'row',
+    flexDirection: 'row'
   },
   url: {
-    flex: 1,
+    flex: 1
   },
   urlText: {
     color: '#fff',
-    fontSize: 20,
+    fontSize: 20
   },
   cancelButton: {
     marginLeft: 10,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   cancelButtonText: {
     color: 'rgba(255,255,255,0.8)',
-    fontSize: 18,
-  },
-});
+    fontSize: 18
+  }
+})

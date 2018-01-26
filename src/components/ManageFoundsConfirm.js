@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {StyleSheet, View, ImageBackground, Image, TouchableOpacity} from 'react-native'
 import {Form, Input, Item, Label, Text, Content, Container} from 'native-base'
-import {Font} from 'expo'
 import {withdrawETH} from '../actions'
 
 class AddFounds extends Component {
@@ -226,7 +225,7 @@ const styles = StyleSheet.create({
     width: 28,
     height: 24,
     resizeMode: 'contain'
-  },
+  }
 })
 
 const mapStateToProps = state => {

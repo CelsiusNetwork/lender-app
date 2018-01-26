@@ -128,7 +128,7 @@ class Register extends Component {
 
   render () {
     const { labels, fields, passHidden } = this.state
-    const { loading, navigation, registerForm} = this.props
+    const { loading, navigation, registerForm } = this.props
     const { firstName, lastName, email, password, phoneNumber } = registerForm
     const { navigate } = navigation
 
@@ -327,7 +327,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
   updateRegisterForm,
-  registerLender,
+  registerLender
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Register)

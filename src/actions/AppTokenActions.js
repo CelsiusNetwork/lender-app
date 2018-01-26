@@ -1,7 +1,6 @@
 import { NavigationActions } from 'react-navigation'
 
 import * as types from './Types'
-import Expo, { SecureStore } from 'expo'
 import { Auth0Service } from '../services'
 
 export const lenderAppInitToken = () => {

@@ -46,12 +46,11 @@ class GraphPager extends Component {
               </TouchableOpacity>
             </View>
           </View>
-
           <Text style={styles.headerText}>
-            <Text style={[{fontFamily: 'barlow-semi-bold' }]}>{ this.state.eth.toFixed(3) } ETH</Text>
+            <Text style={[{fontFamily: 'barlow-semi-bold'}]}>{ this.state.eth.toFixed(3) } ETH</Text>
           </Text>
           <Text style={styles.header2Text}>
-            <Text style={[{fontFamily: 'barlow-light' }]}>{ this.state.deg.toFixed(3) } CEL</Text>
+            <Text style={[{fontFamily: 'barlow-light'}]}>{ this.state.deg.toFixed(3) } CEL</Text>
             <Text style={[styles.changeUp, { fontFamily: 'barlow-light' }]}> { this.state.change}</Text>
           </Text>
 

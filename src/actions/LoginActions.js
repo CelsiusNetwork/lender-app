@@ -69,9 +69,9 @@ const handleLenderInfo = (dispatch, response) => {
   response = JSON.parse(response)
   const user = JSON.parse(response._bodyInit)
   dispatch({
-      type: types.FETCH_LENDER_SUCCESS,
-      payload: user
-    })
+    type: types.FETCH_LENDER_SUCCESS,
+    payload: user
+  })
     // set user id in secure store
   storeLoggedUser(user.user_id).then(() => {
     dispatch(NavigationActions.reset({

@@ -12,6 +12,8 @@ class ForgotPassword extends Component {
 
   // Render methods
   renderButton () {
+    const { navigate } = this.props.navigation
+
     if (this.props.loading) {
       return <Spinner color='black' />
     }

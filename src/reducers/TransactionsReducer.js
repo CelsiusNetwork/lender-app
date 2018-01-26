@@ -3,7 +3,7 @@ import TransactionModel from '../models/TransactionModel'
 
 const TRANSACTIONS_STATE = {
   transactions: [],
-  activeTransaction: null,
+  activeTransaction: null
 }
 
 export default (state = TRANSACTIONS_STATE, action) => {

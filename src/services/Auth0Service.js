@@ -1,3 +1,4 @@
+const { fetch } = window
 const apiUrl = 'https://celsiusnetwork.auth0.com'
 
 export const Auth0Service = () => ({

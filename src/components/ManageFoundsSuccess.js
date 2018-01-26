@@ -1,10 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { StyleSheet, View, ImageBackground, Image, TouchableOpacity } from 'react-native'
-import { Button, Form, Input, Item, Label, Text, Content, Header, Title, Container } from 'native-base'
-import { registerFirstNameChanged, registerLastNameChanged, registerEmailChanged, registerPasswordChanged, registerPhoneNumberChanged, registerLender } from '../actions'
-import { Font } from 'expo';
-import { NavigationActions } from 'react-navigation'
+import { Text, Content, Container } from 'native-base'
 import { withdrawETH, gotoHome } from '../actions'
 
 class AddFounds extends Component {
@@ -82,7 +79,6 @@ class AddFounds extends Component {
     if (this.props.error !== '') { return (<Text style={styles.errorText}>{this.props.error}</Text>) }
     return <View />
   }
-
 }
 
 const styles = StyleSheet.create({
@@ -95,7 +91,7 @@ const styles = StyleSheet.create({
   },
   background: {
     flex: 1,
-    flexDirection: 'row',
+    flexDirection: 'row'
     // justifyContent: 'top',
     // alignItems: 'center',
     // backgroundColor: 'red'
@@ -113,15 +109,15 @@ const styles = StyleSheet.create({
     resizeMode: 'contain'
   },
   header: {
-		fontSize: 34,
-		backgroundColor: 'rgba(0,0,0,0)',
-		color: 'white',
-		paddingLeft: 30,
-		paddingRight: 30,
-		marginBottom: 30,
+    fontSize: 34,
+    backgroundColor: 'rgba(0,0,0,0)',
+    color: 'white',
+    paddingLeft: 30,
+    paddingRight: 30,
+    marginBottom: 30,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginTop: 60,
+    marginTop: 60
   },
   text: {
     textAlign: 'center',
@@ -155,12 +151,7 @@ const styles = StyleSheet.create({
   center: {
     // flex: 1,
     // flexDirection: 'row',
-    alignItems: 'center',
-  },
-  row: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    // height: 50,
+    alignItems: 'center'
   },
   buttonIcon: {
     position: 'absolute',
@@ -182,7 +173,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    marginLeft: 10,
+    marginLeft: 10
   },
   cellLeftText: {
     color: 'rgba(255, 255, 255, 0.5)',
@@ -193,17 +184,17 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
-    marginRight: 10,
+    marginRight: 10
     // borderColor: 'red',
     // borderWidth: 1
   },
   cellRightText: {
     color: 'rgba(255, 255, 255, 1)',
     fontSize: 18,
-    textAlign: 'left',
+    textAlign: 'left'
     // borderColor: 'green',
     // borderWidth: 1
-  },
+  }
 })
 
 const mapStateToProps = state => {

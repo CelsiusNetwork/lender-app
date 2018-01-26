@@ -126,7 +126,7 @@ const handleLenderRewardPoints = (dispatch, response = {}) => {
   }
 }
 
-function validateRegisterForm(registrationForm) {
+function validateRegisterForm (registrationForm) {
   if (!registrationForm.firstName) return getErrorText({notEmpty: {field: 'First Name'}})
   if (registrationForm.firstName.length < 2) return getErrorText({atLeast: {field: 'First Name', number: 2}})
   if (!registrationForm.lastName) return getErrorText({notEmpty: {field: 'Last Name'}})
@@ -138,7 +138,7 @@ function validateRegisterForm(registrationForm) {
   return false
 }
 
-function validateEditProfileForm(registrationForm) {
+function validateEditProfileForm (registrationForm) {
   if (!registrationForm.firstName) return getErrorText({notEmpty: {field: 'First Name'}})
   if (registrationForm.firstName.length < 5) return getErrorText({atLeast: {field: 'First Name', number: 2}})
   if (!registrationForm.lastName) return getErrorText({notEmpty: {field: 'Last Name'}})
@@ -148,7 +148,7 @@ function validateEditProfileForm(registrationForm) {
   return false
 }
 
-function getErrorText(error) {
+function getErrorText (error) {
   // error format { atLeast: { field, number }}
   if (error.atLeast) return `Ooops... ${error.atLeast.field} must have at least ${error.atLeast.number} letters!`
   // error format { notEmpty: { field }}

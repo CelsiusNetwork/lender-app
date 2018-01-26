@@ -15,5 +15,5 @@ export default combineReducers({
   lender: LenderReducer,
   wallet: WalletBalance,
   withdrawETH: WithdrawETHReducer,
-  transactions: TransactionsReducer,
+  transactions: TransactionsReducer
 })

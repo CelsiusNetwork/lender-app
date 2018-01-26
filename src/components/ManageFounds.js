@@ -10,9 +10,6 @@ import {
   registerPhoneNumberChanged,
   registerLender
 } from '../actions'
-import {Font} from 'expo'
-
-// import QRCode from 'react-native-qrcode'
 
 class AddFounds extends Component {
   constructor (props) {

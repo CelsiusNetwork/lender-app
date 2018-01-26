@@ -1,3 +1,4 @@
+const { fetch } = window
 const apiUrl = 'https://cs.celsius.network/cs/api/v1'
 const rewardApiUrl = 'https://cs.celsius.network/cs/rewarder'
 

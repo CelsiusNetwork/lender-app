@@ -3,7 +3,6 @@ import {connect} from 'react-redux'
 import {StyleSheet, View, ImageBackground, Image, TouchableOpacity} from 'react-native'
 import {Text, Content, Container} from 'native-base'
 import {setWithdrawAmount} from '../actions'
-import {Font} from 'expo'
 
 class ManageFoundsWithdraw extends Component {
   constructor () {
