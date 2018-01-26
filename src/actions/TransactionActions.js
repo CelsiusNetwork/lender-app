@@ -1,18 +1,19 @@
 import * as types from './Types'
-import { TestEtherScanService } from '../services'
-// import { NavigationActions } from 'react-navigation'
-// import Navigator from '../Navigator'
+import {EtherScanService} from '../services'
 
 export const fetchTransactionsHistory = (walletAddress) => {
   return (dispatch) => {
     dispatch({
       type: types.FETCH_ETH_TRANSACTIONS_LOADING
     })
-    TestEtherScanService().fetchTransactionList(walletAddress)
-      .then(response => handleTransactionsList(dispatch, response))
-      .catch((error) => {
-        transactionsListFail(dispatch, error)
-      })
+
+    let service = new EtherScanService(walletAddress)
+
+    service.fetchTransactionList().then(
+      response => handleTransactionsList(dispatch, response)
+    ).catch((error) => {
+      transactionsListFail(dispatch, error)
+    })
   }
 }
 

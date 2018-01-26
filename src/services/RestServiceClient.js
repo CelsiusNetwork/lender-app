@@ -7,7 +7,7 @@ import axios from 'axios'
  * */
 export class RestServiceClient {
   constructor (baseUrl = '', {headers = {}} = {}) {
-    if (_.isString(baseUrl) && !_.isEmpty(baseUrl)) {
+    if (!_.isString(baseUrl) && !_.isEmpty(baseUrl)) {
       throw new Error('Missing baseUrl.')
     }
 
@@ -31,9 +31,10 @@ export class RestServiceClient {
    * return string
    */
   fullApiUrl (url) {
-    if (_.isString(url) && !_.isEmpty(url)) {
+    if (!_.isString(url) && !_.isEmpty(url)) {
       throw new Error('Missing resource url')
     }
+
     return `${this.baseUrl}${url}`
   }
 
@@ -55,11 +56,12 @@ export class RestServiceClient {
    * @method GET
    *
    * @param url (url of endpoint)
+   * @param params [Object] request params
    *
    * @return AxiosPromise
    */
-  GET (url) {
-    return axios.get(this.fullApiUrl(url))
+  GET (url, params = {}) {
+    return axios.get(this.fullApiUrl(url), params)
   }
 
   /**
