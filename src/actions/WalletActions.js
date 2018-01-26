@@ -45,16 +45,15 @@ export const setWithdrawAmount = (text) => {
 }
 
 const handleWithdrawETH = (dispatch, response) => {
-  if (response.ok === true) {
-    dispatch({
-      type: types.WITHDRAW_ETH_SUCCESS,
-      payload: response._bodyText
-    })
-    // TODO (djs):
+  let action
+
+  if (response instanceof ErrorModel) {
+    action = {type: types.WITHDRAW_ETH_ERROR, payload: response.response}
+  } else {
+    action = {type: types.WITHDRAW_ETH_SUCCESS, payload: response.response}
   }
-  if (response.ok === false) {
-    // TODO (djs):
-  }
+
+  dispatch(action)
 }
 
 export const fetchWalletBalance = (walletAddress, token) => {
@@ -71,15 +70,13 @@ export const fetchWalletBalance = (walletAddress, token) => {
 }
 
 const handleWalletBalance = (dispatch, response) => {
+  let action
+
   if (response instanceof ErrorModel) {
-    dispatch({
-      type: types.FETCH_WALLET_BALANCE_ERROR,
-      payload: response
-    })
+    action = {type: types.FETCH_WALLET_BALANCE_ERROR, payload: response}
   } else {
-    dispatch({
-      type: types.FETCH_WALLET_BALANCE_SUCCESS,
-      payload: response
-    })
+    action = {type: types.FETCH_WALLET_BALANCE_SUCCESS, payload: response}
   }
+
+  dispatch(action)
 }
