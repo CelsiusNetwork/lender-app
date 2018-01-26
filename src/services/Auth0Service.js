@@ -1,7 +1,20 @@
-const { fetch } = window
-const apiUrl = 'https://celsiusnetwork.auth0.com'
+import {RestServiceClient} from './RestServiceClient'
+import {
+  AUTH0_CELSIUS_API_URL,
+  INIT_CLIENT_ID,
+  INIT_CLIENT_SECRET,
+  INIT_AUDIENCE,
+  INIT_GRANT_TYPE,
+  GRANT_TYPE,
+  CLIENT_ID
+} from 'react-native-dotenv'
 
-export const Auth0Service = () => ({
+export class Auth0Service extends RestServiceClient {
+  constructor (token = undefined) {
+    super(AUTH0_CELSIUS_API_URL, {authorizationToken: token})
+    this.token = token
+  }
+
   /**
    * @name signInWithEmailAndPassword
    * @description get access token with user credentials
@@ -13,61 +26,41 @@ export const Auth0Service = () => ({
    * */
   signInWithEmailAndPassword ({ email, password }) {
     const request = {
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      method: 'post',
-      body: JSON.stringify({
-        grant_type: 'password',
-        client_id: 'LOHU3qeHAxFUE34Q71bfMUtdHW7afyLl',
-        username: email,
-        password: password
-      })
+      grant_type: GRANT_TYPE,
+      client_id: CLIENT_ID,
+      username: email,
+      password
     }
-    return fetch(apiUrl + '/oauth/token', request)
-  },
+
+    return this.POST('/oauth/token', request)
+  }
 
   /**
    * @name initCredentials
-   * @description
+   * @description initialize client credentials
    *
    * @return Promise<Response>
    * */
   initClientCredentials () {
     const request = {
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      method: 'post',
-      body: JSON.stringify({
-        client_id: '5XxZ11JjiVz0U0aD62RA1blSqtvHvEBC',
-        client_secret: 'QghhC-1CLpqxO_ikETk5kpBec6RkMmlsDTMvl3PMt1_XyIWuFJGqYGVP7SRkodd5',
-        audience: 'https://cs.celsius.network/cs',
-        grant_type: 'client_credentials'
-      })
+      client_id: INIT_CLIENT_ID,
+      client_secret: INIT_CLIENT_SECRET,
+      audience: INIT_AUDIENCE,
+      grant_type: INIT_GRANT_TYPE
     }
-    return fetch(apiUrl + '/oauth/token', request)
-  },
+
+    return this.POST('/oauth/token', request)
+  }
 
   /**
    * @name getUser
    * @description Get specific user by userId
    *
-   * @param id [String] user id
-   * @param token [String] oAuth access token
+   * @param token [String] user access token
    *
    * @return Promise<Response>
    * */
-  getUser (id, token) {
-    const request = {
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + id
-      },
-      method: 'get'
-    }
-
-    return fetch(apiUrl + '/api/v2/users/' + token, request)
+  getUser (token) {
+    return this.GET(`/api/v2/users/${token}`)
   }
-
-})
+}

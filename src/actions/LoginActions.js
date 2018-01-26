@@ -3,6 +3,7 @@ import { Auth0Service } from '../services'
 import { NavigationActions } from 'react-navigation'
 import jwtDecode from 'jwt-decode'
 import { storeLoggedUser } from './index'
+import {ErrorModel} from '../models/ErrorModel'
 
 export const loginEmailChanged = (text) => {
   return {
@@ -20,16 +21,11 @@ export const loginPasswordChanged = (text) => {
 
 export const loginLender = ({ email, password }) => {
   return (dispatch) => {
-    console.log(dispatch)
-    dispatch({
-      type: types.LOGIN_LENDER_LOADING
-    })
+    dispatch({type: types.LOGIN_LENDER_LOADING})
 
-    Auth0Service().signInWithEmailAndPassword({ email, password })
-      .then(response => handleResponse(dispatch, JSON.stringify(response)))
-      .catch((error) => {
-        loginLenderFail(dispatch, error)
-      })
+    let service = new Auth0Service()
+    service.signInWithEmailAndPassword({ email, password })
+      .then(response => handleResponse(dispatch, response))
   }
 }
 
@@ -44,36 +40,36 @@ export const logoutLender = () => {
   }
 }
 
-// export const fetchLenderInfo = ({ lender }, token) => {
-//   console.log('FETCHlENDERiNFO()')
-//   console.log(lender.sub)
-//   console.log(token)
-//   console.log('-------')
-//   const id = lender.sub
-//   return (dispatch) => {
-//     console.log('steva was here')
-//     dispatch({
-//       type: types.FETCH_LENDER_LOADING
-//     })
-//     Auth0Service().getUser(id, token)
-//       .then(response => handleLenderInfo(dispatch, JSON.stringify(response)))
-//       .catch((error) => {
-//         handleLenderInfoFail(dispatch, error)
-//         console.log('Error while fetchLenderInfo()')
-//         console.debug(error)
-//       })
-//   }
-// }
+const handleResponse = (dispatch, response) => {
+  if (response instanceof ErrorModel) {
+    loginLenderFail(dispatch, response.statusCode)
+  } else {
+    const { id_token } = response
+    const lender = jwtDecode(id_token)
+
+    dispatch({
+      type: types.FETCH_LENDER_LOADING
+    })
+
+    const service = new Auth0Service(id_token)
+    service.getUser(lender.sub)
+      .then(response => handleLenderInfo(dispatch, response))
+
+    dispatch({
+      type: types.LOGIN_LENDER_SUCCESS,
+      payload: { lender, id_token }
+    })
+  }
+}
 
 const handleLenderInfo = (dispatch, response) => {
-  response = JSON.parse(response)
-  const user = JSON.parse(response._bodyInit)
   dispatch({
     type: types.FETCH_LENDER_SUCCESS,
-    payload: user
+    payload: response
   })
-    // set user id in secure store
-  storeLoggedUser(user.user_id).then(() => {
+
+  // set user id in secure store
+  storeLoggedUser(response.user_id).then(() => {
     dispatch(NavigationActions.reset({
       index: 0,
       actions: [
@@ -85,42 +81,6 @@ const handleLenderInfo = (dispatch, response) => {
   })
 }
 
-const handleResponse = (dispatch, response) => {
-  response = JSON.parse(response)
-  const token = JSON.parse(response._bodyInit)
-  const tokenId = token.id_token
-  const lender = jwtDecode(tokenId)
-  if (response.ok === true) {
-    dispatch({
-      type: types.FETCH_LENDER_LOADING
-    })
-    Auth0Service().getUser(tokenId, lender.sub)
-      .then(response => handleLenderInfo(dispatch, JSON.stringify(response)))
-      .catch((error) => {
-        handleLenderInfoFail(dispatch, error)
-        console.log('Error while fetchLenderInfo()')
-        console.debug(error)
-      })
-
-    dispatch({
-      type: types.LOGIN_LENDER_SUCCESS,
-      payload: { lender, tokenId }
-    })
-  }
-  if (response.ok === false) {
-    loginLenderFail(dispatch, response.code)
-  }
-}
-
 const loginLenderFail = (dispatch, error) => {
-  console.log('loginLenderFail() error:')
-  console.debug(error)
-  dispatch({
-    type: types.LOGIN_LENDER_FAIL,
-    payload: error
-  })
-}
-
-const handleLenderInfoFail = (dispatch, error) => {
-
+  dispatch({type: types.LOGIN_LENDER_FAIL, payload: error})
 }
