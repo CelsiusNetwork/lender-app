@@ -7,6 +7,12 @@ export class EtherScanService extends RestServiceClient {
     this.walletAddress = walletAddress
   }
 
+  /**
+   * @name fetchTransactionList
+   * @description get all transactions for the user
+   *
+   * @return AxiosPromise server response
+   * */
   fetchTransactionList () {
     const params = {
       module: 'account',
@@ -15,6 +21,6 @@ export class EtherScanService extends RestServiceClient {
       apiKey: ETH_SCAN_API_KEY
     }
 
-    return this.GET('/api', { params })
+    return this.GET('/api', {params})
   }
 }
