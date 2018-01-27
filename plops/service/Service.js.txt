@@ -1,62 +1,8 @@
-import axios from 'axios';
-import apiUrl from './apiUrl';
+import {RestServiceClient} from './RestServiceClient'
 
-const baseUrl = `${apiUrl.v1}{{path}}`;
-
-export const {{pascalCase name}}Service = () => ({
-  /**
-   * @name getAll
-   * @description gets all {{pascalCase name}}s
-   * @param
-   *
-   * @return Promise<Response>
-   * */
-  getAll () {
-    return axios.get(baseUrl);
-  },
-
-  /**
-   * @name get
-   * @description gets one {{pascalCase name}} by id
-   * @param id
-   *
-   * @return Promise<Response>
-   * */
-  get (id) {
-    return axios.get(baseUrl/${id});
-  },
-
-  /**
-   * @name create
-   * @description creates a {{pascalCase name}}
-   * @param
-   *
-   * @return Promise<Response>
-   * */
-  create ({{camelCase name}}) {
-    return axios.post(baseUrl, { {{camelCase name}} });
-  },
-
-  /**
-   * @name update
-   * @description updates {{pascalCase name}}
-   * @param
-   *
-   * @return Promise<Response>
-   * */
-  update ({{camelCase name}}) {
-    return axios.put(baseUrl, { {{camelCase name}} });
-  },
-
-  /**
-   * @name remove
-   * @description removes {{pascalCase name}} by id
-   * @param id
-   *
-   * @return Promise<Response>
-   * */
-  remove (id) {
-    return axios.delete(`${baseUrl}/${id}`);
-  },
-
-})
+export class {{pascalCase name}}Service extends RestServiceClient {
+  constructor (token = undefined) {
+      super(BASE_URL, {authorizationToken: token})
+      this.token = token
+  }
+}
