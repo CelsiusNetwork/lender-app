@@ -7,9 +7,9 @@ export const fetchTransactionsHistory = (walletAddress) => {
       type: types.FETCH_ETH_TRANSACTIONS_LOADING
     })
 
-    let service = new EtherScanService(walletAddress)
+    let service = new EtherScanService()
 
-    service.fetchTransactionList().then(
+    service.fetchTransactionList(walletAddress).then(
       response => handleTransactionsList(dispatch, response)
     ).catch((error) => {
       transactionsListFail(dispatch, error)
@@ -27,19 +27,18 @@ export const setActiveTransaction = (transaction) => {
 }
 
 const handleTransactionsList = (dispatch, response) => {
-  if (response.data.message === 'OK') {
+  if (response.message === 'OK') {
     dispatch({
       type: types.FETCH_ETH_TRANSACTIONS_SUCCESS,
-      payload: response.data.result
+      payload: response.result
     })
   }
   if (response.ok === false) {
-    transactionsListFail(dispatch, response.code)
+    transactionsListFail(dispatch, response.message)
   }
 }
 
 const transactionsListFail = (dispatch, error) => {
-  console.debug(error)
   dispatch({
     type: types.FETCH_ETH_TRANSACTIONS_FAIL,
     payload: error
