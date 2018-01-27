@@ -10,6 +10,8 @@ export class EtherScanService extends RestServiceClient {
    * @name fetchTransactionList
    * @description get all transactions for the user
    *
+   * @param address [string] user wallet address
+   *
    * @return Promise<AxiosResponse> server response
    * */
   fetchTransactionList (address) {
