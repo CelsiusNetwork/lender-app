@@ -18,10 +18,9 @@ export default (state = LOGIN_INITIAL_STATE, action) => {
     case types.LOGIN_LENDER_LOADING:
       return { ...state, loading: true }
     case types.LOGIN_LENDER_SUCCESS:
-      console.log('iha')
       return {
         ...state,
-        token: action.payload.tokenId,
+        token: action.payload.id_token,
         authId: action.payload.lender.sub,
         email: action.payload.lender.email,
         loading: false
