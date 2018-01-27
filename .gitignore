@@ -12,3 +12,4 @@ package-lock.json
 .vscode
 
 # environment files
+.env
