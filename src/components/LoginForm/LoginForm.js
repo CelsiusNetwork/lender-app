@@ -1,10 +1,26 @@
 import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
+import deepmerge from 'deepmerge'
 import {StyleSheet, View, ImageBackground, Image, TouchableOpacity, Text} from 'react-native'
 import {Button, Form, Input, Item, Label, Content, Container} from 'native-base'
-import {loginEmailChanged, loginPasswordChanged, loginLender} from '../actions'
+import {loginEmailChanged, loginPasswordChanged, loginLender} from '../../actions/index'
+
+import screenRawStyles from './LoginForm.styles'
+import globalRawStyles from '../../assets/styles/global.styles'
+
+const rawStyles = deepmerge(globalRawStyles, screenRawStyles)
+const styles = StyleSheet.create(rawStyles)
 
 class LoginForm extends Component {
+  constructor (props) {
+    super(props)
+
+    this.onEmailChange = this.onEmailChange.bind(this)
+    this.onPasswordChange = this.onPasswordChange.bind(this)
+    this.onButtonPress = this.onButtonPress.bind(this)
+  }
+
   // Event Handlers
   onEmailChange (text) {
     this.props.loginEmailChanged(text)
@@ -28,24 +44,26 @@ class LoginForm extends Component {
   }
 
   render () {
-    const {navigate} = this.props.navigation
-    const loading = this.props.loading
+    const { email, password, navigation, loading } = this.props
+    const { navigate } = navigation
 
     return (
       <View style={styles.container}>
-        <ImageBackground source={require('../assets/images/background.png')} style={styles.background}>
+        <ImageBackground source={require('../../assets/images/background.png')} style={styles.background}>
           <Container style={styles.formContainer}>
             <Content>
+
               <TouchableOpacity onPress={() => navigate('Welcome')}>
-                <Image source={require('../assets/images/Celsius_Symbol_white.png')} style={styles.logo} />
+                <Image source={require('../../assets/images/Celsius_Symbol_white.png')} style={styles.logo} />
               </TouchableOpacity>
+
               <Form style={styles.form}>
                 <Item floatingLabel style={styles.floatingWrapper}>
                   <Label style={{color: '#ffffff', fontSize: 12}}>E-MAIL</Label>
                   <Input
                     style={styles.input}
-                    onChangeText={this.onEmailChange.bind(this)}
-                    value={this.props.email}
+                    onChangeText={this.onEmailChange}
+                    value={email}
                     keyboard-type='email-address'
                     autoCorrect={false}
                     autoFocus autoCapitalize='none' />
@@ -54,15 +72,16 @@ class LoginForm extends Component {
                   <Label style={{color: '#ffffff', fontSize: 12}}>PASSWORD</Label>
                   <Input
                     style={styles.input}
-                    onChangeText={this.onPasswordChange.bind(this)}
-                    value={this.props.password}
+                    onChangeText={this.onPasswordChange}
+                    value={password}
                     secureTextEntry returnKeyType='done' autoCorrect={false} />
                 </Item>
 
                 {this.renderError()}
-                <Button style={styles.button} onPress={this.onButtonPress.bind(this)} block primary>
+
+                <Button style={styles.button} onPress={this.onButtonPress} block primary>
                   {loading ? (
-                    <Image source={require('../assets/images/animated_spinner.gif')} style={styles.loader} />
+                    <Image source={require('../../assets/images/animated_spinner.gif')} style={styles.loader} />
                   ) : (
                     <Text style={styles.buttonText}>Log in</Text>
                   )}
@@ -82,104 +101,13 @@ class LoginForm extends Component {
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'center'
-  },
-  background: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  logo: {
-    // position: 'absolute',
-    width: 70,
-    height: 70,
-    marginLeft: 20,
-    marginBottom: 20,
-    marginTop: 20
-  },
-  welcomeContainer: {
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'center'
-  },
-  text: {
-    fontSize: 16,
-    backgroundColor: 'rgba(0,0,0,0)',
-    color: '#a3b0be',
-    paddingLeft: 30,
-    paddingRight: 30,
-    lineHeight: 20
-  },
-  createLink: {
-    color: '#ffffff'
-  },
-  forgetPassword: {
-    backgroundColor: 'rgba(0,0,0,0)',
-    color: '#a3b0be',
-    paddingLeft: 17,
-    paddingTop: 50
-  },
-  header: {
-    fontSize: 32,
-    backgroundColor: 'rgba(0,0,0,0)',
-    color: 'white',
-    paddingLeft: 30,
-    paddingRight: 30,
-    marginBottom: 10,
-    fontWeight: 'bold'
-  },
-  formContainer: {
-    marginTop: 50
-  },
-  floatingLabel: {
-    color: '#ffffff'
-  },
-  floatingWrapper: {
-    borderBottomWidth: 0
-  },
-  form: {
-    marginLeft: 20,
-    marginRight: 20
-  },
-  input: {
-    height: 40,
-    borderColor: 'rgba(255,255,255,0.3)',
-    borderBottomWidth: 2,
-    color: '#ffffff',
-    marginBottom: 10,
-    marginRight: 15,
-    paddingTop: 10,
-    fontSize: 14
-  },
-  button: {
-    backgroundColor: '#ffffff',
-    borderRadius: 5,
-    padding: 5,
-    height: 50,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginRight: 15,
-    marginLeft: 15,
-    marginTop: 30
-  },
-  buttonText: {
-    color: '#333333'
-  },
-  errorText: {
-    marginLeft: 15,
-    marginTop: 10,
-    color: '#FF9494'
-  },
-  loader: {
-    width: 30,
-    height: 30
-  }
-})
+LoginForm.propTypes = {
+  email: PropTypes.string,
+  password: PropTypes.string,
+  loading: PropTypes.bool,
+  error: PropTypes.string,
+  navigation: PropTypes.object.isRequired
+}
 
 const mapStateToProps = state => {
   return {
@@ -188,8 +116,7 @@ const mapStateToProps = state => {
     // email: state.auth.email,
     // password: state.auth.password,
     loading: state.auth.loading,
-    error: state.auth.error,
-    nav: state.nav
+    error: state.auth.error
   }
 }
 

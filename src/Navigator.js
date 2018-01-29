@@ -6,11 +6,11 @@ import { addNavigationHelpers, NavigationActions, StackNavigator } from 'react-n
 // Components
 import EditProfile from './components/EditProfile/EditProfile'
 import AddFunds from './components/AddFunds/AddFunds'
+import LoginForm from './components/LoginForm/LoginForm'
 import WelcomePager from './components/welcome/WelcomePager'
 import GraphPager from './components/graph/GraphPager.js'
 import HistoryDetail from './components/graph/HistoryDetail.js'
 import Register from './components/Register'
-import LoginForm from './components/LoginForm'
 import ForgotPassword from './components/ForgotPassword'
 import Passcode from './components/Passcode'
 import Verification from './components/Verification'
