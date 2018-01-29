@@ -1,11 +1,16 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {View, ImageBackground, Image, TouchableOpacity, Text, Share, Clipboard} from 'react-native'
+import deepmerge from 'deepmerge'
+import {StyleSheet, View, ImageBackground, Image, TouchableOpacity, Text, Share, Clipboard} from 'react-native'
 import {Content, Container} from 'native-base'
 import QRCode from 'react-native-qrcode'
 
-import styles from './AddFunds.styles'
+import screenRawStyles from './AddFunds.styles'
+import globalRawStyles from '../../assets/styles/global.styles'
+
+const rawStyles = deepmerge(globalRawStyles, screenRawStyles)
+const styles = StyleSheet.create(rawStyles)
 
 class AddFunds extends Component {
   constructor (props) {
