@@ -2,16 +2,11 @@ import * as types from '../actions/Types'
 
 const LENDER_INITIAL_STATE = {
   lender: null,
-  'name': null,
-  'surname': null,
-  'email': null,
-  'walletAddress': null,
+  name: null,
+  surname: null,
+  email: null,
+  walletAddress: null,
   registerForm: {
-    // firstName: 'filip',
-    // lastName: 'filipfilip',
-    // email: `filip.jovakaric+${ new Date().getTime() }@mvpworkshop.co`,
-    // password: 'filip123',
-    // phoneNumber: '1234567890'
     firstName: '',
     lastName: '',
     email: '',
@@ -26,11 +21,9 @@ const LENDER_INITIAL_STATE = {
 export default (state = LENDER_INITIAL_STATE, action) => {
   switch (action.type) {
     case types.FETCH_LENDER_LOADING:
-      return { ...state, loading: true }
+      return {...state, loading: true}
 
     case types.FETCH_LENDER_SUCCESS:
-      console.log('fetch_lender_success yea:name')
-      console.log(action.payload.user_metadata.name)
       return {
         ...state,
         lender: action.payload,
@@ -44,33 +37,31 @@ export default (state = LENDER_INITIAL_STATE, action) => {
     case types.FETCH_LENDER_FAIL:
       let errorMsg
       errorMsg = 'Lender fetch fail'
-      return { ...state, error: errorMsg, loading: false }
+      return {...state, error: errorMsg, loading: false}
 
     case types.FETCH_LENDER_REWARD_POINTS_SUCCESS:
-      return { ...state, lenderRewardPoint: action.payload }
+      return {...state, lenderRewardPoint: action.payload}
 
     case types.UPDATE_REGISTER_FORM:
-      console.log('here')
-
       return {
         ...state,
-        registerForm: action.payload ? { ...action.payload } : { ...LENDER_INITIAL_STATE.registerForm },
+        registerForm: action.payload ? {...action.payload} : {...LENDER_INITIAL_STATE.registerForm},
         error: null
       }
 
     case types.REGISTER_LENDER_LOADING:
-      return { ...state, loading: true }
+      return {...state, loading: true}
 
     case types.REGISTER_LENDER_SUCCESS:
       return {
         ...state,
-        registerForm: { ...LENDER_INITIAL_STATE.registerForm },
+        registerForm: {...LENDER_INITIAL_STATE.registerForm},
         error: null,
         loading: false
       }
 
     case types.REGISTER_LENDER_FAILURE:
-      return { ...state, error: action.payload, loading: false }
+      return {...state, error: action.payload, loading: false}
 
     default:
       return state

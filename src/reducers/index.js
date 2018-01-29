@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux'
 
+// Reducers
 import AppTokenReducer from './AppTokenReducer'
 import LoginReducer from './LoginReducer'
 import NavigatorReducer from './NavigatorReducer'
