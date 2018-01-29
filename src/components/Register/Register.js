@@ -1,8 +1,16 @@
 import React, {Component} from 'react'
+import PropTypes from 'prop-types'
+import deepmerge from 'deepmerge'
 import {connect} from 'react-redux'
 import {StyleSheet, View, ImageBackground, Image, TouchableOpacity} from 'react-native'
 import {Button, Form, Input, Item, Label, Text, Content, Container} from 'native-base'
-import { updateRegisterForm, registerLender } from '../actions'
+import { updateRegisterForm, registerLender } from '../../actions/index'
+
+import screenRawStyles from './Register.styles'
+import globalRawStyles from '../../assets/styles/global.styles'
+
+const rawStyles = deepmerge(globalRawStyles, screenRawStyles)
+const styles = StyleSheet.create(rawStyles)
 
 const LABEL_TEXTS = {
   firstNameActive: 'FIRST NAME',
@@ -134,11 +142,11 @@ class Register extends Component {
 
     return (
       <View style={styles.container}>
-        <ImageBackground source={require('../assets/images/background.png')} style={styles.background}>
+        <ImageBackground source={require('../../assets/images/background.png')} style={styles.background}>
           <Container style={styles.formContainer}>
             <TouchableOpacity
               onPress={() => navigate('Welcome')}>
-              <Image source={require('../assets/images/logo-header.png')} style={styles.logo} />
+              <Image source={require('../../assets/images/logo-header.png')} style={styles.logo} />
             </TouchableOpacity>
             <Content>
               <Form style={styles.form}>
@@ -195,7 +203,7 @@ class Register extends Component {
                 { registerForm.password ? (
                   <TouchableOpacity onPress={this.togglePasswordVisibility} style={styles.eyeIconButton} >
                     <Image
-                      source={require('../assets/images/icon-show.png')}
+                      source={require('../../assets/images/icon-show.png')}
                       style={styles.eyeIcon}
                       resizeMode='contain' />
                   </TouchableOpacity>
@@ -219,7 +227,7 @@ class Register extends Component {
                   // onPress={() => navigate('VerifyPhoneNumber')}
                   block primary>
                   { loading ? (
-                    <Image source={require('../assets/images/animated_spinner.gif')} style={styles.loader} />
+                    <Image source={require('../../assets/images/animated_spinner.gif')} style={styles.loader} />
                   ) : (
                     <Text style={styles.buttonText}>Verify your profile</Text>
                   )}
@@ -234,94 +242,23 @@ class Register extends Component {
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'center'
-  },
-  background: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  logo: {
-    width: 128,
-    height: 40,
-    left: 30,
-    top: 10,
-    marginBottom: 10,
-    resizeMode: 'contain'
-  },
-  formContainer: {
-    marginTop: 100
-  },
-  floatingLabel: {
-    color: '#ffffff'
-  },
-  floatingWrapper: {
-    borderBottomWidth: 0
-  },
-  input: {
-    height: 40,
-    width: 300,
-    borderColor: 'rgba(255,255,255,0.3)',
-    borderBottomWidth: 2,
-    color: '#ffffff',
-    marginBottom: 20,
-    fontSize: 21
-  },
-  eyeIconButton: {
-    position: 'absolute',
-    top: 270,
-    right: 10,
-    width: 20,
-    height: 20,
-    backgroundColor: 'transparent'
-  },
-  eyeIcon: {
-    width: 20,
-    height: 20
-  },
-  button: {
-    backgroundColor: '#ffffff',
-    borderRadius: 5,
-    padding: 5,
-    height: 50,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginRight: 30,
-    marginLeft: 30,
-    marginTop: 30
-  },
-  buttonText: {
-    color: '#333333'
-  },
-  form: {
-    marginLeft: 20,
-    marginRight: 20,
-    paddingTop: 20
-  },
-  errorText: {
-    marginLeft: 15,
-    marginTop: 10,
-    color: '#FF9494'
-  },
-  loader: {
-    width: 30,
-    height: 30
-  }
-})
+Register.propTypes = {
+  initToken: PropTypes.string,
+  registerForm: PropTypes.object,
+  error: PropTypes.string,
+  loading: PropTypes.bool,
+  navigation: PropTypes.object.isRequired,
+  updateRegisterForm: PropTypes.func.isRequired,
+  registerLender: PropTypes.func.isRequired
+}
 
 const mapStateToProps = state => {
-  const { lender, initToken, nav } = state
+  const { lender, initToken } = state
   return {
     initToken: initToken.token,
     registerForm: lender.registerForm,
     error: lender.error,
-    loading: lender.loading,
-    nav: nav
+    loading: lender.loading
   }
 }
 
