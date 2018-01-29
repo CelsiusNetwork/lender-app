@@ -25,6 +25,7 @@ import QRScanner from './components/QRScanner'
 import ManageFundsSuccess from './components/ManageFundsSuccess'
 import ManageFundsError from './components/ManageFundsError'
 import Home from './components/Home'
+// NOTE: plop Screen imports new screen here
 
 export const Navigator = StackNavigator({
   LoginForm: {
@@ -110,6 +111,7 @@ export const Navigator = StackNavigator({
   ManageFundsError: {
     screen: ManageFundsError,
     headerMode: 'screen'
+  // NOTE: plop Screen inserts screen here
   }
 }, {
   headerMode: 'none'

@@ -1,0 +1,56 @@
+import React, {Component} from 'react'
+import PropTypes from 'prop-types'
+import {connect} from 'react-redux'
+import deepmerge from 'deepmerge'
+import {ImageBackground, StyleSheet, View, TouchableOpacity, Image, Text} from 'react-native'
+import {} from 'native-base'
+
+import screenRawStyles from './{{pascalCase name}}.styles'
+import globalRawStyles from '../../assets/styles/global.styles'
+
+const rawStyles = deepmerge(globalRawStyles, screenRawStyles)
+const styles = StyleSheet.create(rawStyles)
+
+class {{pascalCase name}} extends Component {
+  constructor(props) {
+    super(props)
+
+    // Event Binders
+  }
+  // Component lifecycle methods
+  // Event handlers
+  // Rendering methods
+  render () {
+    const { navigation } = this.props
+    return (
+      <View style={styles.container}>
+        <ImageBackground source={require('../../assets/images/background-blur.png')} style={styles.background}>
+          <View style={styles.body}>
+            <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
+              <Image source={require('../../assets/images/icon-back.png')} style={styles.back} />
+            </TouchableOpacity>
+            <Text style={styles.header}>NEW PAGE</Text>
+          </View>
+        </ImageBackground>
+      </View>
+    )
+  }
+}
+
+{{pascalCase name}}.propTypes = {
+  // PropTypes...
+  navigation: PropTypes.object.isRequired
+}
+
+const mapStateToProps = state => {
+  const {  } = state
+  return {
+    // Props from state
+  }
+}
+
+const mapDispatchToProps = {
+  // App actions
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)({{pascalCase name}})
