@@ -48,9 +48,9 @@ const handleWithdrawETH = (dispatch, response) => {
   let action
 
   if (response instanceof ErrorModel) {
-    action = {type: types.WITHDRAW_ETH_ERROR, payload: response.response}
+    action = {type: types.WITHDRAW_ETH_ERROR, payload: response}
   } else {
-    action = {type: types.WITHDRAW_ETH_SUCCESS, payload: response.response}
+    action = {type: types.WITHDRAW_ETH_SUCCESS, payload: response}
   }
 
   dispatch(action)
