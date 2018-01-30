@@ -6,6 +6,7 @@ const LENDER_INITIAL_STATE = {
   surname: null,
   email: null,
   walletAddress: null,
+  phoneNumber: null,
   registerForm: {
     firstName: '',
     lastName: '',
@@ -24,12 +25,14 @@ export default (state = LENDER_INITIAL_STATE, action) => {
       return {...state, loading: true}
 
     case types.FETCH_LENDER_SUCCESS:
+      const { name, surname, phone_number, address } = action.payload.user_metadata
       return {
         ...state,
         lender: action.payload,
-        name: action.payload.user_metadata.name,
-        surname: action.payload.user_metadata.surname,
-        walletAddress: action.payload.user_metadata.address,
+        name,
+        surname,
+        phoneNumber: phone_number,
+        walletAddress: address,
         loading: false,
         error: null
       }

@@ -16,14 +16,15 @@ export class CelsiusService extends RestServiceClient {
    * @return Promise<Response>
    * */
   registerLender (payload) {
-    const {email, password, firstName, lastName} = payload
+    const {email, password, firstName, lastName, phoneNumber} = payload
 
     let request = {
       email,
       password,
       user_metadata: {
         name: firstName,
-        surname: lastName
+        surname: lastName,
+        phone_number: phoneNumber
       },
       wallet: {
         password
