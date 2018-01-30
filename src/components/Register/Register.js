@@ -121,16 +121,17 @@ class Register extends Component {
   }
 
   onButtonPress () {
-    const { registerLender, registerForm } = this.props
-    const appToken = this.props.initToken
-    console.log('onButtonPress()')
-    registerLender(registerForm, appToken)
+    const { registerLender, registerForm, initToken } = this.props
+    registerLender(registerForm, initToken)
   }
 
   renderError () {
     const { error } = this.props
-    console.log(error)
-    if (error) { return (<Text style={styles.errorText}>{error}</Text>) }
+
+    if (error) {
+      return (<Text style={styles.errorText}>{error}</Text>)
+    }
+
     return <View />
   }
 

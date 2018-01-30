@@ -94,8 +94,8 @@ class EditProfile extends Component {
   }
 
   render () {
-    const {registerForm, lenderRewardPoint} = this.props
-    const {firstName, lastName, email, picture, phoneNumber} = registerForm
+    const {registerForm, lenderRewardPoint, phoneNumber} = this.props
+    const {firstName, lastName, email, picture} = registerForm
 
     return (
       <View style={styles.container}>
@@ -218,6 +218,7 @@ const mapStateToProps = state => {
     token: state.auth.token,
     registerForm: state.lender.registerForm,
     walletAddress: state.lender.walletAddress,
+    phoneNumber: state.lender.phoneNumber,
     lenderRewardPoint: state.lender.lenderRewardPoint,
     lender: state.lender.lender,
     picture: state.lender.lender.picture,
