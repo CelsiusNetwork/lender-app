@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "lender-app-alpha",
-    "icon": "./assets/Icon-83.5@2x.png",
+    "icon": "./src/assets/images/Icon-83.5@2x.png",
     "version": "0.0.1",
     "slug": "lender-app",
     "sdkVersion": "23.0.0",
@@ -14,6 +14,18 @@
     },
     "androidStatusBar": {
       "barStyle": "light-content"
+    },
+    "hooks": {
+      "postPublish": [
+        {
+          "file": "sentry-expo/upload-sourcemaps",
+          "config": {
+            "organization": "mvp-workshop",
+            "project": "leander-app",
+            "authToken": "6393032eb02044c4a530ac566ecb0a183a1c10102620412794cad62c5ddafb48"
+          }
+        }
+      ]
     }
   }
 }

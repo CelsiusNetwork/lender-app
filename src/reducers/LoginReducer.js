@@ -12,22 +12,26 @@ const LOGIN_INITIAL_STATE = {
 export default (state = LOGIN_INITIAL_STATE, action) => {
   switch (action.type) {
     case types.LOGIN_EMAIL_CHANGED:
-      return { ...state, email: action.payload }
+      return {...state, email: action.payload}
+
     case types.LOGIN_PASSWORD_CHANGED:
-      return { ...state, password: action.payload }
+      return {...state, password: action.payload}
+
     case types.LOGIN_LENDER_LOADING:
-      return { ...state, loading: true }
+      return {...state, loading: true}
+
     case types.LOGIN_LENDER_SUCCESS:
-      console.log('iha')
       return {
         ...state,
-        token: action.payload.tokenId,
+        token: action.payload.id_token,
         authId: action.payload.lender.sub,
         email: action.payload.lender.email,
         loading: false
       }
+
     case types.LOGIN_LENDER_FAIL:
       let errorMsg
+
       switch (action.payload) {
         case 'auth/invalid-email':
           errorMsg = 'It must be a correct email address.'
@@ -43,7 +47,8 @@ export default (state = LOGIN_INITIAL_STATE, action) => {
         default:
           errorMsg = 'Wrong user data.'
       }
-      return { ...state, error: errorMsg, loading: false }
+      return {...state, error: errorMsg, loading: false}
+
     default:
       return state
   }

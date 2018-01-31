@@ -1,19 +1,20 @@
 import * as types from './Types'
-import { WalletService } from '../services'
-import { NavigationActions } from 'react-navigation'
+import {WalletService} from '../services'
+import {NavigationActions} from 'react-navigation'
+import {ErrorModel} from '../models/ErrorModel'
 
-export const withdrawETH = (password, fromAddress, toAddress, value, token) => {
+export const withdrawETH = (password, fromAddress, toAddress, amount, token) => {
   return (dispatch) => {
     dispatch({
       type: types.WITHDRAW_ETH_LOADING
     })
 
-    // Delay redirection in 5 seconds
+    // Delay redirection in 3 seconds
     setTimeout(() => {
       dispatch(NavigationActions.reset({
         index: 0,
         actions: [
-          NavigationActions.navigate({ routeName: 'Home' })
+          NavigationActions.navigate({routeName: 'Home'})
         ]
       }))
 
@@ -22,7 +23,8 @@ export const withdrawETH = (password, fromAddress, toAddress, value, token) => {
       })
     }, 3000)
 
-    WalletService().sendETH(password, fromAddress, toAddress, value, token)
+    let service = new WalletService(token)
+    service.sendETH(fromAddress, toAddress, amount)
       .then(response => handleWithdrawETH(dispatch, response))
   }
 }
@@ -34,60 +36,47 @@ export const setWithdrawAmount = (text) => {
       payload: text
     })
     dispatch(NavigationActions.navigate({
-      routeName: 'ManageFoundsConfirm',
+      routeName: 'ManageFundsConfirm',
       actions: [
-        NavigationActions.navigate({ routeName: 'ManageFoundsConfirm' })
+        NavigationActions.navigate({routeName: 'ManageFundsConfirm'})
       ]
     }))
   }
 }
 
 const handleWithdrawETH = (dispatch, response) => {
-  if (response.ok === true) {
-    dispatch({
-      type: types.WITHDRAW_ETH_SUCCESS,
-      payload: response._bodyText
-    })
+  let action
 
-    // TODO (djs): Check with team
-    // dispatch(NavigationActions.navigate({
-    //   routeName: 'ManageFoundsSuccess',
-    //   actions: [
-    //     NavigationActions.navigate({ routeName: 'ManageFoundsSuccess' })
-    //   ]
-    // }))
+  if (response instanceof ErrorModel) {
+    action = {type: types.WITHDRAW_ETH_ERROR, payload: response}
+  } else {
+    action = {type: types.WITHDRAW_ETH_SUCCESS, payload: response}
   }
-  if (response.ok === false) {
-    // dispatch(NavigationActions.navigate({
-    //   routeName: 'ManageFoundsConfirm',
-    //   actions: [
-    //     NavigationActions.navigate({ routeName: 'ManageFoundsError' })
-    //   ]
-    // }))
-  }
+
+  dispatch(action)
 }
 
 export const fetchWalletBalance = (walletAddress, token) => {
-  console.log('FETCH WALLET BALANCE')
   return (dispatch) => {
     dispatch({
       type: types.FETCH_WALLET_BALANCE_LOADING
     })
-    WalletService().getBalance(walletAddress, token)
+
+    let service = new WalletService(token)
+
+    service.getBalance(walletAddress)
       .then(response => handleWalletBalance(dispatch, response))
   }
 }
 
 const handleWalletBalance = (dispatch, response) => {
-  console.log('handleWalletBalance')
-    // response = JSON.parse(response)
-  if (response.ok === true) {
-    dispatch({
-      type: types.FETCH_WALLET_BALANCE_SUCCESS,
-      payload: response._bodyText
-    })
+  let action
+
+  if (response instanceof ErrorModel) {
+    action = {type: types.FETCH_WALLET_BALANCE_ERROR, payload: response}
+  } else {
+    action = {type: types.FETCH_WALLET_BALANCE_SUCCESS, payload: response}
   }
-  if (response.ok === false) {
-    // handle this beach
-  }
+
+  dispatch(action)
 }

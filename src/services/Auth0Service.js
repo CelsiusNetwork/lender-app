@@ -1,51 +1,66 @@
-const apiUrl = 'https://celsiusnetwork.auth0.com'
+import {RestServiceClient} from './RestServiceClient'
+import {
+  AUTH0_CELSIUS_API_URL,
+  INIT_CLIENT_ID,
+  INIT_CLIENT_SECRET,
+  INIT_AUDIENCE,
+  INIT_GRANT_TYPE,
+  GRANT_TYPE,
+  CLIENT_ID
+} from 'react-native-dotenv'
 
-export const Auth0Service = () => ({
-  siginInWithEmailAndPassword ({ email, password }) {
-    const request = {
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      method: 'post',
-      body: JSON.stringify({
-        grant_type: 'password',
-        client_id: 'LOHU3qeHAxFUE34Q71bfMUtdHW7afyLl',
-        username: email,
-        password: password
-      })
-    }
-    return fetch(apiUrl + '/oauth/token', request)
-  },
-  initClientCredentials () {
-    const request = {
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      method: 'post',
-      body: JSON.stringify({
-        client_id: '5XxZ11JjiVz0U0aD62RA1blSqtvHvEBC',
-        client_secret: 'QghhC-1CLpqxO_ikETk5kpBec6RkMmlsDTMvl3PMt1_XyIWuFJGqYGVP7SRkodd5',
-        audience: 'https://cs.celsius.network/cs',
-        grant_type: 'client_credentials'
-      })
-    }
-    return fetch(apiUrl + '/oauth/token', request)
-  },
-  getUser (id, token) {
-    console.log('getUser()')
-    console.log(id)
-    console.log(token)
-    const request = {
-      headers: {
-        'Content-Type': 'application/json',
-        // because of reasons id.t2 todo
-        'Authorization': 'Bearer ' + id
-      },
-      method: 'get'
-    }
-    console.log('get User request()')
-    console.log(request)
-    return fetch(apiUrl + '/api/v2/users/' + token, request)
+export class Auth0Service extends RestServiceClient {
+  constructor (token = undefined) {
+    super(AUTH0_CELSIUS_API_URL, {authorizationToken: token})
+    this.token = token
   }
 
-})
+  /**
+   * @name signInWithEmailAndPassword
+   * @description get access token with user credentials
+   *
+   * @param email [string] user email
+   * @param password [string] plain user password
+   *
+   * @return Promise<Response>
+   * */
+  signInWithEmailAndPassword ({ email, password }) {
+    const request = {
+      grant_type: GRANT_TYPE,
+      client_id: CLIENT_ID,
+      username: email,
+      password
+    }
+
+    return this.POST('/oauth/token', request)
+  }
+
+  /**
+   * @name initCredentials
+   * @description initialize client credentials
+   *
+   * @return Promise<Response>
+   * */
+  initClientCredentials () {
+    const request = {
+      client_id: INIT_CLIENT_ID,
+      client_secret: INIT_CLIENT_SECRET,
+      audience: INIT_AUDIENCE,
+      grant_type: INIT_GRANT_TYPE
+    }
+
+    return this.POST('/oauth/token', request)
+  }
+
+  /**
+   * @name getUser
+   * @description Get specific user by userId
+   *
+   * @param token [String] user access token
+   *
+   * @return Promise<Response>
+   * */
+  getUser (token) {
+    return this.GET(`/api/v2/users/${token}`)
+  }
+}

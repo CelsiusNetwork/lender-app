@@ -1,0 +1,8 @@
+import {RestServiceClient} from './RestServiceClient'
+
+export class {{pascalCase name}}Service extends RestServiceClient {
+  constructor (token = undefined) {
+    super('{{path}}', {authorizationToken: token})
+    this.token = token
+  }
+}

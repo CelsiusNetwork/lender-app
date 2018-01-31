@@ -1,36 +1,31 @@
-import React from "react"
-import { BackHandler } from "react-native"
-import { connect } from "react-redux"
-import { addNavigationHelpers, NavigationActions, StackNavigator } from "react-navigation"
+import React from 'react'
+import { BackHandler } from 'react-native'
+import { connect } from 'react-redux'
+import { addNavigationHelpers, NavigationActions, StackNavigator } from 'react-navigation'
 
-
-import WelcomePager from "./components/welcome/WelcomePager"
-// import WelcomePager from "./components/Verification"
-
-import GraphPager from "./components/graph/GraphPager.js"
-import HistoryDetail from "./components/graph/HistoryDetail.js"
-
-import Register from './components/Register'
-import LoginForm from './components/LoginForm'
-import ForgotPassword from './components/ForgotPassword'
+// Components
+import EditProfile from './components/EditProfile/EditProfile'
+import AddFunds from './components/AddFunds/AddFunds'
+import LoginForm from './components/LoginForm/LoginForm'
+import ForgotPassword from './components/ForgotPassword/ForgotPassword'
+import ManageFunds from './components/ManageFunds/ManageFunds'
+import ManageFundsConfirm from './components/ManageFundsConfirm/ManageFundsConfirm'
+import WelcomePager from './components/welcome/WelcomePager'
+import GraphPager from './components/graph/GraphPager.js'
+import HistoryDetail from './components/HistoryDetail/HistoryDetail.js'
+import Register from './components/Register/Register'
 import Passcode from './components/Passcode'
-
 import Verification from './components/Verification'
 import VerifyPhoneNumber from './components/VerifyPhoneNumber'
 import VerifyDocument from './components/VerifyDocument'
 import VerifyPhoto from './components/VerifyPhoto'
 import Agree from './components/Agree'
-
-import EditProfile from './components/EditProfile'
-import AddFounds from './components/AddFounds'
-import ManageFounds from './components/ManageFounds'
-import ManageFoundsWithdraw from './components/ManageFoundsWithdraw'
-import ManageFoundsConfirm from './components/ManageFoundsConfirm'
+import ManageFundsWithdraw from './components/ManageFundsWithdraw'
 import QRScanner from './components/QRScanner'
-import ManageFoundsSuccess from './components/ManageFoundsSuccess'
-import ManageFoundsError from './components/ManageFoundsError'
-
+import ManageFundsSuccess from './components/ManageFundsSuccess'
+import ManageFundsError from './components/ManageFundsError'
 import Home from './components/Home'
+// NOTE: plop Screen imports new screen here
 
 export const Navigator = StackNavigator({
   LoginForm: {
@@ -89,72 +84,77 @@ export const Navigator = StackNavigator({
     screen: EditProfile,
     headerMode: 'screen'
   },
-  AddFounds: {
-    screen: AddFounds,
+  AddFunds: {
+    screen: AddFunds,
     headerMode: 'screen'
   },
-  ManageFounds: {
-    screen: ManageFounds,
+  ManageFunds: {
+    screen: ManageFunds,
     headerMode: 'screen'
   },
-  ManageFoundsWithdraw: {
-    screen: ManageFoundsWithdraw,
+  ManageFundsWithdraw: {
+    screen: ManageFundsWithdraw,
     headerMode: 'screen'
   },
-  ManageFoundsConfirm: {
-    screen: ManageFoundsConfirm,
+  ManageFundsConfirm: {
+    screen: ManageFundsConfirm,
     headerMode: 'screen'
   },
   QRScanner: {
     screen: QRScanner,
     headerMode: 'screen'
   },
-  ManageFoundsSuccess: {
-    screen: ManageFoundsSuccess,
+  ManageFundsSuccess: {
+    screen: ManageFundsSuccess,
     headerMode: 'screen'
   },
-  ManageFoundsError: {
-    screen: ManageFoundsError,
+  ManageFundsError: {
+    screen: ManageFundsError,
     headerMode: 'screen'
+  // NOTE: plop Screen inserts screen here
   }
 }, {
-  // see next line
-  headerMode: 'none',
-});
+  headerMode: 'none'
+})
 
 class LenderNavigation extends React.Component {
-  componentDidMount() {
-    BackHandler.addEventListener("hardwareBackPress", this.onBackPress);
-  }
+  // Event Handlers
+  onBackPress () {
+    const { dispatch, nav } = this.props
 
-  componentWillUnmount() {
-    BackHandler.removeEventListener("hardwareBackPress", this.onBackPress);
-  }
-
-  onBackPress = () => {
-    const { dispatch, nav } = this.props;
     if (nav.index === 0) {
-      return false;
+      return false
     }
-    dispatch(NavigationActions.back());
-    return true;
+
+    dispatch(NavigationActions.back())
+    return true
   }
 
-  render() {
-    const { dispatch, nav } = this.props;
-    // passing navigation prop (consisting of dispatch and state) to Navigator
+  // Component Lifecycle Methods
+  componentDidMount () {
+    BackHandler.addEventListener('hardwareBackPress', this.onBackPress)
+  }
+
+  componentWillUnmount () {
+    BackHandler.removeEventListener('hardwareBackPress', this.onBackPress)
+  }
+
+  // Rendering methods
+  render () {
+    const { dispatch, nav } = this.props
+
     const navigation = addNavigationHelpers({
       dispatch,
       state: nav
-    });
+    })
 
-    return <Navigator navigation = { navigation }
-    />;
+    return <Navigator navigation={navigation}
+    />
   }
 }
 
 const mapStateToProps = state => ({
   nav: state.nav
-});
+})
 
 export default connect(mapStateToProps)(LenderNavigation)

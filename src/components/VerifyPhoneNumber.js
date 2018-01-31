@@ -2,27 +2,11 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {StyleSheet, View, Image, Text} from 'react-native'
 import {Content, Container, Input} from 'native-base'
-import {Font} from 'expo'
 
 class VerifyPhoneNumber extends Component {
   constructor () {
     super()
-    this.state = {
-      fontLoaded: false
-    }
-  }
-
-  async componentDidMount () {
-    await Font.loadAsync({
-      'barlow-semi-bold': require('../../assets/fonts/Barlow-SemiBold.otf')
-    })
-    await Font.loadAsync({
-      'barlow-light': require('../../assets/fonts/Barlow-Light.otf')
-    })
-    await Font.loadAsync({
-      'barlow': require('../../assets/fonts/Barlow-Regular.otf')
-    })
-    this.setState({fontLoaded: true})
+    this.state = {}
   }
 
   render () {
@@ -31,7 +15,7 @@ class VerifyPhoneNumber extends Component {
         <Content>
           <View style={styles.aCenter}>
             <View style={styles.mobileWrapper}>
-              <Image source={require('../../assets/images/icon-mobile.png')} style={styles.mobile} />
+              <Image source={require('../assets/images/icon-mobile.png')} style={styles.mobile} />
             </View>
             <Text style={styles.text}>Phone number enables you 2-factor authentication. Please enter the code we’ve sent
               you via SMS.</Text>
@@ -40,7 +24,6 @@ class VerifyPhoneNumber extends Component {
                 style={styles.input}
                 keyboardType='numeric'
                 maxLength={6}
-                // placeholder='_ _ _ _ _ _'
                 returnKeyType='done' autoCorrect={false} />
             </View>
           </View>
@@ -61,9 +44,6 @@ const styles = StyleSheet.create({
   background: {
     flex: 1,
     flexDirection: 'row'
-    // justifyContent: 'top',
-    // alignItems: 'center',
-    // backgroundColor: 'red'
   },
   body: {
     flex: 1,
@@ -84,8 +64,6 @@ const styles = StyleSheet.create({
     height: 4
   },
   logo: {
-    // flex: 1,
-    // position: 'absolute',
     marginTop: 40,
     marginLeft: 30,
     width: 140,

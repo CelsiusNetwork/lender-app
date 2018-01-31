@@ -6,9 +6,10 @@ npm-debug.*
 */**/.DS_Store
 package-lock.json
 
-#awsmobilejs
-awsmobilejs/.awsmobile/backend-build
-awsmobilejs/\#current-backend-info
-
 #IDEs
 .idea
+.python-version
+.vscode
+
+# environment files
+.env

@@ -1,43 +1,34 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {
-  Alert,
-  ImageBackground,
   StyleSheet,
   View,
   Image,
   Text,
-  TouchableOpacity,
-  AsyncStorage,
-  Animated
+  TouchableOpacity
 } from 'react-native'
-import {Form, Input, Item, Label, Content, Container} from 'native-base'
-import {NavigationActions} from 'react-navigation'
-import {Font} from 'expo'
+import {Content, Container} from 'native-base'
 
 class IncomeHistory extends Component {
-  constructor (props) {
-    super(props)
+  constructor () {
+    super()
     this.state = {}
 
     this.refreshTransactionsInterval = null
   }
 
-  async componentDidMount () {
+  // Event Handlers
+  handleTransactionPress (transaction) {
+    const {navigation, setActiveTransaction} = this.props
+    setActiveTransaction(transaction)
+    navigation.navigate('HistoryDetail')
+  }
+
+  // Component Lifecycle Methods
+  componentDidMount () {
     const {fetchTransactionsHistory, walletAddress} = this.props
 
-    await Font.loadAsync({
-      'barlow-semi-bold': require('../../../assets/fonts/Barlow-SemiBold.otf')
-    })
-    await Font.loadAsync({
-      'barlow-light': require('../../../assets/fonts/Barlow-Light.otf')
-    })
-    await Font.loadAsync({
-      'barlow': require('../../../assets/fonts/Barlow-Regular.otf')
-    })
-    this.setState({fontLoaded: true})
-
-    // refresheshing transactions every 60s
+    // refreshing transactions every 60s
     fetchTransactionsHistory(walletAddress)
     this.refreshTransactionsInterval = setInterval(() => {
       fetchTransactionsHistory(walletAddress)
@@ -45,16 +36,10 @@ class IncomeHistory extends Component {
   }
 
   componentWillUnmount () {
-    console.log('clearing interval')
     clearInterval(this.refreshTransactionsInterval)
   }
 
-  handleTransacationPress (transaction) {
-    const {navigation, setActiveTransaction} = this.props
-    setActiveTransaction(transaction)
-    navigation.navigate('HistoryDetail')
-  }
-
+  // Rendering Methods
   renderTransaction (t) {
     const {walletAddress} = this.props
 
@@ -64,75 +49,59 @@ class IncomeHistory extends Component {
       }
 
       return (
-        <TouchableOpacity key={t.hash} style={styles.tableRow} onPress={() => this.handleTransacationPress(t)}>
+        <TouchableOpacity key={t.hash} style={styles.tableRow} onPress={() => this.handleTransactionPress(t)}>
           <View>
-            <Image source={require('../../../assets/images/icon-etherium.png')} style={styles.icon} />
+            <Image source={require('../../assets/images/icon-etherium.png')} style={styles.icon} />
           </View>
           <View style={styles.value}>
-            {this.state.fontLoaded ? (
-              <Text style={[styles.valueText, {fontFamily: 'barlow-semi-bold'}]}>{t.ethValue} ETH</Text>) : null}
+            <Text style={[styles.valueText, {fontFamily: 'barlow-semi-bold'}]}>{t.ethValue} ETH</Text>
           </View>
           {t.isReceiving(walletAddress) ? (
             <View style={[styles.status, styles.greenStatus]}>
-              {this.state.fontLoaded ? (
-                <Text style={[styles.statusText, styles.greenText, {fontFamily: 'barlow'}]}>RECEIVED</Text>) : null}
+              <Text style={[styles.statusText, styles.greenText, {fontFamily: 'barlow'}]}>RECEIVED</Text>
             </View>
           ) : (
             <View style={[styles.status, styles.orangeStatus]}>
-              {this.state.fontLoaded ? (
-                <Text style={[styles.statusText, styles.orangeText, {fontFamily: 'barlow'}]}>SOLD</Text>) : null}
+              <Text style={[styles.statusText, styles.orangeText, {fontFamily: 'barlow'}]}>SOLD</Text>
             </View>
           )}
           <View style={styles.created}>
-            {this.state.fontLoaded ? (
-              <Text style={[styles.createdText, {fontFamily: 'barlow'}]}>{t.dateDisplay}</Text>) : null}
-            <Image source={require('../../../assets/images/icon-time.png')} style={styles.clock} />
-            {this.state.fontLoaded ? (
-              <Text style={[styles.createdText, {fontFamily: 'barlow'}]}>{t.timeDisplay}</Text>) : null}
+            <Text style={[styles.createdText, {fontFamily: 'barlow'}]}>{t.dateDisplay}</Text>
+            <Image source={require('../../assets/images/icon-time.png')} style={styles.clock} />
+            <Text style={[styles.createdText, {fontFamily: 'barlow'}]}>{t.timeDisplay}</Text>
           </View>
         </TouchableOpacity>
       )
     } else {
       return (
-        <TouchableOpacity key={t.hash} style={[styles.tableRow]} onPress={() => this.handleTransacationPress(t)}>
+        <TouchableOpacity key={t.hash} style={[styles.tableRow]} onPress={() => this.handleTransactionPress(t)}>
           <View>
-            <Image source={require('../../../assets/images/icon-coins.png')} style={styles.icon} />
+            <Image source={require('../../assets/images/icon-coins.png')} style={styles.icon} />
           </View>
           <View style={styles.value}>
-            {this.state.fontLoaded ? (
-              <Text style={[styles.valueText, {fontFamily: 'barlow-semi-bold'}]}>{t.degAmount} CEL</Text>) : null}
+            <Text style={[styles.valueText, {fontFamily: 'barlow-semi-bold'}]}>{t.degAmount} CEL</Text>
           </View>
           {t.isReceiving(walletAddress) ? (
             <View style={[styles.status, styles.greenStatus]}>
-              {this.state.fontLoaded ? (
-                <Text style={[styles.statusText, styles.greenText, {fontFamily: 'barlow'}]}>RECEIVED</Text>) : null}
+              <Text style={[styles.statusText, styles.greenText, {fontFamily: 'barlow'}]}>RECEIVED</Text>
             </View>
           ) : (
             <View style={[styles.status, styles.orangeStatus]}>
-              {this.state.fontLoaded ? (
-                <Text style={[styles.statusText, styles.orangeText, {fontFamily: 'barlow'}]}>SOLD</Text>) : null}
+              <Text style={[styles.statusText, styles.orangeText, {fontFamily: 'barlow'}]}>SOLD</Text>
             </View>
           )}
           <View style={styles.created}>
-            {this.state.fontLoaded ? (
-              <Text style={[styles.createdText, {fontFamily: 'barlow'}]}>{t.dateDisplay}</Text>) : null}
-            <Image source={require('../../../assets/images/icon-time.png')} style={styles.clock} />
-            {this.state.fontLoaded ? (
-              <Text style={[styles.createdText, {fontFamily: 'barlow'}]}>{t.timeDisplay}</Text>) : null}
+            <Text style={[styles.createdText, {fontFamily: 'barlow'}]}>{t.dateDisplay}</Text>
+            <Image source={require('../../assets/images/icon-time.png')} style={styles.clock} />
+            <Text style={[styles.createdText, {fontFamily: 'barlow'}]}>{t.timeDisplay}</Text>
           </View>
         </TouchableOpacity>
       )
     }
-
-    return null
   }
 
   render () {
-    const {navigate} = this.props.navigation
     const {transactions} = this.props
-
-    console.log(transactions)
-
     return (
       <View style={styles.welcomeContainer}>
         <Container style={styles.wrapper}>
@@ -142,7 +111,7 @@ class IncomeHistory extends Component {
               {transactions.map((t) => this.renderTransaction(t))}
             </View>
             <Text style={[styles.footer, {marginBottom: 50}]}>
-              {this.state.fontLoaded ? (<Text style={[{fontFamily: 'barlow'}]}>Activity</Text>) : null}
+              <Text style={[{fontFamily: 'barlow'}]}>Activity</Text>
             </Text>
             <View style={{borderBottomColor: 'rgba(255,255,255,0.1)', borderBottomWidth: 1, marginLeft: 12, marginRight: 12}} />
           </Content>
@@ -200,9 +169,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
     marginLeft: 10
-    // height: 40,
-    // borderWidth: 1,
-    // borderColor: 'green',
   },
   cellRight: {
     flex: 1,
@@ -210,20 +176,14 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     alignItems: 'center',
     marginRight: 10
-    // height: 40,
-    // borderWidth: 1,
-    // borderColor: 'red'
   },
   button: {
     backgroundColor: '#ffffff',
     borderRadius: 5,
     padding: 5,
     height: 50,
-    // width: 150,
     justifyContent: 'center',
     alignItems: 'center',
-    // marginRight: '5%',
-    // marginLeft: '5%',
     paddingLeft: 20,
     paddingRight: 20,
     marginLeft: 30
@@ -239,11 +199,8 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     padding: 5,
     height: 50,
-    // width: 150,
     justifyContent: 'center',
     alignItems: 'center',
-    // marginRight: '5%',
-    // marginLeft: '5%',
     paddingLeft: 20,
     paddingRight: 20,
     marginRight: 30
@@ -257,20 +214,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingLeft: 30,
     paddingRight: 30
-    // borderWidth: 1,
-    // borderColor: 'blue'
-
   },
   tableContainer: {
     flex: 1,
-    // flexDirection: 'row',
-    // width: '100%',
     height: 340,
-    // resizeMode: "contain",
     marginLeft: 20,
     marginRight: 20
-    // borderWidth: 1,
-    // borderColor: 'red'
   },
   footer: {
     fontSize: 24,

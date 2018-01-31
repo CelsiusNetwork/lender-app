@@ -7,11 +7,12 @@ import HowItWorks from './HowItWorks'
 import { lenderAppInitToken } from '../../actions'
 
 class WelcomePager extends Component {
+  // Rendering Methods
   render () {
     return (
       <View style={styles.container}>
         <ImageBackground
-          source={require('../../../assets/images/background.png')}
+          source={require('../../assets/images/background.png')}
           style={styles.background}>
           <Pages
             style={styles.pagesWrapper}>
@@ -26,7 +27,7 @@ class WelcomePager extends Component {
 
 const styles = StyleSheet.create({
   pagesWrapper: {
-    flex: 1,
+    flex: 1
   },
   title: {
     fontSize: 38,

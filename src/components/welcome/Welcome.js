@@ -1,51 +1,33 @@
-import React, { Component } from 'react'
-import { StatusBar, Platform, StyleSheet, View, Text, Image } from 'react-native'
-import { Font } from 'expo';
-
-const MyStatusBar = ({backgroundColor, ...props}) => (
-  <View style={[styles.statusBar, { backgroundColor }]}>
-    <StatusBar translucent backgroundColor={backgroundColor} {...props} />
-  </View>
-);
+import React, {Component} from 'react'
+import {StatusBar, StyleSheet, View, Text, Image} from 'react-native'
 
 export default class Welcome extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-        fontLoaded: false,
-      }
+  constructor () {
+    super()
+    this.state = {}
   }
 
-  async componentDidMount() {
-    await Font.loadAsync({
-      'inconsolata': require('../../../assets/fonts/Inconsolata-Regular.ttf'),
-    });
-    await Font.loadAsync({
-      'barlow-semi-bold': require('../../../assets/fonts/Barlow-SemiBold.otf'),
-    });
-    await Font.loadAsync({
-      'barlow-light': require('../../../assets/fonts/Barlow-Light.otf'),
-    });
-    await Font.loadAsync({
-      'barlow-bold': require('../../../assets/fonts/Barlow-Bold.otf'),
-    });
-    await Font.loadAsync({
-      'barlow': require('../../../assets/fonts/Barlow-Regular.otf'),
-    });
-    this.setState({ fontLoaded: true });
-  }
-
+  // Rendering Methods
   render () {
     return (
       <View style={styles.welcomeContainer}>
-        <MyStatusBar barStyle="light-content" />
-        <Image source={require('../../../assets/images/Celsius_Symbol_white.png')} style={styles.logo} />
-        { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow-bold'}, styles.header]}>WELCOME TO CELSIUS</Text>) : null }
-        { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow'}, styles.text]}>A new global financial platform that seamlessly connects holders of crypto-assets with borrowers. Earn fees on your assets by allowing financial traders to borrow them.</Text>) : null }
+        <MyStatusBar barStyle='light-content' />
+        <Image source={require('../../assets/images/Celsius_Symbol_white.png')} style={styles.logo} />
+        <Text style={[{fontFamily: 'barlow-bold'}, styles.header]}>WELCOME TO CELSIUS</Text>
+        <Text style={[{fontFamily: 'barlow'}, styles.text]}>
+          A new global financial platform that seamlessly connects holders of crypto-assets with borrowers.
+          Earn fees on your assets by allowing financial traders to borrow them.
+        </Text>
       </View>
     )
   }
 }
+
+const MyStatusBar = ({backgroundColor, ...props}) => (
+  <View style={[styles.statusBar, {backgroundColor}]}>
+    <StatusBar translucent backgroundColor={backgroundColor} {...props} />
+  </View>
+)
 
 const styles = StyleSheet.create({
   welcomeContainer: {
@@ -61,8 +43,6 @@ const styles = StyleSheet.create({
     fontSize: 38,
     backgroundColor: 'rgba(0,0,0,0)',
     color: 'white',
-    // paddingLeft: 25,
-    // paddingRight: 30,
     marginBottom: 10,
     fontWeight: 'bold'
   },
@@ -79,7 +59,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: 60,
     height: 60,
-    // marginLeft: 15,
     marginBottom: 80,
     marginTop: 90
   }

@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
 import { StyleSheet, View, Image, Text, TouchableOpacity } from 'react-native'
-import { Content, Header, Title, Container } from 'native-base'
+import { Content, Container } from 'native-base'
 import { connect } from 'react-redux'
-import { NavigationActions } from 'react-navigation'
-import { Font } from 'expo';
 import { Pages } from 'react-native-pages'
 
 import Slide1 from './Slide1'
@@ -11,62 +9,40 @@ import Slide2 from './Slide2'
 import Slide3 from './Slide3'
 
 class HowItWorks extends Component {
-  constructor(props) {
-    super(props);
+  constructor () {
+    super()
     this.state = {
-        fontLoaded: false,
-        toLeft:0,
-        toRight:1
-      }
+      toLeft: 0,
+      toRight: 1
+    }
   }
 
-  async componentDidMount() {
-    await Font.loadAsync({
-      'inconsolata': require('../../../assets/fonts/Inconsolata-Regular.ttf'),
-    });
-    await Font.loadAsync({
-      'barlow-semi-bold': require('../../../assets/fonts/Barlow-SemiBold.otf'),
-    });
-    await Font.loadAsync({
-      'barlow-light': require('../../../assets/fonts/Barlow-Light.otf'),
-    });
-    await Font.loadAsync({
-      'barlow-bold': require('../../../assets/fonts/Barlow-Bold.otf'),
-    });
-    await Font.loadAsync({
-      'barlow': require('../../../assets/fonts/Barlow-Regular.otf'),
-    });
-    this.setState({ fontLoaded: true });
-  }
-
-  static navigationOptions = {
-    header: null
-  }
-
+  // Event Handlers
   onButtonPress () {
     this.props.lenderAppInitToken()
   }
 
-  scrollLeft(){
+  scrollLeft () {
     this.refs.scroller.scrollToPage(this.state.toLeft)
   }
 
-  scrollRight(){
+  scrollRight () {
     this.refs.scroller.scrollToPage(this.state.toRight)
   }
 
   scrolled (wasOnPage) {
-    if(wasOnPage == 0){
-      this.setState({toLeft:0, toRight: 1});
+    if (wasOnPage === 0) {
+      this.setState({toLeft: 0, toRight: 1})
     }
-    if(wasOnPage == 1){
-      this.setState({toLeft:0, toRight: 2});
+    if (wasOnPage === 1) {
+      this.setState({toLeft: 0, toRight: 2})
     }
-    if(wasOnPage == 2){
-      this.setState({toLeft:1, toRight: 2});
+    if (wasOnPage === 2) {
+      this.setState({toLeft: 1, toRight: 2})
     }
   }
 
+  // Rendering methods
   render () {
     const { navigate } = this.props.navigation
     return (
@@ -74,43 +50,39 @@ class HowItWorks extends Component {
         <Container>
           <Content>
 
-            <Image source={require('../../../assets/images/logo-header.png')} style={styles.logo} />
-            { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow-bold'}, styles.header]}>{'How it works?'.toUpperCase()}</Text>) : null }
+            <Image source={require('../../assets/images/logo-header.png')} style={styles.logo} />
+            <Text style={[{fontFamily: 'barlow-bold'}, styles.header]}>HOW IT WORKS?</Text>
 
             <View style={styles.circleWrapper}>
               <TouchableOpacity style={styles.aLeftWrapper} onPress={this.scrollLeft.bind(this)}>
                 <Image
-                  source={require('../../../assets/images/arrow-left.png')}
-                  resizeMode="contain"
+                  source={require('../../assets/images/arrow-left.png')}
+                  resizeMode='contain'
                   style={[styles.aLeft]} />
               </TouchableOpacity>
               <TouchableOpacity style={styles.aRightWrapper} onPress={this.scrollRight.bind(this)}>
                 <Image
-                  source={require('../../../assets/images/arrow-right.png')}
-                  resizeMode="contain"
+                  source={require('../../assets/images/arrow-right.png')}
+                  resizeMode='contain'
                   style={styles.aRight} />
               </TouchableOpacity>
               <Pages
-              // scrollEnabled={false}
-              onScrollEnd={this.scrolled.bind(this)}
-              indicatorPosition='none'
-              ref='scroller'
-              style={styles.slideshowWrapper}>
+                onScrollEnd={this.scrolled.bind(this)}
+                indicatorPosition='none'
+                ref='scroller'
+                style={styles.slideshowWrapper}>
                 <Slide1 />
                 <Slide2 />
                 <Slide3 />
               </Pages>
             </View>
 
-            <TouchableOpacity style={styles.button}
-              onPress={this.onButtonPress.bind(this)}
-              //onPress={() => navigate('Register')}
-              >
-              { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow'}, styles.buttonText]}>Create account</Text>) : null }
+            <TouchableOpacity style={styles.button} onPress={this.onButtonPress.bind(this)}>
+              <Text style={[{fontFamily: 'barlow'}, styles.buttonText]}>Create account</Text>
             </TouchableOpacity>
 
             <TouchableOpacity style={styles.loginTouchable} onPress={() => navigate('LoginForm')}>
-              { this.state.fontLoaded ? (<Text style={[{ fontFamily: 'barlow'}, styles.loginText]}>Already have one?</Text>) : null }
+              <Text style={[{fontFamily: 'barlow'}, styles.loginText]}>Already have one?</Text>
             </TouchableOpacity>
 
           </Content>
@@ -118,15 +90,6 @@ class HowItWorks extends Component {
       </View>
     )
   }
-}
-
-const mapStateToProps = state => {
-  return {
-
-  }
-}
-
-const mapDispatchToProps = {
 }
 
 const styles = StyleSheet.create({
@@ -172,9 +135,7 @@ const styles = StyleSheet.create({
     height: 350,
     marginTop: 30,
     marginBottom: 20,
-    position: 'relative',
-    // borderColor: 'red',
-    // borderWidth: 1
+    position: 'relative'
   },
   aLeftWrapper: {
     position: 'absolute',
@@ -190,21 +151,11 @@ const styles = StyleSheet.create({
   },
   aLeft: {
     width: 20,
-    height: 37,
-    // flex: 1,
-    // flexDirection: 'row',
-    // alignItems: 'center',
-    // justifyContent: 'flex-start',
-    // marginLeft: 0
+    height: 37
   },
   aRight: {
     width: 20,
-    height: 37,
-    // flex: 1,
-    // flexDirection: 'row',
-    // justifyContent: 'flex-end',
-    // alignItems: 'center',
-    // marginRight: 0
+    height: 37
   },
   circle: {
     width: 186,
@@ -241,5 +192,14 @@ const styles = StyleSheet.create({
     height: 350
   }
 })
+
+const mapStateToProps = state => {
+  return {
+
+  }
+}
+
+const mapDispatchToProps = {
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(HowItWorks)

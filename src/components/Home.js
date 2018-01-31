@@ -6,15 +6,20 @@ import {Pages} from 'react-native-pages'
 import DegIncome from './graph/DegIncome'
 import DegValue from './graph/DegValue'
 import IncomeHistory from './graph/IncomeHistory'
-import {fetchWalletBalance, fetchTransactionsHistory, setActiveTransaction, lenderAppInitToken, isAlreadyLoggedIn} from '../actions'
-import Expo, { Font } from 'expo'
+import {
+  fetchWalletBalance,
+  fetchTransactionsHistory,
+  setActiveTransaction,
+  lenderAppInitToken,
+  isAlreadyLoggedIn
+} from '../actions'
+import Sentry from 'sentry-expo'
 
 class Home extends Component {
-  constructor (props) {
-    super(props)
+  constructor () {
+    super()
 
     this.state = {
-      fontLoaded: false,
       eth: 10.000,
       deg: 2.984,
       change: ' ▲ +3.24%',
@@ -23,12 +28,11 @@ class Home extends Component {
       },
       isAlreadyLogged: false
     }
-    console.log('props: ')
-    console.log(props)
 
     this.fetchingBalanceInterval = null
   }
 
+  // Component Lifecycle Methods
   componentWillMount () {
     const {props} = this
 
@@ -38,35 +42,23 @@ class Home extends Component {
       console.error(error)
     })
 
-    // refrest eth & cel balance every 60s
     props.fetchWalletBalance(props.walletAddress, props.token)
     this.fetchingBalanceInterval = setInterval(() => {
       props.fetchWalletBalance(props.walletAddress, props.token)
     }, 60000)
   }
 
+  componentDidMount () {
+    const {email, authId, surname} = this.props
 
-  // TODO: font should be loded before DOM is initializes, into componentWillMount()
-  async componentDidMount () {
-    await Font.loadAsync({
-      'barlow-semi-bold': require('../../assets/fonts/Barlow-SemiBold.otf')
+    Sentry.setUserContext({
+      email,
+      userID: authId,
+      surname
     })
-    await Font.loadAsync({
-      'barlow-light': require('../../assets/fonts/Barlow-Light.otf')
-    })
-    await Font.loadAsync({
-      'barlow': require('../../assets/fonts/Barlow-Regular.otf')
-    })
-
-    this.setState({fontLoaded: true})
   }
 
   componentWillReceiveProps (nextProps) {
-    // nextProps are the next set of props that this component
-    // will be rendered with
-    // this.props is still the old set of props
-    console.log('received props: ')
-    console.log(nextProps)
     this.props = nextProps
   }
 
@@ -74,6 +66,7 @@ class Home extends Component {
     clearInterval(this.fetchingBalanceInterval)
   }
 
+  // Rendering methods
   render () {
     const {navigate} = this.props.navigation
     const ethBalance = this.props.ethBalance || '0.00'
@@ -83,33 +76,31 @@ class Home extends Component {
     if (!this.state.isAlreadyLogged) {
       return (
         <View style={styles.container}>
-          <ImageBackground source={require('../../assets/images/background-blur.png')} style={styles.background}>
+          <ImageBackground source={require('../assets/images/background-blur.png')} style={styles.background}>
             <View style={styles.body}>
               <View style={[styles.row, {marginBottom: 20, marginTop: 60}]}>
-              <TouchableOpacity onPress={() => navigate('Home')}>
-                <View style={styles.cellLeft}>
-                  <Image source={require('../../assets/images/Celsius_Symbol_white.png')} style={styles.logo} />
-                </View>
-              </TouchableOpacity>
+                <TouchableOpacity onPress={() => navigate('Home')}>
+                  <View style={styles.cellLeft}>
+                    <Image source={require('../assets/images/Celsius_Symbol_white.png')} style={styles.logo} />
+                  </View>
+                </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigate('EditProfile')}>
                   <View style={styles.cellRight}>
-                    <Image source={require('../../assets/images/icon-user.png')} style={styles.user} />
+                    <Image source={require('../assets/images/icon-user.png')} style={styles.user} />
                   </View>
                 </TouchableOpacity>
               </View>
               <Container style={styles.wrapper}>
                 <Content>
                   <Text style={styles.header}>
-                    <Text>{ethBalance}</Text>
-                    <Text> ETH</Text>
+                    <Text>{ethBalance} ETH</Text>
                   </Text>
                   <Text style={styles.header2}>
-                    <Text>{celBalance}</Text>
-                    <Text> CEL</Text>
+                    <Text>{celBalance} CEL</Text>
                   </Text>
                   <View style={styles.btnsContainer}>
                     <View>
-                      <TouchableOpacity style={[styles.button, {width: 150, height: 50, marginLeft: 113, marginTop: 30, marginBottom: 47}]} onPress={() => navigate('AddFounds')}>
+                      <TouchableOpacity style={[styles.button, {width: 150, height: 50, marginLeft: 113, marginTop: 30, marginBottom: 47}]} onPress={() => navigate('AddFunds')}>
                         <Text style={[styles.buttonText, {fontFamily: 'barlow-medium', fontSize: 21}]}>Add funds</Text>
                       </TouchableOpacity>
                     </View>
@@ -122,7 +113,7 @@ class Home extends Component {
                   <View style={styles.hr} />
                   <TouchableOpacity style={styles.box}>
                     <View style={styles.boxIconWrapper}>
-                      <Image source={require('../../assets/images/icon-wallet.png')} style={styles.icon} />
+                      <Image source={require('../assets/images/icon-wallet.png')} style={styles.icon} />
                     </View>
                     <View style={styles.boxTextWrapper}>
                       <Text style={styles.boxText}>Transfer funds to your newly created Celsius wallet to start earning
@@ -131,7 +122,7 @@ class Home extends Component {
                   </TouchableOpacity>
                   <TouchableOpacity style={styles.box}>
                     <View style={styles.boxIconWrapper}>
-                      <Image source={require('../../assets/images/icon-transfer.png')} style={styles.icon} />
+                      <Image source={require('../assets/images/icon-transfer.png')} style={styles.icon} />
                     </View>
                     <View style={styles.boxTextWrapper}>
                       <Text style={styles.boxText}>By lending money to borrowers, you earn Degree which you can later on
@@ -140,7 +131,7 @@ class Home extends Component {
                   </TouchableOpacity>
                   <TouchableOpacity style={styles.box}>
                     <View style={styles.boxIconWrapper}>
-                      <Image source={require('../../assets/images/icon-network.png')} style={styles.icon} />
+                      <Image source={require('../assets/images/icon-network.png')} style={styles.icon} />
                     </View>
                     <View style={styles.boxTextWrapper}>
                       <Text style={styles.boxText}>Improve your seniority score by sticking longer with Celsius and earn
@@ -158,44 +149,42 @@ class Home extends Component {
       return (
         <View style={stylesGraph.container}>
           <ImageBackground
-            source={require('../../assets/images/background.png')}
+            source={require('../assets/images/background.png')}
             style={stylesGraph.background}>
             <View style={stylesGraph.header}>
               <View style={stylesGraph.cellLeft}>
                 <TouchableOpacity onPress={() => navigate('Home')}>
-                  <Image source={require('../../assets/images/logo-small.png')} style={stylesGraph.logo} />
+                  <Image source={require('../assets/images/logo-small.png')} style={stylesGraph.logo} />
                 </TouchableOpacity>
               </View>
               <View style={stylesGraph.cellRight}>
                 <TouchableOpacity onPress={() => navigate('EditProfile')}>
-                  <Image source={require('../../assets/images/icon-user.png')} style={stylesGraph.user} />
+                  <Image source={require('../assets/images/icon-user.png')} style={stylesGraph.user} />
                 </TouchableOpacity>
               </View>
             </View>
 
             <Text style={stylesGraph.headerText}>
-              {this.state.fontLoaded ? (<Text style={[{fontFamily: 'barlow-semi-bold'}]}>{ethBalance}</Text>) : null}
-              {this.state.fontLoaded ? (<Text style={[{fontFamily: 'barlow-semi-bold'}]}> ETH</Text>) : null}
+              <Text style={[{fontFamily: 'barlow-semi-bold'}]}>{ethBalance} ETH</Text>
             </Text>
             <Text style={stylesGraph.header2Text}>
-              {this.state.fontLoaded ? (<Text style={[{fontFamily: 'barlow-light'}]}>{celBalance}</Text>) : null}
-              {this.state.fontLoaded ? (<Text style={[{fontFamily: 'barlow-light'}]}> CEL</Text>) : null}
-              {this.state.fontLoaded ? (
-                <Text style={[stylesGraph.changeUp, {fontFamily: 'barlow-light'}]}> {this.state.change}</Text>) : null}
+              <Text style={[{fontFamily: 'barlow-light'}]}>{celBalance} CEL</Text>
+              <Text style={[stylesGraph.changeUp, {fontFamily: 'barlow-light'}]}> {this.state.change}</Text>
             </Text>
 
             <View style={stylesGraph.row}>
               <View style={stylesGraph.buttonCellLeft}>
-                <TouchableOpacity style={stylesGraph.button} onPress={() => navigate('AddFounds')}>
+                <TouchableOpacity style={stylesGraph.button} onPress={() => navigate('AddFunds')}>
                   <Text style={stylesGraph.buttonText}>Add funds</Text>
                 </TouchableOpacity>
               </View>
               <View style={stylesGraph.buttonCellRight}>
-                <TouchableOpacity style={stylesGraph.button2} onPress={() => navigate('ManageFounds')}>
+                <TouchableOpacity style={stylesGraph.button2} onPress={() => navigate('ManageFunds')}>
                   <Text style={stylesGraph.button2Text}>Manage</Text>
                 </TouchableOpacity>
               </View>
             </View>
+
             <View style={stylesGraph.pagesWrapper}>
               <Pages style={stylesGraph.pages}>
                 <DegIncome navigation={this.props.navigation} lenderAppInitToken={this.props.lenderAppInitToken} />
@@ -228,16 +217,12 @@ const styles = StyleSheet.create({
   background: {
     flex: 1,
     flexDirection: 'row'
-    // justifyContent: 'top',
-    // alignItems: 'center',
-    // backgroundColor: 'red'
   },
   body: {
     flex: 1,
     marginTop: 20
   },
   line: {
-    height: 10,
     borderRadius: 2,
     height: 4,
     marginBottom: 10
@@ -274,8 +259,6 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     marginLeft: 10,
     height: 40
-    // borderWidth: 1,
-    // borderColor: 'red'
   },
   cellRight: {
     flex: 1,
@@ -291,13 +274,11 @@ const styles = StyleSheet.create({
     marginLeft: 15
   },
   user: {
-    // position: 'absolute',
     width: 26,
     height: 28,
     marginRight: 15,
     resizeMode: 'contain'
   },
-  wrapper: {},
   text: {
     fontSize: 14,
     backgroundColor: 'rgba(0,0,0,0)',
@@ -325,11 +306,8 @@ const styles = StyleSheet.create({
     width: '95%',
     justifyContent: 'center',
     alignItems: 'center',
-    // marginRight: '5%',
-    // marginLeft: '5%',
     paddingLeft: 20,
     paddingRight: 20,
-    // marginLeft: 20,
     alignSelf: 'stretch'
   },
   buttonText: {
@@ -412,11 +390,8 @@ const styles = StyleSheet.create({
     width: '95%',
     justifyContent: 'center',
     alignItems: 'center',
-    // marginRight: '5%',
-    // marginLeft: '5%',
     paddingLeft: 20,
     paddingRight: 20,
-    // marginRight: 20,
     alignSelf: 'stretch'
   },
   button2Text: {
@@ -426,20 +401,6 @@ const styles = StyleSheet.create({
 })
 
 const stylesGraph = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'center',
-    marginLeft: 0,
-    marginRight: 0
-  },
-  background: {
-    flex: 1,
-    flexDirection: 'row'
-    // justifyContent: 'top',
-    // alignItems: 'center',
-    // backgroundColor: 'red'
-  },
   header: {
     flexDirection: 'row',
     marginBottom: 15,
@@ -511,8 +472,6 @@ const stylesGraph = StyleSheet.create({
     alignSelf: 'stretch',
     marginLeft: 23,
     height: 50
-    // borderWidth: 1,
-    // borderColor: 'green',
   },
   buttonCellRight: {
     flex: 1,
@@ -522,8 +481,6 @@ const stylesGraph = StyleSheet.create({
     alignSelf: 'stretch',
     marginRight: 23,
     height: 50
-    // borderWidth: 1,
-    // borderColor: 'red'
   },
   logo: {
     width: 34,
@@ -558,11 +515,6 @@ const stylesGraph = StyleSheet.create({
     width: '95%',
     justifyContent: 'center',
     alignItems: 'center',
-    // marginRight: '5%',
-    // marginLeft: '5%',
-    // paddingLeft: 20,
-    // paddingRight: 20,
-    // marginLeft: 30,
     alignSelf: 'stretch'
   },
   buttonText: {
@@ -570,7 +522,6 @@ const stylesGraph = StyleSheet.create({
     fontSize: 20
   },
   button2: {
-    // flex: 1,
     backgroundColor: 'rgba(255, 255, 255, 0.0)',
     borderColor: 'rgba(255, 255, 255, 0.5)',
     borderWidth: 2,
@@ -580,11 +531,6 @@ const stylesGraph = StyleSheet.create({
     width: '95%',
     justifyContent: 'center',
     alignItems: 'center',
-    // marginRight: '5%',
-    // marginLeft: '5%',
-    // paddingLeft: 20,
-    // paddingRight: 20,
-    // marginRight: 30,
     alignSelf: 'stretch'
   },
   button2Text: {
@@ -609,10 +555,12 @@ const mapStateToProps = state => {
   }
 }
 
-// The mapDispatchToProps function lets us inject
-// certain props into the React component that can dispatch actions
 const mapDispatchToProps = {
-  fetchWalletBalance, fetchTransactionsHistory, lenderAppInitToken, setActiveTransaction, isAlreadyLoggedIn
+  fetchWalletBalance,
+  fetchTransactionsHistory,
+  lenderAppInitToken,
+  setActiveTransaction,
+  isAlreadyLoggedIn
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)
