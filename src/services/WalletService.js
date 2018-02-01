@@ -1,5 +1,6 @@
 import {RestServiceClient} from './RestServiceClient'
-import {CS_CELSIUS_API_URL} from 'react-native-dotenv'
+import {CS_CELSIUS_API_URL, LENDER_PASSWORD_KEY} from 'react-native-dotenv'
+import {getSecureStoreKey} from '../actions/SecureStoreActions'
 
 export class WalletService extends RestServiceClient {
   constructor (token) {
@@ -30,7 +31,8 @@ export class WalletService extends RestServiceClient {
    *
    * @return Promise<Response>
    */
-  sendETH (fromAddress, toAddress, value) {
-    return this.POST(`${this.lenderEndPoint}/eth/send`, {fromAddress, toAddress, value})
+  async sendETH (fromAddress, toAddress, value) {
+    const password = await getSecureStoreKey(LENDER_PASSWORD_KEY)
+    return this.POST(`${this.lenderEndPoint}/eth/send`, {fromAddress, toAddress, value, password})
   }
 }

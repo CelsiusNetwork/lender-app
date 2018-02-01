@@ -71,7 +71,7 @@ class ManageFundsConfirm extends Component {
                 </Form>
 
                 <View style={styles.center}>
-                  <TouchableOpacity style={styles.button} onPress={() => withdrawETH('test42!', walletAddress, toAddress, withdrawAmount, token)}>
+                  <TouchableOpacity style={styles.button} onPress={() => withdrawETH(walletAddress, toAddress, withdrawAmount, token)}>
                     <Text style={styles.buttonText} />
                     <Text style={styles.buttonText}>
                       Confirm withdraw
