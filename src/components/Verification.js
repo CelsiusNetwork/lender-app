@@ -13,6 +13,8 @@ class Verification extends Component {
   constructor () {
     super()
     this.state = {
+      showDocCamera: false,
+      showPhotoCamera: false,
       progress: 0,
       progressLine: '0%',
       step: 1,
@@ -30,10 +32,16 @@ class Verification extends Component {
     if (currentStep === 1) {
       this.setState({btnTxt: 'Take a photo'})
       this.setState({stepName: 'DOCUMENT CHECK'})
+      this.setState({showDocCamera: true})
     }
     if (currentStep === 2) {
       this.setState({btnTxt: 'Finish verification'})
       this.setState({stepName: 'TAKE A PICTURE'})
+      this.setState({showDocCamera: false})
+      let self = this
+      setTimeout(function(){
+        self.setState({showPhotoCamera: true})
+      }, 200)
     }
     if (currentStep === 3) {
       this.setState({btnTxt: 'Im done!'})
@@ -80,8 +88,8 @@ class Verification extends Component {
               indicatorPosition='none'
               ref='kungfoo'>
               <VerifyPhoneNumber />
-              <VerifyDocument />
-              <VerifyPhoto />
+              <VerifyDocument navigation={this.props.navigation} showDocCamera={this.state.showDocCamera}  />
+              <VerifyPhoto navigation={this.props.navigation} showPhotoCamera={this.state.showPhotoCamera}  />
               <Agree />
             </Pages>
             {this.renderButtons()}
