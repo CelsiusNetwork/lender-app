@@ -5,7 +5,7 @@ import {ErrorModel} from '../models/ErrorModel'
 
 export const registerLender = (registerForm, appToken) => {
   return (dispatch) => {
-    const error = validateRegisterForm(registerForm)
+    let error = validateRegisterForm(registerForm)
     if (!error) {
       dispatch({type: types.REGISTER_LENDER_LOADING})
 
@@ -111,10 +111,18 @@ function validateRegisterForm (registrationForm) {
   if (registrationForm.firstName.length < 2) return getErrorText({atLeast: {field: 'First Name', number: 2}})
   if (!registrationForm.lastName) return getErrorText({notEmpty: {field: 'Last Name'}})
   if (registrationForm.lastName.length < 2) return getErrorText({atLeast: {field: 'Last Name', number: 2}})
-  if (!registrationForm.email) return getErrorText({notEmpty: {field: 'Email'}})
+  if (!registrationForm.email) {
+    return getErrorText({notEmpty: {field: 'Email'}})
+  } else if (!validateEmail(registrationForm.email)) {
+    return getErrorText({invalid: {field: 'Email'}})
+  }
   if (!registrationForm.password) return getErrorText({notEmpty: {field: 'Password'}})
   if (registrationForm.password.length < 3) return getErrorText({atLeast: {field: 'Password', number: 3}})
-  if (!registrationForm.phoneNumber) return getErrorText({notEmpty: {field: 'Phone number'}})
+  if (!registrationForm.phoneNumber) {
+    return getErrorText({notEmpty: {field: 'Phone number'}})
+  } else if (!validatePhoneNumber(registrationForm.phoneNumber)) {
+    return getErrorText({invalid: {field: 'Phone number'}})
+  }
   return false
 }
 
@@ -129,11 +137,18 @@ function validateEditProfileForm (registrationForm) {
 }
 
 function getErrorText (error) {
-  // error format { atLeast: { field, number }}
   if (error.atLeast) return `Oops... ${error.atLeast.field} must have at least ${error.atLeast.number} letters!`
-  // error format { notEmpty: { field }}
   if (error.notEmpty) return `Oops... ${error.notEmpty.field} cannot be empty!`
-  // error format { server: String | true }
+  if (error.invalid) return `Oops... ${error.invalid.field} is not valid!`
   if (error.server) return error.server === true ? `Oops... Something went wrong with our servers ` : error.server
   return 'Oops... Something went terribly wrong :( We are working nonstop to fix it!'
+}
+
+function validateEmail (email) {
+  const regex = /^(([^<>()[\].,;:\s@"]+(.[^<>()[\].,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/g
+  return regex.test(email)
+}
+function validatePhoneNumber (phoneNumber) {
+  const regex = /^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/im
+  return regex.test(phoneNumber)
 }

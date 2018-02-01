@@ -76,8 +76,8 @@ export class RestServiceClient {
     }
 
     console.group()
-    console.error(`${errorModel.errorName} details: ${errorModel.message}`)
-    console.error(errorModel)
+    console.warn(`${errorModel.errorName} details: ${errorModel.message}`)
+    console.warn(errorModel)
     console.groupEnd()
 
     return errorModel
