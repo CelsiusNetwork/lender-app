@@ -4,6 +4,9 @@ import { NavigationActions } from 'react-navigation'
 import jwtDecode from 'jwt-decode'
 import { storeLoggedUser } from './index'
 import {ErrorModel} from '../models/ErrorModel'
+import * as CryptoJS from 'crypto-js'
+import {LENDER_PASSWORD_KEY} from 'react-native-dotenv'
+import {setSecureStoreKey} from './SecureStoreActions'
 
 export const loginEmailChanged = (text) => {
   return {
@@ -25,7 +28,7 @@ export const loginLender = ({ email, password }) => {
 
     let service = new Auth0Service()
     service.signInWithEmailAndPassword({ email, password })
-      .then(response => handleResponse(dispatch, response))
+      .then(response => handleResponse(dispatch, response, password))
   }
 }
 
@@ -40,7 +43,7 @@ export const logoutLender = () => {
   }
 }
 
-const handleResponse = (dispatch, response) => {
+const handleResponse = (dispatch, response, password) => {
   if (response instanceof ErrorModel) {
     loginLenderFail(dispatch, response.statusCode)
   } else {
@@ -53,7 +56,7 @@ const handleResponse = (dispatch, response) => {
 
     const service = new Auth0Service(id_token)
     service.getUser(lender.sub)
-      .then(response => handleLenderInfo(dispatch, response))
+      .then(response => handleLenderInfo(dispatch, response, password))
 
     dispatch({
       type: types.LOGIN_LENDER_SUCCESS,
@@ -62,7 +65,7 @@ const handleResponse = (dispatch, response) => {
   }
 }
 
-const handleLenderInfo = (dispatch, response) => {
+const handleLenderInfo = async (dispatch, response, password) => {
   dispatch({
     type: types.FETCH_LENDER_SUCCESS,
     payload: response
@@ -79,6 +82,9 @@ const handleLenderInfo = (dispatch, response) => {
   }).catch(error => {
     console.error(error)
   })
+
+  const hash = CryptoJS.SHA256(password)
+  await setSecureStoreKey(LENDER_PASSWORD_KEY, hash.toString())
 }
 
 const loginLenderFail = (dispatch, error) => {

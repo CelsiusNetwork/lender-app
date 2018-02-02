@@ -73,7 +73,7 @@ class Home extends Component {
     const celBalance = this.props.celBalance || '0.00'
     const name = this.props.lender.name
 
-    if (!this.state.isAlreadyLogged) {
+    if (parseFloat(ethBalance) === 0) {
       return (
         <View style={styles.container}>
           <ImageBackground source={require('../assets/images/background-blur.png')} style={styles.background}>

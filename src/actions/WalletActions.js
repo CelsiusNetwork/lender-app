@@ -3,7 +3,7 @@ import {WalletService} from '../services'
 import {NavigationActions} from 'react-navigation'
 import {ErrorModel} from '../models/ErrorModel'
 
-export const withdrawETH = (password, fromAddress, toAddress, amount, token) => {
+export const withdrawETH = (fromAddress, toAddress, amount, token) => {
   return (dispatch) => {
     dispatch({
       type: types.WITHDRAW_ETH_LOADING

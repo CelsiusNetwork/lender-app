@@ -28,7 +28,6 @@ const LABEL_TEXTS = {
 class Register extends Component {
   constructor (props) {
     super(props)
-
     this.state = {
       labels: {
         firstName: LABEL_TEXTS.firstNameActive,
@@ -98,7 +97,6 @@ class Register extends Component {
   }
 
   togglePasswordVisibility () {
-    console.log('toggling')
     this.setState({ passHidden: !this.state.passHidden })
   }
 
@@ -233,7 +231,6 @@ class Register extends Component {
                     <Text style={styles.buttonText}>Verify your profile</Text>
                   )}
                 </Button>
-
               </Form>
             </Content>
           </Container>

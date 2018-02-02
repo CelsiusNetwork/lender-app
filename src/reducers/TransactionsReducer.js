@@ -15,7 +15,6 @@ export default (state = TRANSACTIONS_STATE, action) => {
       }
 
     case types.SET_ACTIVE_TRANSACTION:
-      console.log(action)
       return {
         ...state,
         activeTransaction: action.transaction
