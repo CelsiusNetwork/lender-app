@@ -1,3 +1,5 @@
+![Power to the people](./src/assets/power-to-the-people.png)
+
 # The Celsius lender-app
 >The Celsius Wallet will be one of the only online crypto wallets designed to allow members to lend their crypto to earn interest on deposited coins (when they’re lent out) or use those coins as collateral to get a loan in dollars.
 
@@ -41,7 +43,13 @@ How to download and start lender-app:
 ### Application Arhitecture
 
 ### Application Framework
-
+App framework is small tool that gives us a simple way to generate
+boilerplate code for components, reducers and other application segments.
+When we need to create a NEW some-app-pattern, insted of writing it manualy
+we use plop generators for it.
+With plop, we have "best practice" method of creating any given 
+pattern in code.
+ 
 ### Dev setup
 
 Install the dependencies and devDependencies and start the server.
