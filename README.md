@@ -41,7 +41,13 @@ How to download and start lender-app:
 ### Application Arhitecture
 
 ### Application Framework
-
+App framework is small tool that gives us a simple way to generate
+boilerplate code for components, reducers and other application segments.
+When we need to create a NEW some-app-pattern, insted of writing it manualy
+we use plop generators for it.
+With plop, we have "best practice" method of creating any given 
+pattern in code.
+ 
 ### Dev setup
 
 Install the dependencies and devDependencies and start the server.
