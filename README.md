@@ -1,3 +1,5 @@
+![Power to the people](./assets/power-to-the-people.png)
+
 # The Celsius lender-app
 >The Celsius Wallet will be one of the only online crypto wallets designed to allow members to lend their crypto to earn interest on deposited coins (when they’re lent out) or use those coins as collateral to get a loan in dollars.
 
