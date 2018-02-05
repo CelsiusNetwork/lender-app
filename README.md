@@ -59,7 +59,11 @@ $ npm install
 $ npm start
 ```
 
-### Sentry
+### Gitflow and Code Management
+1. Team members work locally and push their branches `(https://danielkummer.github.io/git-flow-cheatsheet/)`
+2. Two branches used to record project history, master and develop
+3. Develop serves as an integration branch for features and fixes### Sentry
+4. Master branch serves the official release history
 
 ### Sourcemaps for Other Platforms
 
